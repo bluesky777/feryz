@@ -1,0 +1,162 @@
+ul.list-unstyled.left-elems
+	// nav trigger/collapse
+	li
+		a.nav-trigger.fa.fa-bars(href="" ng-click="toggleNav()")
+
+	//  Search box 
+	// li
+		.form-search.hidden-xs
+			form#site-search(action="na")
+				input.form-control(type="search" placeholder="Type here for search...")
+				button.fa.fa-searchf(type="submit")
+
+
+	// site-logo for mobile nav
+	li
+		.site-logo.visible-xs
+			a.text-uppercase.h3(ui-sref="panel")
+				span.text Wissen
+
+	// fullscreen
+	li.fullscreen.hidden-xs(ng-click="goFullScreen()")
+		a(href="")
+			i.fa.fa-arrows-alt
+
+	// notification drop
+	li.notify-drop.hidden-xs.dropdown(dropdown="" ng-if="hasRoleOrPerm('admin', 'tecnico', 'profesor')")
+		a(href="" dropdown-toggle="")
+			i.fa.fa-laptop
+			span(ng-bind=" evento_actual.alias")
+			//span.badge.badge-danger.badge-xs.circle {{ USER.eventos.length }}
+		
+		.panel.panel-default.dropdown-menu(custom-scrollbar="")
+			.panel-heading Selecciona el evento que deseas
+				a.right.btn.btn-xs.btn-pink.mt-3(ui-sref="panel.eventos") Eventos
+			.panel-body
+				ul.list-unstyled
+					li.clearfix(ng-repeat="evento in USER.eventos")
+						
+
+						//a(href="" ng-click="set_system_event(evento)")
+							span.fa.fa-laptop.left(ng-class="(evento.actual) ? 'bg-primary': 'bg-success' ")
+							.desc
+								strong {{ evento.nombre }}
+								p.small.text-muted(ng-show="evento.actual") Actual
+						
+						a.right.btn.btn-xs.btn-purple.mt-3(href="" ng-click="set_system_event(evento)" style="color: #fff" ng-hide="evento.actual")
+							| Actual
+							md-tooltip Establecer como evento actual
+
+						a(href="" ng-click="set_user_event(evento)")
+							span.fa.fa-laptop.left(ng-class="(evento.id==USER.evento_selected_id) ? 'bg-primary': 'bg-success' ")
+							.desc
+								strong {{ evento.nombre }}
+								p.small.text-muted(ng-show="evento.actual") Actual
+						
+
+
+
+	// Idiomas
+	li.notify-drop.hidden-xs.dropdown(dropdown="")
+		a(href="" dropdown-toggle="")
+			i.fa.fa-flag-checkered
+		
+		.panel.panel-default.dropdown-menu(custom-scrollbar="")
+			.panel-heading {{ 'IDIOMA_MENU' | translate }}
+			.panel-body
+				ul.list-unstyled
+					li.clearfix(ng-repeat="idioma in idiomas_usados")
+						a(href="" ng-click="cambiarIdioma(idioma)")
+							span.fa.fa-flag.left(ng-class="(idioma.actual) ? 'bg-primary': 'bg-success' ")
+							.desc
+								strong {{idioma.original}} ({{idioma.abrev}}) - {{idioma.nombre}}
+								p.small.text-muted(ng-show="idioma.actual") Actual
+
+
+ul.list-unstyled.right-elems.ng-scope
+	li.profile-drop.hidden-xs.dropdown(dropdown='')
+		a(href='', dropdown-toggle='', aria-haspopup='true', aria-expanded='false')
+			img(ng-src="{{imagesPath + USER.imagen_nombre}}" alt="{{USER.username}}")
+		ul.dropdown-menu.dropdown-menu-right
+			li
+				a(href='javascript:;')
+					span.ion.ion-person
+					| Perfil
+			li
+				a(href='javascript:;')
+					span.ion.ion-settings 
+					| Configuración
+			li.divider
+			li
+				a(href='javascript:;')
+					span.ion.ion-lock-combination
+					| Imágenes
+			li
+				a(href='' ng-click="logout()")
+					span.ion.ion-power(ng-bind-html="('SALIR' | translate)")
+
+
+	li.profile-drop.hidden-xs.dropdown()
+		a(href='' ng-click="logout()" style="color: #fff")
+			i.fa.fa-sign-out(ng-bind-html="('SALIR' | translate)") 
+			
+	//li.floating-sidebar(ng-class="{'open': floatingSidebar}")
+	li.floating-sidebar(ng-class="{'open': floatingSidebar}")
+		a(href="" ng-click='toggleFloatingSidebar()')
+			i.fa.fa-th
+		.sidebar-wrap.ps-container.ps-active-y(custom-scrollbar='')
+			
+			tabset(justified="true")
+				tab(heading="CHAT")
+					.chat-tab.clearfix
+						h5.title.mt0.mb30 Online
+						.user-container.mb15
+							img(src='images/perfil/pruebaadmin.jpg', alt='')
+							.desc
+								p.mb0 John Wick
+								p.xsmall
+									span.ion.ion-location
+									| San Franciso, USA
+							span.ion.ion-record.avail.right.on
+						.user-container.mb15
+							img(src='images/perfil/pruebaadmin.jpg', alt='')
+							.desc
+								p.mb0 John Wick
+								p.xsmall
+									span.ion.ion-location
+									| California, USA
+							span.ion.ion-record.avail.right.away
+
+				tab(heading="INFO")
+					.info-tab.clearfix
+						h5.title.mt0.mb30 Work in Progress
+						ul.list-unstyled.mb15.clearfix
+							li
+								.clearfix.mb10
+									small.left App Upload
+									small.right 80%
+								.progress-xs.progress.ng-isolate-scope(value='80', type='primary')
+									.progress-bar.progress-bar-primary(ng-class="type && 'progress-bar-' + type", role='progressbar', aria-valuenow='80', aria-valuemin='0', aria-valuemax='100', ng-style="{width: percent + '%'}" aria-valuetext='80%' style='width: 80%;')
+
+						h5.title.mt0.mb30 Settings
+
+						.clearfix.mb15
+							.left
+								p Show me online
+							.right
+								.ui-toggle.ui-toggle-success.ui-toggle-xs
+									label
+										input(type='checkbox', checked='')
+										span
+
+						.clearfix.mb15
+							.left
+								p Notifications
+
+							.right
+								.ui-toggle.ui-toggle-success.ui-toggle-xs
+									label
+										input(type='checkbox')
+										span
+
+

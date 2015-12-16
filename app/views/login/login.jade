@@ -1,0 +1,43 @@
+.page.page-auth
+
+	.auth-container
+		
+		.form-head.mb20
+			h1.site-logo.h2.mb5.mt5.text-center.text-uppercase.text-bold
+				a(href="") Wissen System
+			h5.text-normal.h5.text-center Pon a prueba tu conocimiento
+
+
+		.form-container
+			form.form-horizontal(ng-submit="login()")
+				md-input-container
+					label Nombre de usuario
+					input(type="text" ng-model="credentials.username")
+					md-tooltip  Ingresa tu nombre de usuario
+				
+
+				md-input-container
+					label Password
+					input(type="password" ng-model="credentials.password")
+					md-tooltip  Ingresa tu password
+				
+
+				
+				.clearfix(ng-if="false")
+					.ui-checkbox.ui-checkbox-primary.right
+						label
+							input(type="checkbox")
+							span Remember me
+				
+				.btn-group.btn-group-justified.mb15
+					
+					.btn-group
+						button.btn.btn-success(type="submit") Entrar
+
+
+				.clearfix.mb15
+					a.text-success.small(href="" ng-click="recuperar_password()") ¿Olvidaste cómo ingresar?
+				
+
+
+
