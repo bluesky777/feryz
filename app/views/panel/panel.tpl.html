@@ -2,7 +2,7 @@
 <header id="site-head" ng-class="{'fixedHeader': fixedHeader}" ng-include=" 'views/panel/header.tpl.html' " class="site-head fixedHeader"></header>
 <!-- main-container-->
 <div ng-class="{'nav-expand': navFull, 'nav-horizontal': navHorizontal}" class="main-container clearfix nav-expand">
-  <aside id="site-nav" ng-class="{'nav-expand': navFull, 'nav-offcanvas': navOffCanvas}" custom-scrollbar="" ng-include=" 'views/panel/nav.tpl.html' " class="nav-wrap ps-container nav-expand ps-active-y">
+  <aside id="nav-container" ng-class="{ 'nav-fixed': main.fixedSidebar, 'nav-horizontal': main.menu === 'horizontal', 'nav-vertical': main.menu === 'vertical', 'bg-white': ['31','32','33','34','35','36'].indexOf(main.skin) &gt;= 0, 'bg-dark': ['31','32','33','34','35','36'].indexOf(main.skin) &lt; 0 }" ng-include=" 'views/panel/nav.tpl.html' " class="nav-container">
     <div class="nav-head"></div>
   </aside>
   <div ng-class="{'nav-expand': navFull, 'fixedHeader': fixedHeader}" id="content" class="content-container fixedHeader">

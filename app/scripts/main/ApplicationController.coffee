@@ -12,6 +12,9 @@ angular.module('feryzApp')
 
 	$scope.isLoginPage = false
 
+	$scope.main = 
+		skin: 21
+
 
 	$scope.navFull = true
 	$scope.toggleNav = ()->

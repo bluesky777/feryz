@@ -1,162 +1,293 @@
-ul.list-unstyled.left-elems
-	// nav trigger/collapse
-	li
-		a.nav-trigger.fa.fa-bars(href="" ng-click="toggleNav()")
-
-	//  Search box 
-	// li
-		.form-search.hidden-xs
-			form#site-search(action="na")
-				input.form-control(type="search" placeholder="Type here for search...")
-				button.fa.fa-searchf(type="submit")
-
-
-	// site-logo for mobile nav
-	li
-		.site-logo.visible-xs
-			a.text-uppercase.h3(ui-sref="panel")
-				span.text Wissen
-
-	// fullscreen
-	li.fullscreen.hidden-xs(ng-click="goFullScreen()")
-		a(href="")
-			i.fa.fa-arrows-alt
-
-	// notification drop
-	li.notify-drop.hidden-xs.dropdown(dropdown="" ng-if="hasRoleOrPerm('admin', 'tecnico', 'profesor')")
-		a(href="" dropdown-toggle="")
-			i.fa.fa-laptop
-			span(ng-bind=" evento_actual.alias")
-			//span.badge.badge-danger.badge-xs.circle {{ USER.eventos.length }}
-		
-		.panel.panel-default.dropdown-menu(custom-scrollbar="")
-			.panel-heading Selecciona el evento que deseas
-				a.right.btn.btn-xs.btn-pink.mt-3(ui-sref="panel.eventos") Eventos
-			.panel-body
-				ul.list-unstyled
-					li.clearfix(ng-repeat="evento in USER.eventos")
-						
-
-						//a(href="" ng-click="set_system_event(evento)")
-							span.fa.fa-laptop.left(ng-class="(evento.actual) ? 'bg-primary': 'bg-success' ")
-							.desc
-								strong {{ evento.nombre }}
-								p.small.text-muted(ng-show="evento.actual") Actual
-						
-						a.right.btn.btn-xs.btn-purple.mt-3(href="" ng-click="set_system_event(evento)" style="color: #fff" ng-hide="evento.actual")
-							| Actual
-							md-tooltip Establecer como evento actual
-
-						a(href="" ng-click="set_user_event(evento)")
-							span.fa.fa-laptop.left(ng-class="(evento.id==USER.evento_selected_id) ? 'bg-primary': 'bg-success' ")
-							.desc
-								strong {{ evento.nombre }}
-								p.small.text-muted(ng-show="evento.actual") Actual
-						
-
-
-
-	// Idiomas
-	li.notify-drop.hidden-xs.dropdown(dropdown="")
-		a(href="" dropdown-toggle="")
-			i.fa.fa-flag-checkered
-		
-		.panel.panel-default.dropdown-menu(custom-scrollbar="")
-			.panel-heading {{ 'IDIOMA_MENU' | translate }}
-			.panel-body
-				ul.list-unstyled
-					li.clearfix(ng-repeat="idioma in idiomas_usados")
-						a(href="" ng-click="cambiarIdioma(idioma)")
-							span.fa.fa-flag.left(ng-class="(idioma.actual) ? 'bg-primary': 'bg-success' ")
-							.desc
-								strong {{idioma.original}} ({{idioma.abrev}}) - {{idioma.nombre}}
-								p.small.text-muted(ng-show="idioma.actual") Actual
-
-
-ul.list-unstyled.right-elems.ng-scope
-	li.profile-drop.hidden-xs.dropdown(dropdown='')
-		a(href='', dropdown-toggle='', aria-haspopup='true', aria-expanded='false')
-			img(ng-src="{{imagesPath + USER.imagen_nombre}}" alt="{{USER.username}}")
-		ul.dropdown-menu.dropdown-menu-right
-			li
-				a(href='javascript:;')
-					span.ion.ion-person
-					| Perfil
-			li
-				a(href='javascript:;')
-					span.ion.ion-settings 
-					| Configuración
-			li.divider
-			li
-				a(href='javascript:;')
-					span.ion.ion-lock-combination
-					| Imágenes
-			li
-				a(href='' ng-click="logout()")
-					span.ion.ion-power(ng-bind-html="('SALIR' | translate)")
-
-
-	li.profile-drop.hidden-xs.dropdown()
-		a(href='' ng-click="logout()" style="color: #fff")
-			i.fa.fa-sign-out(ng-bind-html="('SALIR' | translate)") 
-			
-	//li.floating-sidebar(ng-class="{'open': floatingSidebar}")
-	li.floating-sidebar(ng-class="{'open': floatingSidebar}")
-		a(href="" ng-click='toggleFloatingSidebar()')
-			i.fa.fa-th
-		.sidebar-wrap.ps-container.ps-active-y(custom-scrollbar='')
-			
-			tabset(justified="true")
-				tab(heading="CHAT")
-					.chat-tab.clearfix
-						h5.title.mt0.mb30 Online
-						.user-container.mb15
-							img(src='images/perfil/pruebaadmin.jpg', alt='')
-							.desc
-								p.mb0 John Wick
-								p.xsmall
-									span.ion.ion-location
-									| San Franciso, USA
-							span.ion.ion-record.avail.right.on
-						.user-container.mb15
-							img(src='images/perfil/pruebaadmin.jpg', alt='')
-							.desc
-								p.mb0 John Wick
-								p.xsmall
-									span.ion.ion-location
-									| California, USA
-							span.ion.ion-record.avail.right.away
-
-				tab(heading="INFO")
-					.info-tab.clearfix
-						h5.title.mt0.mb30 Work in Progress
-						ul.list-unstyled.mb15.clearfix
-							li
-								.clearfix.mb10
-									small.left App Upload
-									small.right 80%
-								.progress-xs.progress.ng-isolate-scope(value='80', type='primary')
-									.progress-bar.progress-bar-primary(ng-class="type && 'progress-bar-' + type", role='progressbar', aria-valuenow='80', aria-valuemin='0', aria-valuemax='100', ng-style="{width: percent + '%'}" aria-valuetext='80%' style='width: 80%;')
-
-						h5.title.mt0.mb30 Settings
-
-						.clearfix.mb15
-							.left
-								p Show me online
-							.right
-								.ui-toggle.ui-toggle-success.ui-toggle-xs
-									label
-										input(type='checkbox', checked='')
-										span
-
-						.clearfix.mb15
-							.left
-								p Notifications
-
-							.right
-								.ui-toggle.ui-toggle-success.ui-toggle-xs
-									label
-										input(type='checkbox')
-										span
-
-
+html
+  body
+    header.top-header.clearfix
+      div(ui-preloader='')
+      // Logo
+      .logo(ng-class="{ 'bg-dark': ['11','31'].indexOf(main.skin) >= 0,\
+      'bg-white': main.skin === '21',\
+      'bg-primary': ['12','22','32'].indexOf(main.skin) >= 0,\
+      'bg-success': ['13','23','33'].indexOf(main.skin) >= 0,\
+      'bg-info': ['14','24','34'].indexOf(main.skin) >= 0,\
+      'bg-warning': ['15','25','35'].indexOf(main.skin) >= 0,\
+      'bg-danger': ['16','26','36'].indexOf(main.skin) >= 0 }")
+        a(href='#/')
+          span.logo-icon.zmdi.zmdi-view-dashboard
+          span.logo-text {{main.brand}}
+      // needs to be put after logo to make it work
+      .menu-button(toggle-off-canvas='')
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      .top-nav
+        ul.nav-left.list-unstyled
+          li
+            a.toggle-min(href='#/', data-toggle-nav-collapsed-min='', md-button='', aria-label='toggle-nav-collapsed-min')
+              i.zmdi.zmdi-menu
+          li.dropdown.hidden-xs(uib-dropdown='', is-open='status.isopenSettings')
+            a.dropdown-toggle(href='javascript:;', uib-dropdown-toggle='', ng-disabled='disabled', md-button='', aria-label='email')
+              i.zmdi.zmdi-settings
+            .uib-dropdown-menu.dropdown-menu-scaleIn.with-arrow.panel.panel-default.admin-options(ui-not-close-on-click='')
+              .panel-heading
+                span(data-translate='ADMIN_OPTIONS')
+              ul.list-group
+                li.list-group-item
+                  p Layouts Style
+                  md-radio-group(ng-model='main.layout')
+                    md-radio-button(value='wide') Wide
+                    md-radio-button(value='boxed') Boxed
+                li.list-group-item
+                  p Menu Style
+                  md-radio-group(ng-model='main.menu')
+                    md-radio-button(value='vertical') Vertical
+                    md-radio-button(value='horizontal') Horizontal
+                li.list-group-item
+                  p Additional
+                  md-checkbox(ng-model='main.fixedHeader', aria-label='fixedHeader')  Fixed Top Header 
+                  br
+                  md-checkbox(ng-model='main.fixedSidebar', aria-label='fixedSidebar')  Fixed Sidebar Menu 
+                li.list-group-item
+                  p
+                    span Page Transition: 
+                    span.space
+                    select(ng-model='main.pageTransition', ng-options='ageTransitionOpt.name for ageTransitionOpt in pageTransitionOpts')
+          li.dropdown.hidden-xs(uib-dropdown='', is-open='status.isopenPalette')
+            a.dropdown-toggle(href='javascript:;', uib-dropdown-toggle='', ng-disabled='disabled', md-button='', aria-label='email')
+              i.zmdi.zmdi-palette
+            .uib-dropdown-menu.with-arrow.panel.panel-default.skin-options.dropdown-menu-scaleIn(ui-not-close-on-click='')
+              .panel-heading
+                span(data-translate='COLOR_OPTIONS')
+              .panel-body
+                .row
+                  .col-xs-4
+                    label.skin-check
+                      input(type='radio', name='skin', value='11', ng-model='main.skin')
+                      span.skin-item.bg-body
+                        span.overlay
+                          span.glyphicon.glyphicon-ok
+                        span.bg-dark.item-header
+                        span.bg-white.item-header
+                        span.bg-dark
+                    label.skin-check
+                      input(type='radio', name='skin', value='12', ng-model='main.skin')
+                      span.skin-item.bg-body
+                        span.overlay
+                          span.glyphicon.glyphicon-ok
+                        span.bg-primary.item-header
+                        span.bg-white.item-header
+                        span.bg-dark
+                    label.skin-check
+                      input(type='radio', name='skin', value='13', ng-model='main.skin')
+                      span.skin-item.bg-body
+                        span.overlay
+                          span.glyphicon.glyphicon-ok
+                        span.bg-success.item-header
+                        span.bg-white.item-header
+                        span.bg-dark
+                    label.skin-check
+                      input(type='radio', name='skin', value='14', ng-model='main.skin')
+                      span.skin-item.bg-body
+                        span.overlay
+                          span.glyphicon.glyphicon-ok
+                        span.bg-info.item-header
+                        span.bg-white.item-header
+                        span.bg-dark
+                    label.skin-check
+                      input(type='radio', name='skin', value='15', ng-model='main.skin')
+                      span.skin-item.bg-body
+                        span.overlay
+                          span.glyphicon.glyphicon-ok
+                        span.bg-warning.item-header
+                        span.bg-white.item-header
+                        span.bg-dark
+                    label.skin-check
+                      input(type='radio', name='skin', value='16', ng-model='main.skin')
+                      span.skin-item.bg-body
+                        span.overlay
+                          span.glyphicon.glyphicon-ok
+                        span.bg-danger.item-header
+                        span.bg-white.item-header
+                        span.bg-dark
+                  .col-xs-4
+                    label.skin-check
+                      input(type='radio', name='skin', value='21', ng-model='main.skin')
+                      span.skin-item.bg-body
+                        span.overlay
+                          span.glyphicon.glyphicon-ok
+                        span.bg-white.item-header
+                        span.bg-white.item-header
+                        span.bg-dark
+                    label.skin-check
+                      input(type='radio', name='skin', value='22', ng-model='main.skin')
+                      span.skin-item.bg-body
+                        span.overlay
+                          span.glyphicon.glyphicon-ok
+                        span.bg-primary.item-header
+                        span.bg-primary.item-header
+                        span.bg-dark
+                    label.skin-check
+                      input(type='radio', name='skin', value='23', ng-model='main.skin')
+                      span.skin-item.bg-body
+                        span.overlay
+                          span.glyphicon.glyphicon-ok
+                        span.bg-success.item-header
+                        span.bg-success.item-header
+                        span.bg-dark
+                    label.skin-check
+                      input(type='radio', name='skin', value='24', ng-model='main.skin')
+                      span.skin-item.bg-body
+                        span.overlay
+                          span.glyphicon.glyphicon-ok
+                        span.bg-info.item-header
+                        span.bg-info.item-header
+                        span.bg-dark
+                    label.skin-check
+                      input(type='radio', name='skin', value='25', ng-model='main.skin')
+                      span.skin-item.bg-body
+                        span.overlay
+                          span.glyphicon.glyphicon-ok
+                        span.bg-warning.item-header
+                        span.bg-warning.item-header
+                        span.bg-dark
+                    label.skin-check
+                      input(type='radio', name='skin', value='26', ng-model='main.skin')
+                      span.skin-item.bg-body
+                        span.overlay
+                          span.glyphicon.glyphicon-ok
+                        span.bg-danger.item-header
+                        span.bg-danger.item-header
+                        span.bg-dark
+                  .col-xs-4
+                    label.skin-check
+                      input(type='radio', name='skin', value='31', ng-model='main.skin')
+                      span.skin-item.bg-body
+                        span.overlay
+                          span.glyphicon.glyphicon-ok
+                        span.bg-dark.item-header
+                        span.bg-dark.item-header
+                        span.bg-white
+                    label.skin-check
+                      input(type='radio', name='skin', value='32', ng-model='main.skin')
+                      span.skin-item.bg-body
+                        span.overlay
+                          span.glyphicon.glyphicon-ok
+                        span.bg-primary.item-header
+                        span.bg-primary.item-header
+                        span.bg-white
+                    label.skin-check
+                      input(type='radio', name='skin', value='33', ng-model='main.skin')
+                      span.skin-item.bg-body
+                        span.overlay
+                          span.glyphicon.glyphicon-ok
+                        span.bg-success.item-header
+                        span.bg-success.item-header
+                        span.bg-white
+                    label.skin-check
+                      input(type='radio', name='skin', value='34', ng-model='main.skin')
+                      span.skin-item.bg-body
+                        span.overlay
+                          span.glyphicon.glyphicon-ok
+                        span.bg-info.item-header
+                        span.bg-info.item-header
+                        span.bg-white
+                    label.skin-check
+                      input(type='radio', name='skin', value='35', ng-model='main.skin')
+                      span.skin-item.bg-body
+                        span.overlay
+                          span.glyphicon.glyphicon-ok
+                        span.bg-warning.item-header
+                        span.bg-warning.item-header
+                        span.bg-white
+                    label.skin-check
+                      input(type='radio', name='skin', value='36', ng-model='main.skin')
+                      span.skin-item.bg-body
+                        span.overlay
+                          span.glyphicon.glyphicon-ok
+                        span.bg-danger.item-header
+                        span.bg-danger.item-header
+                        span.bg-white
+          li.search-box.visible-md.visible-lg
+            .input-group
+              span.input-group-addon
+                i.zmdi.zmdi-search
+              input.form-control(type='text', placeholder="{{ 'SEARCH' | translate }}")
+              span.input-bar
+          li.dropdown(uib-dropdown='', is-open='status.isopenEmail')
+            a.dropdown-toggle(href='javascript:;', uib-dropdown-toggle='', ng-disabled='disabled', md-button='', aria-label='email')
+              i.zmdi.zmdi-email
+              span.badge.badge-danger 3
+            .uib-dropdown-menu.with-arrow.panel.panel-default.dropdown-menu-scaleIn
+              .panel-heading  You have 3 mails. 
+              ul.list-group
+                li.list-group-item
+                  a.media(href='javascript:;')
+                    span.media-left.media-icon
+                      span.btn-icon.btn-icon-round.btn-success
+                        i.zmdi.zmdi-email
+                    .media-body
+                      span.block Lisa sent you a mail
+                      span.text-muted.block 2min ago
+                li.list-group-item
+                  a.media(href='javascript:;')
+                    span.media-left.media-icon
+                      span.btn-icon.btn-icon-round.btn-info
+                        i.zmdi.zmdi-email
+                    .media-body
+                      span.block Jane sent you a mail
+                      span.text-muted 3 hours ago
+                li.list-group-item
+                  a.media(href='javascript:;')
+                    span.media-left.media-icon
+                      span.btn-icon.btn-icon-round.btn-danger
+                        i.zmdi.zmdi-email
+                    .media-body
+                      span.block Lynda sent you a mail
+                      span.text-muted 9 hours ago
+              .panel-footer
+                a(href='#/mail/inbox') Show all mails.
+        ul.nav-right.pull-right.list-unstyled
+          li.dropdown.text-normal.nav-profile(uib-dropdown='', is-open='status.isopenProfile')
+            a.dropdown-toggle(href='javascript:;', uib-dropdown-toggle='', ng-disabled='disabled', md-button='', aria-label='email')
+              img.img-circle.img30_30(src='images/g1.jpg', alt='')
+              span.hidden-xs
+                span(data-translate='LISA')
+            ul.uib-dropdown-menu.with-arrow.pull-right.dropdown-menu-scaleIn
+              li
+                a(href='#/')
+                  i.zmdi.zmdi-home
+                  span(data-translate='DASHBOARD')
+              li
+                a(href='#/page/profile')
+                  i.zmdi.zmdi-account
+                  span(data-translate='MY_PROFILE')
+              li
+                a(href='#/page/signin')
+                  i.zmdi.zmdi-forward
+                  span(data-translate='LOG_OUT')
+          li.dropdown.langs.text-normal(data-ng-controller='LangCtrl', uib-dropdown='', is-open='status.isopenLang')
+            a.dropdown-toggle.active-flag(href='javascript:;', uib-dropdown-toggle='', ng-disabled='disabled', md-button='', aria-label='lang')
+              .flag(class='{{ getFlag() }}')
+            ul.uib-dropdown-menu.with-arrow.pull-right.list-langs.dropdown-menu-scaleIn(role='menu')
+              li(data-ng-show="lang !== 'English' ")
+                a(href='javascript:;', data-ng-click="setLang('English')")
+                  .flag.flags-american
+                  |  English
+              li(data-ng-show="lang !== 'Español' ")
+                a(href='javascript:;', data-ng-click="setLang('Español')")
+                  .flag.flags-spain
+                  |  Español
+              li(data-ng-show="lang !== 'Portugal' ")
+                a(href='javascript:;', data-ng-click="setLang('Portugal')")
+                  .flag.flags-portugal
+                  |  Portugal
+              li(data-ng-show="lang !== '中文' ")
+                a(href='javascript:;', data-ng-click="setLang('中文')")
+                  .flag.flags-china
+                  |  中文
+              li(data-ng-show="lang !== '日本語' ")
+                a(href='javascript:;', data-ng-click="setLang('日本語')")
+                  .flag.flags-japan
+                  |  日本語
+              li(data-ng-show="lang !== 'Русский язык' ")
+                a(href='javascript:;', data-ng-click="setLang('Русский язык')")
+                  .flag.flags-russia
+                  |  Русский язык

@@ -1,84 +1,177 @@
-.nav-head
-	// site logo
-	a.site-logo.text-uppercase(ui-sref="panel")
-		i.fa.fa-globe
-		span.text Wissen
-
-// Site nav (vertical) 
-nav.site-nav.clearfix(role="navigation")
-
-	.container-entidad.clearfix.mb15(ng-if="!hasRoleOrPerm('admin', 'tecnico', 'profesor')")
-		img.img-thumbnail.img-entidad(ng-src="{{ imagesPath + USER.entidad.logo}}" alt="{{USER.username}}")
-		md-tooltip {{USER.entidad.nombre}}
-
-
-	.profile.clearfix.mb15
-		img(ng-src="{{imagesPath + USER.imagen_nombre}}" alt="{{USER.username}}")
-		div.group
-			h5.name {{USER.nombres}}
-			small.desig {{USER.apellidos}}
-
-
-	// navigation
-	ul.list-unstyled.clearfix.nav-list.mb15(highlight-active="")
-		li(ng-class="{active: $state.is('panel') }")
-			a(href="" ui-sref="panel" md-ink-ripple="")
-				i.fa.fa-home
-				span.text {{ 'INICIO_MENU' | translate }}
-
-		li(ui-sref-active="active" ng-if="hasRoleOrPerm('admin', 'tecnico', 'profesor')")
-			a(href="" ui-sref="panel.eventos" md-ink-ripple="")
-				i.fa.fa-laptop
-				span.text {{ 'EVENTS_MENU' | translate }}
-
-		li(ui-sref-active="active" ng-if="hasRoleOrPerm('admin', 'tecnico', 'profesor')")
-			a(href="" ui-sref="panel.categorias" md-ink-ripple="")
-				i.fa.fa-map-marker
-				span.text {{ 'CATEGS_MENU' | translate }}
-
-		li(ui-sref-active="active" ng-if="hasRoleOrPerm('admin', 'tecnico', 'profesor')")
-			a(href="" ui-sref="panel.entidades" md-ink-ripple="")
-				i.fa.fa-bank
-				span.text {{ 'ENTIDADES_MENU' | translate }}
-
-		li(ui-sref-active="active" ng-if="hasRoleOrPerm('admin', 'tecnico', 'profesor')")
-			a(href="" ui-sref="panel.preguntas" md-ink-ripple="")
-				i.fa.fa-question
-				span.text {{ 'PREGUNTAS_MENU' | translate }}
-
-		li(ui-sref-active="active" ng-if="hasRoleOrPerm('admin', 'tecnico', 'profesor')")
-			a(href="" ui-sref="panel.evaluaciones" md-ink-ripple="")
-				i.fa.fa-clipboard
-				span.text {{ 'EVALUACIONES_MENU' | translate }}
-
-		li(ui-sref-active="active" ng-if="hasRoleOrPerm('admin', 'tecnico', 'profesor')")
-			a(href="" ui-sref="panel.usuarios" md-ink-ripple="")
-				i.fa.fa-users
-				span.text {{ 'USERS_MENU' | translate }}
-
-		li(ui-sref-active="active" ng-if="hasRoleOrPerm('admin', 'tecnico', 'profesor')")
-			a(href="" ui-sref="panel.informes" md-ink-ripple="")
-				i.fa.fa-users
-				span.text {{ 'INFORMES_MENU' | translate }}
-
-
-		li(ui-sref-active="active" ng-if="false")
-			a(href="" md-ink-ripple="")
-				i.fa.fa-asterisk
-				span.text Construcción
-				i.arrow.fa.fa-angle-left
-				span.badge.badge-xs.badge-primary 2
-
-			ul.inner-drop.nested.list-unstyled
-				li 
-					a(href="" md-ink-ripple="") Font Awesome
-				li 
-					a(href="" md-ink-ripple="") Ionicons
-
-		
-
-
-<!-- nav-foot -->
-footer.nav-foot
-	p 2015 © 
-		span Wissen
+html
+  body
+    .nav-wrapper
+      ul#nav.nav(data-slim-scroll='', data-collapse-nav='', data-highlight-active='')
+        li.nav-title
+          span(data-translate='NAVIGATION')
+        li
+          a(md-button='', aria-label='meanu', href='#/dashboard')
+            i.zmdi.zmdi-home
+            span(data-translate='DASHBOARD')
+        li
+          a(md-button='', aria-label='meanu', href='#/ui')
+            i.zmdi.zmdi-card-giftcard
+            span
+              span(data-translate='MATERIAL')
+              |  UI
+          ul
+            li
+              a(md-button='', aria-label='meanu', href='#/ui/typography')
+                i.fa.fa-circle
+                span(data-translate='TYPOGRAPHY')
+            li
+              a(md-button='', aria-label='meanu', href='#/ui/buttons')
+                i.fa.fa-circle
+                span(data-translate='BUTTONS')
+            li
+              a(md-button='', aria-label='meanu', href='#/ui/icons')
+                i.fa.fa-circle
+                span(data-translate='ICONS')
+                span.badge.badge-info 3
+            li
+              a(md-button='', aria-label='meanu', href='#/ui/lists')
+                i.fa.fa-circle
+                span(data-translate='LISTS')
+            li
+              a(md-button='', aria-label='meanu', href='#/ui/components')
+                i.fa.fa-circle
+                span(data-translate='COMPONENTS')
+                span.badge.badge-danger 24
+            li
+              a(md-button='', aria-label='meanu', href='#/ui/cards')
+                i.fa.fa-circle
+                span(data-translate='CARDS')
+            li
+              a(md-button='', aria-label='meanu', href='#/ui/pricing-tables')
+                i.fa.fa-circle
+                span(data-translate='PRICING_TABLES')
+            li
+              a(md-button='', aria-label='meanu', href='#/ui/timeline')
+                i.fa.fa-circle
+                span(data-translate='TIMELINE')
+            li
+              a(md-button='', aria-label='meanu', href='#/map/maps')
+                i.fa.fa-circle
+                span(data-translate='MAPS')
+            li
+              a(md-button='', aria-label='meanu', href='#/ui/grids')
+                i.fa.fa-circle
+                span(data-translate='GRIDS')
+        li
+          a(md-button='', aria-label='meanu', href='#/page')
+            i.zmdi.zmdi-pages
+            span(data-translate='PAGES')
+          ul
+            li
+              a(md-button='', aria-label='meanu', target='_blank', href='http://iarouse.com/dist-material-design-admin/landing/index.html')
+                i.fa.fa-circle
+                span(data-translate='LANDING_PAGE')
+            li
+              a(md-button='', aria-label='meanu', href='#/page/signin')
+                i.fa.fa-circle
+                span(data-translate='SIGN_IN')
+            li
+              a(md-button='', aria-label='meanu', href='#/page/signup')
+                i.fa.fa-circle
+                span(data-translate='SIGN_UP')
+            li
+              a(md-button='', aria-label='meanu', href='#/page/forgot-password')
+                i.fa.fa-circle
+                span(data-translate='FORGOT_PASSWORD')
+            li
+              a(md-button='', aria-label='meanu', href='#/page/profile')
+                i.fa.fa-circle
+                span(data-translate='USER_PROFILE')
+            li
+              a(md-button='', aria-label='meanu', href='#/page/invoice')
+                i.fa.fa-circle
+                span(data-translate='INVOICE')
+            li
+              a(md-button='', aria-label='meanu', href='#/page/404')
+                i.fa.fa-circle
+                | 404 
+                span(data-translate='ERROR')
+            li
+              a(md-button='', aria-label='meanu', href='#/page/500')
+                i.fa.fa-circle
+                | 500 
+                span(data-translate='ERROR')
+            li
+              a(md-button='', aria-label='meanu', href='#/page/blank')
+                i.fa.fa-circle
+                span(data-translate='BLANK_PAGE')
+        li
+          a(md-button='', aria-label='meanu', href='#/table')
+            i.zmdi.zmdi-view-list
+            span(data-translate='TABLES')
+          ul
+            li
+              a(md-button='', aria-label='meanu', href='#/table/static')
+                i.fa.fa-circle
+                span(data-translate='STATIC_TABLES')
+            li
+              a(md-button='', aria-label='meanu', href='#/table/responsive')
+                i.fa.fa-circle
+                span(data-translate='RESPONSIVE_TABLES')
+                span.badge.badge-info 2
+            li
+              a(md-button='', aria-label='meanu', href='#/table/dynamic')
+                i.fa.fa-circle
+                span(data-translate='DYNAMIC_TABLES')
+        li
+          a(md-button='', aria-label='meanu', href='#/form')
+            i.zmdi.zmdi-edit
+            span(data-translate='FORMS')
+          ul
+            li
+              a(md-button='', aria-label='meanu', href='#/form/elements')
+                i.fa.fa-circle
+                span(data-translate='FORM_ELEMENTS')
+                span.badge.badge-info 15
+            li
+              a(md-button='', aria-label='meanu', href='#/form/validation')
+                i.fa.fa-circle
+                span(data-translate='FORM_VALIDATION')
+            li
+              a(md-button='', aria-label='meanu', href='#/form/wizard')
+                i.fa.fa-circle
+                span(data-translate='FORM_WIZARD')
+            li
+              a(md-button='', aria-label='meanu', href='#/form/layouts')
+                i.fa.fa-circle
+                span(data-translate='FORM_LAYOUTS')
+        li
+          a(md-button='', aria-label='meanu', href='#/chart')
+            i.zmdi.zmdi-chart
+            span(data-translate='CHARTS')
+          ul
+            li
+              a(md-button='', aria-label='meanu', href='#/chart/chartjs')
+                i.fa.fa-circle
+                | ChartJS 
+                span(data-translate='CHARTS')
+            li
+              a(md-button='', aria-label='meanu', href='#/chart/flot')
+                i.fa.fa-circle
+                | Flot 
+                span(data-translate='CHARTS')
+            li
+              a(md-button='', aria-label='meanu', href='#/chart/charts')
+                i.fa.fa-circle
+                | Other 
+                span(data-translate='CHARTS')
+        li.nav-divider
+        li.nav-title
+          span(data-translate='FEATURES')
+        li.li-small
+          a(href='#/ui/components')
+            i.fa.fa-circle.color-info
+            span(data-translate='MATERIAL_COMPO')
+        li.li-small
+          a(href='#/form/elements')
+            i.fa.fa-circle.color-success
+            span(data-translate='MATERIAL_ELEMENTS')
+        li.li-small
+          a(href='#/ui/icons')
+            i.fa.fa-circle.color-danger
+            span(data-translate='MATERIAL_ICONS')

@@ -7,8 +7,7 @@ header.site-head.fixedHeader#site-head(ng-class="{'fixedHeader': fixedHeader}" n
 // main-container
 .main-container.clearfix.nav-expand(ng-class="{'nav-expand': navFull, 'nav-horizontal': navHorizontal}")
 
-	aside.nav-wrap.ps-container.nav-expand.ps-active-y#site-nav(ng-class="{'nav-expand': navFull, 'nav-offcanvas': navOffCanvas}" 
-		custom-scrollbar="" ng-include=" 'views/panel/nav.tpl.html' ")
+	aside.nav-container#nav-container(ng-class="{ 'nav-fixed': main.fixedSidebar, 'nav-horizontal': main.menu === 'horizontal', 'nav-vertical': main.menu === 'vertical', 'bg-white': ['31','32','33','34','35','36'].indexOf(main.skin) >= 0, 'bg-dark': ['31','32','33','34','35','36'].indexOf(main.skin) < 0 }" ng-include=" 'views/panel/nav.tpl.html' ")
 		.nav-head
 
 	div.content-container.fixedHeader(ng-class="{'nav-expand': navFull, 'fixedHeader': fixedHeader}" id="content")
