@@ -10,11 +10,12 @@ angular.module('feryzApp')
 					'principal':
 						templateUrl: "#{App.views}panel/panel.tpl.html"
 						controller: 'PanelCtrl'
-				resolve: { 
+				###resolve: { 
 					resolved_user: ['AuthService', (AuthService)->
 						AuthService.verificar()
 					]
-				}
+				
+				}###
 				data: 
 					pageTitle: 'Feryz - Bienvenido'
 			})
