@@ -1,7 +1,7 @@
 angular.module('feryzApp')
 
 .controller('ProductosCtrl', ['$scope', 'Restangular', '$filter', 'toastr', ($scope, Restangular, $filter, toastr) ->
-
+	
 	$scope.creando = false
 	$scope.productoNuevo = {}
 	$scope.editando = false

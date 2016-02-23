@@ -92,7 +92,7 @@ angular.module('feryzApp')
 
 				Perfil.setUser user
 
-				#console.log 'Usuario traido: ', user
+				console.log 'Usuario traido: ', user
 
 				
 				$rootScope.$broadcast AUTH_EVENTS.loginSuccess

@@ -3,89 +3,275 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
+
+
+
+@import "base.scss";
+@import "select2.scss";
+
+
+
+
+
+
+// Arreglando Select2
+ .select2 > .select2-choice.ui-select-match {
+  /* Because of the inclusion of Bootstrap */
+  height: 29px;
+}
+.selectize-control > .selectize-dropdown {
+  top: 36px;
 }
 
-body {
-  padding: 0;
+// Anchar el menú de los eventos
+.site-head ul.left-elems > li.notify-drop .dropdown-menu{
+    min-width: 450px;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
+
+md-tooltip {
+  z-index: 99999;
 }
 
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 10px;
 
-  /* Make the masthead heading the same height as the navigation */
-  h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 40px;
-    padding-bottom: 19px;
+
+
+// Arreglando tabs
+.md-select-menu-container {
+  z-index: 9999;
+}
+md-tabs{
+  border: 1px solid #e1e1e1;
+}
+md-tabs-wrapper{
+  border-width: 0 0 1px;
+  border-style: solid;
+}
+md-tab-content.md-right{ // La animación al cambiar a un tab izquierdo
+  -webkit-animation: none !important;
+  animation: none !important;
+}
+
+
+
+// Arreglando navegación
+.nav > li > a:hover, .nav > li > a:focus {
+  background-color: transparent;
+}
+.panel-default > .panel-heading {
+  background-color: #ffffff;
+}
+
+
+// Arreglando editores de texto
+md-input-container label.confroala {
+  top: -65px !important;
+}
+a:hover, a:focus {
+  text-decoration: none;
+}
+
+.froala-box{
+  border: solid;
+  border-width: 0 0 1px 0;
+  border-color: rgba(0,0,0,0.12);
+}
+
+.textblue{
+  color: #00F !important;
+}
+
+.md-toast {
+
+}
+.md-top {
+  z-index: 999000;
+  position: fixed;
+  top: 66px; // size of my navbar + 16px
+}
+
+.md-right {
+  z-index: 999000;
+  position: fixed;
+  right: 16px;
+}
+
+
+.opciones md-whiteframe {
+  background: #fff;
+  margin: 5px;
+  padding: 10px;
+  white-space: normal;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.14), 0 4px 5px 0 rgba(0, 0, 0, 0.098), 0 1px 10px 0 rgba(0, 0, 0, 0.084);
+
+  &:hover{
+    background: #2196f3;
+    color: #fff;
   }
 }
+.opciones md-whiteframe.elegida {
+  background: #3f51b5;
+  color: #fff;
+  padding-left: 10px;
 
-/* Custom page footer */
-.footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
 }
 
-.container-narrow > hr {
-  margin: 30px 0;
+
+.definicion-preg{
+  padding-left: 20px;
 }
 
-/* Main marketing message and sign up button */
-.jumbotron {
+.opcionesedit{
+
+  padding-left: 40px;
+
+  md-input-container{
+    padding-bottom: 1px !important;
+    
+    label{
+      margin-bottom: 0px; 
+    }
+    .md-input{
+      border-width: 0 0 1px 0 !important;
+    }
+  }
+}
+.add-opcion{
+  border-color: #86e6c8 !important;
+  background: #86e6c8 !important
+}
+
+
+
+.pointer{
+  cursor: pointer;
+}
+
+.img-gender{
+  width: 70px;
+}
+.rd-gender{
+  display: inline-block !important;
+}
+
+@mixin ayuda-preg(){
+  position: absolute;
+  padding: 4px;
+  background-color: #fff;
+  border-radius: 10px 0;
+  cursor: pointer;
+  border: 1px solid #eee;
+}
+
+.ayuda-preg-showed{
+  @include ayuda-preg();
+  width: 300px;
+  margin-left: -290px;
+}
+
+.ayuda-preg-hidded{
+  @include ayuda-preg();
+}
+
+.fondo-odd{
+    background-color: #F1F9FF;
+}
+.fondo-even{
+    background-color: #FDEFFF;
+}
+.fondo-gris{
+    background-color: #eee;
+}
+
+.definicion-frame:hover .btn-container-edit{
+  opacity: 1;
+}
+
+.definicion-frame .btn-container-edit{
+  position: absolute;
+  margin-left: -170px;
+  margin-top: -10px;
+
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+
+.ancho-200{
+  display: inline-block;
+  width: 200px;
+}
+
+
+.titulo-3d {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  cursor: pointer;
+  border: none;
+  font: bold 52px/normal 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: rgba(255,255,255,1);
   text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-
-  .btn {
-    font-size: 21px;
-    padding: 14px 24px;
-  }
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  text-shadow: 0 1px 0 rgb(204,204,204) , 0 2px 0 rgb(201,201,201) , 0 3px 0 rgb(187,187,187) , 0 4px 0 rgb(185,185,185) , 0 5px 0 rgb(170,170,170) , 0 6px 1px rgba(0,0,0,0.0980392) , 0 0 5px rgba(0,0,0,0.0980392) , 0 1px 3px rgba(0,0,0,0.298039) , 0 3px 5px rgba(0,0,0,0.2) , 0 5px 10px rgba(0,0,0,0.247059) , 0 10px 10px rgba(0,0,0,0.2) , 0 20px 20px rgba(0,0,0,0.14902) ;
+  -webkit-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+  -moz-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+  -o-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+  transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
 }
 
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-
-  p + h4 {
-    margin-top: 28px;
-  }
+.titulo-3d:hover {
+  color: rgb(239, 239, 239);
+  text-shadow: 0 1px 0 rgba(255,255,255,1) , 0 2px 0 rgba(255,255,255,1) , 0 3px 0 rgba(255,255,255,1) , 0 4px 0 rgba(255,255,255,1) , 0 5px 0 rgba(255,255,255,1) , 0 6px 1px rgba(0,0,0,0.0980392) , 0 0 5px rgba(0,0,0,0.0980392) , 0 1px 3px rgba(0,0,0,0.298039) , 0 3px 5px rgba(0,0,0,0.2) , 0 -5px 10px rgba(0,0,0,0.247059) , 0 -7px 10px rgba(0,0,0,0.2) , 0 -15px 20px rgba(0,0,0,0.14902) ;
+  -webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+  -moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+  -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+  transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
 }
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 730px;
+.container-entidad{
+
+  padding: 10px 0px 10px 7px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    
+  .img-entidad{
+    width: 200px; 
+    height: 200px;
   }
 
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
 }
+
+.timer-count{
+  position: absolute;
+  right: 0px;
+  margin-top: -10px;
+}
+.timer-progress{
+  position: absolute;
+  color: #999;
+  font-weight: 100;
+  line-height: 1;
+}
+.progress-wrapper {
+  position: relative;
+  font-size: 40px;
+}
+
+.progreso-preguntas{
+  position: relative;
+}
+
+.total-pregs{
+  right: 10px;
+  top: 2px;
+  position: absolute;
+  color: #aaa;
+}
+
+
+// Para quitar el mensaje de Unlicensed Froala Editor que sabe online.
+.froala-wrapper + div{
+  display: none !important;
+}
+

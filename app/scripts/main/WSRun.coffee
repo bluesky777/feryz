@@ -23,7 +23,7 @@ angular.module('feryzApp')
 		if $rootScope.lastState == null or $rootScope.lastState == 'login' or $rootScope.lastState == '/' or $rootScope.lastState == 'main'
 			$state.go 'panel' #- Por lo tanto nos vamos a panel después de autenticarnos.
 		else
-			$state.transitionTo $rootScope.lastState, $rootScope.lastStateParam #- Si no es null ni login, Nos vamos al último estado.
+			$state.go $rootScope.lastState, $rootScope.lastStateParam #- Si no es null ni login, Nos vamos al último estado.
 		#console.log 'Funcion ingresar. lastState: ', $rootScope.lastState
 
 	#- Evento ejecutado cuando nos logueamos despues del servidor haber pedido autenticación.

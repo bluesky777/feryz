@@ -1,15 +1,23 @@
-h1 Hola empleadosss botos
+h1(class="text text-primary") Empleados
 
-{{ titulo }}
 
-button(ng-click="traerEmpleados()") Traer todos los empleados
 
-table(style="border: solid 2px #000; padding: 4px;" border="1")
+button(ng-click="traerEmpleados()" class="btn btn-default") Traer todos los empleados
+
+input(type="text" ng-model="buscar.cargo")
+
+table(class="table table-default")
 	tr
 		td Nombre
-		td Apellido
-		td Telefono
-	tr(ng-repeat="empleado in empleados")
-		td {{ empleado.nombre }}
-		td {{ empleado.Apellidos }}
-		td {{ empleado.Telefono }}
+		td cargo
+		td salario
+		td Editar & Eliminar
+	tr(ng-repeat="emp in empleados | filter:buscar")
+		td {{ emp.nombre }}
+		td {{ emp.cargo }}
+		td {{ emp.salario }}
+		td 
+			a.btn.btn-default(href="" ng-click="editarEmpleado(emp)")
+				i.fa.fa-pencil
+			a.btn.btn-danger(href="" ng-click="eliminarEmpleado(emp)")
+				i.fa.fa-times

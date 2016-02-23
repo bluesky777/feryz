@@ -5,7 +5,7 @@ angular.module('feryzApp')
 .config(['$cookiesProvider', '$stateProvider', '$urlRouterProvider', '$httpProvider', '$locationProvider', 'App', 'PERMISSIONS', 'RestangularProvider', '$intervalProvider', '$rootScopeProvider', 'USER_ROLES', 'toastrConfig', 'uiSelectConfig', ($cookies, $state, $urlRouter, $httpProvider, $locationProvider, App, PERMISSIONS, Restangular, $intervalProvider, $rootScopeProvider, USER_ROLES, toastrConfig, uiSelectConfig)->
 
 	Restangular.setBaseUrl App.Server # Url a la que se harán todas las llamadas.
-
+	$httpProvider.Url= App.Server
 	###
 	$httpProvider.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
 	$httpProvider.defaults.headers.put['X-CSRFToken'] = $cookies.csrftoken;

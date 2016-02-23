@@ -1,27 +1,29 @@
 
-<h1>Productos</h1>
+<Center>
+  <h1 class="text-primary">Productos</h1>
+</Center>
 <div ng-show="creando">
   <form ng-submit="guardarProducto()">
     <input type="text" ng-model="productoNuevo.nombre" placeholder="Nombre">
     <input type="text" ng-model="productoNuevo.codigo" placeholder="Código">
-    <input type="submit" value="Guardar">
-    <input type="button" value="Cancelar" ng-click="creando=false">
+    <input type="submit" value="Guardar" class="btn btn-default">
+    <input type="button" value="Cancelar" ng-click="creando=false" class="btn btn-danger">
   </form>
 </div>
 <div ng-show="editando">
   <form ng-submit="actualizarProducto()">
     <input type="text" ng-model="productoEdit.nombre" placeholder="Nombre">
     <input type="text" ng-model="productoEdit.codigo" placeholder="Código">
-    <input type="submit" value="Actualizar">
-    <input type="button" value="Cancelar" ng-click="editando=false">
+    <input type="submit" value="Actualizar" class="btn btn-primary">
+    <input type="button" value="Cancelar" ng-click="editando=false" class="btn btn-danger">
   </form>
 </div>
-<button ng-click="crearProducto()">Nuevo producto</button>
-<table style="border: solid 2px #000; padding: 4px;" border="1">
+<button ng-click="crearProducto()" class="btn btn-success">Nuevo producto</button>
+<table class="table table-bordered">
   <tr>
     <td>Nombre</td>
     <td>Apellido</td>
-    <td>Telefono</td>
+    <td>Editar & Eliminar</td>
   </tr>
   <tr ng-repeat="prod in productos">
     <td>{{ prod.nombre }}</td>
