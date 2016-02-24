@@ -20,22 +20,4 @@ header.site-head.fixedHeader#site-head(ng-class="{'fixedHeader': fixedHeader}" n
 
 
 
-	<!-- settings -->
-	.site-settings.clearfix.hidden-xs(ng-class="{'open': isSettingsOpen}")
-		.settings.clearfix
-			.trigger.ion.ion-settings.left(ng-click="toggleSettingsBox()" role="button" tabindex="0")
-			.wrapper.left
-				ul.list-unstyled.other-settings
-					li.clearfix.mb10
-						.left.small Nav Horizontal
-						md-switch.right.md-default-theme(aria-label="Mensajito" ng-model="navHorizontal" style="margin: 0" ng-change="onNavHorizontal()" role="checkbox")
-							.md-container
-								.md-bar
-								.md-thumb-container 
-								.md-thumb(md-ink-ripple="" md-ink-ripple-checkbox="")
-							.md-label
-				hr
-				ul.themes.list-unstyled
-					li(ng-class="{active: theme-zero}" ng-model="themeModel" btn-radio="'theme-zero'" ng-change="onThemeChange(themeModel)" tabindex="0" aria-invalid="false")
-
-
+	

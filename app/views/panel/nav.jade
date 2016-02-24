@@ -7,13 +7,9 @@
 // Site nav (vertical) 
 nav.site-nav.clearfix(role="navigation")
 
-	.container-entidad.clearfix.mb15(ng-if="!hasRoleOrPerm('admin', 'tecnico', 'profesor')")
-		img.img-thumbnail.img-entidad(ng-src="{{ imagesPath + USER.entidad.logo}}" alt="{{USER.username}}")
-		md-tooltip {{USER.entidad.nombre}}
-
 
 	.profile.clearfix.mb15
-		img(ng-src="{{imagesPath + USER.imagen_nombre}}" alt="{{USER.username}}")
+		img(ng-src="{{imagesPath + USER.image_nombre}}" alt="{{USER.username}}")
 		div.group
 			h5.name {{USER.nombres}}
 			small.desig {{USER.apellidos}}
@@ -21,20 +17,20 @@ nav.site-nav.clearfix(role="navigation")
 
 	// navigation
 	ul.list-unstyled.clearfix.nav-list.mb15(highlight-active="")
-		li(ng-class="{active: $state.is('panel') }")
+		li(ui-sref-active-eq="active")
 			a(href="" ui-sref="panel" md-ink-ripple="")
 				i.fa.fa-home
-				span.text {{ 'INICIO_MENU' | translate }}
+				span.text Inicio
 
-		li(ui-sref-active="active" ng-if="hasRoleOrPerm('admin', 'tecnico', 'profesor')")
-			a(href="" ui-sref="panel.eventos" md-ink-ripple="")
+		li(ui-sref-active="active" )
+			a(href="" ui-sref="panel.usuarios" md-ink-ripple="")
 				i.fa.fa-laptop
-				span.text {{ 'EVENTS_MENU' | translate }}
+				span.text Usuarios
 
-		li(ui-sref-active="active" ng-if="hasRoleOrPerm('admin', 'tecnico', 'profesor')")
-			a(href="" ui-sref="panel.categorias" md-ink-ripple="")
+		li(ui-sref-active="active")
+			a(href="" ui-sref="panel.pacientes" md-ink-ripple="")
 				i.fa.fa-map-marker
-				span.text {{ 'CATEGS_MENU' | translate }}
+				span.text Pacientes
 
 		li(ui-sref-active="active" ng-if="hasRoleOrPerm('admin', 'tecnico', 'profesor')")
 			a(href="" ui-sref="panel.entidades" md-ink-ripple="")
