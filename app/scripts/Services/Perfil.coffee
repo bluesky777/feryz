@@ -1,6 +1,6 @@
 angular.module('feryzApp')
 
-.factory('Perfil', ['Restangular', 'App', '$q', '$cookies', '$rootScope', 'AUTH_EVENTS', '$http', (Restangular, App, $q, $cookies, $rootScope, AUTH_EVENTS, $http) ->
+.factory('Perfil', ['App', 'AUTH_EVENTS', '$http', (App, AUTH_EVENTS, $http) ->
 
 	user = {}
 

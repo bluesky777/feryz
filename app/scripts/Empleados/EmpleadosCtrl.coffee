@@ -1,6 +1,6 @@
 angular.module('feryzApp')
 
-.controller('EmpleadosCtrl', ['$scope', 'Restangular', '$filter', 'toastr', ($scope, Restangular, $filter, toastr) ->
+.controller('EmpleadosCtrl', ['$scope', '$http', '$filter', 'toastr', ($scope, $http, $filter, toastr) ->
 	
 	$scope.creando = false
 	$scope.empleadoNuevo = {}
@@ -13,7 +13,7 @@ angular.module('feryzApp')
 
 	$scope.guardarEmpleado = ()->
 
-		Restangular.one('empleados/guardar').customPOST($scope.empleadoNuevo).then( (r)->
+		$http.one('empleados/guardar').customPOST($scope.empleadoNuevo).then( (r)->
 			$scope.empleados.push r
 			toastr.success 'Creado correctamente: ' + r.nombre
 			$scope.creando = false
@@ -25,7 +25,7 @@ angular.module('feryzApp')
 
 	$scope.eliminarEmpleado = (emp)->
 		
-		Restangular.one('empleados/eliminar').customDELETE(emp.id).then( (r)->
+		$http.one('empleados/eliminar').customDELETE(emp.id).then( (r)->
 			$scope.empleados = $filter('filter')($scope.empleados, {id: '!'+emp.id})
 		, (r2)->
 			console.log 'No se pudo eliminar empleado', r2
@@ -33,7 +33,7 @@ angular.module('feryzApp')
 		)
 
 	$scope.actualizarEmpleado = (usu)->
-		Restangular.one('empleados/actualizar').customPUT($scope.empleadoEdit).then( (r)->
+		$http.one('empleados/actualizar').customPUT($scope.empleadoEdit).then( (r)->
 			toastr.success 'Actualizado correctamente: ' + r.nombre
 			$scope.editando = false
 		, (r2)->
@@ -49,7 +49,7 @@ angular.module('feryzApp')
 	
 	$scope.traerEmpleados = ()->
 
-		Restangular.one('empleados').customGET('all').then( (r)->
+		$http.one('empleados').customGET('all').then( (r)->
 			$scope.empleados = r
 		, (r2)->
 			console.log 'No se pudo traer los empleados', r2

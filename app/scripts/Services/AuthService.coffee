@@ -1,6 +1,6 @@
 angular.module('feryzApp')
 
-.factory('AuthService', ['Restangular', '$state', '$http', '$cookies', 'Perfil', '$rootScope', 'AUTH_EVENTS', '$q', '$filter', 'toastr', (Restangular, $state, $http, $cookies, Perfil, $rootScope, AUTH_EVENTS, $q, $filter, toastr)->
+.factory('AuthService', ['App', '$state', '$http', '$cookies', 'Perfil', '$rootScope', 'AUTH_EVENTS', '$q', '$filter', 'toastr', (App, $state, $http, $cookies, Perfil, $rootScope, AUTH_EVENTS, $q, $filter, toastr)->
 	authService = {}
 
 
@@ -83,22 +83,19 @@ angular.module('feryzApp')
 
 		authService.borrarToken()
 
-		Restangular.one('login/login').customPOST(credentials).then((user)->
+		$http.post(App.Server + 'login/login', credentials).then((r)->
 			#debugger
-			if user.token
-				$cookies.put('xtoken', user.token)
+			if r.data.token
+				$cookies.put('xtoken', r.data.token)
 				
 				$http.defaults.headers.common['Authorization'] = 'Bearer ' + $cookies.get('xtoken')
 
-				Perfil.setUser user
-
-				console.log 'Usuario traido: ', user
-
+				Perfil.setUser r.data
 				
 				$rootScope.$broadcast AUTH_EVENTS.loginSuccess
-				d.resolve user
+				d.resolve r.data
 			else
-				console.log 'No se trajo un token en el login.', user
+				console.log 'No se trajo un token en el login.', r.data
 				$rootScope.$broadcast AUTH_EVENTS.loginFailed
 				d.reject 'Error en login'
 
@@ -125,16 +122,16 @@ angular.module('feryzApp')
 
 		d = $q.defer();
 
-		#console.log Perfil.User().id 
+		#console.log Perfil.User()
 
 		if Perfil.User().id or Perfil.User().id == undefined
 
 			$http.defaults.headers.common['Authorization'] = 'Bearer ' + $cookies.get('xtoken')
 
-			login = Restangular.one('login/verificar').post().then((usuario)->
+			login = $http.post(App.Server + 'login/verificar').then((r)->
 
 				$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-				d.resolve usuario
+				d.resolve r.data
 
 			, (r2)->
 				console.log 'No se pudo loguear con token. ', r2

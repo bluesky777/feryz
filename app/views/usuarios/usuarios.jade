@@ -1,100 +1,70 @@
-div(style="overflow: auto")
-	Center
-		h1(class="text-primary") Usuarios
+.row
+	.col-lg-12
+		.panel.panel-default.panel-hovered.mb20(ng-show="creando" )
+			.panel-heading Nuevo usuario
 
-	div(ng-show="creando" )
-		form(ng-submit="guardarUsuario()")
-			input(type="text" ng-model="usuarioNuevo.nombres" placeholder="Nombres")
-			input(type="text" ng-model="usuarioNuevo.apellidos" placeholder="Apellidos")
-			input(type="text" ng-model="usuarioNuevo.sexo" placeholder="Sexo")
-			input(type="text" ng-model="usuarioNuevo.username" placeholder="Nombre usuario")
-			input(type="text" ng-model="usuarioNuevo.email" placeholder="Email")
-			input(type="text" ng-model="usuarioNuevo.password" placeholder="Password")
-			input(type="text" ng-model="usuarioNuevo.tipo_doc" placeholder="Tipo doc")
-			input(type="text" ng-model="usuarioNuevo.num_doc" placeholder="Num doc")
-			input(type="text" ng-model="usuarioNuevo.ciudad_doc" placeholder="Ciudad doc")
-			input(type="text" ng-model="usuarioNuevo.fecha_nac" placeholder="Fecha nac")
-			input(type="text" ng-model="usuarioNuevo.ciudad_nac" placeholder="Ciudad nac")
-			input(type="text" ng-model="usuarioNuevo.titulo" placeholder="Titulo")
-			input(type="text" ng-model="usuarioNuevo.estado_civil" placeholder="Estado civil")
-			input(type="text" ng-model="usuarioNuevo.barrio" placeholder="Barrio")
-			input(type="text" ng-model="usuarioNuevo.direccion" placeholder="Direccion")
-			input(type="text" ng-model="usuarioNuevo.telefono" placeholder="Telefono")
-			input(type="text" ng-model="usuarioNuevo.celular" placeholder="Celular")
-			input(type="text" ng-model="usuarioNuevo.facebook" placeholder="Facebook")
-			input(type="submit" value="Guardar" class="btn btn-default")
-			input(type="button" value="Cancelar" ng-click="creando=false" class="btn btn-danger")
+			.panel-body
+				div
+					form(ng-submit="guardarUsuario()")
+						input(type="text" ng-model="usuarioNuevo.nombres" placeholder="Nombres")
+						input(type="text" ng-model="usuarioNuevo.apellidos" placeholder="Apellidos")
+						input(type="text" ng-model="usuarioNuevo.sexo" placeholder="Sexo")
+						input(type="text" ng-model="usuarioNuevo.username" placeholder="Nombre usuario")
+						input(type="text" ng-model="usuarioNuevo.email" placeholder="Email")
+						input(type="text" ng-model="usuarioNuevo.password" placeholder="Password")
+						input(type="text" ng-model="usuarioNuevo.tipo_doc" placeholder="Tipo doc")
+						input(type="text" ng-model="usuarioNuevo.num_doc" placeholder="Num doc")
+						input(type="text" ng-model="usuarioNuevo.ciudad_doc" placeholder="Ciudad doc")
+						input(type="text" ng-model="usuarioNuevo.fecha_nac" placeholder="Fecha nac")
+						input(type="text" ng-model="usuarioNuevo.ciudad_nac" placeholder="Ciudad nac")
+						input(type="text" ng-model="usuarioNuevo.titulo" placeholder="Titulo")
+						input(type="text" ng-model="usuarioNuevo.estado_civil" placeholder="Estado civil")
+						input(type="text" ng-model="usuarioNuevo.barrio" placeholder="Barrio")
+						input(type="text" ng-model="usuarioNuevo.direccion" placeholder="Direccion")
+						input(type="text" ng-model="usuarioNuevo.telefono" placeholder="Telefono")
+						input(type="text" ng-model="usuarioNuevo.celular" placeholder="Celular")
+						input(type="text" ng-model="usuarioNuevo.facebook" placeholder="Facebook")
+						input(type="submit" value="Guardar" class="btn btn-default")
+						input(type="button" value="Cancelar" ng-click="creando=false" class="btn btn-danger")
+.row
+	.col-lg-12
+		.panel.panel-default.panel-hovered.mb20(ng-show="editando" )
+			.panel-heading Editar usuario
+
+			.panel-body
+				div(ng-show="editando")
+					form(ng-submit="actualizarUsuario()")
+						input(type="text" ng-model="usuarioActualizar.nombres" placeholder="Nombres")
+						input(type="text" ng-model="usuarioActualizar.apellidos" placeholder="Apellidos")
+						input(type="text" ng-model="usuarioActualizar.sexo" placeholder="Sexo")
+						input(type="text" ng-model="usuarioActualizar.username" placeholder="Nombre usuario")
+						input(type="text" ng-model="usuarioActualizar.email" placeholder="Email")
+						input(type="text" ng-model="usuarioActualizar.password" placeholder="Password")
+						input(type="text" ng-model="usuarioActualizar.tipo_doc" placeholder="Tipo doc")
+						input(type="text" ng-model="usuarioActualizar.num_doc" placeholder="Num doc")
+						input(type="text" ng-model="usuarioActualizar.ciudad_doc" placeholder="Ciudad doc")
+						input(type="text" ng-model="usuarioActualizar.fecha_nac" placeholder="Fecha nac")
+						input(type="text" ng-model="usuarioActualizar.ciudad_nac" placeholder="Ciudad nac")
+						input(type="text" ng-model="usuarioActualizar.titulo" placeholder="Titulo")
+						input(type="text" ng-model="usuarioActualizar.estado_civil" placeholder="Estado civil")
+						input(type="text" ng-model="usuarioActualizar.barrio" placeholder="Barrio")
+						input(type="text" ng-model="usuarioActualizar.direccion" placeholder="Direccion")
+						input(type="text" ng-model="usuarioActualizar.telefono" placeholder="Telefono")
+						input(type="text" ng-model="usuarioActualizar.celular" placeholder="Celular")
+						input(type="text" ng-model="usuarioActualizar.facebook" placeholder="Facebook")
+						input(type="submit" value="Actualizar" class="btn btn-primary")
+						input(type="button" value="Cancelar" ng-click="editando=false" class="btn btn-danger")
 
 
-	div(ng-show="editando")
-		form(ng-submit="actualizarUsuario()")
-			input(type="text" ng-model="usuarioActualizar.nombres" placeholder="Nombres")
-			input(type="text" ng-model="usuarioActualizar.apellidos" placeholder="Apellidos")
-			input(type="text" ng-model="usuarioActualizar.sexo" placeholder="Sexo")
-			input(type="text" ng-model="usuarioActualizar.username" placeholder="Nombre usuario")
-			input(type="text" ng-model="usuarioActualizar.email" placeholder="Email")
-			input(type="text" ng-model="usuarioActualizar.password" placeholder="Password")
-			input(type="text" ng-model="usuarioActualizar.tipo_doc" placeholder="Tipo doc")
-			input(type="text" ng-model="usuarioActualizar.num_doc" placeholder="Num doc")
-			input(type="text" ng-model="usuarioActualizar.ciudad_doc" placeholder="Ciudad doc")
-			input(type="text" ng-model="usuarioActualizar.fecha_nac" placeholder="Fecha nac")
-			input(type="text" ng-model="usuarioActualizar.ciudad_nac" placeholder="Ciudad nac")
-			input(type="text" ng-model="usuarioActualizar.titulo" placeholder="Titulo")
-			input(type="text" ng-model="usuarioActualizar.estado_civil" placeholder="Estado civil")
-			input(type="text" ng-model="usuarioActualizar.barrio" placeholder="Barrio")
-			input(type="text" ng-model="usuarioActualizar.direccion" placeholder="Direccion")
-			input(type="text" ng-model="usuarioActualizar.telefono" placeholder="Telefono")
-			input(type="text" ng-model="usuarioActualizar.celular" placeholder="Celular")
-			input(type="text" ng-model="usuarioActualizar.facebook" placeholder="Facebook")
-			input(type="submit" value="Actualizar" class="btn btn-primary")
-			input(type="button" value="Cancelar" ng-click="editando=false" class="btn btn-danger")
 
+.row
+	.col-lg-12
+		.panel.panel-default.panel-hovered.mb20
+			.panel-heading Usuarios
+			
+			.panel-body(style="overflow: auto")
+				
+				md-button(ng-click="crearUsuario()" class="md-raised md-primary") Nuevo Usuario
 
+				div(ui-grid="opcionesGrid" ui-grid-edit ui-grid-resize-columns)
 
-	button(ng-click="crearUsuario()" class="btn btn-success") Nuevo Usuario
-
-	table( class="table table")
-		tr
-			td Nombres
-			td Apellidos
-			td Sexo
-			td Nombre de usuario
-			td Email
-			td Password
-			td Tipo doc
-			td Num doc
-			td Ciudad doc
-			td Fecha nac
-			td Ciudad nac
-			td Titulo
-			td Estado civil
-			td Barrio
-			td Direccion
-			td Telefono
-			td Celular
-			td Facebook
-			td Editar & Eliminar
-		tr(ng-repeat="user in usuarios")
-			td {{ user.nombres }}
-			td {{ user.apellidos }}
-			td {{ user.sexo }}
-			td {{ user.username }}
-			td {{ user.email }}
-			td {{ user.password }}
-			td {{ user.tipo_doc }}
-			td {{ user.num_doc }}
-			td {{ user.ciudad_doc }}
-			td {{ user.fecha_nac }}
-			td {{ user.ciudad_nac }}
-			td {{ user.titulo }}
-			td {{ user.estado_civil }}
-			td {{ user.barrio }}
-			td {{ user.direccion }}
-			td {{ user.telefono }}
-			td {{ user.celular }}
-			td {{ user.facebook }}
-			td 
-				a.btn.btn-default(href="" ng-click="editarUsuario(user)")
-					i.fa.fa-pencil
-				a.btn.btn-danger(href="" ng-click="eliminarUsuario(user)")
-					i.fa.fa-times

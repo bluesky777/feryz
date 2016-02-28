@@ -6,13 +6,11 @@ angular.module('feryzApp', [
   'ngResource'
   'ngRoute'
   'ngSanitize'
-  'ngTouch'
   'ui.router'
   'ui.bootstrap'
   'ui.select'
   'pascalprecht.translate'
   'angular-loading-bar'
-  'restangular'
   'toastr'
   'http-auth-interceptor'
   'ui.grid'
@@ -28,11 +26,11 @@ angular.module('feryzApp', [
 #- Valores que usaremos para nuestro proyecto
 .constant('App', (()->
 
-  dominio = 'http://localhost:8080/' # Pruebas en mi localhost
+  dominio = 'http://localhost/' # Pruebas en mi localhost
   #dominio = 'http://olimpiadaslibertad.com/'
   #dominio = 'http://192.168.1.100/'
   
-  console.log 'Entra al dominio: ', location.hostname
+  #console.log 'Entra al dominio: ', location.hostname
   
   if(location.hostname.match('lalvirtual'))
     dominio = 'http://lalvirtual.com/wissen/'
