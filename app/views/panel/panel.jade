@@ -14,7 +14,7 @@ header.site-head.fixedHeader#site-head(ng-class="{'fixedHeader': fixedHeader}" n
 	div.content-container.fixedHeader(ng-class="{'nav-expand': navFull, 'fixedHeader': fixedHeader}" id="content")
 		.page.page-dashboard
 
-			.page-wrap(ui-view="contenido_panel")
+			.page-wrap(ui-view="contenido_panel" style="overflow: auto")
 
 				iniciar-dir(eventoactual="evento_actual" user="USER")
 

@@ -4,15 +4,15 @@ angular.module('feryzApp')
 
 	$stateProvider
 
-	.state('panel.usuarios', { #- Estado admin.
-				url: '^/usuarios'
+	.state('panel.usuarios1', { #- Estado admin.
+				url: '^/usuarios1'
 				views:
-					'contenido_panel':
-						templateUrl: "#{App.views}usuarios/usuarios.tpl.html"
-						controller: 'UsuariosCtrl'
+					'contenido_panel1':
+						templateUrl: "#{App.views}usuarios/usuarios.tpl.html1"
+						controller: 'UsuariosCtrl1'
 
 				data: 
-					pageTitle: 'Usuarios'
+					pageTitle: 'Usuarios1'
 					needed_permissions: [PERMISSIONS.can_edit_usuarios]
 			})
 

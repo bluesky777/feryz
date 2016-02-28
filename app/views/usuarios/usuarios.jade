@@ -1,181 +1,100 @@
-md-button.md-raised.md-primary(ng-click="creando=!creando" ng-show="!creando") Nuevo usuario
+div(style="overflow: auto")
+	Center
+		h1(class="text-primary") Usuarios
 
-.row(ng-show="creando")
-	.col-sm-12.col-md-12
-		
-		.panel.panel-default.panel-hovered.panel-stacked.mb20
-			.panel-heading   
-				| Nuevo
-
-			.panel-body
-
-				form.form-horizontal(ng-submit="guardarNuevo()" name="frm" role="form")
-					
-					.row
-						.col-md-8
-
-							div(layout layout-sm="column")
-								md-input-container(flex)
-									label Nombre
-									input(type="text" ng-model="newUsu.nombres" name="nombres" required)
-								md-input-container(flex)
-									label Apellidos
-									input(type="text" ng-model="newUsu.apellidos")
-							
-							div(layout layout-sm="column")
-								md-input-container(flex)
-									label Username
-									input(type="text" ng-model="newUsu.username" required)
-
-								md-input-container(flex)
-									label Contraseña
-									input(type="text" ng-model="newUsu.password" required)
-								
-							div(layout layout-sm="column")
-								md-input-container(flex)
-									label Email
-									input(type="text" ng-model="newUsu.email")
-								
-								md-input-container(flex)
-									label Celular
-									input(type="text" ng-model="newUsu.cell")
-								
-								md-input-container(flex)
-									label Edad
-									input(ng-model="newUsu.edad" type="text")
-							.row
-								.col-md-8
-									.form-group
-										label.control-label.col-md-3 Sexo
-										.col-md-9
-											md-radio-group(ng-model="newUsu.sexo")
-												md-radio-button.rd-gender(ng-value="avatar.masculino.abrev" aria-label="{{avatar.masculino.def}}")
-													img.img-gender(ng-src="{{avatar.masculino.img}}")
-													md-tooltip Masculino
-											
-												md-radio-button.rd-gender(ng-value="avatar.femenino.abrev" aria-label="{{avatar.femenino.def}}")
-													img.img-gender(ng-src="{{avatar.femenino.img}}")
-													md-tooltip Femenino
-
-						.col-md-4
-
-							md-select(ng-model="newUsu.entidad_id" placeholder="Entidad")
-								md-option(ng-repeat="entidad in entidades" value="{{entidad.id}}") {{entidad.nombre}}
-
-							md-select(ng-model="newUsu.nivel_id" placeholder="Niveles")
-								md-option(ng-value="nivel.nivel_king_id" ng-repeat="nivel in $parent.niveles_king | nivelesTraducidos:$parent.evento_actual.idioma_principal_id") {{nivel.nombre}}
-								md-option(value="") Todos
+	div(ng-show="creando" )
+		form(ng-submit="guardarUsuario()")
+			input(type="text" ng-model="usuarioNuevo.nombres" placeholder="Nombres")
+			input(type="text" ng-model="usuarioNuevo.apellidos" placeholder="Apellidos")
+			input(type="text" ng-model="usuarioNuevo.sexo" placeholder="Sexo")
+			input(type="text" ng-model="usuarioNuevo.username" placeholder="Nombre usuario")
+			input(type="text" ng-model="usuarioNuevo.email" placeholder="Email")
+			input(type="text" ng-model="usuarioNuevo.password" placeholder="Password")
+			input(type="text" ng-model="usuarioNuevo.tipo_doc" placeholder="Tipo doc")
+			input(type="text" ng-model="usuarioNuevo.num_doc" placeholder="Num doc")
+			input(type="text" ng-model="usuarioNuevo.ciudad_doc" placeholder="Ciudad doc")
+			input(type="text" ng-model="usuarioNuevo.fecha_nac" placeholder="Fecha nac")
+			input(type="text" ng-model="usuarioNuevo.ciudad_nac" placeholder="Ciudad nac")
+			input(type="text" ng-model="usuarioNuevo.titulo" placeholder="Titulo")
+			input(type="text" ng-model="usuarioNuevo.estado_civil" placeholder="Estado civil")
+			input(type="text" ng-model="usuarioNuevo.barrio" placeholder="Barrio")
+			input(type="text" ng-model="usuarioNuevo.direccion" placeholder="Direccion")
+			input(type="text" ng-model="usuarioNuevo.telefono" placeholder="Telefono")
+			input(type="text" ng-model="usuarioNuevo.celular" placeholder="Celular")
+			input(type="text" ng-model="usuarioNuevo.facebook" placeholder="Facebook")
+			input(type="submit" value="Guardar" class="btn btn-default")
+			input(type="button" value="Cancelar" ng-click="creando=false" class="btn btn-danger")
 
 
-							md-content
-								md-list
-									md-subheader.md-no-sticky
-										| Inscribir en:
-
-									md-list-item(ng-repeat="categoria in categorias_king1 | categoriasTraducidas:$parent.evento_actual.idioma_principal_id:newUsu.nivel_id")
-										md-checkbox(ng-checked="checkeandoCategorias(categoria, newUsu.inscripciones)" ng-click="toggle(categoria, newUsu.inscripciones)")
-										p {{categoria.nombre}}
+	div(ng-show="editando")
+		form(ng-submit="actualizarUsuario()")
+			input(type="text" ng-model="usuarioActualizar.nombres" placeholder="Nombres")
+			input(type="text" ng-model="usuarioActualizar.apellidos" placeholder="Apellidos")
+			input(type="text" ng-model="usuarioActualizar.sexo" placeholder="Sexo")
+			input(type="text" ng-model="usuarioActualizar.username" placeholder="Nombre usuario")
+			input(type="text" ng-model="usuarioActualizar.email" placeholder="Email")
+			input(type="text" ng-model="usuarioActualizar.password" placeholder="Password")
+			input(type="text" ng-model="usuarioActualizar.tipo_doc" placeholder="Tipo doc")
+			input(type="text" ng-model="usuarioActualizar.num_doc" placeholder="Num doc")
+			input(type="text" ng-model="usuarioActualizar.ciudad_doc" placeholder="Ciudad doc")
+			input(type="text" ng-model="usuarioActualizar.fecha_nac" placeholder="Fecha nac")
+			input(type="text" ng-model="usuarioActualizar.ciudad_nac" placeholder="Ciudad nac")
+			input(type="text" ng-model="usuarioActualizar.titulo" placeholder="Titulo")
+			input(type="text" ng-model="usuarioActualizar.estado_civil" placeholder="Estado civil")
+			input(type="text" ng-model="usuarioActualizar.barrio" placeholder="Barrio")
+			input(type="text" ng-model="usuarioActualizar.direccion" placeholder="Direccion")
+			input(type="text" ng-model="usuarioActualizar.telefono" placeholder="Telefono")
+			input(type="text" ng-model="usuarioActualizar.celular" placeholder="Celular")
+			input(type="text" ng-model="usuarioActualizar.facebook" placeholder="Facebook")
+			input(type="submit" value="Actualizar" class="btn btn-primary")
+			input(type="button" value="Cancelar" ng-click="editando=false" class="btn btn-danger")
 
 
 
+	button(ng-click="crearUsuario()" class="btn btn-success") Nuevo Usuario
 
-					.clearfix.right
-						md-button.md-primary(type="submit" ng-disabled="guardando") Guardar
-						md-button.md-default(type="button" ng-click="cancelarNuevo()") Cancelar
-
-
-.row(ng-show="editando")
-	.col-sm-12.col-md-12
-		
-		.panel.panel-default.panel-hovered.panel-stacked.mb20
-			.panel-heading   
-				| Editar a {{currentUser.nombres}}
-
-			.panel-body
-
-				form.form-horizontal(ng-submit="guardarEdicion()" name="frmEdit" role="form")
-					.row
-						.col-md-8
-
-							div(layout layout-sm="column")
-								md-input-container(flex)
-									label Nombre
-									input(type="text" ng-model="currentUser.nombres" name="nombres" required)
-								md-input-container(flex)
-									label Apellidos
-									input(type="text" ng-model="currentUser.apellidos")
-							
-							div(layout layout-sm="column")
-								md-input-container(flex)
-									label Username
-									input(type="text" ng-model="currentUser.username" required)
-
-								md-input-container(flex)
-									label Contraseña
-									input(type="text" ng-model="currentUser.password" required)
-								
-							div(layout layout-sm="column")
-								md-input-container(flex)
-									label Email
-									input(type="text" ng-model="currentUser.email")
-								
-								md-input-container(flex)
-									label Celular
-									input(type="text" ng-model="currentUser.cell")
-								
-								md-input-container(flex)
-									label Edad
-									input(ng-model="currentUser.edad" type="text")
-							.row
-								.col-md-8
-									.form-group
-										label.control-label.col-md-3 Sexo
-										.col-md-9
-											md-radio-group(ng-model="currentUser.sexo")
-												md-radio-button.rd-gender(ng-value="avatar.masculino.abrev" aria-label="{{avatar.masculino.def}}")
-													img.img-gender(ng-src="{{avatar.masculino.img}}")
-													md-tooltip Masculino
-											
-												md-radio-button.rd-gender(ng-value="avatar.femenino.abrev" aria-label="{{avatar.femenino.def}}")
-													img.img-gender(ng-src="{{avatar.femenino.img}}")
-													md-tooltip Femenino
-
-						.col-md-4
-
-							md-select(ng-model="currentUser.entidad_id" placeholder="Entidad")
-								md-option(ng-repeat="entidad in entidades" value="{{entidad.id}}") {{entidad.nombre}}
-
-							md-select(ng-model="currentUser.nivel_id" placeholder="Niveles")
-								md-option(ng-value="nivel.nivel_king_id" ng-repeat="nivel in $parent.niveles_king | nivelesTraducidos:$parent.evento_actual.idioma_principal_id") {{nivel.nombre}}
-								md-option(value="") Todos
-
-
-							md-content
-								md-list
-									md-subheader.md-no-sticky
-										| Inscribir en:
-
-									md-list-item(ng-repeat="categoria in currentUsers | categsInscritas:categorias_king1:evento_actual.idioma_principal_id | filter: { nivel_id: currentUser.nivel_id } ")
-										md-checkbox(ng-model="categoria.selected" ng-change="cambiaInscripcion(categoria, currentUsers)" aria-label="Categoria" ng-disabled="categoria.cambiando")
-										p {{categoria.nombre}}
-										.fa.fa-comments-o.md-secondary(aria-label="Comentario inútil" ng-click="")
-
-
-
-					.clearfix.right
-						md-button.md-primary(type="submit" ng-disabled="guardando") Guardar
-						md-button.md-default(type="button" ng-click="cancelarEdicion()") Cancelar
-
-
-.row
-	.col-sm-12.col-md-12
-
-		
-		grid-usuarios(currentusers="currentUsers" nivelesking="niveles_king" usuarios="usuarios" categoriasking="categorias_king2" idioma="$parent.evento_actual.idioma_principal_id")
-
-
-
-
-
-
-
+	table( class="table table")
+		tr
+			td Nombres
+			td Apellidos
+			td Sexo
+			td Nombre de usuario
+			td Email
+			td Password
+			td Tipo doc
+			td Num doc
+			td Ciudad doc
+			td Fecha nac
+			td Ciudad nac
+			td Titulo
+			td Estado civil
+			td Barrio
+			td Direccion
+			td Telefono
+			td Celular
+			td Facebook
+			td Editar & Eliminar
+		tr(ng-repeat="user in usuarios")
+			td {{ user.nombres }}
+			td {{ user.apellidos }}
+			td {{ user.sexo }}
+			td {{ user.username }}
+			td {{ user.email }}
+			td {{ user.password }}
+			td {{ user.tipo_doc }}
+			td {{ user.num_doc }}
+			td {{ user.ciudad_doc }}
+			td {{ user.fecha_nac }}
+			td {{ user.ciudad_nac }}
+			td {{ user.titulo }}
+			td {{ user.estado_civil }}
+			td {{ user.barrio }}
+			td {{ user.direccion }}
+			td {{ user.telefono }}
+			td {{ user.celular }}
+			td {{ user.facebook }}
+			td 
+				a.btn.btn-default(href="" ng-click="editarUsuario(user)")
+					i.fa.fa-pencil
+				a.btn.btn-danger(href="" ng-click="eliminarUsuario(user)")
+					i.fa.fa-times

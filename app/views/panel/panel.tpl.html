@@ -7,7 +7,7 @@
   </aside>
   <div ng-class="{'nav-expand': navFull, 'fixedHeader': fixedHeader}" id="content" class="content-container fixedHeader">
     <div class="page page-dashboard">
-      <div ui-view="contenido_panel" class="page-wrap">
+      <div ui-view="contenido_panel" style="overflow: auto" class="page-wrap">
         <iniciar-dir eventoactual="evento_actual" user="USER"></iniciar-dir>
       </div>
     </div>
