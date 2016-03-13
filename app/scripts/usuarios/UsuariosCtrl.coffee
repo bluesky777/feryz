@@ -3,7 +3,7 @@ angular.module('feryzApp')
 .controller('UsuariosCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', ($scope, $http, App, $filter, toastr) ->
 		
 	$scope.creando = false
-	$scope.usuarioNuevo = {}
+	$scope.usuarioNuevo = { sexo: 'M' }
 	$scope.editando = false
 	$scope.usuarioEdit = {}
 
@@ -12,10 +12,10 @@ angular.module('feryzApp')
 
 	$scope.guardarUsuario = ()->
 
-		$http.post(App.Server + 'usuarios/guardar', $scope.usuarioNuevo ).then( (r)->
+		$http.post('::usuarios/guardar', $scope.usuarioNuevo ).then( (r)->
 			console.log '$scope.usuarios',$scope.usuarios
 			$scope.opcionesGrid.data.push r.data
-			toastr.success 'Creado correctamente: ' + r.nombre
+			toastr.success 'Creado correctamente: ' + r.data.nombre
 			$scope.creando = false
 		, (r2)->
 			toastr.error 'No se pudo crear', 'Error'
@@ -25,14 +25,14 @@ angular.module('feryzApp')
 
 	$scope.eliminarUsuario = (usu)->
 		
-		$http.delete(App.Server + 'usuarios/eliminar/' + usu.id).then( (r)->
+		$http.delete('::usuarios/eliminar/' + usu.id).then( (r)->
 			$scope.usuarios = $filter('filter')($scope.usuarios, {id: '!'+usu.id})
 		, (r2)->
 			console.log 'No se pudo eliminar producto', r2
 		)
 
 	$scope.actualizarUsuario = (usu)->
-		$http.put(App.Server + 'usuarios/actualizar', $scope.usuarioEdit).then( (r)->
+		$http.put(App.Server + '::usuarios/actualizar', $scope.usuarioEdit).then( (r)->
 			toastr.success 'Actualizado correctamente: ' + r.nombre
 			$scope.editando = false
 		, (r2)->
@@ -48,7 +48,7 @@ angular.module('feryzApp')
 	
 	$scope.traerUsuarios = ()->
 
-		$http.get(App.Server + 'usuarios/all').then((r)->
+		$http.get('::usuarios/all').then((r)->
 			$scope.opcionesGrid.data = r.data
 		, (r2)->
 			console.log 'No se pudo traer los usuarios', r2
@@ -82,7 +82,7 @@ angular.module('feryzApp')
 					if colDef.field == "sexo"
 						if newValue == 'M' or newValue == 'F'
 							# Es correcto...
-							$http.put(App.Server + 'usuarios/actualizar/' + rowEntity.id, rowEntity).then((r)->
+							$http.put('::usuarios/actualizar/' + rowEntity.id, rowEntity).then((r)->
 								toastr.success 'Usuario actualizado con éxito', 'Actualizado'
 							, (r2)->
 								toastr.error 'Cambio no guardado', 'Error'
@@ -93,7 +93,7 @@ angular.module('feryzApp')
 							rowEntity.sexo = oldValue
 					else
 
-						$http.put(App.Server + 'usuarios/actualizar/' + rowEntity.id, rowEntity).then((r)->
+						$http.put('::usuarios/actualizar/' + rowEntity.id, rowEntity).then((r)->
 							toastr.success 'Usuario actualizado con éxito', 'Actualizado'
 						, (r2)->
 							toastr.error 'Cambio no guardado', 'Error'

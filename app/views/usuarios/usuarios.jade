@@ -6,6 +6,28 @@
 			.panel-body
 				div
 					form(ng-submit="guardarUsuario()")
+
+						.row
+							.col-lg-6
+								md-input-container.md-block
+									label Nombres
+									input(ng-model="usuarioNuevo.nombres")
+
+							.col-lg-6
+								md-input-container.md-block(flex-gt-sm)
+									label Apellidos
+									input(ng-model="usuarioNuevo.apellidos")
+
+						.row
+							.col-lg-12
+								md-radio-group(ng-model="usuarioNuevo.sexo")
+									.row
+										.col-lg-2.col-md-3.col-sm-6.col-xs-12
+											md-radio-button(value="M") Masculino
+										.col-lg-2.col-md-3.col-sm-6.col-xs-12
+											md-radio-button(value="F") Femenino
+
+
 						input(type="text" ng-model="usuarioNuevo.nombres" placeholder="Nombres")
 						input(type="text" ng-model="usuarioNuevo.apellidos" placeholder="Apellidos")
 						input(type="text" ng-model="usuarioNuevo.sexo" placeholder="Sexo")

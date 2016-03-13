@@ -21,6 +21,15 @@ angular.module('feryzApp')
 	$httpProvider.defaults.headers.common["Accept"] = "application/json";
 	$httpProvider.defaults.headers.common["Content-Type"] = "application/json";
 	
+	$httpProvider.interceptors.push(($q)->
+		{
+			'request': (config)->
+				esplotado = config.url.split('::')
+				if esplotado.length > 1
+					config.url = App.Server + esplotado[1]
+				config
+		}
+	)
 
 
 	uiSelectConfig.theme = 'select2'

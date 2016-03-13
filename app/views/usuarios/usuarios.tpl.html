@@ -6,6 +6,34 @@
       <div class="panel-body">
         <div>
           <form ng-submit="guardarUsuario()">
+            <div class="row">
+              <div class="col-lg-6">
+                <md-input-container class="md-block">
+                  <label>Nombres</label>
+                  <input ng-model="usuarioNuevo.nombres">
+                </md-input-container>
+              </div>
+              <div class="col-lg-6">
+                <md-input-container flex-gt-sm class="md-block">
+                  <label>Apellidos</label>
+                  <input ng-model="usuarioNuevo.apellidos">
+                </md-input-container>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <md-radio-group ng-model="usuarioNuevo.sexo">
+                  <div class="row">
+                    <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+                      <md-radio-button value="M">Masculino</md-radio-button>
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+                      <md-radio-button value="F">Femenino</md-radio-button>
+                    </div>
+                  </div>
+                </md-radio-group>
+              </div>
+            </div>
             <input type="text" ng-model="usuarioNuevo.nombres" placeholder="Nombres">
             <input type="text" ng-model="usuarioNuevo.apellidos" placeholder="Apellidos">
             <input type="text" ng-model="usuarioNuevo.sexo" placeholder="Sexo">

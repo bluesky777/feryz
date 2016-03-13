@@ -83,7 +83,7 @@ angular.module('feryzApp')
 
 		authService.borrarToken()
 
-		$http.post(App.Server + 'login/login', credentials).then((r)->
+		$http.post('::login/login', credentials).then((r)->
 			#debugger
 			if r.data.token
 				$cookies.put('xtoken', r.data.token)
@@ -128,7 +128,7 @@ angular.module('feryzApp')
 
 			$http.defaults.headers.common['Authorization'] = 'Bearer ' + $cookies.get('xtoken')
 
-			login = $http.post(App.Server + 'login/verificar').then((r)->
+			login = $http.post('::login/verificar').then((r)->
 
 				$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
 				d.resolve r.data
