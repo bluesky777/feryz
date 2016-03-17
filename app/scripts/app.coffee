@@ -26,7 +26,7 @@ angular.module('feryzApp', [
 #- Valores que usaremos para nuestro proyecto
 .constant('App', (()->
 
-  dominio = 'http://localhost/' # Pruebas en mi localhost
+  dominio = 'http://localhost:8080/' # Pruebas en mi localhost
   #dominio = 'http://olimpiadaslibertad.com/'
   #dominio = 'http://192.168.1.100/'
   

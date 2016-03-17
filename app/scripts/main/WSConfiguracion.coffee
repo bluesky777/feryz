@@ -24,9 +24,15 @@ angular.module('feryzApp')
 	$httpProvider.interceptors.push(($q)->
 		{
 			'request': (config)->
-				esplotado = config.url.split('::')
-				if esplotado.length > 1
-					config.url = App.Server + esplotado[1]
+				explotado = config.url.split('::')
+				if explotado.length > 1
+					config.url = App.Server + explotado[1]
+				else
+					explotado = config.url.split('==')
+					if explotado.length > 1
+						config.url = App.views + explotado[1]
+
+
 				config
 		}
 	)

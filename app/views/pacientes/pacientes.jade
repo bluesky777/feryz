@@ -5,22 +5,22 @@
 
 			.panel-body
 				div
-					form(ng-submit="guardarUsuario()")
+					form(ng-model="guardarPaciente()")
 
 						.row
 							.col-lg-6
 								md-input-container.md-block(flex-gt-sm)
 									label Nombres
-									input(ng-model="usuarioNuevo.nombres")
+									input(ng-model="pacienteNuevo.nombres")
 
 							.col-lg-6
 								md-input-container.md-block(flex-gt-sm)
 									label Apellidos
-									input(ng-model="usuarioNuevo.apellidos")
+									input(ng-model="pacienteNuevo.apellidos")
 
 						.row
 							.col-lg-12
-								md-radio-group(ng-model="usuarioNuevo.sexo")
+								md-radio-group(ng-model="pacienteNuevo.sexo")
 									.row
 										.col-lg-2.col-md-3.col-sm-6.col-xs-12
 											md-radio-button(value="M") Masculino
@@ -31,101 +31,104 @@
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm)
 									label Nombre usuario
-									input(ng-model="usuarioNuevo.username")
+									input(ng-model="pacienteNuevo.username")
 
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm)
 									label Email
-									input(ng-model="usuarioNuevo.email")
-						
+									input(ng-model="pacienteNuevo.email")
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm)
 									label Password
-									input(ng-model="usuarioNuevo.password")
+									input(ng-model="pacienteNuevo.password")
 						.row
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm)
 									label Tipo_doc
-									input(ng-model="usuarioNuevo.tipo_doc")
+									input(ng-model="pacienteNuevo.tipo_doc")
 						
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm)
 									label Num_doc
-									input(ng-model="usuarioNuevo.num_doc")
+									input(ng-model="pacienteNuevo.num_doc")
 
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm)
 									label Ciudad_doc
-									input(ng-model="usuarioNuevo.ciudad_doc")
+									input(ng-model="pacienteNuevo.ciudad_doc")
 						.row
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm)
 									label Fecha_nac
-									input(ng-model="usuarioNuevo.fecha_nac")
+									input(ng-model="pacienteNuevo.fecha_nac")
 
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm)
 									label Ciudad_nac
-									input(ng-model="usuarioNuevo.ciudad_nac")
+									input(ng-model="pacienteNuevo.ciudad_nac")
 						
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm)
 									label Titulo
-									input(ng-model="usuarioNuevo.titulo")
+									input(ng-model="pacienteNuevo.titulo")
 						.row
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm)
 									label Estado Civil
-									input(ng-model="usuarioNuevo.estado_civil")
+									input(ng-model="pacienteNuevo.estado_civil")
 						
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm)
 									label Barrio
-									input(ng-model="usuarioNuevo.barrio")
+									input(ng-model="pacienteNuevo.barrio")
 
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm)
 									label Direccion
-									input(ng-model="usuarioNuevo.direccion")
+									input(ng-model="pacienteNuevo.direccion")
 						.row
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm)
 									label Telefono
-									input(ng-model="usuarioNuevo.telefono")
+									input(ng-model="pacienteNuevo.telefono")
 
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm)
 									label Celular
-									input(ng-model="usuarioNuevo.celular")
+									input(ng-model="pacienteNuevo.celular")
 						
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm)
 									label Facebook
-									input(ng-model="usuarioNuevo.facebook")
+									input(ng-model="pacienteNuevo.facebook")
 						.row
 							.col-lg-2
 								input(type="submit" value="Guardar" class="btn btn-default")
 
 							.col-lg-2
 								input(type="button" value="Cancelar" ng-click="creando=false" class="btn btn-danger")
-
+						input(type="button" ng-click="" class="btn btn-success" value="Guardar")
+ 
+						input(type="button" ng-click="creando=false" class="btn btn-danger" value="Cancelar")
 .row
 	.col-lg-12
 		.panel.panel-default.panel-hovered.mb20(ng-show="editando" )
 			.panel-heading Editar usuario
 
 			.panel-body
-				div(ng-show="editando")
-					form(ng-submit="actualizarUsuario()")
+				div
+					form(ng-model="actualizarPaciente()")
 						.row
 							.col-lg-6
 								md-input-container.md-block(flex-gt-sm)
 									label Nombres
-									input(ng-model="usuarioActualizar.nombres")
+									input(ng-model="UsuarioActualizar.nombres")
+
 							.col-lg-6
 								md-input-container.md-block(flex-gt-sm)
 									label Apellidos
 									input(ng-model="UsuarioActualizar.apellidos")
+
 						.row
 							.col-lg-12
 								md-radio-group(ng-model="UsuarioActualizar.sexo")
@@ -134,6 +137,7 @@
 											md-radio-button(value="M") Masculino
 										.col-lg-2.col-md-3.col-sm-6.col-xs-12
 											md-radio-button(value="F") Femenino
+
 						.row
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm)
@@ -209,20 +213,15 @@
 								md-input-container.md-block(flex-gt-sm)
 									label Facebook
 									input(ng-model="UsuarioActualizar.facebook")
-
 						input(type="submit" value="Actualizar" class="btn btn-primary")
 						input(type="button" value="Cancelar" ng-click="editando=false" class="btn btn-danger")
-
 
 
 .row
 	.col-lg-12
 		.panel.panel-default.panel-hovered.mb20
-			.panel-heading Usuarios
-			
+			.panel-heading Pacientes
+
 			.panel-body(style="overflow: auto")
 				
-				md-button(ng-click="crearUsuario()" class="md-raised md-primary") Nuevo Usuario
-
-				div(ui-grid="opcionesGrid" ui-grid-edit ui-grid-resize-columns)
-
+				md-button(ng-click="crearPaciente()" class="md-raised md-primary") Crear Nuevo Paciente
