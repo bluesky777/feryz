@@ -2,10 +2,10 @@
 <div class="row">
   <div class="col-lg-12">
     <div ng-show="creando" class="panel panel-default panel-hovered mb20">
-      <div class="panel-heading">Nuevo usuario</div>
+      <div class="panel-heading">Nuevo Paciente (datos básicos)</div>
       <div class="panel-body">
         <div>
-          <form ng-model="guardarPaciente()">
+          <form ng-submit="guardarPaciente()">
             <div class="row">
               <div class="col-lg-6">
                 <md-input-container flex-gt-sm class="md-block">
@@ -37,55 +37,75 @@
             <div class="row">
               <div class="col-lg-4">
                 <md-input-container flex-gt-sm class="md-block">
-                  <label>Nombre usuario</label>
-                  <input ng-model="pacienteNuevo.username">
+                  <label>Empresa usuaria</label>
+                  <input ng-model="pacienteNuevo.empresa_usuaria">
                 </md-input-container>
               </div>
               <div class="col-lg-4">
                 <md-input-container flex-gt-sm class="md-block">
-                  <label>Email</label>
-                  <input ng-model="pacienteNuevo.email">
+                  <label>Empresa temporal</label>
+                  <input ng-model="pacienteNuevo.empresa_temporal">
                 </md-input-container>
               </div>
               <div class="col-lg-4">
                 <md-input-container flex-gt-sm class="md-block">
-                  <label>Password</label>
-                  <input ng-model="pacienteNuevo.password">
-                </md-input-container>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
-                  <label>Tipo_doc</label>
-                  <input ng-model="pacienteNuevo.tipo_doc">
-                </md-input-container>
-              </div>
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
-                  <label>Num_doc</label>
-                  <input ng-model="pacienteNuevo.num_doc">
-                </md-input-container>
-              </div>
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
-                  <label>Ciudad_doc</label>
-                  <input ng-model="pacienteNuevo.ciudad_doc">
+                  <label>Actividad economica</label>
+                  <input ng-model="pacienteNuevo.actividad_economica">
                 </md-input-container>
               </div>
             </div>
             <div class="row">
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
-                  <label>Fecha_nac</label>
-                  <input ng-model="pacienteNuevo.fecha_nac">
-                </md-input-container>
+              <div class="form-group col-lg-4 col-sm-6 col-xs-12">
+                <label>Tipo documento</label>
+                <ui-select ng-model="pacienteNuevo.tipo_doc" style="width: 100%;">
+                  <ui-select-match placeholder="Tipo documento" allow-clear="true">{{$select.selected.tipo}}</ui-select-match>
+                  <ui-select-choices repeat="tipo in tipos_doc | filter: $select.search">
+                    <div ng-bind-html="tipo.tipo | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
               </div>
               <div class="col-lg-4">
                 <md-input-container flex-gt-sm class="md-block">
-                  <label>Ciudad_nac</label>
-                  <input ng-model="pacienteNuevo.ciudad_nac">
+                  <label>Número documento</label>
+                  <input ng-model="pacienteNuevo.doc_identidad">
                 </md-input-container>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-lg-4 col-sm-6 col-xs-12">
+                <label>Pais de nacimiento</label>
+                <ui-select ng-model="pacienteNuevo.pais" on-select="paisSeleccionado($item, $model)" style="width: 100%;">
+                  <ui-select-match placeholder="Pais" allow-clear="true">{{$select.selected.pais}}</ui-select-match>
+                  <ui-select-choices repeat="pais in paises | filter: $select.search">
+                    <div ng-bind-html="pais.pais | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+              <div class="form-group col-lg-4 col-sm-6 col-xs-12">
+                <label>Departamento</label>
+                <ui-select ng-model="pacienteNuevo.depart_nac" on-select="departamentoSeleccionado($item, $model)" style="width: 100%;">
+                  <ui-select-match placeholder="Departamento" allow-clear="true">{{$select.selected.departamento}}</ui-select-match>
+                  <ui-select-choices repeat="depart in departamentos | filter: $select.search">
+                    <div ng-bind-html="depart.departamento | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+              <div class="form-group col-lg-4 col-sm-6 col-xs-12">
+                <label>Ciudad de nacimiento</label>
+                <ui-select ng-model="pacienteNuevo.ciudad_nac_id" style="width: 100%;">
+                  <ui-select-match placeholder="Ciudad" allow-clear="true">{{$select.selected.ciudad}}</ui-select-match>
+                  <ui-select-choices repeat="ciudad in ciudades | filter: $select.search">
+                    <div ng-bind-html="ciudad.ciudad | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="input-group">
+                  <input type="text" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="pacienteNuevo.fecha_nac" is-open="data.isOpen" ng-click="data.isOpen = true" max-date="'2020-12-12'" datepicker-options="dateOptions" close-text="Aceptar" current-text="Hoy" clear-text="Borrar" placeholder="Fecha nacimiento" class="form-control active"><span class="input-group-btn">
+                    <button type="button" ng-click="data.isOpen = true" class="btn btn-default"><i class="fa fa-calendar"></i></button></span>
+                </div>
               </div>
               <div class="col-lg-4">
                 <md-input-container flex-gt-sm class="md-block">
@@ -148,6 +168,23 @@
         </div>
       </div>
     </div>
+    <div ng-show="creando" class="panel panel-default panel-hovered mb20">
+      <div class="panel-heading">Visiometría</div>
+      <div class="panel-body">
+        <div>
+          <form ng-submit="guardarPaciente()">
+            <div class="row">
+              <div class="col-lg-6">
+                <md-input-container flex-gt-sm class="md-block">
+                  <label>Ojo picho</label>
+                  <input ng-model="pacienteNuevo.nombres">
+                </md-input-container>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <div class="row">
@@ -156,7 +193,7 @@
       <div class="panel-heading">Editar usuario</div>
       <div class="panel-body">
         <div>
-          <form ng-model="actualizarPaciente()">
+          <form ng-submit="actualizarPaciente()">
             <div class="row">
               <div class="col-lg-6">
                 <md-input-container flex-gt-sm class="md-block">
@@ -268,7 +305,7 @@
             <div class="row">
               <div class="col-lg-4">
                 <md-input-container flex-gt-sm class="md-block">
-                  <label>Telefono</label>
+                  <label>Teléfono</label>
                   <input ng-model="UsuarioActualizar.telefono">
                 </md-input-container>
               </div>

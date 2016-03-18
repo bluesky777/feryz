@@ -4,8 +4,39 @@ angular.module('feryzApp')
 		
 	$scope.creando = false
 	$scope.pacienteNuevo = { sexo: 'M' }
+
 	$scope.editando = false
 	$scope.pacienteEdit = {}
+	$scope.dateOptions =  {formatYear: 'yy'}
+	$scope.tipos_doc = [
+		{id: 1, tipo: 'Cédula'}
+		{id: 2, tipo: 'Cédula extranjera'}
+		{id: 3, tipo: 'Tarjeta de identidad'}
+	]
+
+
+	$http.get('::paises/all').then((r)->
+		$scope.paises = r.data
+		$scope.pacienteNuevo.pais = $filter('filter')($scope.paises, { id: 1 })[0]
+		$scope.paisSeleccionado($scope.pacienteNuevo.pais)
+	, ()->
+		toastr.error 'No se pudo traer las ciudades.'
+	)
+
+
+	$scope.paisSeleccionado = (pais, modelo)->
+		$http.get('::ciudades/departamentos', {params: {pais_id: pais.id} }).then((r)->
+			$scope.departamentos = r.data
+		, ()->
+			toastr.error 'No se pudo traer las ciudades.'
+		)
+
+	$scope.departamentoSeleccionado = (depart, modelo)->
+		$http.get('::ciudades/ciudades', {params: {departamento: depart.departamento} }).then((r)->
+			$scope.ciudades = r.data
+		, ()->
+			toastr.error 'No se pudo traer las ciudades.'
+		)
 
 	$scope.crearPaciente = ()->
 		$scope.creando = true
