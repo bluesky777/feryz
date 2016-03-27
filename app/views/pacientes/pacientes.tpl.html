@@ -1,7 +1,7 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <div ng-show="creando" class="panel panel-default panel-hovered mb20">
+    <div ng-show="!creando" class="panel panel-default panel-hovered mb20">
       <div class="panel-heading">Nuevo Paciente (datos básicos)</div>
       <div class="panel-body">
         <div>
@@ -168,17 +168,58 @@
         </div>
       </div>
     </div>
-    <div ng-show="creando" class="panel panel-default panel-hovered mb20">
+    <div ng-show="!creando" class="panel panel-default panel-hovered mb20">
       <div class="panel-heading">Visiometría</div>
       <div class="panel-body">
         <div>
           <form ng-submit="guardarPaciente()">
             <div class="row">
-              <div class="col-lg-6">
+              <div class="col-lg-12">
                 <md-input-container flex-gt-sm class="md-block">
-                  <label>Ojo picho</label>
-                  <input ng-model="pacienteNuevo.nombres">
+                  <label>Antecedentes personales</label>
+                  <input ng-model="pacienteNuevo.ant_personales">
                 </md-input-container>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <md-input-container flex-gt-sm class="md-block">
+                  <label>Recomendaciones</label>
+                  <input ng-model="pacienteNuevo.recomendaciones">
+                </md-input-container>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-2 col-md-3 col-xs-12">
+                <md-checkbox ng-model="pacienteNuevo.estereopsis" ng-true-value="'N'" ng-false-value="'A'" aria-label="Estereopsis">Estereopsis normal</md-checkbox>
+              </div>
+              <div ng-show="pacienteNuevo.estereopsis=='A'" class="col-lg-10 col-md-9 col-xs-12">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Observaciones</label>
+                  <textarea ng-model="pacienteNuevo.estereopsis_observ"></textarea>
+                </md-input-container>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-2 col-md-3 col-xs-12">
+                <md-checkbox ng-model="pacienteNuevo.test_color" ng-true-value="'N'" ng-false-value="'A'" aria-label="Test Color">Test color normal</md-checkbox>
+              </div>
+              <div ng-show="pacienteNuevo.test_color=='A'" class="col-lg-10 col-md-9 col-xs-12">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Observaciones</label>
+                  <textarea ng-model="pacienteNuevo.test_color_observ"></textarea>
+                </md-input-container>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <h4 class="md-title">Sintomas de visión</h4>
+              </div>
+              <div class="col-lg-12">
+                <md-chips ng-model="pacienteNuevo.sintomas_vision" placeholder="Copie síntomas" delete-button-label="Quitar síntoma" delete-hint="Presione la X para remover síntoma" secondary-placeholder="+Síntoma" md-transform-chip="transformChip($chip)">
+                  <md-chip-template><span ng-hide="$chip.type">{{$chip.nombre}}</span><span ng-show="$chip.type"><b><i>(+) {{$chip.nombre}}</i></b></span></md-chip-template>
+                  <md-autocomplete md-selected-item="ctrl.selectedItem" md-search-text="ctrl.searchText" md-items="item in ctrl.querySearch(ctrl.searchText)" md-item-text="item.nombre" placeholder="Copie el síntoma"><span md-highlight-text="ctrl.searchText">{{item.nombre}}</span></md-autocomplete>
+                </md-chips>
               </div>
             </div>
           </form>

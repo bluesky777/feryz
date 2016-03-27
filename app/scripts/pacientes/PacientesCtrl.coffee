@@ -3,7 +3,20 @@ angular.module('feryzApp')
 .controller('PacientesCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', ($scope, $http, App, $filter, toastr) ->
 		
 	$scope.creando = false
-	$scope.pacienteNuevo = { sexo: 'M' }
+	$scope.pacienteNuevo = 
+		sexo: 'M'
+		estereopsis: 'N' 
+		test_color: 'N'
+		sintomas_vision: []
+	$scope.opt_sintomas_vision = [
+		{nombre: 'Ver borroso'}
+		{nombre: 'Tiene ojos grandes'}
+		{nombre: 'Me asusta'}
+		{nombre: 'Visión de medusa'}
+	]
+	for sint in $scope.opt_sintomas_vision
+		sint._lowername = sint.nombre.toLowerCase();
+
 
 	$scope.editando = false
 	$scope.pacienteEdit = {}
@@ -13,6 +26,25 @@ angular.module('feryzApp')
 		{id: 2, tipo: 'Cédula extranjera'}
 		{id: 3, tipo: 'Tarjeta de identidad'}
 	]
+
+	$scope.ctrl = {}
+
+	$scope.transformChip = (chip)->
+		if (angular.isObject(chip))
+			return chip
+		return { nombre: chip, type: 'new' }
+
+
+	$scope.ctrl.querySearch = (query)->
+		results = if query then $scope.opt_sintomas_vision.filter($scope.createFilterFor(query)) else []
+		return results;
+
+	$scope.createFilterFor = (query)->
+		lowercaseQuery = angular.lowercase(query);
+		return (sintoma_vision)->
+			return (sintoma_vision._lowername.indexOf(lowercaseQuery) != -1)
+
+
 
 
 	$http.get('::paises/all').then((r)->
