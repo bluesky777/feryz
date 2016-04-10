@@ -1,0 +1,96 @@
+div.panel-heading Antecedentes Laborales
+
+
+	md-list(ng-hide="antecedentesLaborales.length == 0")
+		md-list-item(ng-repeat="antecedente in antecedentesLaborales" ng-click="editarAntecLabor(antecedente)") 
+			p {{antecedente.empresa}} - {{antecedente.cargo}}
+			md-button.md-icon-button(aria-label="Eliminar")
+				.fa.fa-time
+
+
+	md-button.md-raised.md-primary(aria-label="Nuevo" ng-click="creandoAntecLabor=true" ng-hide="creandoAntecLabor || antecedentesLaborales.length == 0 ") Agregar antecedente laboral
+
+	form(style="margin-top=10px;" ng-show="antecedentesLaborales.length == 0 || creandoAntecLabor" ng-submit="guardarAntecedenteLaboral()")
+
+		.row
+			.col-lg-4.col-sm-6
+				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+					label Empresa
+					input(ng-model="AntecLaborNuevo.empresa")
+			.col-lg-4.col-sm-6
+				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+					label Actividad economica
+					input(ng-model="AntecLaborNuevo.activ_economica")
+			.col-lg-4.col-sm-12
+				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+					label Cargo
+					input(ng-model="AntecLaborNuevo.cargo")
+
+		.row
+			.col-lg-4.col-sm-6
+				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+					label Factor de Riesgo
+					input(ng-model="AntecLaborNuevo.fact_riesgo")
+			.col-lg-4.col-sm-6
+				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+					label Tiempo de exposicion
+					input(ng-model="AntecLaborNuevo.tiemp_exposicion")
+			.col-lg-4.col-sm-12
+				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+					label Nivel exposicion
+					input(ng-model="AntecLaborNuevo.niv_exposicion")
+
+		.row
+			.col-lg-6.col-sm-6
+				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+					label Controles
+					input(ng-model="AntecLaborNuevo.controles")
+			.col-lg-6.col-sm-6
+				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+					label EPP
+					input(ng-model="AntecLaborNuevo.epp")
+
+		md-button.md-raised.md-default(aria-label="Cancelar" ng-click="creandoAntecLabor=false") Cancelar
+		md-button.md-raised.md-primary(type="submit" aria-label="Nuevo" ng-click="creandoAntecLabor=true" ) Guardar
+
+
+
+	form(style="margin-top=10px;" ng-show="antecedentesLaborales.length == 0 || creandoAntecLabor" ng-submit="guardarAntecedentesLaboral()")
+
+		.row
+			.col-lg-4.col-sm-6
+				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+					label Empresa
+					input(ng-model="AntecLaborActual.empresa")
+			.col-lg-4.col-sm-6
+				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+					label Actividad economica
+					input(ng-model="AntecLaborActual.activ_economica")
+			.col-lg-4.col-sm-12
+				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+					label Cargo
+					input(ng-model="AntecLaborActual.cargo")
+
+		.row
+			.col-lg-4.col-sm-6
+				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+					label Factor de Riesgo
+					input(ng-model="AntecLaborActual.fact_riesgo")
+			.col-lg-4.col-sm-6
+				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+					label Tiempo de exposicion
+					input(ng-model="AntecLaborActual.tiemp_exposicion")
+			.col-lg-4.col-sm-12
+				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+					label Nivel exposicion
+					input(ng-model="AntecLaborActual.niv_exposicion")
+
+		.row
+			.col-lg-6.col-sm-6
+				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+					label Controles
+					input(ng-model="AntecLaborActual.controles")
+			.col-lg-6.col-sm-6
+				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+					label EPP
+					input(ng-model="AntecLaborActual.epp")

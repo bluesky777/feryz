@@ -17,6 +17,14 @@ angular.module('feryzApp')
 	for sint in $scope.opt_sintomas_vision
 		sint._lowername = sint.nombre.toLowerCase();
 
+	$scope.pulsarPacientes = ()->
+		$http.get('::pacientes/all').then((r)->
+			$scope.empleos = r.data
+		, (r2)->
+			console.log 'No se pudo traer los usuarios', r2
+		)
+		
+	$scope.pulsarPacientes()
 
 	$scope.editando = false
 	$scope.pacienteEdit = {}
