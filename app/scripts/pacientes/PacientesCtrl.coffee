@@ -1,13 +1,22 @@
 angular.module('feryzApp')
 
 .controller('PacientesCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', ($scope, $http, App, $filter, toastr) ->
-		
-	$scope.creando = false
+	$scope.pacienteEdit = {}
 	$scope.pacienteNuevo = 
 		sexo: 'M'
 		estereopsis: 'N' 
 		test_color: 'N'
 		sintomas_vision: []
+
+	$scope.creando = false
+	$scope.editando = false
+
+
+	$scope.crearPaciente = ()->
+		console.log 'Creando'
+		$scope.creando = true
+
+	
 	$scope.opt_sintomas_vision = [
 		{nombre: 'Ver borroso'}
 		{nombre: 'Tiene ojos grandes'}
@@ -17,17 +26,8 @@ angular.module('feryzApp')
 	for sint in $scope.opt_sintomas_vision
 		sint._lowername = sint.nombre.toLowerCase();
 
-	$scope.pulsarPacientes = ()->
-		$http.get('::pacientes/all').then((r)->
-			$scope.empleos = r.data
-		, (r2)->
-			console.log 'No se pudo traer los usuarios', r2
-		)
-		
-	$scope.pulsarPacientes()
 
-	$scope.editando = false
-	$scope.pacienteEdit = {}
+	
 	$scope.dateOptions =  {formatYear: 'yy'}
 	$scope.tipos_doc = [
 		{id: 1, tipo: 'Cédula'}
@@ -78,21 +78,6 @@ angular.module('feryzApp')
 			toastr.error 'No se pudo traer las ciudades.'
 		)
 
-	$scope.crearPaciente = ()->
-		$scope.creando = true
-
-	$scope.guardarPaciente = ()->
-
-		$http.post('::pacientes/guardar', $scope.pacienteNuevo ).then( (r)->
-			console.log '$scope.pacientes',$scope.pacientes
-			$scope.opcionesGrid.data.push r.data
-			toastr.success 'Creado correctamente: ' + r.data.nombre
-			$scope.creando = false
-		, (r2)->
-			toastr.error 'No se pudo crear', 'Error'
-			console.log 'No se pudo guardar paciente', r2
-		)
-		
 
 	$scope.eliminarPaciente = (pac)->
 		
@@ -102,18 +87,16 @@ angular.module('feryzApp')
 			console.log 'No se pudo eliminar pacientes', r2
 		)
 
-	$scope.actualizarPaciente = (pac)->
-		$http.put(App.Server + '::pacientes/actualizar', $scope.pacienteEdit).then( (r)->
-			toastr.success 'Actualizado correctamente: ' + r.nombre
-			$scope.editando = false
-		, (r2)->
-			toastr.error 'No se pudo crear', 'Error'
-			console.log 'No se pudo guardar Paciente', r2
-		)
-
 	$scope.editarPaciente = (pac)->
 		$scope.editando = true
 		$scope.pacienteEdit = pac
+		tipo = $filter('filter')($scope.tipos_doc, {tipo: $scope.pacienteEdit.doc_tipo}, true)
+		
+		if tipo.length > 0
+			tipo = tipo[0]
+		console.log tipo
+		
+		$scope.pacienteEdit.doc_tipo = tipo
 		
 
 	
@@ -127,8 +110,8 @@ angular.module('feryzApp')
 	$scope.traerPacientes()
 
 
-	btn1 = '<a class="btn btn-default btn-xs" ng-click="grid.appScope.editarUsuario(row.entity)"><md-tooltip md-direction="left">Editar</md-tooltip><i class="fa fa-edit "></i></a>'
-	btn2 = '<a class="btn btn-default btn-xs" ng-click="grid.appScope.editarUsuario(row.entity)"><md-tooltip md-direction="left">Eliminar</md-tooltip><i class="fa fa-times "></i></a>'
+	btn1 = '<a class="btn btn-default btn-xs" ng-click="grid.appScope.editarPaciente(row.entity)"><md-tooltip md-direction="left">Editar</md-tooltip><i class="fa fa-edit "></i></a>'
+	btn2 = '<a class="btn btn-default btn-xs" ng-click="grid.appScope.eliminarPaciente(row.entity)"><md-tooltip md-direction="left">Eliminar</md-tooltip><i class="fa fa-times "></i></a>'
 
 	$scope.opcionesGrid = {
 		showGridFooter: true,
@@ -153,8 +136,8 @@ angular.module('feryzApp')
 					if colDef.field == "sexo"
 						if newValue == 'M' or newValue == 'F'
 							# Es correcto...
-							$http.put('::usuarios/actualizar/' + rowEntity.id, rowEntity).then((r)->
-								toastr.success 'Usuario actualizado con éxito', 'Actualizado'
+							$http.put('::pacientes/actualizar/' + rowEntity.id, rowEntity).then((r)->
+								toastr.success 'Paciente actualizado con éxito', 'Actualizado'
 							, (r2)->
 								toastr.error 'Cambio no guardado', 'Error'
 								console.log 'Falló al intentar guardar: ', r2
@@ -164,8 +147,8 @@ angular.module('feryzApp')
 							rowEntity.sexo = oldValue
 					else
 
-						$http.put('::usuarios/actualizar/' + rowEntity.id, rowEntity).then((r)->
-							toastr.success 'Usuario actualizado con éxito', 'Actualizado'
+						$http.put('::pacientes/actualizar/' + rowEntity.id, rowEntity).then((r)->
+							toastr.success 'Paciente actualizado con éxito', 'Actualizado'
 						, (r2)->
 							toastr.error 'Cambio no guardado', 'Error'
 							console.log 'Falló al intentar guardar: ', r2

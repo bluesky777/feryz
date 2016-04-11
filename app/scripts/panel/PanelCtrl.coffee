@@ -63,7 +63,7 @@ angular.module('feryzApp')
 
 			
 		$scope.set_user_event = (evento)->
-			Restangular.one('eventos/set-user-event').customPUT({'evento_id': evento.id}).then((r)->
+			$http.put('eventos/set-user-event', {'evento_id': evento.id}).then((r)->
 				console.log 'Evento cambiado: ', r
 
 				$scope.USER.evento_selected_id = evento.id
@@ -81,7 +81,7 @@ angular.module('feryzApp')
 		$scope.logout = ()->
 			AuthService.logout()
 
-			Restangular.one('login/logout').customPUT().then((r)->
+			$http.one('login/logout').customPUT().then((r)->
 				console.log 'Desconectado con éxito: ', r
 			, (r2)->
 				console.log 'Error desconectando!', r2
@@ -90,16 +90,6 @@ angular.module('feryzApp')
 			#$state.go 'login'
 
 
-
-
-		# Traemos los eventos
-		$scope.traerEventos = ()->
-			Restangular.all('eventos').getList().then((r)->
-				$scope.USER.eventos = r
-				$scope.el_evento_actual()
-			(r2)->
-				console.log 'No se trajeron los eventos.'
-			)
 
 				
 		return

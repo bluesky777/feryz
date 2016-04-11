@@ -102,6 +102,17 @@ angular.module('feryzApp')
 				_.contains values, item[property]
 			if filtrado.length == 0 then return false else filtrado[0]
 
+	angular.extend(toastrConfig, {
+		allowHtml: true,
+		closeButton: true,
+		extendedTimeOut: 1000,
+		preventOpenDuplicates: false,
+		maxOpened: 3,
+		tapToDismiss: true,
+		target: 'body',
+		timeOut: 4000,
+	})
+
 	@
 ])
 

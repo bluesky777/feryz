@@ -71,8 +71,8 @@ angular.module('feryzApp')
 		ingresar()
 
 	$rootScope.$on AUTH_EVENTS.loginFailed, (ev)->
-		toastr.error 'Datos incorrecto.', 'No se pudo loguear'
-		console.log 'Evento loginFailed: ', ev
+		#toastr.error 'Datos incorrecto.', 'No se pudo loguear'
+		#console.log 'Evento loginFailed: ', ev
 
 		
 

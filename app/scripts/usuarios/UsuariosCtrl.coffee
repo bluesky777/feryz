@@ -57,7 +57,7 @@ angular.module('feryzApp')
 
 
 	btn1 = '<a class="btn btn-default btn-xs" ng-click="grid.appScope.editarUsuario(row.entity)"><md-tooltip md-direction="left">Editar</md-tooltip><i class="fa fa-edit "></i></a>'
-	btn2 = '<a class="btn btn-default btn-xs" ng-click="grid.appScope.editarUsuario(row.entity)"><md-tooltip md-direction="left">Eliminar</md-tooltip><i class="fa fa-times "></i></a>'
+	btn2 = '<a class="btn btn-default btn-xs" ng-click="grid.appScope.eliminarUsuario(row.entity)"><md-tooltip md-direction="left">Eliminar</md-tooltip><i class="fa fa-times "></i></a>'
 
 	$scope.opcionesGrid = {
 		showGridFooter: true,

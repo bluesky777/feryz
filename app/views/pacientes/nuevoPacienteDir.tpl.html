@@ -1,0 +1,225 @@
+
+<div ng-if="creando" class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default panel-hovered mb20">
+      <div class="panel-heading">Nuevo Paciente (datos básicos)</div>
+      <div class="panel-body">
+        <div>
+          <form ng-submit="guardarPaciente()">
+            <div class="row">
+              <div class="col-lg-4 col-sm-6">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Empresa usuaria</label>
+                  <input ng-model="pacienteNuevo.empresa_usuaria">
+                </md-input-container>
+              </div>
+              <div class="col-lg-4 col-sm-6">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Empresa temporal</label>
+                  <input ng-model="pacienteNuevo.empresa_temporal">
+                </md-input-container>
+              </div>
+              <div class="col-lg-4 col-sm-12">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Actividad economica</label>
+                  <input ng-model="pacienteNuevo.actividad_economica">
+                </md-input-container>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4 col-sm-6">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Nombres</label>
+                  <input ng-model="pacienteNuevo.nombres">
+                </md-input-container>
+              </div>
+              <div class="col-lg-4 col-sm-12 col-xs-12">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Apellidos</label>
+                  <input ng-model="pacienteNuevo.apellidos">
+                </md-input-container>
+              </div>
+              <div class="form-group col-lg-4 col-sm-12 col-xs-12">
+                <ui-select ng-model="pacienteNuevo.doc_tipo" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
+                  <ui-select-match placeholder="Tipo documento" allow-clear="true">{{$select.selected.tipo}}</ui-select-match>
+                  <ui-select-choices repeat="tipo in tipos_doc | filter: $select.search">
+                    <div ng-bind-html="tipo.tipo | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4 col-sm-12 col-xs-12">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Numero de documento</label>
+                  <input ng-model="pacienteNuevo.doc_identidad">
+                </md-input-container>
+              </div>
+              <div class="col-lg-4 col-sm-6">
+                <md-radio-group ng-model="pacienteNuevo.sexo">
+                  <div class="row">
+                    <div class="col-lg-x col-md-6 col-sm-6 col-xs-12">
+                      <md-radio-button value="M">Masculino</md-radio-button>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                      <md-radio-button value="F">Femenino</md-radio-button>
+                    </div>
+                  </div>
+                </md-radio-group>
+              </div>
+              <div class="col-lg-4 col-sm-12">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Direccion</label>
+                  <input ng-model="pacienteNuevo.direccion">
+                </md-input-container>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4 col-sm-6">
+                <md-input-container flex-gt-sm style="margin: 1!important; padding-bottom: 0!important" class="md-block">
+                  <label>Telefono</label>
+                  <input ng-model="pacienteNuevo.telefono">
+                </md-input-container>
+              </div>
+              <div class="col-lg-4 col-sm-6">
+                <md-input-container flex-gt-sm style="margin: 1!important; padding-bottom: 0!important" class="md-block">
+                  <label>Telefono contacto</label>
+                  <input ng-model="pacienteNuevo.telefono_contacto">
+                </md-input-container>
+              </div>
+              <div style="margin-bottom: 0px;" class="form-group col-lg-4 col-sm-6 col-xs-12">
+                <label for="paciente-fecha-nac">Fecha de nacimiento</label>
+                <div class="controls">
+                  <div class="input-group"><span ng-click="data.isOpen = true" class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input id="paciente-fecha-nac" type="text" icon-prefix="fa" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="pacienteNuevo.fecha_nac" is-open="data.isOpen" ng-click="data.isOpen = true" max-date="'2020-12-12'" datepicker-options="dateOptions" close-text="Aceptar" current-text="Hoy" clear-text="Borrar" placeholder="Fecha nacimiento" class="form-control active">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-lg-4 col-sm-6 col-xs-12">
+                <label>Pais de nacimiento</label>
+                <ui-select ng-model="pacienteNuevo.pais" on-select="paisSeleccionado($item, $model)" style="width: 100%;">
+                  <ui-select-match placeholder="Pais" allow-clear="true">{{$select.selected.pais}}</ui-select-match>
+                  <ui-select-choices repeat="pais in paises | filter: $select.search">
+                    <div ng-bind-html="pais.pais | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+              <div class="form-group col-lg-4 col-sm-6 col-xs-12">
+                <label>Departamento</label>
+                <ui-select ng-model="pacienteNuevo.depart_nac" on-select="departamentoSeleccionado($item, $model)" style="width: 100%;">
+                  <ui-select-match placeholder="Departamento" allow-clear="true">{{$select.selected.departamento}}</ui-select-match>
+                  <ui-select-choices repeat="depart in departamentos | filter: $select.search">
+                    <div ng-bind-html="depart.departamento | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+              <div class="form-group col-lg-4 col-sm-12 col-xs-12">
+                <label>Ciudad de nacimiento</label>
+                <ui-select ng-model="pacienteNuevo.ciudad_nac" style="width: 100%;">
+                  <ui-select-match placeholder="Ciudad" allow-clear="true">{{$select.selected.ciudad}}</ui-select-match>
+                  <ui-select-choices repeat="ciudad in ciudades | filter: $select.search">
+                    <div ng-bind-html="ciudad.ciudad | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4 col-sm-6">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Estado Civil</label>
+                  <input ng-model="pacienteNuevo.estado_civil">
+                </md-input-container>
+              </div>
+              <div class="col-lg-4 col-sm-6">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Nivel escolaridad</label>
+                  <input ng-model="pacienteNuevo.nivel_escolaridad">
+                </md-input-container>
+              </div>
+              <div class="col-lg-4 col-sm-12">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Edad</label>
+                  <input ng-model="pacienteNuevo.edad">
+                </md-input-container>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4 col-sm-6">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Profesion</label>
+                  <input ng-model="pacienteNuevo.profesion">
+                </md-input-container>
+              </div>
+              <div class="col-lg-4 col-sm-6">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Grupo sanguíneo</label>
+                  <input ng-model="pacienteNuevo.grupo_sanguineo">
+                </md-input-container>
+              </div>
+              <div class="col-lg-4 col-sm-12">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Rh</label>
+                  <input ng-model="pacienteNuevo.rh">
+                </md-input-container>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4 col-sm-6">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>EPS</label>
+                  <input ng-model="pacienteNuevo.eps">
+                </md-input-container>
+              </div>
+              <div class="col-lg-4 col-sm-6">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>ARP</label>
+                  <input ng-model="pacienteNuevo.arp">
+                </md-input-container>
+              </div>
+              <div style="margin-bottom: 12px;" class="form-group col-lg-4 col-sm-6 col-xs-12">
+                <label for="paciente-fecha-ingreso">Fecha de ingreso</label>
+                <div class="controls">
+                  <div class="input-group"><span ng-click="data.isOpen2 = true" class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input id="paciente-fecha-ingreso" type="text" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="pacienteNuevo.fecha_ingreso" is-open="data.isOpen2" ng-click="data.isOpen2 = true" max-date="'2020-12-12'" datepicker-options="dateOptions" close-text="Aceptar" current-text="Hoy" clear-text="Borrar" placeholder="Fecha ingreso" class="form-control active">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">									
+              <div class="col-lg-6 col-sm-6">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Cargo</label>
+                  <input ng-model="pacienteNuevo.cargo">
+                </md-input-container>
+              </div>
+              <div class="col-lg-6 col-sm-6">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Descripcion de Cargo</label>
+                  <input ng-model="pacienteNuevo.descripcion_cargo">
+                </md-input-container>
+              </div>
+            </div>
+            <div class="panel-heading">Motivo de consulta y enfermedad actual</div>
+            <div style="margin: 10px"></div>
+            <div class="row">
+              <div class="col-lg-12 col-sm-12">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Motivo consulta</label>
+                  <input ng-model="pacienteNuevo.motivo_consulta">
+                </md-input-container>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-2 col-sm-6">
+                <input type="button" value="Cancelar" ng-click="$parent.creando=false" class="btn btn-danger">
+                <input type="submit" value="Guardar" class="btn btn-default">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

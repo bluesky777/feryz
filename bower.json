@@ -16,7 +16,7 @@
     "angular-ui-router": "~0.2.15",
     "angular-ui-grid": "~3.1.0",
     "angular-ui-select": "^0.14.3",
-    "angular-toastr": "~1.2.1",
+    "angular-toastr": "~1.7.0",
     "angular-fullscreen": "~1.0.1",
     "ng-file-upload": "~3.2.4",
     "ng-file-upload-shim": "~3.2.4",
