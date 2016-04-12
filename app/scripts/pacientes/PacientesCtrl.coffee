@@ -94,9 +94,24 @@ angular.module('feryzApp')
 		
 		if tipo.length > 0
 			tipo = tipo[0]
-		console.log tipo
 		
 		$scope.pacienteEdit.doc_tipo = tipo
+
+
+		$http.put('::antecedentes-laborales/paciente', {paciente_id: pac.id}).then((r)->
+			$scope.pacienteEdit.antecedentesLaborales = r.data
+			console.log $scope.pacienteEdit
+		, (r2)->
+			console.log 'No se pudo traer los antecedentes', r2
+		)		
+		$http.put('::accientes-trabajo/paciente', {paciente_id: pac.id}).then((r)->
+			$scope.pacienteEdit.accidentesTrabajo = r.data
+			console.log $scope.pacienteEdit
+		, (r2)->
+			console.log 'No se pudo traer los accidentes', r2
+		)
+
+
 		
 
 	

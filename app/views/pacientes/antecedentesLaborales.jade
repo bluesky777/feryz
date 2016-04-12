@@ -1,17 +1,18 @@
 div.panel-heading Antecedentes Laborales
 
 
-	md-list(ng-hide="antecedentesLaborales.length == 0")
-		md-list-item(ng-repeat="antecedente in antecedentesLaborales" ng-click="editarAntecLabor(antecedente)") 
+	md-list(ng-hide="pacienteEdit.antecedentesLaborales.length == 0")
+		md-list-item(ng-repeat="antecedente in pacienteEdit.antecedentesLaborales" ng-click="editarAntecLabor(antecedente)") 
 			p {{antecedente.empresa}} - {{antecedente.cargo}}
 			md-button.md-icon-button(aria-label="Eliminar")
 				.fa.fa-time
 
 
-	md-button.md-raised.md-primary(aria-label="Nuevo" ng-click="creandoAntecLabor=true" ng-hide="creandoAntecLabor || antecedentesLaborales.length == 0 ") Agregar antecedente laboral
+	md-button.md-raised.md-primary(aria-label="Nuevo" ng-click="nuevoAntecLabor()" ng-hide="creandoAntecLabor") Agregar antecedente laboral
+
 
 	form(style="margin-top=10px;" ng-show="antecedentesLaborales.length == 0 || creandoAntecLabor" ng-submit="guardarAntecedenteLaboral()")
-
+		h5 Nuevo antecendente laboral: 
 		.row
 			.col-lg-4.col-sm-6
 				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
@@ -51,12 +52,12 @@ div.panel-heading Antecedentes Laborales
 					input(ng-model="AntecLaborNuevo.epp")
 
 		md-button.md-raised.md-default(aria-label="Cancelar" ng-click="creandoAntecLabor=false") Cancelar
-		md-button.md-raised.md-primary(type="submit" aria-label="Nuevo" ng-click="creandoAntecLabor=true" ) Guardar
+		md-button.md-raised.md-primary(type="submit" aria-label="Nuevo") Guardar
 
 
 
-	form(style="margin-top=10px;" ng-show="antecedentesLaborales.length == 0 || creandoAntecLabor" ng-submit="guardarAntecedentesLaboral()")
-
+	form(style="margin-top=10px;" ng-show="editandoAntecLabor" ng-submit="actualizarAntecLaboral()")
+		h5 Editar antecendente laboral: 
 		.row
 			.col-lg-4.col-sm-6
 				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
@@ -94,3 +95,8 @@ div.panel-heading Antecedentes Laborales
 				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 					label EPP
 					input(ng-model="AntecLaborActual.epp")
+
+		md-button.md-raised.md-default(aria-label="Cancelar" ng-click="actualizandoAntecLabor=false") Cancelar
+		md-button.md-raised.md-primary(type="submit" aria-label="Guardar" ) Guardar
+
+

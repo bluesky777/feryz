@@ -14,12 +14,6 @@ angular.module('feryzApp')
 
 .controller('PacienteEditarCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', ($scope, $http, App, $filter, toastr) ->
 	
-	$http.get('::antecedentes-laborales/all').then((r)->
-		$scope.antecedentesLaborales = r.data
-	, (r2)->
-		console.log 'No se pudo traer los antecedentes', r2
-	)
-
 	$scope.actualizarPaciente = ()->
 		console.log $scope.pacienteEdit
 		$http.put('::pacientes/actualizar', $scope.pacienteEdit).then( (r)->

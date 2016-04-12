@@ -1,15 +1,16 @@
 
 <div class="panel-heading">Antecedentes Laborales
-  <md-list ng-hide="antecedentesLaborales.length == 0">
-    <md-list-item ng-repeat="antecedente in antecedentesLaborales" ng-click="editarAntecLabor(antecedente)"> 
+  <md-list ng-hide="pacienteEdit.antecedentesLaborales.length == 0">
+    <md-list-item ng-repeat="antecedente in pacienteEdit.antecedentesLaborales" ng-click="editarAntecLabor(antecedente)"> 
       <p>{{antecedente.empresa}} - {{antecedente.cargo}}</p>
       <md-button aria-label="Eliminar" class="md-icon-button">
         <div class="fa fa-time"></div>
       </md-button>
     </md-list-item>
   </md-list>
-  <md-button aria-label="Nuevo" ng-click="creandoAntecLabor=true" ng-hide="creandoAntecLabor || antecedentesLaborales.length == 0 " class="md-raised md-primary">Agregar antecedente laboral</md-button>
+  <md-button aria-label="Nuevo" ng-click="nuevoAntecLabor()" ng-hide="creandoAntecLabor" class="md-raised md-primary">Agregar antecedente laboral</md-button>
   <form style="margin-top=10px;" ng-show="antecedentesLaborales.length == 0 || creandoAntecLabor" ng-submit="guardarAntecedenteLaboral()">
+    <h5>Nuevo antecendente laboral: </h5>
     <div class="row">
       <div class="col-lg-4 col-sm-6">
         <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
@@ -65,9 +66,10 @@
       </div>
     </div>
     <md-button aria-label="Cancelar" ng-click="creandoAntecLabor=false" class="md-raised md-default">Cancelar</md-button>
-    <md-button type="submit" aria-label="Nuevo" ng-click="creandoAntecLabor=true" class="md-raised md-primary">Guardar</md-button>
+    <md-button type="submit" aria-label="Nuevo" class="md-raised md-primary">Guardar</md-button>
   </form>
-  <form style="margin-top=10px;" ng-show="antecedentesLaborales.length == 0 || creandoAntecLabor" ng-submit="guardarAntecedentesLaboral()">
+  <form style="margin-top=10px;" ng-show="editandoAntecLabor" ng-submit="actualizarAntecLaboral()">
+    <h5>Editar antecendente laboral: </h5>
     <div class="row">
       <div class="col-lg-4 col-sm-6">
         <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
@@ -122,5 +124,7 @@
         </md-input-container>
       </div>
     </div>
+    <md-button aria-label="Cancelar" ng-click="actualizandoAntecLabor=false" class="md-raised md-default">Cancelar</md-button>
+    <md-button type="submit" aria-label="Guardar" class="md-raised md-primary">Guardar</md-button>
   </form>
 </div>

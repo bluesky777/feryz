@@ -1,0 +1,60 @@
+div.panel-heading Accidentes de trabajo
+
+
+	md-list(ng-hide="pacienteEdit.accidenteTrabajo.length == 0")
+		md-list-item(ng-repeat="antecedente in pacienteEdit.accidentesTrabajo" ng-click="editarAccidTrabajo(accidente)") 
+			p {{accidente.empresa}} - {{accidente.cargo}}
+			md-button.md-icon-button(aria-label="Eliminar")
+				.fa.fa-time
+
+
+	md-button.md-raised.md-primary(aria-label="Nuevo" ng-click="nuevoAntecTrabajo()" ng-hide="creandoAntecTrabajo") Agregar accidentes de trabajo
+
+
+	form(style="margin-top=10px;" ng-show="accidentesTrabajo.length == 0 || creandoAccidTrabajo" ng-submit="guardarAccidenteTrabajo()")
+		h5(style="margin: 10px") Nuevo accidente de trabajo: 
+
+			.row
+				.col-lg-4.col-sm-6
+					label Fecha Ingreso
+
+					md-datepicker(style="width: 260px;height" ng-model="AccidTrabajoNuevo.fecha" md-placeholder="Enter date")
+				
+				.col-lg-8.col-sm-6
+					md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+						label Diagnostico
+						input(ng-mKBel="AccidTrabajoNuevo.diagnostico")
+			
+			.row
+				.col-lg-4.col-sm-6
+					md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+						label ARP
+						input(ng-model="AccidTrabajoNuevo.arp")
+				
+				.col-lg-4.col-sm-6
+					md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+						label Organo afectado
+						input(ng-mKBel="AccidTrabajoNuevo.organo_afectado")
+				
+				.col-lg-4.col-sm-12
+					md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+						label Agente
+						input(ng-model="AccidTrabajoNuevo.agente")
+			
+			.row
+				.col-lg-4.col-sm-6
+					md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+						label Tipo de accidente
+						input(ng-model="AccidTrabajoNuevo.tipo_accidente")
+				
+				.col-lg-4.col-sm-6
+					md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+						label Severidad
+						input(ng-model="AccidTrabajoNuevo.severidad")
+				
+				.col-lg-4.col-sm-12
+					md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+						label Secuelas
+						input(ng-model="AccidTrabajoNuevo.secuelas")
+			md-button.md-raised.md-default(aria-label="Cancelar" ng-click="creandoAccidTrabajo=false") Cancelar
+			md-button.md-raised.md-primary(type="submit" aria-label="Nuevo") Guardar

@@ -1,0 +1,70 @@
+
+<div class="panel-heading">Accidentes de trabajo
+  <md-list ng-hide="pacienteEdit.accidenteTrabajo.length == 0">
+    <md-list-item ng-repeat="antecedente in pacienteEdit.accidentesTrabajo" ng-click="editarAccidTrabajo(accidente)"> 
+      <p>{{accidente.empresa}} - {{accidente.cargo}}</p>
+      <md-button aria-label="Eliminar" class="md-icon-button">
+        <div class="fa fa-time"></div>
+      </md-button>
+    </md-list-item>
+  </md-list>
+  <md-button aria-label="Nuevo" ng-click="nuevoAntecTrabajo()" ng-hide="creandoAntecTrabajo" class="md-raised md-primary">Agregar accidentes de trabajo</md-button>
+  <form style="margin-top=10px;" ng-show="accidentesTrabajo.length == 0 || creandoAccidTrabajo" ng-submit="guardarAccidenteTrabajo()">
+    <h5 style="margin: 10px">Nuevo accidente de trabajo: 
+      <div class="row">
+        <div class="col-lg-4 col-sm-6">
+          <label>Fecha Ingreso</label>
+          <md-datepicker style="width: 260px;height" ng-model="AccidTrabajoNuevo.fecha" md-placeholder="Enter date"></md-datepicker>
+        </div>
+        <div class="col-lg-8 col-sm-6">
+          <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+            <label>Diagnostico</label>
+            <input ng-mKBel="AccidTrabajoNuevo.diagnostico">
+          </md-input-container>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-sm-6">
+          <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+            <label>ARP</label>
+            <input ng-model="AccidTrabajoNuevo.arp">
+          </md-input-container>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+            <label>Organo afectado</label>
+            <input ng-mKBel="AccidTrabajoNuevo.organo_afectado">
+          </md-input-container>
+        </div>
+        <div class="col-lg-4 col-sm-12">
+          <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+            <label>Agente</label>
+            <input ng-model="AccidTrabajoNuevo.agente">
+          </md-input-container>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-sm-6">
+          <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+            <label>Tipo de accidente</label>
+            <input ng-model="AccidTrabajoNuevo.tipo_accidente">
+          </md-input-container>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+            <label>Severidad</label>
+            <input ng-model="AccidTrabajoNuevo.severidad">
+          </md-input-container>
+        </div>
+        <div class="col-lg-4 col-sm-12">
+          <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+            <label>Secuelas</label>
+            <input ng-model="AccidTrabajoNuevo.secuelas">
+          </md-input-container>
+        </div>
+      </div>
+      <md-button aria-label="Cancelar" ng-click="creandoAccidTrabajo=false" class="md-raised md-default">Cancelar</md-button>
+      <md-button type="submit" aria-label="Nuevo" class="md-raised md-primary">Guardar</md-button>
+    </h5>
+  </form>
+</div>

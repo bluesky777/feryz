@@ -8,36 +8,47 @@ angular.module('feryzApp')
 	#scope: 
 	#	ngModel: "="
 	#require: 'ngModel'
+	controller: 'AntecedentesLaboralesCtrl'
+])
 
-	link: (scope, iElem, iAttrs)->
-		
+.controller('AntecedentesLaboralesCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', ($scope, $http, App, $filter, toastr) ->	
 
-		$http.get('::antecedentes-laborales/all').then((r)->
-			scope.antecedentesLaborales = r.data
-		, (r2)->
-			console.log 'No se pudo traer los antecedentes', r2
-		)
-
-
-		scope.creandoAntecLabor = false
-		scope.editandoAntecLabor = false
-		scope.AntecLaborNuevo = {}
+		$scope.creandoAntecLabor = false
+		$scope.editandoAntecLabor = false
+		$scope.AntecLaborNuevo = {}
+		$scope.AntecLaborActual = {}
 
 
-		scope.editarAntecLabor = (antec)->
-			scope.editandoAntecLabor = true
-			scope.AntecLaborActual = antec
+		$scope.editarAntecLabor = (antec)->
+			$scope.editandoAntecLabor = true
+			$scope.creandoAntecLabor = false
+			$scope.AntecLaborActual = antec
+
+		$scope.nuevoAntecLabor = (antec)->
+			$scope.creandoAntecLabor = true
+			$scope.editandoAntecLabor = false
+			$scope.AntecLaborNuevo = {}
 
 
-		scope.guardarAntecedenteLaboral = ()->
-			scope.AntecLaborNuevo.paciente_id = 1 # pacienteEdit.id
+		$scope.guardarAntecedenteLaboral = ()->
+			$scope.AntecLaborNuevo.paciente_id = $scope.pacienteEdit.id
 			
-			$http.post('::antecedentes-laborales/guardar', scope.AntecLaborNuevo).then((r)->
-				scope.antecedentesLaborales.push r.data
-				scope.creandoAntecLabor = false
-				scope.AntecLaborNuevo = {}
+			$http.post('::antecedentes-laborales/guardar', $scope.AntecLaborNuevo).then((r)->
+				$scope.pacienteEdit.antecedentesLaborales.push r.data
+				$scope.creandoAntecLabor = false
+				$scope.AntecLaborNuevo = {}
+				toastr.success 'Antecedente agregado'
 			, (r2)->
-				console.log 'No se pudo agregar antecedente', r2
+				toastr.error 'No se pudo agregar antecedente'
+			)
+
+		$scope.actualizarAntecLaboral = ()->
+
+			$http.put('::antecedentes-laborales/actualizar', $scope.AntecLaborActual).then((r)->
+				$scope.editandoAntecLabor = false
+				toastr.success 'Antecedente actualizado'
+			, (r2)->
+				toastr.error 'No se pudo agregar antecedente'
 			)
 
 

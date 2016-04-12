@@ -203,23 +203,6 @@
                 </md-input-container>
               </div>
             </div>
-            <div class="row">
-              <div class="col-lg-2 col-sm-6">
-                <input type="submit" value="Guardar" class="btn btn-default">
-              </div>
-              <div class="col-lg-2 col-sm-6">
-                <input type="button" value="Cancelar" ng-click="$parent.editando=false" class="btn btn-danger">
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <div class="panel panel-default panel-hovered mb20">
-      <div class="panel-heading">Antecedentes</div>
-      <div class="panel-body">
-        <div>
-          <form ng-submit="guardarAntecedentesPaciente()">
             <div class="panel-heading">Antecedentes Personales
               <div style="margin: 10px"></div>
             </div>
@@ -251,125 +234,91 @@
                 </md-input-container>
               </div>
             </div>
+            <div class="row">
+              <div class="col-lg-2 col-sm-6">
+                <input type="submit" value="Guardar" class="btn btn-default">
+              </div>
+              <div class="col-lg-2 col-sm-6">
+                <input type="button" value="Cancelar" ng-click="$parent.editando=false" class="btn btn-danger">
+              </div>
+            </div>
           </form>
-          <antecedentes-laborales-dir></antecedentes-laborales-dir>
-          <div class="panel-heading">Antecedentes de trabajo
-            <div style="margin: 10px"></div>
-            <div class="row">
-              <div class="col-lg-4 col-sm-6">
-                <label>Fecha Ingreso</label>
-                <md-datepicker style="width: 260px;height" ng-model="pacienteEdit.fecha" md-placeholder="Enter date"></md-datepicker>
-              </div>
-              <div class="col-lg-8 col-sm-6">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Diagnostico</label>
-                  <input ng-mKBel="pacienteEdit.diagnostico">
-                </md-input-container>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-4 col-sm-6">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>ARP</label>
-                  <input ng-model="pacienteEdit.arp">
-                </md-input-container>
-              </div>
-              <div class="col-lg-4 col-sm-6">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Organo afectado</label>
-                  <input ng-mKBel="pacienteEdit.organo_afectado">
-                </md-input-container>
-              </div>
-              <div class="col-lg-4 col-sm-12">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Agente</label>
-                  <input ng-model="pacienteEdit.agente">
-                </md-input-container>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-4 col-sm-6">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Tipo de accidente</label>
-                  <input ng-model="pacienteEdit.tipo_accidente">
-                </md-input-container>
-              </div>
-              <div class="col-lg-4 col-sm-6">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Severidad</label>
-                  <input ng-model="pacienteEdit.severidad">
-                </md-input-container>
-              </div>
-              <div class="col-lg-4 col-sm-12">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Secuelas</label>
-                  <input ng-model="pacienteEdit.secuelas">
-                </md-input-container>
-              </div>
-            </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default panel-hovered mb20">
+      <div class="panel-heading">Antecedentes laborales</div>
+      <div class="panel-body">
+        <antecedentes-laborales-dir></antecedentes-laborales-dir>
+      </div>
+    </div>
+    <div class="panel panel-default panel-hovered mb20">
+      <div class="panel-heading">Antecedentes de trabajo</div>
+      <div class="panel-body">
+        <accidentes-trabajo-dir></accidentes-trabajo-dir>
+      </div>
+    </div>
+    <div class="panel panel-default panel-hovered mb20">
+      <div class="panel-heading">Enfermedades profesionales</div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-4 col-sm-6">
+            <label>Fecha Ingreso</label>
+            <md-datepicker style="width: 260px;height" ng-model="pacienteEdit.fecha" md-placeholder="Enter date"></md-datepicker>
           </div>
-          <div class="panel-heading">Enfermedades profesionales
-            <div style="margin: 10px"></div>
-            <div class="row">
-              <div class="col-lg-4 col-sm-6">
-                <label>Fecha Ingreso</label>
-                <md-datepicker style="width: 260px;height" ng-model="pacienteEdit.fecha" md-placeholder="Enter date"></md-datepicker>
-              </div>
-              <div class="col-lg-8 col-sm-6">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Diagnostico</label>
-                  <input ng-mKBel="pacienteEdit.diagnostico">
-                </md-input-container>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-4 col-sm-6">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>ARP</label>
-                  <input ng-model="pacienteEdit.arp">
-                </md-input-container>
-              </div>
-              <div class="col-lg-4 col-sm-6">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Organo afectado</label>
-                  <input ng-mKBel="pacienteEdit.organo_afectado">
-                </md-input-container>
-              </div>
-              <div class="col-lg-4 col-sm-12">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Agente</label>
-                  <input ng-model="pacienteEdit.agente">
-                </md-input-container>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-4 col-sm-6">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Tipo de accidente</label>
-                  <input ng-model="pacienteEdit.tipo_accidente">
-                </md-input-container>
-              </div>
-              <div class="col-lg-4 col-sm-6">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Severidad</label>
-                  <input ng-model="pacienteEdit.severidad">
-                </md-input-container>
-              </div>
-              <div class="col-lg-4 col-sm-12">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Secuelas</label>
-                  <input ng-model="pacienteEdit.secuelas">
-                </md-input-container>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-2 col-sm-6">
-                <input type="submit" value="Guardar" class="btn btn-success">
-              </div>
-              <div class="col-lg-2 col-sm-6">
-                <input type="button" value="Cancelar" ng-click="creando=false" class="btn btn-danger">
-              </div>
-            </div>
+          <div class="col-lg-8 col-sm-6">
+            <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+              <label>Diagnostico</label>
+              <input ng-mKBel="pacienteEdit.diagnostico">
+            </md-input-container>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 col-sm-6">
+            <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+              <label>ARP</label>
+              <input ng-model="pacienteEdit.arp">
+            </md-input-container>
+          </div>
+          <div class="col-lg-4 col-sm-6">
+            <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+              <label>Organo afectado</label>
+              <input ng-mKBel="pacienteEdit.organo_afectado">
+            </md-input-container>
+          </div>
+          <div class="col-lg-4 col-sm-12">
+            <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+              <label>Agente</label>
+              <input ng-model="pacienteEdit.agente">
+            </md-input-container>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 col-sm-6">
+            <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+              <label>Tipo de accidente</label>
+              <input ng-model="pacienteEdit.tipo_accidente">
+            </md-input-container>
+          </div>
+          <div class="col-lg-4 col-sm-6">
+            <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+              <label>Severidad</label>
+              <input ng-model="pacienteEdit.severidad">
+            </md-input-container>
+          </div>
+          <div class="col-lg-4 col-sm-12">
+            <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+              <label>Secuelas</label>
+              <input ng-model="pacienteEdit.secuelas">
+            </md-input-container>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-2 col-sm-6">
+            <input type="submit" value="Guardar" class="btn btn-success">
+          </div>
+          <div class="col-lg-2 col-sm-6">
+            <input type="button" value="Cancelar" ng-click="creando=false" class="btn btn-danger">
           </div>
         </div>
       </div>
