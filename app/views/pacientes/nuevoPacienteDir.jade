@@ -172,10 +172,11 @@
 									input(ng-model="pacienteNuevo.motivo_consulta")
 
 						.row
-							.col-lg-2.col-sm-6
-								input(type="button" value="Cancelar" ng-click="$parent.creando=false" class="btn btn-danger")
+							.col-lg-12.col-sm-12
 
-								input(type="submit" value="Guardar" class="btn btn-default")
+								md-button.md-raised.md-default(type="button" ng-click="$parent.creando=false") Cancelar
+
+								md-button.md-raised.md-primary(type="submit") Guardar
 
  
 		

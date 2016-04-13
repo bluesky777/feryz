@@ -1,17 +1,17 @@
 angular.module('feryzApp')
 
-.directive('antecedentesTrabajoDir',['toastr', '$http', (toastr, $http)-> 
+.directive('accidentesTrabajoDir',['toastr', '$http', (toastr, $http)-> 
 
 	restrict: 'AE'
 	transclude: true,
-	templateUrl: "==pacientes/antecedentesTrabajoDir.tpl.html"
+	templateUrl: "==pacientes/accidentesTrabajoDir.tpl.html"
 	#scope: 
 	#	ngModel: "="
 	#require: 'ngModel'
-	controller: 'AntecedentesTrabajoCtrl'
+	controller: 'AccidentesTrabajoCtrl'
 ])
 
-.controller('AntecedentesTrabajoCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', ($scope, $http, App, $filter, toastr) ->	
+.controller('AccidentesTrabajoCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', ($scope, $http, App, $filter, toastr) ->	
 
 		$scope.creandoAccidTrabajo = false
 		$scope.editandoAccidTrabajo = false
@@ -21,6 +21,7 @@ angular.module('feryzApp')
 
 		$scope.editarAccidTrabajo = (antec)->
 			$scope.editandoAccidTrabajo = true
+			$scope.creandoAccidTrabajo = false
 			$scope.AccidTrabajoActual = antec
 
 		$scope.nuevoAccidTrabajo = (antec)->
@@ -30,21 +31,21 @@ angular.module('feryzApp')
 
 
 		$scope.guardarAccidenteTrabajo = ()->
-			$scope.AntecLaborNuevo.paciente_id = $scope.pacienteEdit.id
+			$scope.AccidTrabajoNuevo.paciente_id = $scope.pacienteEdit.id
 			
-			$http.post('::accidentes-trabajo/guardar', $scope.AntecLaborNuevo).then((r)->
-				$scope.pacienteEdit.antecedentesLaborales.push r.data
-				$scope.creandoAntecLabor = false
-				$scope.AntecLaborNuevo = {}
+			$http.post('::accidentes-trabajo/guardar', $scope.AccidTrabajoNuevo).then((r)->
+				$scope.pacienteEdit.accidentesTrabajo.push r.data
+				$scope.creandoAccidTrabajo = false
+				$scope.AccidTrabajoNuevo = {}
 				toastr.success 'Antecedente agregado'
 			, (r2)->
 				toastr.error 'No se pudo agregar antecedente'
 			)
 
-		$scope.actualizarAntecLaboral = ()->
+		$scope.actualizarAccidTrabajo = ()->
 
-			$http.put('::accidentes-trabajo/actualizar', $scope.AntecLaborActual).then((r)->
-				$scope.editandoAntecLabor = false
+			$http.put('::accidentes-trabajo/actualizar', $scope.AccidTrabajoActual).then((r)->
+				$scope.editandoAccidTrabajo = false
 				toastr.success 'Antecedente actualizado'
 			, (r2)->
 				toastr.error 'No se pudo agregar antecedente'

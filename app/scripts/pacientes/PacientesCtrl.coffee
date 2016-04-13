@@ -13,7 +13,6 @@ angular.module('feryzApp')
 
 
 	$scope.crearPaciente = ()->
-		console.log 'Creando'
 		$scope.creando = true
 
 	
@@ -87,30 +86,60 @@ angular.module('feryzApp')
 			console.log 'No se pudo eliminar pacientes', r2
 		)
 
+
+	########################################################################
+	########################	 EDITAR PACIENTE 	  ######################
+	########################################################################
 	$scope.editarPaciente = (pac)->
 		$scope.editando = true
 		$scope.pacienteEdit = pac
-		tipo = $filter('filter')($scope.tipos_doc, {tipo: $scope.pacienteEdit.doc_tipo}, true)
 		
+
+		# Configuramos el tipo para el SELECT2
+		tipo = $filter('filter')($scope.tipos_doc, {tipo: $scope.pacienteEdit.doc_tipo}, true)
+				
 		if tipo.length > 0
 			tipo = tipo[0]
+		else
+			tipo = $scope.tipos_doc[0]
 		
 		$scope.pacienteEdit.doc_tipo = tipo
+
+		
+		# Configuramos la ciudad nac 
+
+		if $scope.pacienteEdit.ciudad_nac_id == null
+			$scope.pacienteEdit.pais = {id: 1, pais: 'COLOMBIA', abrev: 'CO'}
+			$scope.paisSeleccionado($scope.pacienteEdit.pais, $scope.pacienteEdit.pais)
+		else
+			$http.get('::ciudades/datosciudad/'+$scope.pacienteEdit.ciudad_nac_id).then (r2)->
+				$scope.paises = r2.data.paises
+				$scope.departamentosNac = r2.departamentos
+				$scope.ciudadesNac = r2.ciudades
+				$scope.pacienteEdit.pais = r2.pais
+				$scope.pacienteEdit.depart_nac = r2.departamento
+				$scope.pacienteEdit.ciudad_nac = r2.ciudad
+
 
 
 		$http.put('::antecedentes-laborales/paciente', {paciente_id: pac.id}).then((r)->
 			$scope.pacienteEdit.antecedentesLaborales = r.data
-			console.log $scope.pacienteEdit
 		, (r2)->
 			console.log 'No se pudo traer los antecedentes', r2
 		)		
-		$http.put('::accientes-trabajo/paciente', {paciente_id: pac.id}).then((r)->
+		$http.put('::accidentes-trabajo/paciente', {paciente_id: pac.id}).then((r)->
 			$scope.pacienteEdit.accidentesTrabajo = r.data
-			console.log $scope.pacienteEdit
+		, (r2)->
+			console.log 'No se pudo traer los accidentes', r2
+		)
+		$http.put('::enfermedades-profesionales/paciente', {paciente_id: pac.id}).then((r)->
+			$scope.pacienteEdit.enfermedadesProfesionales = r.data
 		, (r2)->
 			console.log 'No se pudo traer los accidentes', r2
 		)
 
+	########################	!!! EDITAR PACIENTE 	  ##################
+	########################################################################
 
 		
 

@@ -1,31 +1,31 @@
 
-<div class="panel-heading">Accidentes de trabajo
-  <md-list ng-hide="pacienteEdit.accidentesTrabajo.length == 0">
-    <md-list-item ng-repeat="accidente in pacienteEdit.accidentesTrabajo" ng-click="editarAccidTrabajo(accidente)"> 
-      <p>{{accidente.diagnostico}} - {{accidente.tipo_accidente}}</p>
+<div class="panel-heading">Enfermedades profesionlaes
+  <md-list ng-hide="pacienteEdit.enfermedadesProfesionales.length == 0">
+    <md-list-item ng-repeat="enfermedad in pacienteEdit.enfermedadesProfesionales" ng-click="editandoEnferPro(enfermedad)"> 
+      <p>{{enfermedad.diagnostico}} - {{enfermedad.tipo_accidente}}</p>
       <md-button aria-label="Eliminar" class="md-icon-button">
         <div class="fa fa-time"></div>
       </md-button>
     </md-list-item>
   </md-list>
-  <md-button aria-label="Nuevo" ng-click="nuevoAccidTrabajo()" ng-hide="creandoAccidTrabajo" class="md-raised md-primary">Agregar accidentes de trabajo</md-button>
-  <form style="margin-top=10px;" ng-show="accidentesTrabajo.length == 0 || creandoAccidTrabajo" ng-submit="guardarAccidenteTrabajo()">
-    <h5 style="margin: 10px">Nuevo accidente de trabajo: 
+  <md-button aria-label="Nuevo" ng-click="nuevoEnferPro()" ng-hide="creandoEnferPro" class="md-raised md-primary">Agregar enfermedad profesional</md-button>
+  <form style="margin-top=10px;" ng-show="enfermedadesProfesionales.length == 0 || creandoEnferPro" ng-submit="guardarEnfermedadProfesional()">
+    <h5 style="margin: 10px">Nueva enfermedad profesional: 
       <div class="row">
         <div class="col-lg-4 col-sm-6">
           <label>Fecha Ingreso</label>
-          <md-datepicker style="width: 260px;height" ng-model="AccidTrabajoNuevo.fecha" md-placeholder="Enter date"></md-datepicker>
+          <md-datepicker style="width: 260px;height" ng-model="EnferProNuevo.fecha" md-placeholder="Enter date"></md-datepicker>
         </div>
         <div class="col-lg-4 col-sm-6">
           <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
             <label>Diagnostico</label>
-            <input ng-model="AccidTrabajoNuevo.diagnostico">
+            <input ng-model="EnferProNuevo.diagnostico">
           </md-input-container>
         </div>
         <div class="col-lg-4 col-sm-6">
           <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
             <label>ARP</label>
-            <input ng-model="AccidTrabajoNuevo.arp">
+            <input ng-model="EnferProNuevo.arp">
           </md-input-container>
         </div>
       </div>
@@ -33,19 +33,19 @@
         <div class="col-lg-4 col-sm-6">
           <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
             <label>Factor riesgo</label>
-            <input ng-model="AccidTrabajoNuevo.fact_riesgo">
+            <input ng-model="EnferProNuevo.fact_riesgo">
           </md-input-container>
         </div>
         <div class="col-lg-4 col-sm-6">
           <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
             <label>Organo afectado</label>
-            <input ng-model="AccidTrabajoNuevo.organo_afectado">
+            <input ng-model="EnferProNuevo.organo_afectado">
           </md-input-container>
         </div>
         <div class="col-lg-4 col-sm-12">
           <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
             <label>Agente</label>
-            <input ng-model="AccidTrabajoNuevo.agente">
+            <input ng-model="EnferProNuevo.agente">
           </md-input-container>
         </div>
       </div>
@@ -53,43 +53,43 @@
         <div class="col-lg-4 col-sm-6">
           <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
             <label>Tipo de accidente</label>
-            <input ng-model="AccidTrabajoNuevo.tipo_accidente">
+            <input ng-model="EnferProNuevo.tipo_accidente">
           </md-input-container>
         </div>
         <div class="col-lg-4 col-sm-6">
           <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
             <label>Severidad</label>
-            <input ng-model="AccidTrabajoNuevo.severidad">
+            <input ng-model="EnferProNuevo.severidad">
           </md-input-container>
         </div>
         <div class="col-lg-4 col-sm-12">
           <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
             <label>Secuelas</label>
-            <input ng-model="AccidTrabajoNuevo.secuelas">
+            <input ng-model="EnferProNuevo.secuelas">
           </md-input-container>
         </div>
       </div>
-      <md-button aria-label="Cancelar" ng-click="creandoAccidTrabajo=false" class="md-raised md-default">Cancelar</md-button>
+      <md-button aria-label="Cancelar" ng-click="creandoEnferPro=false" class="md-raised md-default">Cancelar</md-button>
       <md-button type="submit" aria-label="Nuevo" class="md-raised md-primary">Guardar</md-button>
     </h5>
   </form>
-  <form style="margin-top=10px;" ng-show="editandoAccidTrabajo" ng-submit="actualizarAccidTrabajo()">
+  <form style="margin-top=10px;" ng-show="editandoEnferPro" ng-submit="actualizarEnferPro()">
     <h5 style="margin: 10px">Editar accidente de trabajo: 
       <div class="row">
         <div class="col-lg-4 col-sm-6">
           <label>Fecha Ingreso</label>
-          <md-datepicker style="width: 260px;height" ng-model="AccidTrabajoNuevo.fecha" md-placeholder="Enter date"></md-datepicker>
+          <md-datepicker style="width: 260px;height" ng-model="EnferProActual.fecha" md-placeholder="Enter date"></md-datepicker>
         </div>
         <div class="col-lg-4 col-sm-6">
           <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
             <label>Diagnostico</label>
-            <input ng-model="AccidTrabajoActual.diagnostico">
+            <input ng-model="EnferProActual.diagnostico">
           </md-input-container>
         </div>
         <div class="col-lg-4 col-sm-6">
           <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
             <label>ARP</label>
-            <input ng-model="AccidTrabajoActual.arp">
+            <input ng-model="EnferProActual.arp">
           </md-input-container>
         </div>
       </div>
@@ -97,19 +97,19 @@
         <div class="col-lg-4 col-sm-6">
           <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
             <label>Factor riesgo</label>
-            <input ng-model="AccidTrabajoActual.fact_riesgo">
+            <input ng-model="EnferProActual.fact_riesgo">
           </md-input-container>
         </div>
         <div class="col-lg-4 col-sm-6">
           <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
             <label>Organo afectado</label>
-            <input ng-model="AccidTrabajoActual.organo_afectado">
+            <input ng-model="EnferProActual.organo_afectado">
           </md-input-container>
         </div>
         <div class="col-lg-4 col-sm-12">
           <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
             <label>Agente</label>
-            <input ng-model="AccidTrabajoActual.agente">
+            <input ng-model="EnferProActual.agente">
           </md-input-container>
         </div>
       </div>
@@ -117,23 +117,23 @@
         <div class="col-lg-4 col-sm-6">
           <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
             <label>Tipo de accidente</label>
-            <input ng-model="AccidTrabajoActual.tipo_accidente">
+            <input ng-model="EnferProActual.tipo_accidente">
           </md-input-container>
         </div>
         <div class="col-lg-4 col-sm-6">
           <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
             <label>Severidad</label>
-            <input ng-model="AccidTrabajoActual.severidad">
+            <input ng-model="EnferProActual.severidad">
           </md-input-container>
         </div>
         <div class="col-lg-4 col-sm-12">
           <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
             <label>Secuelas</label>
-            <input ng-model="AccidTrabajoActual.secuelas">
+            <input ng-model="EnferProActual.secuelas">
           </md-input-container>
         </div>
       </div>
-      <md-button aria-label="Cancelar" ng-click="editandoAccidTrabajo=false" class="md-raised md-default">Cancelar</md-button>
+      <md-button aria-label="Cancelar" ng-click="editandoEnferPro=false" class="md-raised md-default">Cancelar</md-button>
       <md-button type="submit" aria-label="Nuevo" class="md-raised md-primary">Guardar</md-button>
     </h5>
   </form>
