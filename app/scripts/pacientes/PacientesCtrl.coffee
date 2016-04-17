@@ -90,9 +90,9 @@ angular.module('feryzApp')
 	########################################################################
 	########################	 EDITAR PACIENTE 	  ######################
 	########################################################################
-	$scope.editarPaciente = (pac)->
+	$scope.editarPaciente = (asdf)->
 		$scope.editando = true
-		$scope.pacienteEdit = pac
+		$scope.pacienteEdit = asdf
 		
 
 		# Configuramos el tipo para el SELECT2

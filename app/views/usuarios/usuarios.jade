@@ -8,98 +8,120 @@
 					form(ng-submit="guardarUsuario()")
 
 						.row
-							.col-lg-6
-								md-input-container.md-block(flex-gt-sm)
+							.col-lg-4
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Nombres
 									input(ng-model="usuarioNuevo.nombres")
 
-							.col-lg-6
-								md-input-container.md-block(flex-gt-sm)
+							.col-lg-4
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Apellidos
 									input(ng-model="usuarioNuevo.apellidos")
 
-						.row
-							.col-lg-12
+							.col-lg-4.col-sm-6
 								md-radio-group(ng-model="usuarioNuevo.sexo")
 									.row
-										.col-lg-2.col-md-3.col-sm-6.col-xs-12
+										.col-lg-x.col-md-6.col-sm-6.col-xs-12
 											md-radio-button(value="M") Masculino
-										.col-lg-2.col-md-3.col-sm-6.col-xs-12
+										.col-lg-4.col-md-6.col-sm-6.col-xs-12
 											md-radio-button(value="F") Femenino
 
 						.row
 							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Nombre usuario
 									input(ng-model="usuarioNuevo.username")
 
 							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Email
 									input(ng-model="usuarioNuevo.email")
 						
 							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Password
 									input(ng-model="usuarioNuevo.password")
 						.row
+							.form-group.col-lg-4.col-sm-12.col-xs-12
+							
+								ui-select(ng-model="usuarioNuevo.tipo_doc" style="margin: 0!important;width: 100%; padding-bottom: 0!important")
+									ui-select-match(placeholder="Tipo documento" allow-clear="true") {{$select.selected.tipo}}
+									ui-select-choices(repeat="tipo in tipos_doc | filter: $select.search")
+										div(ng-bind-html="tipo.tipo | highlight: $select.search")
 							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
-									label Tipo_doc
-									input(ng-model="usuarioNuevo.tipo_doc")
-						
-							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Num_doc
 									input(ng-model="usuarioNuevo.num_doc")
 
 							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Ciudad_doc
 									input(ng-model="usuarioNuevo.ciudad_doc")
-						.row
-							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
-									label Fecha_nac
-									input(ng-model="usuarioNuevo.fecha_nac")
 
+						.row
+							.form-group.col-lg-4.col-sm-6.col-xs-12
+								label Pais de nacimiento
+								ui-select(ng-model="usuarioNuevo.pais" on-select="paisSeleccionado($item, $model)" style="width: 100%;")
+									ui-select-match(placeholder="Pais" allow-clear="true") {{$select.selected.pais}}
+									ui-select-choices(repeat="pais in paises | filter: $select.search")
+										div(ng-bind-html="pais.pais | highlight: $select.search")
+
+							.form-group.col-lg-4.col-sm-6.col-xs-12
+								label Departamento
+								ui-select(ng-model="usuarioNuevo.depart_nac" on-select="departamentoSeleccionado($item, $model)" style="width: 100%;")
+									ui-select-match(placeholder="Departamento" allow-clear="true") {{$select.selected.departamento}}
+									ui-select-choices(repeat="depart in departamentos | filter: $select.search")
+										div(ng-bind-html="depart.departamento | highlight: $select.search")
+
+							.form-group.col-lg-4.col-sm-12.col-xs-12
+								label Ciudad de nacimiento
+								ui-select(ng-model="usuarioNuevo.ciudad_nac" style="width: 100%;")
+									ui-select-match(placeholder="Ciudad" allow-clear="true") {{$select.selected.ciudad}}
+									ui-select-choices(repeat="ciudad in ciudades | filter: $select.search")
+										div(ng-bind-html="ciudad.ciudad | highlight: $select.search")
+						.row
+							.form-group.col-lg-4.col-sm-6.col-xs-12(style="margin-bottom: 12px;")
+								label(for="usuario-fecha-nacimiento") Fecha de nacimiento
+								.controls
+									.input-group
+										span.input-group-addon(ng-click="data.isOpen2 = true")
+											i.fa.fa-calendar
+										input.form-control.active#usuario-fecha-nacimiento(type="text" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="usuarioNuevo.fecha_nac" is-open="data.isOpen2" ng-click="data.isOpen2 = true" max-date="'2020-12-12'" datepicker-options="dateOptions" close-text="Aceptar" current-text="Hoy" clear-text="Borrar" placeholder="Fecha nacimiento")
+							
 							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
-									label Ciudad_nac
-									input(ng-model="usuarioNuevo.ciudad_nac")
-						
-							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Titulo
 									input(ng-model="usuarioNuevo.titulo")
-						.row
+						
 							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Estado Civil
 									input(ng-model="usuarioNuevo.estado_civil")
 						
+						.row
 							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Barrio
 									input(ng-model="usuarioNuevo.barrio")
 
 							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Direccion
 									input(ng-model="usuarioNuevo.direccion")
-						.row
+						
 							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Telefono
 									input(ng-model="usuarioNuevo.telefono")
 
+						.row
 							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Celular
 									input(ng-model="usuarioNuevo.celular")
 						
 							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Facebook
 									input(ng-model="usuarioNuevo.facebook")
 						.row
@@ -118,97 +140,124 @@
 				div(ng-show="editando")
 					form(ng-submit="actualizarUsuario()")
 						.row
-							.col-lg-6
-								md-input-container.md-block(flex-gt-sm)
+							.col-lg-4
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Nombres
 									input(ng-model="usuarioActualizar.nombres")
-							.col-lg-6
-								md-input-container.md-block(flex-gt-sm)
+							.col-lg-4
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Apellidos
-									input(ng-model="UsuarioActualizar.apellidos")
-						.row
-							.col-lg-12
-								md-radio-group(ng-model="UsuarioActualizar.sexo")
+									input(ng-model="usuarioActualizar.apellidos")
+						
+							.col-lg-4
+								md-radio-group(ng-model="usuarioActualizar.sexo")
 									.row
-										.col-lg-2.col-md-3.col-sm-6.col-xs-12
+										.col-lg-4.col-md-6.col-sm-6.col-xs-12
 											md-radio-button(value="M") Masculino
-										.col-lg-2.col-md-3.col-sm-6.col-xs-12
+										.col-lg-4.col-md-6.col-sm-6.col-xs-12
 											md-radio-button(value="F") Femenino
 						.row
 							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Nombre usuario
-									input(ng-model="UsuarioActualizar.username")
+									input(ng-model="usuarioActualizar.username")
 
 							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Email
-									input(ng-model="UsuarioActualizar.email")
+									input(ng-model="usuarioActualizar.email")
 						
 							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Password
-									input(ng-model="UsuarioActualizar.password")
+									input(ng-model="usuarioActualizar.password")
+
 						.row
-							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
-									label Tipo_doc
-									input(ng-model="UsuarioActualizar.tipo_doc")
+							.form-group.col-lg-4.col-sm-12.col-xs-12
+							
+								ui-select(ng-model="usuarioActualizar.tipo_doc" style="margin: 0!important;width: 100%; padding-bottom: 0!important")
+									ui-select-match(placeholder="Tipo documento" allow-clear="true") {{$select.selected.tipo}}
+									ui-select-choices(repeat="tipo in tipos_doc | filter: $select.search")
+										div(ng-bind-html="tipo.tipo | highlight: $select.search")
 						
 							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Num_doc
-									input(ng-model="UsuarioActualizar.num_doc")
+									input(ng-model="usuarioActualizar.num_doc")
 
 							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Ciudad_doc
-									input(ng-model="UsuarioActualizar.ciudad_doc")
-						.row
-							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
-									label Fecha_nac
-									input(ng-model="UsuarioActualizar.fecha_nac")
+									input(ng-model="usuarioActualizar.ciudad_doc")
 
-							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
-									label Ciudad_nac
-									input(ng-model="UsuarioActualizar.ciudad_nac")
+										
+															
+						.row
+							.form-group.col-lg-4.col-sm-6.col-xs-12
+								label Pais de nacimiento
+								ui-select(ng-model="usuarioActualizar.pais" on-select="paisSeleccionado($item, $model)" style="width: 100%;")
+									ui-select-match(placeholder="Pais" allow-clear="true") {{$select.selected.pais}}
+									ui-select-choices(repeat="pais in paises | filter: $select.search")
+										div(ng-bind-html="pais.pais | highlight: $select.search")
+
+							.form-group.col-lg-4.col-sm-6.col-xs-12
+								label Departamento
+								ui-select(ng-model="usuarioActualizar.depart_nac" on-select="departamentoSeleccionado($item, $model)" style="width: 100%;")
+									ui-select-match(placeholder="Departamento" allow-clear="true") {{$select.selected.departamento}}
+									ui-select-choices(repeat="depart in departamentos | filter: $select.search")
+										div(ng-bind-html="depart.departamento | highlight: $select.search")
+
+							.form-group.col-lg-4.col-sm-12.col-xs-12
+								label Ciudad de nacimiento
+								ui-select(ng-model="usuarioActualizar.ciudad_nac" style="width: 100%;")
+									ui-select-match(placeholder="Ciudad" allow-clear="true") {{$select.selected.ciudad}}
+									ui-select-choices(repeat="ciudad in ciudades | filter: $select.search")
+										div(ng-bind-html="ciudad.ciudad | highlight: $select.search")
+						
+						.row
+							.form-group.col-lg-4.col-sm-6.col-xs-12(style="margin-bottom: 12px;")
+								label(for="usuario-fecha-nacimiento") Fecha de nacimiento
+								.controls
+									.input-group
+										span.input-group-addon(ng-click="data.isOpen2 = true")
+											i.fa.fa-calendar
+										input.form-control.active#usuario-fecha-nacimiento(type="text" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="usuarioActualizar.fecha_nac" is-open="data.isOpen2" ng-click="data.isOpen2 = true" max-date="'2020-12-12'" datepicker-options="dateOptions" close-text="Aceptar" current-text="Hoy" clear-text="Borrar" placeholder="Fecha Nacimiento")
+
 						
 							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Titulo
-									input(ng-model="UsuarioActualizar.titulo")
-						.row
+									input(ng-model="usuarioActualizar.titulo")
+						
 							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Estado Civil
-									input(ng-model="UsuarioActualizar.estado_civil")
-						
-							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
-									label Barrio
-									input(ng-model="UsuarioActualizar.barrio")
-
-							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
-									label Direccion
-									input(ng-model="UsuarioActualizar.direccion")
+									input(ng-model="usuarioActualizar.estado_civil")
 						.row
 							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
-									label Telefono
-									input(ng-model="UsuarioActualizar.telefono")
-
-							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
-									label Celular
-									input(ng-model="UsuarioActualizar.celular")
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+									label Barrio
+									input(ng-model="usuarioActualizar.barrio")
 						
 							.col-lg-4
-								md-input-container.md-block(flex-gt-sm)
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+									label Direccion
+									input(ng-model="usuarioActualizar.direccion")
+						
+							.col-lg-4
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+									label Telefono
+									input(ng-model="usuarioActualizar.telefono")
+						.row
+							.col-lg-4
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+									label Celular
+									input(ng-model="usuarioActualizar.celular")
+						
+							.col-lg-4
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Facebook
-									input(ng-model="UsuarioActualizar.facebook")
+									input(ng-model="usuarioActualizar.facebook")
 
 						input(type="submit" value="Actualizar" class="btn btn-primary")
 						input(type="button" value="Cancelar" ng-click="editando=false" class="btn btn-danger")

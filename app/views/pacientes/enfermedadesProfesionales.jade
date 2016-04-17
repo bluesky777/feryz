@@ -1,0 +1,121 @@
+div.panel-heading Accidentes de trabajo
+
+
+	md-list(ng-hide="pacienteEdit.enfermedadesProfesionales.length == 0")
+		md-list-item(ng-repeat="enfermedad in pacienteEdit.enfermedadesProfesionales" ng-click="editandoEnferPro(enfermedad)") 
+			p {{enfermedad.diagnostico}} - {{enfermedad.tipo_accidente}}
+			md-button.md-icon-button(aria-label="Eliminar")
+				.fa.fa-time
+
+
+	md-button.md-raised.md-primary(aria-label="Nuevo" ng-click="nuevoEnferPro()" ng-hide="creandoEnferPro") Agregar enfermedad profesional
+
+
+	form(style="margin-top=10px;" ng-show="pacienteEdit.enfermedadesProfesionales.length == 0 || creandoEnferPro" ng-submit="guardarEnfermedadProfesional()")
+		h5(style="margin: 10px") Nueva enfermedad profesional: 
+
+			.row
+				.col-lg-4.col-sm-6
+					label Fecha Ingreso
+
+					md-datepicker(style="width: 260px;height" ng-model="EnferProNuevo.fecha" md-placeholder="Enter date")
+				
+				.col-lg-4.col-sm-6
+					md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+						label Diagnostico
+						input(ng-model="EnferProNuevo.diagnostico")
+				
+				.col-lg-4.col-sm-6
+					md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+						label ARP
+						input(ng-model="EnferProNuevo.arp")
+
+			.row
+				
+				.col-lg-4.col-sm-6
+					md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+						label Factor riesgo
+						input(ng-model="EnferProNuevo.fact_riesgo")
+				
+				.col-lg-4.col-sm-6
+					md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+						label Organo afectado
+						input(ng-model="EnferProNuevo.organo_afectado")
+				
+				.col-lg-4.col-sm-12
+					md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+						label Agente
+						input(ng-model="EnferProNuevo.agente")
+			
+			.row
+				.col-lg-4.col-sm-6
+					md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+						label Tipo de accidente
+						input(ng-model="EnferProNuevo.tipo_accidente")
+				
+				.col-lg-4.col-sm-6
+					md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+						label Severidad
+						input(ng-model="EnferProNuevo.severidad")
+				
+				.col-lg-4.col-sm-12
+					md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+						label Secuelas
+						input(ng-model="EnferProNuevo.secuelas")
+			md-button.md-raised.md-default(aria-label="Cancelar" ng-click="creandoEnferPro=false") Cancelar
+			md-button.md-raised.md-primary(type="submit" aria-label="Nuevo") Guardar
+
+
+	form(style="margin-top=10px;" ng-show="editandoEnferPro" ng-submit="actualizarAccidTrabajo()")
+		h5(style="margin: 10px") Editar accidente de trabajo: 
+
+			.row
+				.col-lg-4.col-sm-6
+					label Fecha Ingreso
+
+					md-datepicker(style="width: 260px;height" ng-model="EnferProActual.fecha" md-placeholder="Enter date")
+				
+				.col-lg-4.col-sm-6
+					md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+						label Diagnostico
+						input(ng-model="EnferProActual.diagnostico")
+				
+				.col-lg-4.col-sm-6
+					md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+						label ARP
+						input(ng-model="EnferProActual.arp")
+
+			.row
+				
+				.col-lg-4.col-sm-6
+					md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+						label Factor riesgo
+						input(ng-model="EnferProActual.fact_riesgo")
+				
+				.col-lg-4.col-sm-6
+					md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+						label Organo afectado
+						input(ng-model="EnferProActual.organo_afectado")
+				
+				.col-lg-4.col-sm-12
+					md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+						label Agente
+						input(ng-model="EnferProActual.agente")
+			
+			.row
+				.col-lg-4.col-sm-6
+					md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+						label Tipo de accidente
+						input(ng-model="EnferProActual.tipo_accidente")
+				
+				.col-lg-4.col-sm-6
+					md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+						label Severidad
+						input(ng-model="EnferProActual.severidad")
+				
+				.col-lg-4.col-sm-12
+					md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+						label Secuelas
+						input(ng-model="EnferProActual.secuelas")
+			md-button.md-raised.md-default(aria-label="Cancelar" ng-click="editandoEnferPro=false") Cancelar
+			md-button.md-raised.md-primary(type="submit" aria-label="Nuevo") Guardar

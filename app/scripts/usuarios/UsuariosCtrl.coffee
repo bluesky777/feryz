@@ -5,7 +5,45 @@ angular.module('feryzApp')
 	$scope.creando = false
 	$scope.usuarioNuevo = { sexo: 'M' }
 	$scope.editando = false
-	$scope.usuarioEdit = {}
+	$scope.usuarioActualizar = {}
+	$scope.tipos_doc = [
+		{id: 1, tipo: 'Cédula'}
+		{id: 2, tipo: 'Cédula extranjera'}
+		{id: 3, tipo: 'Tarjeta de identidad'}
+	]
+
+	####################################################################################
+	############################!traer paises###########################################
+
+	$http.get('::paises/all').then((r)->
+		$scope.paises = r.data
+		$scope.usuarioNuevo.pais = $filter('filter')($scope.paises, { id: 1 })[0]
+		$scope.paisSeleccionado($scope.usuarioNuevo.pais)
+	, ()->
+		toastr.error 'No se pudo traer las ciudades.'
+	)
+
+	$scope.paisSeleccionado = (pais, modelo)->
+		$http.get('::ciudades/departamentos', {params: {pais_id: pais.id} }).then((r)->
+			$scope.departamentos = r.data
+		, ()->
+			toastr.error 'No se pudo traer las ciudades.'
+		)
+
+	$scope.departamentoSeleccionado = (depart, modelo)->
+		$http.get('::ciudades/ciudades', {params: {departamento: depart.departamento} }).then((r)->
+			$scope.ciudades = r.data
+		, ()->
+			toastr.error 'No se pudo traer las ciudades.'
+		)
+
+
+
+
+
+	########################### !traer paises##############################################
+	#######################################################################################
+
 
 	$scope.crearUsuario = ()->
 		$scope.creando = true
@@ -13,7 +51,7 @@ angular.module('feryzApp')
 	$scope.guardarUsuario = ()->
 
 		$http.post('::usuarios/guardar', $scope.usuarioNuevo ).then( (r)->
-			console.log '$scope.usuarios',$scope.usuarios
+			console.log '$scope.usuarios',$scope.usuarioNuevo
 			$scope.opcionesGrid.data.push r.data
 			toastr.success 'Creado correctamente: ' + r.data.nombre
 			$scope.creando = false
@@ -32,7 +70,7 @@ angular.module('feryzApp')
 		)
 
 	$scope.actualizarUsuario = (usu)->
-		$http.put(App.Server + '::usuarios/actualizar', $scope.usuarioEdit).then( (r)->
+		$http.put(App.Server + '::usuarios/actualizar', $scope.usuarioActualizar).then( (r)->
 			toastr.success 'Actualizado correctamente: ' + r.nombre
 			$scope.editando = false
 		, (r2)->
@@ -42,7 +80,31 @@ angular.module('feryzApp')
 
 	$scope.editarUsuario = (usu)->
 		$scope.editando = true
-		$scope.usuarioEdit = usu
+		$scope.usuarioActualizar = usu
+		# Configuramos el tipo para el SELECT2
+		tipo = $filter('filter')($scope.tipos_doc, {tipo: $scope.usuarioActualizar.doc_tipo}, true)
+				
+		if tipo.length > 0
+			tipo = tipo[0]
+		else
+			tipo = $scope.tipos_doc[0]
+		
+		$scope.usuarioActualizar.doc_tipo = tipo
+
+		
+		# Configuramos la ciudad nac 
+
+		if $scope.usuarioActualizar.ciudad_nac == null
+			$scope.usuarioActualizar.pais = {id: 1, pais: 'COLOMBIA', abrev: 'CO'}
+			$scope.paisSeleccionado($scope.usuarioActualizar.pais, $scope.usuarioActualizar.pais)
+		else
+			$http.get('::ciudades/datosciudad/'+$scope.usuarioActualizar.ciudad_nac).then (r2)->
+				$scope.paises = r2.data.paises
+				$scope.departamentosNac = r2.departamentos
+				$scope.ciudadesNac = r2.ciudades
+				$scope.usuarioActualizar.pais = r2.pais
+				$scope.usuarioActualizar.depart_nac = r2.departamento
+				$scope.usuarioActualizar.ciudad_nac = r2.ciudad
 		
 
 	

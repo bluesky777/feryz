@@ -7,27 +7,25 @@
         <div>
           <form ng-submit="guardarUsuario()">
             <div class="row">
-              <div class="col-lg-6">
-                <md-input-container flex-gt-sm class="md-block">
+              <div class="col-lg-4">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Nombres</label>
                   <input ng-model="usuarioNuevo.nombres">
                 </md-input-container>
               </div>
-              <div class="col-lg-6">
-                <md-input-container flex-gt-sm class="md-block">
+              <div class="col-lg-4">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Apellidos</label>
                   <input ng-model="usuarioNuevo.apellidos">
                 </md-input-container>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-12">
+              <div class="col-lg-4 col-sm-6">
                 <md-radio-group ng-model="usuarioNuevo.sexo">
                   <div class="row">
-                    <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+                    <div class="col-lg-x col-md-6 col-sm-6 col-xs-12">
                       <md-radio-button value="M">Masculino</md-radio-button>
                     </div>
-                    <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                       <md-radio-button value="F">Femenino</md-radio-button>
                     </div>
                   </div>
@@ -36,99 +34,126 @@
             </div>
             <div class="row">
               <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Nombre usuario</label>
                   <input ng-model="usuarioNuevo.username">
                 </md-input-container>
               </div>
               <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Email</label>
                   <input ng-model="usuarioNuevo.email">
                 </md-input-container>
               </div>
               <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Password</label>
                   <input ng-model="usuarioNuevo.password">
                 </md-input-container>
               </div>
             </div>
             <div class="row">
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
-                  <label>Tipo_doc</label>
-                  <input ng-model="usuarioNuevo.tipo_doc">
-                </md-input-container>
+              <div class="form-group col-lg-4 col-sm-12 col-xs-12">
+                <ui-select ng-model="usuarioNuevo.tipo_doc" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
+                  <ui-select-match placeholder="Tipo documento" allow-clear="true">{{$select.selected.tipo}}</ui-select-match>
+                  <ui-select-choices repeat="tipo in tipos_doc | filter: $select.search">
+                    <div ng-bind-html="tipo.tipo | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
               </div>
               <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Num_doc</label>
                   <input ng-model="usuarioNuevo.num_doc">
                 </md-input-container>
               </div>
               <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Ciudad_doc</label>
                   <input ng-model="usuarioNuevo.ciudad_doc">
                 </md-input-container>
               </div>
             </div>
             <div class="row">
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
-                  <label>Fecha_nac</label>
-                  <input ng-model="usuarioNuevo.fecha_nac">
-                </md-input-container>
+              <div class="form-group col-lg-4 col-sm-6 col-xs-12">
+                <label>Pais de nacimiento</label>
+                <ui-select ng-model="usuarioNuevo.pais" on-select="paisSeleccionado($item, $model)" style="width: 100%;">
+                  <ui-select-match placeholder="Pais" allow-clear="true">{{$select.selected.pais}}</ui-select-match>
+                  <ui-select-choices repeat="pais in paises | filter: $select.search">
+                    <div ng-bind-html="pais.pais | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+              <div class="form-group col-lg-4 col-sm-6 col-xs-12">
+                <label>Departamento</label>
+                <ui-select ng-model="usuarioNuevo.depart_nac" on-select="departamentoSeleccionado($item, $model)" style="width: 100%;">
+                  <ui-select-match placeholder="Departamento" allow-clear="true">{{$select.selected.departamento}}</ui-select-match>
+                  <ui-select-choices repeat="depart in departamentos | filter: $select.search">
+                    <div ng-bind-html="depart.departamento | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+              <div class="form-group col-lg-4 col-sm-12 col-xs-12">
+                <label>Ciudad de nacimiento</label>
+                <ui-select ng-model="usuarioNuevo.ciudad_nac" style="width: 100%;">
+                  <ui-select-match placeholder="Ciudad" allow-clear="true">{{$select.selected.ciudad}}</ui-select-match>
+                  <ui-select-choices repeat="ciudad in ciudades | filter: $select.search">
+                    <div ng-bind-html="ciudad.ciudad | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+            <div class="row">
+              <div style="margin-bottom: 12px;" class="form-group col-lg-4 col-sm-6 col-xs-12">
+                <label for="usuario-fecha-nacimiento">Fecha de nacimiento</label>
+                <div class="controls">
+                  <div class="input-group"><span ng-click="data.isOpen2 = true" class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input id="usuario-fecha-nacimiento" type="text" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="usuarioNuevo.fecha_nac" is-open="data.isOpen2" ng-click="data.isOpen2 = true" max-date="'2020-12-12'" datepicker-options="dateOptions" close-text="Aceptar" current-text="Hoy" clear-text="Borrar" placeholder="Fecha nacimiento" class="form-control active">
+                  </div>
+                </div>
               </div>
               <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
-                  <label>Ciudad_nac</label>
-                  <input ng-model="usuarioNuevo.ciudad_nac">
-                </md-input-container>
-              </div>
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Titulo</label>
                   <input ng-model="usuarioNuevo.titulo">
+                </md-input-container>
+              </div>
+              <div class="col-lg-4">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Estado Civil</label>
+                  <input ng-model="usuarioNuevo.estado_civil">
                 </md-input-container>
               </div>
             </div>
             <div class="row">
               <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
-                  <label>Estado Civil</label>
-                  <input ng-model="usuarioNuevo.estado_civil">
-                </md-input-container>
-              </div>
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Barrio</label>
                   <input ng-model="usuarioNuevo.barrio">
                 </md-input-container>
               </div>
               <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Direccion</label>
                   <input ng-model="usuarioNuevo.direccion">
+                </md-input-container>
+              </div>
+              <div class="col-lg-4">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Telefono</label>
+                  <input ng-model="usuarioNuevo.telefono">
                 </md-input-container>
               </div>
             </div>
             <div class="row">
               <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
-                  <label>Telefono</label>
-                  <input ng-model="usuarioNuevo.telefono">
-                </md-input-container>
-              </div>
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Celular</label>
                   <input ng-model="usuarioNuevo.celular">
                 </md-input-container>
               </div>
               <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Facebook</label>
                   <input ng-model="usuarioNuevo.facebook">
                 </md-input-container>
@@ -156,27 +181,25 @@
         <div ng-show="editando">
           <form ng-submit="actualizarUsuario()">
             <div class="row">
-              <div class="col-lg-6">
-                <md-input-container flex-gt-sm class="md-block">
+              <div class="col-lg-4">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Nombres</label>
                   <input ng-model="usuarioActualizar.nombres">
                 </md-input-container>
               </div>
-              <div class="col-lg-6">
-                <md-input-container flex-gt-sm class="md-block">
+              <div class="col-lg-4">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Apellidos</label>
-                  <input ng-model="UsuarioActualizar.apellidos">
+                  <input ng-model="usuarioActualizar.apellidos">
                 </md-input-container>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-12">
-                <md-radio-group ng-model="UsuarioActualizar.sexo">
+              <div class="col-lg-4">
+                <md-radio-group ng-model="usuarioActualizar.sexo">
                   <div class="row">
-                    <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                       <md-radio-button value="M">Masculino</md-radio-button>
                     </div>
-                    <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                       <md-radio-button value="F">Femenino</md-radio-button>
                     </div>
                   </div>
@@ -185,101 +208,128 @@
             </div>
             <div class="row">
               <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Nombre usuario</label>
-                  <input ng-model="UsuarioActualizar.username">
+                  <input ng-model="usuarioActualizar.username">
                 </md-input-container>
               </div>
               <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Email</label>
-                  <input ng-model="UsuarioActualizar.email">
+                  <input ng-model="usuarioActualizar.email">
                 </md-input-container>
               </div>
               <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Password</label>
-                  <input ng-model="UsuarioActualizar.password">
+                  <input ng-model="usuarioActualizar.password">
                 </md-input-container>
               </div>
             </div>
             <div class="row">
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
-                  <label>Tipo_doc</label>
-                  <input ng-model="UsuarioActualizar.tipo_doc">
-                </md-input-container>
+              <div class="form-group col-lg-4 col-sm-12 col-xs-12">
+                <ui-select ng-model="usuarioActualizar.tipo_doc" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
+                  <ui-select-match placeholder="Tipo documento" allow-clear="true">{{$select.selected.tipo}}</ui-select-match>
+                  <ui-select-choices repeat="tipo in tipos_doc | filter: $select.search">
+                    <div ng-bind-html="tipo.tipo | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
               </div>
               <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Num_doc</label>
-                  <input ng-model="UsuarioActualizar.num_doc">
+                  <input ng-model="usuarioActualizar.num_doc">
                 </md-input-container>
               </div>
               <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Ciudad_doc</label>
-                  <input ng-model="UsuarioActualizar.ciudad_doc">
+                  <input ng-model="usuarioActualizar.ciudad_doc">
                 </md-input-container>
               </div>
             </div>
             <div class="row">
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
-                  <label>Fecha_nac</label>
-                  <input ng-model="UsuarioActualizar.fecha_nac">
-                </md-input-container>
+              <div class="form-group col-lg-4 col-sm-6 col-xs-12">
+                <label>Pais de nacimiento</label>
+                <ui-select ng-model="usuarioActualizar.pais" on-select="paisSeleccionado($item, $model)" style="width: 100%;">
+                  <ui-select-match placeholder="Pais" allow-clear="true">{{$select.selected.pais}}</ui-select-match>
+                  <ui-select-choices repeat="pais in paises | filter: $select.search">
+                    <div ng-bind-html="pais.pais | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+              <div class="form-group col-lg-4 col-sm-6 col-xs-12">
+                <label>Departamento</label>
+                <ui-select ng-model="usuarioActualizar.depart_nac" on-select="departamentoSeleccionado($item, $model)" style="width: 100%;">
+                  <ui-select-match placeholder="Departamento" allow-clear="true">{{$select.selected.departamento}}</ui-select-match>
+                  <ui-select-choices repeat="depart in departamentos | filter: $select.search">
+                    <div ng-bind-html="depart.departamento | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+              <div class="form-group col-lg-4 col-sm-12 col-xs-12">
+                <label>Ciudad de nacimiento</label>
+                <ui-select ng-model="usuarioActualizar.ciudad_nac" style="width: 100%;">
+                  <ui-select-match placeholder="Ciudad" allow-clear="true">{{$select.selected.ciudad}}</ui-select-match>
+                  <ui-select-choices repeat="ciudad in ciudades | filter: $select.search">
+                    <div ng-bind-html="ciudad.ciudad | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+            <div class="row">
+              <div style="margin-bottom: 12px;" class="form-group col-lg-4 col-sm-6 col-xs-12">
+                <label for="usuario-fecha-nacimiento">Fecha de nacimiento</label>
+                <div class="controls">
+                  <div class="input-group"><span ng-click="data.isOpen2 = true" class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input id="usuario-fecha-nacimiento" type="text" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="usuarioActualizar.fecha_nac" is-open="data.isOpen2" ng-click="data.isOpen2 = true" max-date="'2020-12-12'" datepicker-options="dateOptions" close-text="Aceptar" current-text="Hoy" clear-text="Borrar" placeholder="Fecha Nacimiento" class="form-control active">
+                  </div>
+                </div>
               </div>
               <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
-                  <label>Ciudad_nac</label>
-                  <input ng-model="UsuarioActualizar.ciudad_nac">
-                </md-input-container>
-              </div>
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Titulo</label>
-                  <input ng-model="UsuarioActualizar.titulo">
+                  <input ng-model="usuarioActualizar.titulo">
                 </md-input-container>
               </div>
-            </div>
-            <div class="row">
               <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Estado Civil</label>
-                  <input ng-model="UsuarioActualizar.estado_civil">
-                </md-input-container>
-              </div>
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
-                  <label>Barrio</label>
-                  <input ng-model="UsuarioActualizar.barrio">
-                </md-input-container>
-              </div>
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
-                  <label>Direccion</label>
-                  <input ng-model="UsuarioActualizar.direccion">
+                  <input ng-model="usuarioActualizar.estado_civil">
                 </md-input-container>
               </div>
             </div>
             <div class="row">
               <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Barrio</label>
+                  <input ng-model="usuarioActualizar.barrio">
+                </md-input-container>
+              </div>
+              <div class="col-lg-4">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Direccion</label>
+                  <input ng-model="usuarioActualizar.direccion">
+                </md-input-container>
+              </div>
+              <div class="col-lg-4">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Telefono</label>
-                  <input ng-model="UsuarioActualizar.telefono">
+                  <input ng-model="usuarioActualizar.telefono">
                 </md-input-container>
               </div>
+            </div>
+            <div class="row">
               <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Celular</label>
-                  <input ng-model="UsuarioActualizar.celular">
+                  <input ng-model="usuarioActualizar.celular">
                 </md-input-container>
               </div>
               <div class="col-lg-4">
-                <md-input-container flex-gt-sm class="md-block">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Facebook</label>
-                  <input ng-model="UsuarioActualizar.facebook">
+                  <input ng-model="usuarioActualizar.facebook">
                 </md-input-container>
               </div>
             </div>
