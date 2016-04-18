@@ -1,6 +1,6 @@
 angular.module('feryzApp')
 
-.controller('UsuariosCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', ($scope, $http, App, $filter, toastr) ->
+.controller('CiudadesCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', ($scope, $http, App, $filter, toastr) ->
 		
 	$scope.creando = false
 	$scope.usuarioNuevo = { sexo: 'M' }

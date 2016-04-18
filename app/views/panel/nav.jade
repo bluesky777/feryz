@@ -32,6 +32,21 @@ nav.site-nav.clearfix(role="navigation")
 				i.fa.fa-map-marker
 				span.text Pacientes
 
+		li(ui-sref-active="active")
+			a(href="" ui-sref="panel.informes" md-ink-ripple="")
+				i.fa.fa-file-text
+				span.text Informes
+
+		li(ui-sref-active="active")
+			a(href="" ui-sref="panel.ciudades" md-ink-ripple="")
+				i.fa.fa-flag
+				span.text Ciudades
+
+		li(ui-sref-active="active")
+			a(href="" ui-sref="panel.configuraciones" md-ink-ripple="")
+				i.fa.fa-cog
+				span.text Configuraciones
+
 		li(ui-sref-active="active" ng-if="hasRoleOrPerm('admin', 'tecnico', 'profesor')")
 			a(href="" ui-sref="panel.entidades" md-ink-ripple="")
 				i.fa.fa-bank

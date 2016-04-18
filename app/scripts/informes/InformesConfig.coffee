@@ -8,7 +8,7 @@ angular.module('feryzApp')
 				url: '^/informes/'
 				views:
 					'contenido_panel':
-						templateUrl: "#{App.views}informes/informes.tpl.html"
+						templateUrl: "==informes/informes.tpl.html"
 						controller: 'InformesCtrl'
 				resolve: { 
 					resolved_user: ['AuthService', (AuthService)->

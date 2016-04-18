@@ -4,8 +4,31 @@
 			.panel-heading Nuevo Paciente (datos básicos)
 
 			.panel-body
+				.row
+					.col-lg-12.col-sm-12
+
+						image(ng-src="{{vm.picture}}")
+
+						ng-camera(
+							capture-message="Sonrie!"
+							output-height="160"
+							output-width="213"
+							viewer-height="320"
+							viewer-width="426"
+							crop-height="90"
+							crop-width="120"
+							image-format="jpeg"
+							jpeg-quality="100"
+							action-message="Tomar foto"
+							snapshot="vm.picture"
+							flash-fallback-url="/images/webcam.swf"
+							shutter-url="/shutter.mp3")
+
+						md-button(ng-click="upload()" aria-label="guardar foto") guardar foto
 				div
 					form(ng-submit="guardarPaciente()")
+
+						
 
 						.row
 							.col-lg-4.col-sm-6

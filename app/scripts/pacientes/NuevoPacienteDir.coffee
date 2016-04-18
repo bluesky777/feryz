@@ -12,7 +12,10 @@ angular.module('feryzApp')
 	controller: 'NuevoPacienteCtrl'
 ])
 
-.controller('NuevoPacienteCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', ($scope, $http, App, $filter, toastr) ->
+.controller('NuevoPacienteCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', 'Upload', ($scope, $http, App, $filter, toastr, Upload) ->
+	
+	$scope.imagesPath = App.images
+	$scope.vm = {}
 
 	$scope.guardarPaciente = ()->
 
@@ -31,6 +34,25 @@ angular.module('feryzApp')
 			console.log 'No se pudo guardar paciente', r2
 		)
 		
+
+	$scope.upload = ()->
+		file = $scope.vm.picture
+		console.log file 
+		if (file) 
+
+			Upload.upload({
+					url: "::imagenes/store",
+					fields: {'Title': "test"},
+					file: file,
+					headers: {
+						'Accept': 'application/json;odata=verbose', 'content-type': 'image/jpeg', 'X-RequestDigest': $("#__REQUESTDIGEST").val()
+				}
+			}).progress((evt)->
+				progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+				console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+			).success((data, status, headers, config)->
+				console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+			);
 
 		
 

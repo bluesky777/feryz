@@ -18,15 +18,16 @@ angular.module('feryzApp', [
   'ui.grid.resizeColumns'
   'ui.grid.exporter'
   'ui.grid.selection'
-  'angularFileUpload'
   'FBAngular'
   'ngMaterial'
   'angular-svg-round-progress'
+  'camera'
+  'ngFileUpload'
 ])
 #- Valores que usaremos para nuestro proyecto
 .constant('App', (()->
 
-  dominio = 'http://localhost:8080/' # Pruebas en mi localhost
+  dominio = 'http://localhost/' # Pruebas en mi localhost
   #dominio = 'http://olimpiadaslibertad.com/'
   #dominio = 'http://192.168.1.100/'
   

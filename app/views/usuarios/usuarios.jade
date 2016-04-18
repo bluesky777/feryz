@@ -56,7 +56,29 @@
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Ciudad_doc
-									input(ng-model="usuarioNuevo.ciudad_doc")
+									input(ng-model="usuarioNuevo.ciudad_doc['id']")
+
+						.row
+							.form-group.col-lg-4.col-sm-6.col-xs-12
+								label Pais de documento
+								ui-select(ng-model="usuarioNuevo.pais_doc" on-select="paisSeleccionado($item, $model)" style="width: 100%;")
+									ui-select-match(placeholder="Pais" allow-clear="true") {{$select.selected.pais}}
+									ui-select-choices(repeat="paisdoc in paises | filter: $select.search")
+										div(ng-bind-html="paisdoc.pais | highlight: $select.search")
+
+							.form-group.col-lg-4.col-sm-6.col-xs-12
+								label Departamento documento
+								ui-select(ng-model="usuarioNuevo.depart_doc" on-select="departamentoSeleccionado($item, $model)" style="width: 100%;")
+									ui-select-match(placeholder="Departamento" allow-clear="true") {{$select.selected.departamento}}
+									ui-select-choices(repeat="departdoc in departamentos | filter: $select.search")
+										div(ng-bind-html="departdoc.departamento | highlight: $select.search")
+
+							.form-group.col-lg-4.col-sm-12.col-xs-12
+								label Ciudad de documento
+								ui-select(ng-model="usuarioNuevo.ciudad_doc" style="width: 100%;")
+									ui-select-match(placeholder="Ciudad" allow-clear="true") {{$select.selected.ciudad}}
+									ui-select-choices(repeat="ciudaddoc in ciudades | filter: $select.search")
+										div(ng-bind-html="ciudaddoc.ciudad | highlight: $select.search")
 
 						.row
 							.form-group.col-lg-4.col-sm-6.col-xs-12
