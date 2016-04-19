@@ -1,7 +1,46 @@
-.row
+.row.hidden-print
 	.col-lg-12
 		.panel.panel-default.panel-hovered.mb20
 			.panel-heading Nuevo usuario
 
 			.panel-body
-				h2 adsldfks
+				md-content
+					md-tabs(md-dynamic-height md-border-bottom)
+						md-tab(label="Listados")
+							md-content.md-padding
+								//h1.md-display-2 Tab One				  
+								md-button(ng-click="verUsuarios()") Usuarios
+
+						md-tab(label="Usuarios")
+							md-content.md-padding
+								h1.md-display-2 Tab Two
+								p Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risu
+
+
+
+				hr.wide
+				h5 Orientación de la página:
+				.control-group
+					.radio
+						label
+							input(type="radio" ng-model="config.orientacion" value="oficio_horizontal")
+							.text Oficio Horizontal
+					.radio
+						label
+							input(type="radio" ng-model="config.orientacion" value="carta_horizontal")
+							.text Carta horizontal
+					.radio
+						label
+							input(type="radio" ng-model="config.orientacion" value="vertical")
+							.text Vertical
+
+
+				hr.wide
+				h5 {{descripcion_informe}}
+
+
+
+.informes-pages(ui-view="report_content")
+	h5(style="text-align: center") Aquí saldrán tus reportes
+
+

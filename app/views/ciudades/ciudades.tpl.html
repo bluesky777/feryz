@@ -4,9 +4,127 @@
     <div class="panel panel-default panel-hovered mb20">
       <div class="panel-heading">Ciudades</div>
       <div class="panel-body">
-        <div> 
-          <h1>hola mundo!!!!!</h1>
-        </div>
+        <md-content>
+          <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="Ciudades">
+              <md-content class="md-padding">
+                <md-button ng-click="crearCiudad()" ng-hide="creandociudad" class="md-raised md-primary">Agregar ciudad</md-button>
+                <form ng-show="creandociudad" ng-submit="guardarCiudad()">
+                  <div class="row">
+                    <div class="form-group col-lg-4 col-sm-6 col-xs-12">
+                      <label>Pais </label>
+                      <ui-select ng-model="crear.pais" on-select="paisSeleccionado($item, $model)" style="width: 100%;">
+                        <ui-select-match placeholder="Pais" allow-clear="true">{{$select.selected.pais}}</ui-select-match>
+                        <ui-select-choices repeat="pais in paises | filter: $select.search">
+                          <div ng-bind-html="pais.pais | highlight: $select.search"></div>
+                        </ui-select-choices>
+                      </ui-select>
+                    </div>
+                    <div class="form-group col-lg-4 col-sm-6 col-xs-12">
+                      <label>Departamento</label>
+                      <ui-select ng-model="crear.depart_nac" on-select="departamentoSeleccionado($item, $model)" style="width: 100%;">
+                        <ui-select-match placeholder="Departamento" allow-clear="true">{{$select.selected.departamento}}</ui-select-match>
+                        <ui-select-choices repeat="depart in departamentos | filter: $select.search">
+                          <div ng-bind-html="depart.departamento | highlight: $select.search"></div>
+                        </ui-select-choices>
+                      </ui-select>
+                    </div>
+                    <div class="col-lg-4 col-sm-12 col-xs-12">
+                      <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                        <label>Ciudad</label>
+                        <input ng-model="crear.ciudad">
+                      </md-input-container>
+                    </div>
+                  </div>
+                </form>
+                <hr><br>
+                <div ng-hide="creandociudad" class="row">
+                  <div class="form-group col-lg-4 col-sm-6 col-xs-12">
+                    <label>Pais</label>
+                    <ui-select ng-model="crear.pais" on-select="paisSeleccionado($item, $model)" style="width: 100%;">
+                      <ui-select-match placeholder="Pais" allow-clear="true">{{$select.selected.pais}}</ui-select-match>
+                      <ui-select-choices repeat="pais in paises | filter: $select.search">
+                        <div ng-bind-html="pais.pais | highlight: $select.search"></div>
+                      </ui-select-choices>
+                    </ui-select>
+                  </div>
+                  <div class="form-group col-lg-4 col-sm-6 col-xs-12">
+                    <label>Departamento</label>
+                    <ui-select ng-model="crear.depart_nac" on-select="departamentoSeleccionado($item, $model)" style="width: 100%;">
+                      <ui-select-match placeholder="Departamento" allow-clear="true">{{$select.selected.departamento}}</ui-select-match>
+                      <ui-select-choices repeat="depart in departamentos | filter: $select.search">
+                        <div ng-bind-html="depart.departamento | highlight: $select.search"></div>
+                      </ui-select-choices>
+                    </ui-select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <md-toolbar layout="row" class="md-hue-3">
+                      <div class="md-toolbar-tools"><span>Ciudades</span></div>
+                    </md-toolbar>
+                    <md-list style="height: 600px; border: 1px solid #ccc; overflow: auto">
+                      <md-list-item ng-repeat="ciudad in ciudades" ng-click="editarCiudad(ciudad)"> 
+                        <p class="row">
+                          <div style="font-weight: bold; font-size: 13pt" class="col-lg-6">{{ciudad.ciudad}}</div>
+                          <div class="col-lg-6">({{ciudad.departamento}})</div>
+                        </p>
+                        <md-button aria-label="Eliminar" class="md-icon-button">
+                          <div class="fa fa-times"></div>
+                        </md-button>
+                      </md-list-item>
+                    </md-list>
+                  </div>
+                </div>
+              </md-content>
+            </md-tab>
+            <md-tab label="Departamentos">
+              <md-content class="md-padding">
+                <md-button ng-click="crearDepartamento()" ng-hide="creandodepartamento" class="md-raised md-primary">Agregar Departamento</md-button>
+                <form ng-show="creandodepartamento" ng-submit="guardarDepartamento()">
+                  <div class="row">
+                    <div class="form-group col-lg-4 col-sm-6 col-xs-12">
+                      <label>Pais de nacimiento</label>
+                      <ui-select ng-model="crear.pais_depart" on-select="paisSeleccionado($item, $model)" style="width: 100%;">
+                        <ui-select-match placeholder="Pais" allow-clear="true">{{$select.selected.pais}}</ui-select-match>
+                        <ui-select-choices repeat="pais in paises | filter: $select.search">
+                          <div ng-bind-html="pais.pais | highlight: $select.search"></div>
+                        </ui-select-choices>
+                      </ui-select>
+                    </div>
+                    <div class="form-group col-lg-4 col-sm-6 col-xs-12">
+                      <label>Departamento</label>
+                      <ui-select ng-model="crear.depart_depart" on-select="departamentoSeleccionado($item, $model)" style="width: 100%;">
+                        <ui-select-match placeholder="Departamento" allow-clear="true">{{$select.selected.departamento}}</ui-select-match>
+                        <ui-select-choices repeat="depart in departamentos | filter: $select.search">
+                          <div ng-bind-html="depart.departamento | highlight: $select.search"></div>
+                        </ui-select-choices>
+                      </ui-select>
+                    </div>
+                  </div>
+                </form>
+              </md-content>
+            </md-tab>
+            <md-tab label="Paises">
+              <md-content class="md-padding">
+                <md-button ng-click="crearPais()" ng-hide="creandopais" class="md-raised md-primary">Agregar Pais</md-button>
+                <form ng-show="creandopais" ng-submit="guardarPais()">
+                  <div class="row">
+                    <div class="form-group col-lg-4 col-sm-6 col-xs-12">
+                      <label>Pais de nacimiento</label>
+                      <ui-select ng-model="crear.pais_pais" on-select="paisSeleccionado($item, $model)" style="width: 100%;">
+                        <ui-select-match placeholder="Pais" allow-clear="true">{{$select.selected.pais}}</ui-select-match>
+                        <ui-select-choices repeat="pais in paises | filter: $select.search">
+                          <div ng-bind-html="pais.pais | highlight: $select.search"></div>
+                        </ui-select-choices>
+                      </ui-select>
+                    </div>
+                  </div>
+                </form>
+              </md-content>
+            </md-tab>
+          </md-tabs>
+        </md-content>
       </div>
     </div>
   </div>

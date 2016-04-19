@@ -61,19 +61,23 @@
 									input(ng-model="pacienteEdit.direccion")
 						.row
 							.col-lg-4.col-sm-6
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+								md-input-container.md-block(flex-gt-sm style="padding: 9px 0px 0px; margin: 0!important; padding-bottom: 0!important")
 									label Telefono
 									input(ng-model="pacienteEdit.telefono")
 
 							.col-lg-4.col-sm-6
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+								md-input-container.md-block(flex-gt-sm style="padding: 9px 0px 0px; margin: 0!important; padding-bottom: 0!important")
 									label Telefono contacto
 									input(ng-model="pacienteEdit.telefono_contacto")
 						
 						
-							.col-lg-4.col-sm-12
-								label Fecha nacimiento
-								md-datepicker(style="width: 260px;height" ng-model="pacienteEdit.fecha_nac" md-placeholder="Enter date" ng-click="data.isOpen = true")
+							.form-group.col-lg-4.col-sm-6.col-xs-12(style="margin-bottom: 0px;")
+								label(for="paciente-fecha-nac") Fecha de nacimiento
+								.controls
+									.input-group
+										span.input-group-addon(ng-click="data.isOpen = true")
+											i.fa.fa-calendar
+										input.form-control.active#paciente-fecha-nac(type="text" icon-prefix="fa" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="pacienteEdit.fecha_nac" is-open="data.isOpen" ng-click="data.isOpen = true" max-date="'2020-12-12'" datepicker-options="dateOptions" close-text="Aceptar" current-text="Hoy" clear-text="Borrar" placeholder="Fecha nacimiento")
 															
 						.row
 							.form-group.col-lg-4.col-sm-6.col-xs-12
@@ -130,18 +134,22 @@
 
 						.row
 							.col-lg-4.col-sm-6
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+								md-input-container.md-block(flex-gt-sm style="padding: 9px 0px 0px; margin: 0!important; padding-bottom: 0!important")
 									label EPS
 									input(ng-model="pacienteEdit.eps")
 							
 							.col-lg-4.col-sm-6
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+								md-input-container.md-block(flex-gt-sm style="padding: 9px 0px 0px; margin: 0!important; padding-bottom: 0!important")
 									label ARP
 									input(ng-model="pacienteEdit.arp")
 							
-							.col-lg-4.col-sm-12
-								label Fecha Ingreso
-								md-datepicker(style="width: 260px;height" ng-model="pacienteEdit.fecha_ingreso" md-placeholder="Enter date" ng-click="data.isOpen = true")
+							.form-group.col-lg-4.col-sm-6.col-xs-12(style="margin-bottom: 0px;")
+								label(for="paciente-fecha-ingreso") Fecha de ingreso
+								.controls
+									.input-group
+										span.input-group-addon(ng-click="data.isOpen = true")
+											i.fa.fa-calendar
+										input.form-control.active#paciente-fecha-ingreso(type="text" icon-prefix="fa" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="pacienteEdit.fecha_ingreso" is-open="data.isOpen" ng-click="data.isOpen = true" max-date="'2020-12-12'" datepicker-options="dateOptions" close-text="Aceptar" current-text="Hoy" clear-text="Borrar" placeholder="Fecha ingreso")
 
 						.row
 							.col-lg-6.col-sm-6

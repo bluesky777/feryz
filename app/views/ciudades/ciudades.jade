@@ -4,5 +4,96 @@
 			.panel-heading Ciudades
 
 			.panel-body
-				div 
-					h1 hola mundo!!!!!
+				md-content
+					md-tabs(md-dynamic-height md-border-bottom)
+						md-tab(label="Ciudades")
+							md-content.md-padding
+								md-button.md-raised.md-primary(ng-click="crearCiudad()" ng-hide="creandociudad") Agregar ciudad
+
+								form(ng-show="creandociudad" ng-submit="guardarCiudad()")
+
+									.row
+										.form-group.col-lg-4.col-sm-6.col-xs-12
+											label Pais 
+											ui-select(ng-model="crear.pais" on-select="paisSeleccionado($item, $model)" style="width: 100%;")
+												ui-select-match(placeholder="Pais" allow-clear="true") {{$select.selected.pais}}
+												ui-select-choices(repeat="pais in paises | filter: $select.search")
+													div(ng-bind-html="pais.pais | highlight: $select.search")
+
+										.form-group.col-lg-4.col-sm-6.col-xs-12
+											label Departamento
+											ui-select(ng-model="crear.depart_nac" on-select="departamentoSeleccionado($item, $model)" style="width: 100%;")
+												ui-select-match(placeholder="Departamento" allow-clear="true") {{$select.selected.departamento}}
+												ui-select-choices(repeat="depart in departamentos | filter: $select.search")
+													div(ng-bind-html="depart.departamento | highlight: $select.search")
+
+										.col-lg-4.col-sm-12.col-xs-12
+											md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+												label Ciudad
+												input(ng-model="crear.ciudad")
+
+								hr
+								br
+								.row(ng-hide="creandociudad")
+									.form-group.col-lg-4.col-sm-6.col-xs-12
+										label Pais
+										ui-select(ng-model="crear.pais" on-select="paisSeleccionado($item, $model)" style="width: 100%;")
+											ui-select-match(placeholder="Pais" allow-clear="true") {{$select.selected.pais}}
+											ui-select-choices(repeat="pais in paises | filter: $select.search")
+												div(ng-bind-html="pais.pais | highlight: $select.search")
+
+									.form-group.col-lg-4.col-sm-6.col-xs-12
+										label Departamento
+										ui-select(ng-model="crear.depart_nac" on-select="departamentoSeleccionado($item, $model)" style="width: 100%;")
+											ui-select-match(placeholder="Departamento" allow-clear="true") {{$select.selected.departamento}}
+											ui-select-choices(repeat="depart in departamentos | filter: $select.search")
+												div(ng-bind-html="depart.departamento | highlight: $select.search")
+
+								.row
+									.col-lg-6
+										md-toolbar.md-hue-3(layout="row")
+											div.md-toolbar-tools
+												span Ciudades
+										md-list(style="height: 600px; border: 1px solid #ccc; overflow: auto")
+											md-list-item(ng-repeat="ciudad in ciudades" ng-click="editarCiudad(ciudad)") 
+												p.row
+													.col-lg-6(style="font-weight: bold; font-size: 13pt") {{ciudad.ciudad}}
+													.col-lg-6 ({{ciudad.departamento}})
+												md-button.md-icon-button(aria-label="Eliminar")
+													.fa.fa-times
+
+						md-tab(label="Departamentos")
+							md-content.md-padding
+								md-button.md-raised.md-primary(ng-click="crearDepartamento()" ng-hide="creandodepartamento") Agregar Departamento
+
+								form(ng-show="creandodepartamento" ng-submit="guardarDepartamento()")
+
+									.row
+										.form-group.col-lg-4.col-sm-6.col-xs-12
+											label Pais de nacimiento
+											ui-select(ng-model="crear.pais_depart" on-select="paisSeleccionado($item, $model)" style="width: 100%;")
+												ui-select-match(placeholder="Pais" allow-clear="true") {{$select.selected.pais}}
+												ui-select-choices(repeat="pais in paises | filter: $select.search")
+													div(ng-bind-html="pais.pais | highlight: $select.search")
+
+										.form-group.col-lg-4.col-sm-6.col-xs-12
+											label Departamento
+											ui-select(ng-model="crear.depart_depart" on-select="departamentoSeleccionado($item, $model)" style="width: 100%;")
+												ui-select-match(placeholder="Departamento" allow-clear="true") {{$select.selected.departamento}}
+												ui-select-choices(repeat="depart in departamentos | filter: $select.search")
+													div(ng-bind-html="depart.departamento | highlight: $select.search")
+
+						md-tab(label="Paises")
+							md-content.md-padding
+								md-button.md-raised.md-primary(ng-click="crearPais()" ng-hide="creandopais") Agregar Pais
+
+								form(ng-show="creandopais" ng-submit="guardarPais()")
+
+									.row
+										.form-group.col-lg-4.col-sm-6.col-xs-12
+											label Pais de nacimiento
+											ui-select(ng-model="crear.pais_pais" on-select="paisSeleccionado($item, $model)" style="width: 100%;")
+												ui-select-match(placeholder="Pais" allow-clear="true") {{$select.selected.pais}}
+												ui-select-choices(repeat="pais in paises | filter: $select.search")
+													div(ng-bind-html="pais.pais | highlight: $select.search")
+

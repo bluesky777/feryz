@@ -5,7 +5,7 @@ div.panel-heading Antecedentes Laborales
 		md-list-item(ng-repeat="antecedente in pacienteEdit.antecedentesLaborales" ng-click="editarAntecLabor(antecedente)") 
 			p {{antecedente.empresa}} - {{antecedente.cargo}}
 			md-button.md-icon-button(aria-label="Eliminar")
-				.fa.fa-time
+				.fa.fa-times
 
 
 	md-button.md-raised.md-primary(aria-label="Nuevo" ng-click="nuevoAntecLabor()" ng-hide="creandoAntecLabor") Agregar antecedente laboral

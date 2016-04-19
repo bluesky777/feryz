@@ -2,25 +2,20 @@ angular.module('feryzApp')
 
 .controller('CiudadesCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', ($scope, $http, App, $filter, toastr) ->
 		
-	$scope.creando = false
-	$scope.usuarioNuevo = { sexo: 'M' }
-	$scope.editando = false
-	$scope.usuarioActualizar = {}
-	$scope.tipos_doc = [
-		{id: 1, tipo: 'Cédula'}
-		{id: 2, tipo: 'Cédula extranjera'}
-		{id: 3, tipo: 'Tarjeta de identidad'}
-	]
+	$scope.creandociudad = false
+	$scope.creandodepartamento = false
+	$scope.creandopais = false
+	$scope.crear = { }
+	$scope.crearActual = {}
+	
 
 	####################################################################################
 	############################!traer paises###########################################
 
 	$http.get('::paises/all').then((r)->
 		$scope.paises = r.data
-		$scope.usuarioNuevo.pais = $filter('filter')($scope.paises, { id: 1 })[0]
-		$scope.usuarioNuevo.paisdoc = $filter('filter')($scope.paises, { id: 1 })[0]
-		$scope.paisSeleccionado($scope.usuarioNuevo.pais)
-		$scope.paisdocSeleccionado($scope.usuarioNuevo.paisdoc)
+		$scope.crear.pais = $filter('filter')($scope.paises, { id: 1 })[0]
+		$scope.paisSeleccionado($scope.crear.pais)
 	, ()->
 		toastr.error 'No se pudo traer las ciudades.'
 	)
@@ -39,18 +34,20 @@ angular.module('feryzApp')
 			toastr.error 'No se pudo traer las ciudades.'
 		)
 
-
-
-
-
 	########################### !traer paises##############################################
 	#######################################################################################
 
 
-	$scope.crearUsuario = ()->
-		$scope.creando = true
+	$scope.crearCiudad = ()->
+		$scope.creandociudad = true
 
-	$scope.guardarUsuario = ()->
+	$scope.crearDepartamento = ()->
+		$scope.creandodepartamento = true
+
+	$scope.crearPais = ()->
+		$scope.creandopais = true
+
+	$scope.guardarCiudad = ()->
 
 		$http.post('::usuarios/guardar', $scope.usuarioNuevo ).then( (r)->
 			console.log '$scope.usuarios',$scope.usuarioNuevo

@@ -5,7 +5,7 @@ div.panel-heading Accidentes de trabajo
 		md-list-item(ng-repeat="enfermedad in pacienteEdit.enfermedadesProfesionales" ng-click="editandoEnferPro(enfermedad)") 
 			p {{enfermedad.diagnostico}} - {{enfermedad.tipo_accidente}}
 			md-button.md-icon-button(aria-label="Eliminar")
-				.fa.fa-time
+				.fa.fa-times
 
 
 	md-button.md-raised.md-primary(aria-label="Nuevo" ng-click="nuevoEnferPro()" ng-hide="creandoEnferPro") Agregar enfermedad profesional

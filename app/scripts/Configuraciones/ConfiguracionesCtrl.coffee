@@ -20,27 +20,18 @@ angular.module('feryzApp')
 		$http.get('::ciudades/ciudades', {params: {departamento: depart.departamento} }).then((r)->
 			$scope.ciudades = r.data
 			if $scope.configuracion.ciudad_id
-				$scope.configuracion.ciudad = $filter('filter')($scope.ciudades, { id: $scope.configuracion.ciudad_id }, true)[0]
+				$scope.configuracion.ciudad_id = $filter('filter')($scope.ciudades, { id: $scope.configuracion.ciudad_id }, true)[0]
 		, ()->
 			toastr.error 'No se pudo traer las ciudades.'
 		)
 
 
-	$scope.eliminarConfiguracion = (usu)->
-		
-		$http.delete('::configuracion/eliminar/' + usu.id).then( (r)->
-			$scope.usuarios = $filter('filter')($scope.usuarios, {id: '!'+usu.id})
+	$scope.guardar = (usu)->
+		$http.put('::configuracion/actualizar', $scope.configuracion).then( (r)->
+			toastr.success $scope.configuracion.nombre_ips+ ' "Actualizada correctamente"'
 		, (r2)->
-			console.log 'No se pudo eliminar producto', r2
-		)
-
-	$scope.actualizarConfiguracion = (usu)->
-		$http.put(App.Server + '::configuracion/actualizar', $scope.configuracion).then( (r)->
-			toastr.success 'Actualizado correctamente: ' + r.nombre
-			$scope.editando = false
-		, (r2)->
-			toastr.error 'No se pudo crear', 'Error'
-			console.log 'No se pudo guardar Producto', r2
+			toastr.error 'No se pudo Actualizar', 'Error'
+			console.log 'No se pudo actualizar configuracion', r2
 		)
 
 	

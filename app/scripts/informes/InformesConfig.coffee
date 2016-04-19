@@ -19,21 +19,20 @@ angular.module('feryzApp')
 					pageTitle: 'Informes'
 			})
 
-		$translateProvider.translations('EN',
-			INICIO_MENU: 'Home'
-		)
-		.translations('ES',
-			INICIO_MENU: 'Inicio'
+		
+		.state 'panel.informes.ver_usuarios',
+			url: 'ver_usuarios'
+			views: 
+				'report_content':
+					templateUrl: "==informes/verUsuarios.tpl.html"
+					controller: 'PuestosGrupoPeriodoCtrl'
+					resolve:
+						usuarios: ['$http', '$stateParams', ($http, $stateParams)->
+							$http.get('::usuarios/all');
+						],
+			data: 
+				pageTitle: 'Usuarios - Feryz'
 
-		)
-		.translations('PT',
-			INICIO_MENU: 'Inicio'
-
-		)
-		.translations('FR',
-			INICIO_MENU: 'Inicio'
-
-		)
 
 		
 

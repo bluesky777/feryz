@@ -1,9 +1,9 @@
 .row
-	.col-lg-12
+	.col-lg-12(style="margin: 0px 0px 200px")
 		.panel.panel-default.panel-hovered.mb20
 			.panel-heading Configuraciones
 
-			.panel-body
+			.panel-body(style="margin: 10px")
 
 				form(ng-submit="guardar()")
 
@@ -35,9 +35,12 @@
 
 						.form-group.col-lg-4.col-sm-12.col-xs-12
 							label Ciudad 
-							ui-select(ng-model="configuracion.ciudad" style="width: 100%;")
-								ui-select-match(placeholder="Ciudad" allow-clear="true") {{$select.selected.ciudad + '(' + $select.selected.ciudad_id + ')' }}
+							ui-select(ng-model="configuracion.ciudad_id" style="width: 100%;")
+								ui-select-match(placeholder="Ciudad" allow-clear="true") {{$select.selected.ciudad}}
 								ui-select-choices(repeat="ciudad in ciudades | filter: $select.search")
-									div(ng-bind-html="ciudad.ciudad + ciudad.departamento| highlight: $select.search")
+									div(ng-bind-html="ciudad.ciudad| highlight: $select.search")
+					.row
+							.col-lg-12
 
+								md-button.md-raised.md-primary(type="submit") Guardar
 

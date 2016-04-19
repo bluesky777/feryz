@@ -76,20 +76,24 @@
             </div>
             <div class="row">
               <div class="col-lg-4 col-sm-6">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                <md-input-container flex-gt-sm style="padding: 9px 0px 0px; margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Telefono</label>
                   <input ng-model="pacienteEdit.telefono">
                 </md-input-container>
               </div>
               <div class="col-lg-4 col-sm-6">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                <md-input-container flex-gt-sm style="padding: 9px 0px 0px; margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Telefono contacto</label>
                   <input ng-model="pacienteEdit.telefono_contacto">
                 </md-input-container>
               </div>
-              <div class="col-lg-4 col-sm-12">
-                <label>Fecha nacimiento</label>
-                <md-datepicker style="width: 260px;height" ng-model="pacienteEdit.fecha_nac" md-placeholder="Enter date" ng-click="data.isOpen = true"></md-datepicker>
+              <div style="margin-bottom: 0px;" class="form-group col-lg-4 col-sm-6 col-xs-12">
+                <label for="paciente-fecha-nac">Fecha de nacimiento</label>
+                <div class="controls">
+                  <div class="input-group"><span ng-click="data.isOpen = true" class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input id="paciente-fecha-nac" type="text" icon-prefix="fa" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="pacienteEdit.fecha_nac" is-open="data.isOpen" ng-click="data.isOpen = true" max-date="'2020-12-12'" datepicker-options="dateOptions" close-text="Aceptar" current-text="Hoy" clear-text="Borrar" placeholder="Fecha nacimiento" class="form-control active">
+                  </div>
+                </div>
               </div>
             </div>
             <div class="row">
@@ -163,20 +167,24 @@
             </div>
             <div class="row">
               <div class="col-lg-4 col-sm-6">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                <md-input-container flex-gt-sm style="padding: 9px 0px 0px; margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>EPS</label>
                   <input ng-model="pacienteEdit.eps">
                 </md-input-container>
               </div>
               <div class="col-lg-4 col-sm-6">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                <md-input-container flex-gt-sm style="padding: 9px 0px 0px; margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>ARP</label>
                   <input ng-model="pacienteEdit.arp">
                 </md-input-container>
               </div>
-              <div class="col-lg-4 col-sm-12">
-                <label>Fecha Ingreso</label>
-                <md-datepicker style="width: 260px;height" ng-model="pacienteEdit.fecha_ingreso" md-placeholder="Enter date" ng-click="data.isOpen = true"></md-datepicker>
+              <div style="margin-bottom: 0px;" class="form-group col-lg-4 col-sm-6 col-xs-12">
+                <label for="paciente-fecha-ingreso">Fecha de ingreso</label>
+                <div class="controls">
+                  <div class="input-group"><span ng-click="data.isOpen = true" class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input id="paciente-fecha-ingreso" type="text" icon-prefix="fa" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="pacienteEdit.fecha_ingreso" is-open="data.isOpen" ng-click="data.isOpen = true" max-date="'2020-12-12'" datepicker-options="dateOptions" close-text="Aceptar" current-text="Hoy" clear-text="Borrar" placeholder="Fecha ingreso" class="form-control active">
+                  </div>
+                </div>
               </div>
             </div>
             <div class="row">
