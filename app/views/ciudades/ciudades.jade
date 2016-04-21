@@ -14,49 +14,58 @@
 
 									.row
 										.form-group.col-lg-4.col-sm-6.col-xs-12
-											label Pais 
-											ui-select(ng-model="crear.pais" on-select="paisSeleccionado($item, $model)" style="width: 100%;")
+											label Pais
+											ui-select(ng-model="crearciudad.pais" on-select="paisSeleccionado($item, $model)" style="width: 100%;")
 												ui-select-match(placeholder="Pais" allow-clear="true") {{$select.selected.pais}}
 												ui-select-choices(repeat="pais in paises | filter: $select.search")
 													div(ng-bind-html="pais.pais | highlight: $select.search")
 
 										.form-group.col-lg-4.col-sm-6.col-xs-12
 											label Departamento
-											ui-select(ng-model="crear.depart_nac" on-select="departamentoSeleccionado($item, $model)" style="width: 100%;")
+												input(type="checkbox" ng-model="crearciudad.nuevo_depart") 
+												|  Nuevo (+)
+											ui-select(ng-hide="crearciudad.nuevo_depart" ng-model="crearciudad.departamento" on-select="departamentoSeleccionado($item, $model)" style="width: 100%;")
 												ui-select-match(placeholder="Departamento" allow-clear="true") {{$select.selected.departamento}}
 												ui-select-choices(repeat="depart in departamentos | filter: $select.search")
 													div(ng-bind-html="depart.departamento | highlight: $select.search")
+											input(ng-show="crearciudad.nuevo_depart" ng-model="crearciudad.txt_new_depart" placeholder="Nuevo departamento")
+
 
 										.col-lg-4.col-sm-12.col-xs-12
-											md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+											md-input-container.md-block(flex-gt-sm style=" padding-bottom: 0!important")
 												label Ciudad
-												input(ng-model="crear.ciudad")
+												input(ng-model="crearciudad.ciudad")
+									.row
+										.col-lg-12
+											md-button.md-raised.md-default(type="button" ng-click="creandociudad=false") Cancelar
+
+											md-button.md-raised.md-primary(type="submit") Guardar
 
 								hr
 								br
-								.row(ng-hide="creandociudad")
+								.row(ng-show="!creandociudad")
 									.form-group.col-lg-4.col-sm-6.col-xs-12
 										label Pais
-										ui-select(ng-model="crear.pais" on-select="paisSeleccionado($item, $model)" style="width: 100%;")
+										ui-select(ng-model="crearciudad.pais" on-select="paisSeleccionado($item, $model)" style="width: 100%;")
 											ui-select-match(placeholder="Pais" allow-clear="true") {{$select.selected.pais}}
 											ui-select-choices(repeat="pais in paises | filter: $select.search")
 												div(ng-bind-html="pais.pais | highlight: $select.search")
 
 									.form-group.col-lg-4.col-sm-6.col-xs-12
 										label Departamento
-										ui-select(ng-model="crear.depart_nac" on-select="departamentoSeleccionado($item, $model)" style="width: 100%;")
+										ui-select(ng-model="crearciudad.depart" on-select="departamentoSeleccionado($item, $model)" style="width: 100%;")
 											ui-select-match(placeholder="Departamento" allow-clear="true") {{$select.selected.departamento}}
 											ui-select-choices(repeat="depart in departamentos | filter: $select.search")
 												div(ng-bind-html="depart.departamento | highlight: $select.search")
 
 								.row
 									.col-lg-6
-										md-toolbar.md-hue-3(layout="row")
+										md-toolbar.md-hue-3(style="background-color: rgb(63, 81, 181); color: rgb(255, 255, 255);" layout="row")
 											div.md-toolbar-tools
 												span Ciudades
-										md-list(style="height: 600px; border: 1px solid #ccc; overflow: auto")
+										md-list(style="height: 600px; border: 1px solid #ccc; overflow: auto" ng-hide="guardar")
 											md-list-item(ng-repeat="ciudad in ciudades" ng-click="editarCiudad(ciudad)") 
-												p.row
+												p.row()
 													.col-lg-6(style="font-weight: bold; font-size: 13pt") {{ciudad.ciudad}}
 													.col-lg-6 ({{ciudad.departamento}})
 												md-button.md-icon-button(aria-label="Eliminar")
@@ -71,17 +80,41 @@
 									.row
 										.form-group.col-lg-4.col-sm-6.col-xs-12
 											label Pais de nacimiento
-											ui-select(ng-model="crear.pais_depart" on-select="paisSeleccionado($item, $model)" style="width: 100%;")
+											ui-select(ng-model="creardepartamento.pais" on-select="paisSeleccionado($item, $model)" style="width: 100%;")
 												ui-select-match(placeholder="Pais" allow-clear="true") {{$select.selected.pais}}
 												ui-select-choices(repeat="pais in paises | filter: $select.search")
 													div(ng-bind-html="pais.pais | highlight: $select.search")
 
-										.form-group.col-lg-4.col-sm-6.col-xs-12
-											label Departamento
-											ui-select(ng-model="crear.depart_depart" on-select="departamentoSeleccionado($item, $model)" style="width: 100%;")
-												ui-select-match(placeholder="Departamento" allow-clear="true") {{$select.selected.departamento}}
-												ui-select-choices(repeat="depart in departamentos | filter: $select.search")
-													div(ng-bind-html="depart.departamento | highlight: $select.search")
+										.col-lg-4.col-sm-12.col-xs-12
+											md-input-container.md-block(flex-gt-sm style=" padding-bottom: 0!important")
+												label Departamento 
+												input(ng-model="creardepartamento.departamento")
+									.row
+										.col-lg-12
+											md-button.md-raised.md-default(type="button" ng-click="creandodepartamento=false") Cancelar
+
+											md-button.md-raised.md-primary(type="submit") Guardar
+								hr
+								br
+								.row(ng-hide="creandodepartamento")
+									.form-group.col-lg-4.col-sm-6.col-xs-12
+										label Pais
+										ui-select(ng-model="creardepartamento.pais" on-select="paisSeleccionado($item, $model)" style="width: 100%;")
+											ui-select-match(placeholder="Pais" allow-clear="true") {{$select.selected.pais}}
+											ui-select-choices(repeat="pais in paises | filter: $select.search")
+												div(ng-bind-html="pais.pais | highlight: $select.search")
+								.row
+									.col-lg-6
+										md-toolbar.md-hue-3(style="background-color: rgb(63, 81, 181); color: rgb(255, 255, 255);" layout="row")
+											div.md-toolbar-tools
+												span Departamentos
+										md-list(style="height: 600px; border: 1px solid #ccc; overflow: auto")
+											md-list-item(ng-repeat="depart in departamentos" ng-click="editarDepartamento(depart)") 
+												p.row
+													.col-lg-6(style="font-weight: bold; font-size: 13pt") {{depart.departamento}}
+													.col-lg-6 ({{creardepartamento.pais.pais}})
+												md-button.md-icon-button(aria-label="Eliminar")
+													.fa.fa-times
 
 						md-tab(label="Paises")
 							md-content.md-padding
@@ -90,10 +123,21 @@
 								form(ng-show="creandopais" ng-submit="guardarPais()")
 
 									.row
-										.form-group.col-lg-4.col-sm-6.col-xs-12
-											label Pais de nacimiento
-											ui-select(ng-model="crear.pais_pais" on-select="paisSeleccionado($item, $model)" style="width: 100%;")
-												ui-select-match(placeholder="Pais" allow-clear="true") {{$select.selected.pais}}
-												ui-select-choices(repeat="pais in paises | filter: $select.search")
-													div(ng-bind-html="pais.pais | highlight: $select.search")
+										.col-lg-4.col-sm-12.col-xs-12
+											md-input-container.md-block(flex-gt-sm style=" padding-bottom: 0!important")
+												label Pais
+												input(ng-model="crearpais.paisnuevo")
+
+								.row
+									.col-lg-6
+										md-toolbar.md-hue-3(style="background-color: rgb(63, 81, 181); color: rgb(255, 255, 255);" layout="row")
+											div.md-toolbar-tools
+												span Paises
+										md-list(style="height: 600px; border: 1px solid #ccc; overflow: auto")
+											md-list-item(ng-repeat="pais in paises" ng-click="editarDepartamento(depart)") 
+												p.row
+													.col-lg-6(style="font-weight: bold; font-size: 13pt") {{pais.id}}
+													.col-lg-6 ({{pais.pais}})
+												md-button.md-icon-button(aria-label="Eliminar")
+													.fa.fa-times
 

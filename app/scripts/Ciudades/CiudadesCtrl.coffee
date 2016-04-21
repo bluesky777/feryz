@@ -5,22 +5,32 @@ angular.module('feryzApp')
 	$scope.creandociudad = false
 	$scope.creandodepartamento = false
 	$scope.creandopais = false
-	$scope.crear = { }
+
+	$scope.crearciudad = {nuevo_depart: false }
+
+	$scope.creardepartamento = { }
+
+	$scope.crearpais = { }
+
 	$scope.crearActual = {}
 	
 
 	####################################################################################
 	############################!traer paises###########################################
+	
 
 	$http.get('::paises/all').then((r)->
 		$scope.paises = r.data
-		$scope.crear.pais = $filter('filter')($scope.paises, { id: 1 })[0]
-		$scope.paisSeleccionado($scope.crear.pais)
+		$scope.crearciudad.pais = $filter('filter')($scope.paises, { id: 1 })[0]
+		$scope.creardepartamento.pais = $filter('filter')($scope.paises, { id: 1 })[0]
+		$scope.paisSeleccionado($scope.crearciudad.pais)
+		
 	, ()->
 		toastr.error 'No se pudo traer las ciudades.'
 	)
 
 	$scope.paisSeleccionado = (pais, modelo)->
+		$scope.guardar = true
 		$http.get('::ciudades/departamentos', {params: {pais_id: pais.id} }).then((r)->
 			$scope.departamentos = r.data
 		, ()->
@@ -28,6 +38,8 @@ angular.module('feryzApp')
 		)
 
 	$scope.departamentoSeleccionado = (depart, modelo)->
+
+		$scope.guardar = false
 		$http.get('::ciudades/ciudades', {params: {departamento: depart.departamento} }).then((r)->
 			$scope.ciudades = r.data
 		, ()->
@@ -49,16 +61,41 @@ angular.module('feryzApp')
 
 	$scope.guardarCiudad = ()->
 
-		$http.post('::usuarios/guardar', $scope.usuarioNuevo ).then( (r)->
-			console.log '$scope.usuarios',$scope.usuarioNuevo
-			$scope.opcionesGrid.data.push r.data
-			toastr.success 'Creado correctamente: ' + r.data.nombre
-			$scope.creando = false
+		$http.post('::ciudades/guardarciudad', $scope.crearciudad ).then( (r)->
+			toastr.success 'Creado correctamente: ' + $scope.crearciudad.ciudad
+			$scope.creandociudad = false
+			$scope.crearciudad = {}
+			$scope.guardar = true
+
+			$http.get('::paises/all').then((r)->
+			$scope.paises = r.data
+			$scope.crearciudad.pais = $filter('filter')($scope.paises, { id: 1 })[0]
+			$scope.paisSeleccionado($scope.crearciudad.pais)
+			
+
+			, (r2)->
+				toastr.error 'No se pudo traer las ciudades.'
+			)
 		, (r2)->
 			toastr.error 'No se pudo crear', 'Error'
-			console.log 'No se pudo guardar Producto', r2
 		)
-		
+
+	$scope.guardarDepartamento = ()->
+
+		$http.post('::ciudades/guardardepartamento', $scope.creardepartamento ).then( (r)->
+			toastr.success 'Creado correctamente: ' + $scope.creardepartamento.departamento
+			$scope.creardepartamento = []
+			$scope.guardar = true
+			$http.get('::paises/all').then((r)->
+			$scope.paises = r.data
+			$scope.creardepartamento.pais = $filter('filter')($scope.paises, { id: 1 })[0]
+			$scope.paisSeleccionado($scope.crearciudad.pais)
+			, (r2)->
+				toastr.error 'No se pudo traer las ciudades.'
+			)
+		, (r2)->
+			toastr.error 'No se pudo crear', 'Error'
+		)
 
 	$scope.eliminarUsuario = (usu)->
 		
@@ -68,13 +105,12 @@ angular.module('feryzApp')
 			console.log 'No se pudo eliminar producto', r2
 		)
 
-	$scope.actualizarUsuario = (usu)->
-		$http.put(App.Server + '::usuarios/actualizar', $scope.usuarioActualizar).then( (r)->
+	$scope.actualizarCiudad = (usu)->
+		$http.put('::ciudades/actualizar', $scope.crear).then( (r)->
 			toastr.success 'Actualizado correctamente: ' + r.nombre
 			$scope.editando = false
 		, (r2)->
 			toastr.error 'No se pudo crear', 'Error'
-			console.log 'No se pudo guardar Producto', r2
 		)
 
 	$scope.editarUsuario = (usu)->
@@ -107,63 +143,6 @@ angular.module('feryzApp')
 		
 
 	
-	$scope.traerUsuarios = ()->
-
-		$http.get('::usuarios/all').then((r)->
-			$scope.opcionesGrid.data = r.data
-		, (r2)->
-			console.log 'No se pudo traer los usuarios', r2
-		)
-	$scope.traerUsuarios()
-
-
-	btn1 = '<a class="btn btn-default btn-xs" ng-click="grid.appScope.editarUsuario(row.entity)"><md-tooltip md-direction="left">Editar</md-tooltip><i class="fa fa-edit "></i></a>'
-	btn2 = '<a class="btn btn-default btn-xs" ng-click="grid.appScope.eliminarUsuario(row.entity)"><md-tooltip md-direction="left">Eliminar</md-tooltip><i class="fa fa-times "></i></a>'
-
-	$scope.opcionesGrid = {
-		showGridFooter: true,
-		enableSorting: true,
-		columnDefs: [
-			{field: 'id', width: 60, enableCellEdit: false}
-			{field: 'Edit', cellTemplate: btn1 + btn2, width: 70, enableCellEdit: false }
-			{field: 'nombres', minWidth: 100}
-			{field: 'apellidos', minWidth: 100}
-			{field: 'sexo', width: 50}
-			{field: 'username', displayName: 'Usuario'}
-			{field: 'email'}
-			{field: 'fecha_nac', type: 'date', format: 'yyyy-mm-dd'}
-		]
-		onRegisterApi: ( gridApi ) ->
-			$scope.gridApi = gridApi
-			gridApi.edit.on.afterCellEdit($scope, (rowEntity, colDef, newValue, oldValue)->
-				#console.log 'Fila editada, ', rowEntity, ' Column:', colDef, ' newValue:' + newValue + ' oldValue:' + oldValue ;
-				
-				if newValue != oldValue
-
-					if colDef.field == "sexo"
-						if newValue == 'M' or newValue == 'F'
-							# Es correcto...
-							$http.put('::usuarios/actualizar/' + rowEntity.id, rowEntity).then((r)->
-								toastr.success 'Usuario actualizado con éxito', 'Actualizado'
-							, (r2)->
-								toastr.error 'Cambio no guardado', 'Error'
-								console.log 'Falló al intentar guardar: ', r2
-							)
-						else
-							$scope.toastr.warning 'Debe usar M o F'
-							rowEntity.sexo = oldValue
-					else
-
-						$http.put('::usuarios/actualizar/' + rowEntity.id, rowEntity).then((r)->
-							toastr.success 'Usuario actualizado con éxito', 'Actualizado'
-						, (r2)->
-							toastr.error 'Cambio no guardado', 'Error'
-							console.log 'Falló al intentar guardar: ', r2
-						)
-
-				$scope.$apply()
-			)
-
-	}
+	
 
 ])
