@@ -7,14 +7,9 @@ angular.module('feryzApp')
 	$scope.creandopais = false
 
 	$scope.crearciudad = {nuevo_depart: false }
-
-	$scope.creardepartamento = { }
-
+	$scope.modificando_depart = false
 	$scope.crearpais = { }
-
-	$scope.crearActual = {}
-	
-
+	$scope.hola= false
 	####################################################################################
 	############################!traer paises###########################################
 	
@@ -22,26 +17,29 @@ angular.module('feryzApp')
 	$http.get('::paises/all').then((r)->
 		$scope.paises = r.data
 		$scope.crearciudad.pais = $filter('filter')($scope.paises, { id: 1 })[0]
-		$scope.creardepartamento.pais = $filter('filter')($scope.paises, { id: 1 })[0]
 		$scope.paisSeleccionado($scope.crearciudad.pais)
 		
 	, ()->
 		toastr.error 'No se pudo traer las ciudades.'
 	)
 
-	$scope.paisSeleccionado = (pais, modelo)->
-		$scope.guardar = true
+	$scope.paisSeleccionado = (pais, departamento)->
 		$http.get('::ciudades/departamentos', {params: {pais_id: pais.id} }).then((r)->
 			$scope.departamentos = r.data
+
+			if $scope.modificando_depart
+				$scope.crearciudad.depart = $filter('filter')($scope.departamentos, {departamento: departamento}, true)[0]
+				$scope.departamentoSeleccionado $scope.crearciudad.depart
+				$scope.modificando_depart = false
 		, ()->
 			toastr.error 'No se pudo traer las ciudades.'
 		)
 
 	$scope.departamentoSeleccionado = (depart, modelo)->
-
-		$scope.guardar = false
 		$http.get('::ciudades/ciudades', {params: {departamento: depart.departamento} }).then((r)->
 			$scope.ciudades = r.data
+			
+
 		, ()->
 			toastr.error 'No se pudo traer las ciudades.'
 		)
@@ -62,7 +60,8 @@ angular.module('feryzApp')
 	$scope.guardarCiudad = ()->
 
 		$http.post('::ciudades/guardarciudad', $scope.crearciudad ).then( (r)->
-			toastr.success 'Creado correctamente: ' + $scope.crearciudad.ciudad
+			toastr.success 'Creado correctamente: ' + r.data.ciudad
+			$scope.ciudades.push r.data
 			$scope.creandociudad = false
 			$scope.crearciudad = {}
 			$scope.guardar = true
@@ -80,21 +79,46 @@ angular.module('feryzApp')
 			toastr.error 'No se pudo crear', 'Error'
 		)
 
-	$scope.guardarDepartamento = ()->
+	$scope.guardarPais = ()->
 
-		$http.post('::ciudades/guardardepartamento', $scope.creardepartamento ).then( (r)->
-			toastr.success 'Creado correctamente: ' + $scope.creardepartamento.departamento
-			$scope.creardepartamento = []
-			$scope.guardar = true
-			$http.get('::paises/all').then((r)->
-			$scope.paises = r.data
-			$scope.creardepartamento.pais = $filter('filter')($scope.paises, { id: 1 })[0]
+		$http.post('::paises/guardar', $scope.crearpais ).then( (r)->
+			toastr.success 'Creado correctamente: ' + r.data.paisnuevo
+			$scope.paises.push r.data
 			$scope.paisSeleccionado($scope.crearciudad.pais)
-			, (r2)->
-				toastr.error 'No se pudo traer las ciudades.'
-			)
+				
 		, (r2)->
 			toastr.error 'No se pudo crear', 'Error'
+		)
+
+	$scope.actualizarCiudad = (ciudad)->
+		$http.put('::ciudades/actualizar-ciudad', ciudad).then( (r)->
+			toastr.success 'Actualizado: ' + ciudad.ciudad
+			ciudad.editandoCiudad = false
+		, (r2)->
+			toastr.error 'No se pudo actualizar', 'Error'
+		)
+
+	$scope.actualizarDepartamento = (ciudad)->
+		$http.put('::ciudades/actualizar-departamento', ciudad).then( (r)->
+			toastr.success 'Actualizado: ' + ciudad.departamento
+			ciudad.editandoDepart = false
+			pais = $scope.crearciudad.pais
+
+			$scope.modificando_depart = true
+			$scope.paisSeleccionado(pais, ciudad.departamento)
+
+		, (r2)->
+			toastr.error 'No se pudo actualizar', 'Error'
+		)
+	$scope.actualizarPais = (pais)->
+		$http.put('::paises/actualizar', pais).then( (r)->
+			toastr.success 'Actualizado: ' + pais.pais
+			pais.editandoPais = false
+			pais.editandoAbrev = false
+		
+
+		, (r2)->
+			toastr.error 'No se pudo actualizar', 'Error'
 		)
 
 	$scope.eliminarUsuario = (usu)->
@@ -105,13 +129,7 @@ angular.module('feryzApp')
 			console.log 'No se pudo eliminar producto', r2
 		)
 
-	$scope.actualizarCiudad = (usu)->
-		$http.put('::ciudades/actualizar', $scope.crear).then( (r)->
-			toastr.success 'Actualizado correctamente: ' + r.nombre
-			$scope.editando = false
-		, (r2)->
-			toastr.error 'No se pudo crear', 'Error'
-		)
+	
 
 	$scope.editarUsuario = (usu)->
 		$scope.editando = true

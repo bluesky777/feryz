@@ -50,34 +50,30 @@
 										div(ng-bind-html="tipo.tipo | highlight: $select.search")
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Num_doc
+									label Número de documento
 									input(ng-model="usuarioNuevo.num_doc")
 
-							.col-lg-4
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Ciudad_doc
-									input(ng-model="usuarioNuevo.ciudad_doc['id']")
 
 						.row
 							.form-group.col-lg-4.col-sm-6.col-xs-12
 								label Pais de documento
-								ui-select(ng-model="usuarioNuevo.pais_doc" on-select="paisSeleccionado($item, $model)" style="width: 100%;")
+								ui-select(ng-model="usuarioNuevo.pais_doc" on-select="paisdocSeleccionado($item, $model)" style="width: 100%;")
 									ui-select-match(placeholder="Pais" allow-clear="true") {{$select.selected.pais}}
 									ui-select-choices(repeat="paisdoc in paises | filter: $select.search")
 										div(ng-bind-html="paisdoc.pais | highlight: $select.search")
 
 							.form-group.col-lg-4.col-sm-6.col-xs-12
 								label Departamento documento
-								ui-select(ng-model="usuarioNuevo.depart_doc" on-select="departamentoSeleccionado($item, $model)" style="width: 100%;")
+								ui-select(ng-model="usuarioNuevo.depart_doc" on-select="departamentoDocSeleccionado($item, $model)" style="width: 100%;")
 									ui-select-match(placeholder="Departamento" allow-clear="true") {{$select.selected.departamento}}
-									ui-select-choices(repeat="departdoc in departamentos | filter: $select.search")
+									ui-select-choices(repeat="departdoc in departamentos_doc | filter: $select.search")
 										div(ng-bind-html="departdoc.departamento | highlight: $select.search")
 
 							.form-group.col-lg-4.col-sm-12.col-xs-12
 								label Ciudad de documento
 								ui-select(ng-model="usuarioNuevo.ciudad_doc" style="width: 100%;")
 									ui-select-match(placeholder="Ciudad" allow-clear="true") {{$select.selected.ciudad}}
-									ui-select-choices(repeat="ciudaddoc in ciudades | filter: $select.search")
+									ui-select-choices(repeat="ciudaddoc in ciudades_doc | filter: $select.search")
 										div(ng-bind-html="ciudaddoc.ciudad | highlight: $select.search")
 
 						.row
@@ -90,7 +86,7 @@
 
 							.form-group.col-lg-4.col-sm-6.col-xs-12
 								label Departamento
-								ui-select(ng-model="usuarioNuevo.depart_nac" on-select="departamentoSeleccionado($item, $model)" style="width: 100%;")
+								ui-select(ng-model="usuarioNuevo.depart_nac" on-select="departamentoSeleccionado($item, $model)" style="width: 100%;padding-bottom: 0")
 									ui-select-match(placeholder="Departamento" allow-clear="true") {{$select.selected.departamento}}
 									ui-select-choices(repeat="depart in departamentos | filter: $select.search")
 										div(ng-bind-html="depart.departamento | highlight: $select.search")
@@ -111,12 +107,12 @@
 										input.form-control.active#usuario-fecha-nacimiento(type="text" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="usuarioNuevo.fecha_nac" is-open="data.isOpen2" ng-click="data.isOpen2 = true" max-date="'2020-12-12'" datepicker-options="dateOptions" close-text="Aceptar" current-text="Hoy" clear-text="Borrar" placeholder="Fecha nacimiento")
 							
 							.col-lg-4
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+								md-input-container.md-block(flex-gt-sm style="padding-bottom: 0!important")
 									label Titulo
 									input(ng-model="usuarioNuevo.titulo")
 						
 							.col-lg-4
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+								md-input-container.md-block(flex-gt-sm style="padding-bottom: 0!important")
 									label Estado Civil
 									input(ng-model="usuarioNuevo.estado_civil")
 						
@@ -204,16 +200,34 @@
 						
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Num_doc
+									label Numero de documento
 									input(ng-model="usuarioActualizar.num_doc")
 
-							.col-lg-4
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Ciudad_doc
-									input(ng-model="usuarioActualizar.ciudad_doc")
+							
 
-										
-															
+
+						.row
+							.form-group.col-lg-4.col-sm-6.col-xs-12
+								label Pais de documento
+								ui-select(ng-model="usuarioActualizar.pais_doc" on-select="paisdocSeleccionado($item, $model)" style="width: 100%;")
+									ui-select-match(placeholder="Pais" allow-clear="true") {{$select.selected.pais}}
+									ui-select-choices(repeat="paisdoc in paises | filter: $select.search")
+										div(ng-bind-html="paisdoc.pais | highlight: $select.search")
+
+							.form-group.col-lg-4.col-sm-6.col-xs-12
+								label Departamento documento
+								ui-select(ng-model="usuarioActualizar.depart_doc" on-select="departamentoDocSeleccionado($item, $model)" style="width: 100%;")
+									ui-select-match(placeholder="Departamento" allow-clear="true") {{$select.selected.departamento}}
+									ui-select-choices(repeat="departdoc in departamentos_doc | filter: $select.search")
+										div(ng-bind-html="departdoc.departamento | highlight: $select.search")
+
+							.form-group.col-lg-4.col-sm-12.col-xs-12
+								label Ciudad de documento
+								ui-select(ng-model="usuarioActualizar.ciudad_doc" style="width: 100%;")
+									ui-select-match(placeholder="Ciudad" allow-clear="true") {{$select.selected.ciudad}}
+									ui-select-choices(repeat="ciudaddoc in ciudades_doc | filter: $select.search")
+										div(ng-bind-html="ciudaddoc.ciudad | highlight: $select.search")
+
 						.row
 							.form-group.col-lg-4.col-sm-6.col-xs-12
 								label Pais de nacimiento
@@ -247,12 +261,12 @@
 
 						
 							.col-lg-4
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+								md-input-container.md-block(flex-gt-sm style="padding-bottom: 0!important")
 									label Titulo
 									input(ng-model="usuarioActualizar.titulo")
 						
 							.col-lg-4
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+								md-input-container.md-block(flex-gt-sm style="padding-bottom: 0!important")
 									label Estado Civil
 									input(ng-model="usuarioActualizar.estado_civil")
 						.row

@@ -90,10 +90,10 @@ angular.module('feryzApp')
 	########################################################################
 	########################	 EDITAR PACIENTE 	  ######################
 	########################################################################
-	$scope.editarPaciente = (asdf)->
+	$scope.editarPaciente = (pac)->
+
 		$scope.editando = true
-		$scope.pacienteEdit = asdf
-		
+		$scope.pacienteEdit = pac
 
 		# Configuramos el tipo para el SELECT2
 		tipo = $filter('filter')($scope.tipos_doc, {tipo: $scope.pacienteEdit.doc_tipo}, true)
@@ -114,11 +114,11 @@ angular.module('feryzApp')
 		else
 			$http.get('::ciudades/datosciudad/'+$scope.pacienteEdit.ciudad_nac_id).then (r2)->
 				$scope.paises = r2.data.paises
-				$scope.departamentosNac = r2.departamentos
-				$scope.ciudadesNac = r2.ciudades
-				$scope.pacienteEdit.pais = r2.pais
-				$scope.pacienteEdit.depart_nac = r2.departamento
-				$scope.pacienteEdit.ciudad_nac = r2.ciudad
+				$scope.departamentosNac = r2.data.departamentos
+				$scope.ciudadesNac = r2.data.ciudades
+				$scope.pacienteEdit.pais = r2.data.pais
+				$scope.pacienteEdit.depart_nac = r2.data.departamento
+				$scope.pacienteEdit.ciudad_nac = r2.data.ciudad
 
 
 

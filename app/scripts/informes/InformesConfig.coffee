@@ -25,7 +25,7 @@ angular.module('feryzApp')
 			views: 
 				'report_content':
 					templateUrl: "==informes/verUsuarios.tpl.html"
-					controller: 'PuestosGrupoPeriodoCtrl'
+					controller: 'VerUsuariosCtrl'
 					resolve:
 						usuarios: ['$http', '$stateParams', ($http, $stateParams)->
 							$http.get('::usuarios/all');

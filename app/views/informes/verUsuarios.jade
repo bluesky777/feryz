@@ -3,6 +3,6 @@ h2 Usuarios del sistema
 table.table
 	tr
 		td Nombre
-	tr
-		td Nombre
+	tr(ng-repeat="usuario in usuarios")
+		td {{usuario.nombres}}
 

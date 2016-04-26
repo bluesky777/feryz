@@ -5,7 +5,6 @@ angular.module('feryzApp')
 .controller('InformesCtrl', ['$scope', '$http', '$state', '$cookies', '$rootScope', 'toastr', '$filter', 
 	($scope, $http, $state, $cookies, $rootScope, toastr, $filter) ->
 
-
 		$scope.verUsuarios = ()->
 			$state.go 'panel.informes.ver_usuarios', {}, {reload: true}
 
