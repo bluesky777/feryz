@@ -1,0 +1,25 @@
+h2 Pacientes
+
+table.table
+	tr
+		td Nombre
+		td Apellido
+		td Documento de identidad
+		td Fecha nacimiento
+		td Pais
+		td Departamento
+		td Ciudad
+		td Motivo de consulta
+		td Telefono
+
+	tr(ng-repeat="paciente in pacientes")
+		td {{paciente.nombres}}
+		td {{paciente.apellidos}}
+		td {{paciente.doc_identidad}}
+		td {{paciente.fecha_nac}}
+		td {{paciente.pais}} ({{paciente.abrev}})
+		td {{paciente.departamento}}
+		td {{paciente.ciudad}}
+		td {{paciente.motivo_consulta}}
+		td {{paciente.telefono}}
+

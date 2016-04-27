@@ -7,6 +7,12 @@ angular.module('feryzApp')
 
 		$scope.verUsuarios = ()->
 			$state.go 'panel.informes.ver_usuarios', {}, {reload: true}
+		
+		$scope.verPacientes = ()->
+			$state.go 'panel.informes.ver_pacientes', {}, {reload: true}
+
+		$scope.verExamenIngreso = ()->
+			$state.go 'panel.informes.ver_exameningreso', {}, {reload: true}
 
 
 		$scope.$on 'cambia_descripcion', (event, descrip)->
