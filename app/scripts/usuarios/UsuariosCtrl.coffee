@@ -11,11 +11,21 @@ angular.module('feryzApp')
 		{id: 3, tipo: 'Tarjeta de identidad'}
 	]
 
-	$scope.usuarioNuevo = { sexo: 'M', tipo_doc: {id: 1, tipo: 'Cédula'} }
+	$scope.usuarioNuevo = { sexo: 'M', password: '', tipo_doc: {id: 1, tipo: 'Cédula'} }
+
+
+
+
+	$http.get('::usuarios/examenes').then((r)->
+		$scope.examenes = r.data
+	, ()->
+		toastr.error 'No se pudo traer los exámenes.'
+	)
+
 
 
 	####################################################################################
-	############################!traer paises###########################################
+	############################ traer paises ##########################################
 
 	$http.get('::paises/all').then((r)->
 		$scope.paises = r.data
@@ -68,6 +78,14 @@ angular.module('feryzApp')
 		$scope.editando = false
 
 	$scope.guardarUsuario = ()->
+
+		if $scope.usuarioNuevo.password != $scope.usuarioNuevo.password_confirm
+			toastr.warning 'La contraseña y confirmación no coinciden'
+			return false
+
+		if $scope.usuarioNuevo.password.length < 3
+			toastr.warning 'La contraseña debe tener al menos 3 caracteres'
+			return false
 
 		$http.post('::usuarios/guardar', $scope.usuarioNuevo ).then( (r)->
 			$scope.opcionesGrid.data.push r.data

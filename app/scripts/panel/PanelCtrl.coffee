@@ -18,6 +18,10 @@ angular.module('feryzApp')
 
 
 			
+		$scope.openMenu = ($mdOpenMenu, ev)->
+			originatorEv = ev
+			$mdOpenMenu(ev)
+
 
 
 			

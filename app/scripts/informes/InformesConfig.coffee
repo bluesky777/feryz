@@ -14,6 +14,9 @@ angular.module('feryzApp')
 					resolved_user: ['AuthService', (AuthService)->
 						AuthService.verificar()
 					]
+					pacientes: ['$http', ($http)->
+						$http.get('::pacientes/all')
+					]
 				}
 				data: 
 					pageTitle: 'Informes'
@@ -52,7 +55,7 @@ angular.module('feryzApp')
 			url: 'ver_exameningreso'
 			views: 
 				'report_content':
-					templateUrl: "==informes/verTodos.tpl.html"
+					templateUrl: "==informes/verExamenIngreso.tpl.html"
 					controller: 'VerExamenIngresoCtrl'
 					resolve:
 						exameningreso: ['$http', '$stateParams', ($http, $stateParams)->

@@ -57,14 +57,21 @@
   </li>
 </ul>
 <ul class="list-unstyled right-elems ng-scope">
-  <li dropdown="" class="profile-drop hidden-xs dropdown"><a href="" dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><img ng-src="{{imagesPath + USER.image_nombre}}" alt="{{USER.username}}"></a>
-    <ul class="dropdown-menu dropdown-menu-right">
-      <li><a href="javascript:;"><span class="ion ion-person"></span>Perfil</a></li>
-      <li><a href="javascript:;"><span class="ion ion-settings"> </span>Configuración</a></li>
-      <li class="divider"></li>
-      <li><a href="javascript:;"><span class="ion ion-lock-combination"></span>Imágenes</a></li>
-      <li><a href="" ng-click="logout()"><span ng-bind-html="('SALIR' | translate)" class="ion ion-power"></span></a></li>
-    </ul>
+  <li dropdown="" style="padding-right: 10px" class="profile-drop hidden-xs dropdown">
+    <md-menu> <a href="" ng-click="openMenu($mdOpenMenu, $event)"><img ng-src="{{imagesPath + USER.image_nombre}}" alt="{{USER.username}}" class="imagen-perfil"></a>
+      <md-menu-content style="margin-top: 40px;" width="3">
+        <md-menu-item>
+          <md-button ng-click="ctrl.redial($event)"><i class="fa fa-person"></i>Perfil</md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button><a ui-sref="panel.filemanager()"><i class="fa fa-lock-combination"></i>Imágenes</a></md-button>
+        </md-menu-item>
+        <md-menu-divider></md-menu-divider>
+        <md-menu-item>
+          <md-button ng-click="logout()"><i class="fa fa-power"></i>Salir</md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
   </li>
   <li class="profile-drop hidden-xs dropdown"><a href="" ng-click="logout()" style="color: #fff"><i ng-bind-html="('SALIR' | translate)" class="fa fa-sign-out"> </i></a></li>
   <!--li.floating-sidebar(ng-class="{'open': floatingSidebar}")-->

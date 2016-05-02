@@ -27,20 +27,31 @@
 											md-radio-button(value="F") Femenino
 
 						.row
-							.col-lg-4
+							.col-lg-3
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Nombre usuario
 									input(ng-model="usuarioNuevo.username")
 
-							.col-lg-4
+							.col-lg-3
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Email
 									input(ng-model="usuarioNuevo.email")
 						
-							.col-lg-4
+							.col-lg-3
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Password
-									input(ng-model="usuarioNuevo.password")
+									label Contraseña
+									input(ng-model="usuarioNuevo.password" type="password")
+							.col-lg-3
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+									label Repita contraseña
+									input(ng-model="usuarioNuevo.password_confirm" type="password")
+						.row
+							.form-group.col-lg-8.col-sm-12.col-xs-12
+							
+								ui-select(ng-model="usuarioNuevo.examenes" style="margin: 0!important;width: 100%; padding-bottom: 0!important")
+									ui-select-match(placeholder="Tipo documento" allow-clear="true") {{$select.selected.tipo}}
+									ui-select-choices(repeat="examen in examenes | filter: $select.search")
+										div(ng-bind-html="examen.tipo | highlight: $select.search")
 						.row
 							.form-group.col-lg-4.col-sm-12.col-xs-12
 							

@@ -1,9 +1,291 @@
-h2 Usuarios del sistema
+.row
+	.col-lg-12
+		.panel.panel-default.panel-hovered.mb20
+			.panel-heading Paciente
 
-table.table
-	tr
-		td Nombre
+			.panel-body(style="margin: 2px 0px 10px 5px")
 
-	tr(ng-repeat="exameningreso in exameningresos")
+				.row
+					.col-lg-4
+						
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Departamento:
+							span {{exameningreso.departamento}}	
+					
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Ciudad: 
+							span {{exameningreso.ciudad}}
+
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Fecha: 
+							span {{exameningreso.fecha_ingreso}}
+
+				.row
+					.col-lg-4
+						
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Empresa usuaria:
+							span	{{exameningreso.empresa_usuaria}}	
+					
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Empresa temporal: 
+							span {{exameningreso.empresa_temporal}}
+
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Activida economica: 
+							span {{exameningreso.actividad_economica}}
+
+				.row
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Nombres: 
+							span {{exameningreso.nombres}}
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Apellidos: 
+							span {{exameningreso.apellidos}}
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Documento de identidad: 
+							span {{exameningreso.doc_identidad}}
+
 		
-		td {{usuario.nombres}}
+				.row
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Genero: 
+							span {{exameningreso.sexo}}
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Direccion: 
+							span {{exameningreso.direccion}}
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Telefono: 
+							span {{exameningreso.telefono}}
+
+		
+				.row
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Telefono contacto: 
+							span {{exameningreso.telefono_contacto}}
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Fecha de nacimiento: 
+							span {{exameningreso.fecha_nac}}
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Pais de nacimiento: 
+							span {{exameningreso.pais}}
+
+		
+				.row
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Departamento de nacimiento: 
+							span {{exameningreso.departamento}}
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Ciudad de nacimiento: 
+							span {{exameningreso.ciudad}}
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Estado civil: 
+							span {{exameningreso.estado_civil}}
+
+		
+				.row
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Nivel escolaridad: 
+							span {{exameningreso.nivel_escolaridad}}
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Edad: 
+							span {{exameningreso.edad}}
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Profesion / oficio: 
+							span {{exameningreso.profesion}}
+
+		
+				.row
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Grupo sanguineo: 
+							span {{exameningreso.grupo_sanguineo}}
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") RH: 
+							span {{exameningreso.rh}}
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Eps: 
+							span {{exameningreso.eps}}
+
+		
+				.row
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Arp: 
+							span {{exameningreso.arp}}
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Afp: 
+							span {{exameningreso.afp}}
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Fecha ingreso: 
+							span {{exameningreso.fecha_ingreso}}
+
+		
+				.row
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Cargo: 
+							span {{exameningreso.cargo}}
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Descripcion de cargo: 
+							span {{exameningreso.descripcion_cargo}}
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Motivo consulta: 
+							span {{exameningreso.motivo_consulta}}
+
+		
+				.row
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Antecedentes patologicos: 
+							span {{exameningreso.antec_patologicos}}
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Antecedentes hospitalarios: 
+							span {{exameningreso.antec_hospitalarios}}
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Antecedentes quirurgicos: 
+							span {{exameningreso.antec_quirurgicos}}
+
+		
+				.row
+					.col-lg-4
+						Div(style="margin: 0px 0px 10px 0px")
+							span(style="font-weight: bold") Antecedentes familiares: 
+							span {{exameningreso.antec_familiares}}
+
+			.panel-heading Antecedentes Laborales
+
+			.panel-body(style="margin: 2px 0px 10px 5px")
+
+				.row
+					.col-lg-4
+						table.table
+							tr
+								td
+									span(style="font-weight: bold") Empresa
+								td 
+									span(style="font-weight: bold") Activida economica
+								td 
+									span(style="font-weight: bold") Cargo
+								td 
+									span(style="font-weight: bold") Factores de riesgo
+								td 
+									span(style="font-weight: bold") Tiempo de exposicion
+								td 
+									span(style="font-weight: bold") Nivel de exposicion
+								td 
+									span(style="font-weight: bold") Controles
+								td 
+									span(style="font-weight: bold") Epp
+
+							tr(ng-repeat="antecedente in exameningreso.ant_laborales") 
+								td {{antecedente.empresa}} 
+								td {{antecedente.activ_economica}} 
+								td {{antecedente.cargo}} 
+								td {{antecedente.fact_riesgo}} 
+								td {{antecedente.tiempo_exposicion}} 
+								td {{antecedente.niv_exposicion}} 
+								td {{antecedente.controles}} 
+								td {{antecedente.epp}}
+
+
+			.panel-heading Accidentes de trabajo
+
+			.panel-body(style="margin: 2px 0px 10px 5px")
+
+				.row
+					.col-lg-4
+						table.table
+							tr
+								td
+									span(style="font-weight: bold") Fecha
+								td 
+									span(style="font-weight: bold") Diagnostico
+								td 
+									span(style="font-weight: bold") Arp
+								td 
+									span(style="font-weight: bold") Organo afectado
+								td 
+									span(style="font-weight: bold") Agente
+								td 
+									span(style="font-weight: bold") Tipo de accidente
+								td 
+									span(style="font-weight: bold") Severidad
+								td 
+									span(style="font-weight: bold") Secuelas
+
+							tr(ng-repeat="accidente in exameningreso.accid_trabajo") 
+								td {{accidente.fecha}} 
+								td {{accidente.diagnostico}} 
+								td {{accidente.arp}} 
+								td {{accidente.organo_afectado}} 
+								td {{accidente.agente}} 
+								td {{accidente.tipo_accidente}} 
+								td {{accidente.severidad}} 
+								td {{accidente.secuelas}}
+
+
+			.panel-heading Enfermedades profesionales
+
+			.panel-body(style="margin: 2px 0px 10px 5px")
+
+				.row
+					.col-lg-4
+						table.table
+							tr
+								td
+									span(style="font-weight: bold") Fecha
+								td 
+									span(style="font-weight: bold") Diagnostico
+								td 
+									span(style="font-weight: bold") Arp
+								td 
+									span(style="font-weight: bold") Organo afectado
+								td 
+									span(style="font-weight: bold") Agente
+								td 
+									span(style="font-weight: bold") Tipo de accidente
+								td 
+									span(style="font-weight: bold") Severidad
+								td 
+									span(style="font-weight: bold") Secuelas
+
+							tr(ng-repeat="accidente in exameningreso.enfermedades_prof") 
+								td {{accidente.fecha}} 
+								td {{accidente.diagnostico}} 
+								td {{accidente.arp}} 
+								td {{accidente.organo_afectado}} 
+								td {{accidente.agente}} 
+								td {{accidente.tipo_accidente}} 
+								td {{accidente.severidad}} 
+								td {{accidente.secuelas}}
+							
+
+			

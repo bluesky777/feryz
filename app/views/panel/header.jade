@@ -74,26 +74,28 @@ ul.list-unstyled.left-elems
 
 
 ul.list-unstyled.right-elems.ng-scope
-	li.profile-drop.hidden-xs.dropdown(dropdown='')
-		a(href='', dropdown-toggle='', aria-haspopup='true', aria-expanded='false')
-			img(ng-src="{{imagesPath + USER.image_nombre}}" alt="{{USER.username}}")
-		ul.dropdown-menu.dropdown-menu-right
-			li
-				a(href='javascript:;')
-					span.ion.ion-person
-					| Perfil
-			li
-				a(href='javascript:;')
-					span.ion.ion-settings 
-					| Configuración
-			li.divider
-			li
-				a(href='javascript:;')
-					span.ion.ion-lock-combination
-					| Imágenes
-			li
-				a(href='' ng-click="logout()")
-					span.ion.ion-power(ng-bind-html="('SALIR' | translate)")
+	li.profile-drop.hidden-xs.dropdown(dropdown='' style="padding-right: 10px")
+
+		md-menu 
+			a(href='' ng-click="openMenu($mdOpenMenu, $event)" )
+				img.imagen-perfil(ng-src="{{imagesPath + USER.image_nombre}}" alt="{{USER.username}}")
+			
+			md-menu-content(style="margin-top: 40px;" width="3")
+				md-menu-item
+					md-button(ng-click="ctrl.redial($event)")
+						i.fa.fa-person
+						| Perfil
+				md-menu-item
+					md-button
+						a(ui-sref="panel.filemanager()")
+							i.fa.fa-lock-combination
+							| Imágenes
+
+				md-menu-divider
+				md-menu-item
+					md-button(ng-click="logout()")
+						i.fa.fa-power
+						| Salir
 
 
 	li.profile-drop.hidden-xs.dropdown()

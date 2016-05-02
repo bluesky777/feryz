@@ -34,7 +34,7 @@ angular.module('feryzApp', [
   #console.log 'Entra al dominio: ', location.hostname
   
   if(location.hostname.match('lalvirtual'))
-    dominio = 'http://lalvirtual.com/wissen/'
+    dominio = 'http://lalvirtual.com/'
     
   if(location.hostname.match('olimpiadaslibertad'))
     dominio = 'http://olimpiadaslibertad.com/'

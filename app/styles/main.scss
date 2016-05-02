@@ -400,4 +400,15 @@ a:hover, a:focus {
 
 }
 
+md-tabs, md-tab-content{
+  overflow-y: visible!important;
+}
+
+.imagen-perfil{
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+    border: 2px solid #eeeeee;
+}
+
 

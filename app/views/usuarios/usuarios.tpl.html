@@ -33,23 +33,39 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-lg-4">
+              <div class="col-lg-3">
                 <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Nombre usuario</label>
                   <input ng-model="usuarioNuevo.username">
                 </md-input-container>
               </div>
-              <div class="col-lg-4">
+              <div class="col-lg-3">
                 <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Email</label>
                   <input ng-model="usuarioNuevo.email">
                 </md-input-container>
               </div>
-              <div class="col-lg-4">
+              <div class="col-lg-3">
                 <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Password</label>
-                  <input ng-model="usuarioNuevo.password">
+                  <label>Contraseña</label>
+                  <input ng-model="usuarioNuevo.password" type="password">
                 </md-input-container>
+              </div>
+              <div class="col-lg-3">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Repita contraseña</label>
+                  <input ng-model="usuarioNuevo.password_confirm" type="password">
+                </md-input-container>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-lg-8 col-sm-12 col-xs-12">
+                <ui-select ng-model="usuarioNuevo.examenes" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
+                  <ui-select-match placeholder="Tipo documento" allow-clear="true">{{$select.selected.tipo}}</ui-select-match>
+                  <ui-select-choices repeat="examen in examenes | filter: $select.search">
+                    <div ng-bind-html="examen.tipo | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
               </div>
             </div>
             <div class="row">
