@@ -16,8 +16,8 @@ angular.module('feryzApp')
 
 
 
-	$http.get('::usuarios/examenes').then((r)->
-		$scope.examenes = r.data
+	$http.get('::usuarios/tipos').then((r)->
+		$scope.tipos_usuarios = r.data
 	, ()->
 		toastr.error 'No se pudo traer los exámenes.'
 	)
@@ -106,28 +106,45 @@ angular.module('feryzApp')
 
 	$scope.actualizarUsuario = (usu)->
 		$http.put('::usuarios/actualizar', $scope.usuarioActualizar).then( (r)->
-			toastr.success 'Actualizado correctamente: ' + r.nombre
+			toastr.success 'Actualizado correctamente: ' + $scope.usuarioActualizar.nombres
 			$scope.editando = false
+
+			$scope.usuarioActualizar.anterior.tipo_usu_id = $scope.usuarioActualizar.tipo_usu_id.id
+			$scope.usuarioActualizar.anterior.tipo_doc = $scope.usuarioActualizar.tipo_doc.id
 		, (r2)->
 			toastr.error 'No se pudo crear', 'Error'
 			console.log 'No se pudo guardar Producto', r2
 		)
 
 	$scope.editarUsuario = (usu)->
+
 		$scope.creando = false
 		$scope.editando = true
-		$scope.usuarioActualizar = usu
+		angular.copy usu, $scope.usuarioActualizar
+		$scope.usuarioActualizar.anterior = usu
+
 		# Configuramos el tipo para el SELECT2
-		tipo = $filter('filter')($scope.tipos_doc, {tipo: $scope.usuarioActualizar.doc_tipo}, true)
-				
+		tipo = $filter('filter')($scope.tipos_doc, {id: $scope.usuarioActualizar.tipo_doc}, true)
+
 		if tipo.length > 0
 			tipo = tipo[0]
 		else
 			tipo = $scope.tipos_doc[0]
 		
 		$scope.usuarioActualizar.tipo_doc = tipo
-
 		
+
+		# Configuramos el tipo usuario para el SELECT2
+		tipo_usu = $filter('filter')($scope.tipos_usuarios, {id: $scope.usuarioActualizar.tipo_usu_id}, true)
+
+		if tipo_usu.length > 0
+			tipo_usu = tipo_usu[0]
+		else
+			tipo_usu = $scope.tipos_usuarios[0]
+		
+		$scope.usuarioActualizar.tipo_usu_id = tipo_usu
+		
+
 		# Configuramos la ciudad nac 
 
 		if $scope.usuarioActualizar.ciudad_nac == null
@@ -168,7 +185,7 @@ angular.module('feryzApp')
 	$scope.traerUsuarios()
 
 
-	btn1 = '<a class="btn btn-default btn-xs" ng-click="grid.appScope.editarUsuario(row.entity)"><md-tooltip md-direction="left">Editar</md-tooltip><i class="fa fa-edit "></i></a>'
+	btn1 = '<a class="btn btn-default btn-xs" ng-click="grid.appScope.editarUsuario(row.entity)"><md-tooltip md-direction="left">Editar</md-tooltip><i class="fa fa-edit "></i>Modificar</a>'
 	btn2 = '<a class="btn btn-default btn-xs" ng-click="grid.appScope.eliminarUsuario(row.entity)"><md-tooltip md-direction="left">Eliminar</md-tooltip><i class="fa fa-times "></i></a>'
 
 	$scope.opcionesGrid = {
@@ -176,7 +193,7 @@ angular.module('feryzApp')
 		enableSorting: true,
 		columnDefs: [
 			{field: 'id', width: 60, enableCellEdit: false}
-			{field: 'Edit', cellTemplate: btn1 + btn2, width: 70, enableCellEdit: false }
+			{field: 'Edición', cellTemplate: btn1 + btn2, width: 120, enableCellEdit: false }
 			{field: 'nombres', minWidth: 100}
 			{field: 'apellidos', minWidth: 100}
 			{field: 'sexo', width: 50}

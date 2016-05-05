@@ -60,10 +60,11 @@
             </div>
             <div class="row">
               <div class="form-group col-lg-8 col-sm-12 col-xs-12">
-                <ui-select ng-model="usuarioNuevo.examenes" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
-                  <ui-select-match placeholder="Tipo documento" allow-clear="true">{{$select.selected.tipo}}</ui-select-match>
-                  <ui-select-choices repeat="examen in examenes | filter: $select.search">
-                    <div ng-bind-html="examen.tipo | highlight: $select.search"></div>
+                <label>Tipo usuario</label>
+                <ui-select ng-model="usuarioNuevo.tipo_usu_id" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
+                  <ui-select-match placeholder="Tipo usuario" allow-clear="true">{{$select.selected.titulo}}</ui-select-match>
+                  <ui-select-choices repeat="tipo in tipos_usuarios | filter: $select.search">
+                    <div ng-bind-html="tipo.titulo | highlight: $select.search"></div>
                   </ui-select-choices>
                 </ui-select>
               </div>
@@ -150,12 +151,6 @@
                     <input id="usuario-fecha-nacimiento" type="text" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="usuarioNuevo.fecha_nac" is-open="data.isOpen2" ng-click="data.isOpen2 = true" max-date="'2020-12-12'" datepicker-options="dateOptions" close-text="Aceptar" current-text="Hoy" clear-text="Borrar" placeholder="Fecha nacimiento" class="form-control active">
                   </div>
                 </div>
-              </div>
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm style="padding-bottom: 0!important" class="md-block">
-                  <label>Titulo</label>
-                  <input ng-model="usuarioNuevo.titulo">
-                </md-input-container>
               </div>
               <div class="col-lg-4">
                 <md-input-container flex-gt-sm style="padding-bottom: 0!important" class="md-block">
@@ -266,6 +261,17 @@
               </div>
             </div>
             <div class="row">
+              <div class="form-group col-lg-8 col-sm-12 col-xs-12">
+                <label>Tipo usuario</label>
+                <ui-select ng-model="usuarioActualizar.tipo_usu_id" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
+                  <ui-select-match placeholder="Tipo usuario" allow-clear="true">{{$select.selected.titulo}}</ui-select-match>
+                  <ui-select-choices repeat="tipo in tipos_usuarios | filter: $select.search">
+                    <div ng-bind-html="tipo.titulo | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+            <div class="row">
               <div class="form-group col-lg-4 col-sm-12 col-xs-12">
                 <ui-select ng-model="usuarioActualizar.tipo_doc" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
                   <ui-select-match placeholder="Tipo documento" allow-clear="true">{{$select.selected.tipo}}</ui-select-match>
@@ -348,18 +354,12 @@
                   </div>
                 </div>
               </div>
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm style="padding-bottom: 0!important" class="md-block">
-                  <label>Titulo</label>
-                  <input ng-model="usuarioActualizar.titulo">
-                </md-input-container>
-              </div>
-              <div class="col-lg-4">
+              <f class="col-lg-4">
                 <md-input-container flex-gt-sm style="padding-bottom: 0!important" class="md-block">
                   <label>Estado Civil</label>
                   <input ng-model="usuarioActualizar.estado_civil">
                 </md-input-container>
-              </div>
+              </f>
             </div>
             <div class="row">
               <div class="col-lg-4">

@@ -24,7 +24,7 @@ nav.site-nav.clearfix(role="navigation")
 
 		li(ui-sref-active="active" )
 			a(href="" ui-sref="panel.usuarios" md-ink-ripple="")
-				i.fa.fa-laptop
+				i.fa.fa-users
 				span.text Usuarios
 
 		li(ui-sref-active="active")
@@ -46,32 +46,6 @@ nav.site-nav.clearfix(role="navigation")
 			a(href="" ui-sref="panel.configuraciones" md-ink-ripple="")
 				i.fa.fa-cog
 				span.text Configuraciones
-
-		li(ui-sref-active="active" ng-if="hasRoleOrPerm('admin', 'tecnico', 'profesor')")
-			a(href="" ui-sref="panel.entidades" md-ink-ripple="")
-				i.fa.fa-bank
-				span.text {{ 'ENTIDADES_MENU' | translate }}
-
-		li(ui-sref-active="active" ng-if="hasRoleOrPerm('admin', 'tecnico', 'profesor')")
-			a(href="" ui-sref="panel.preguntas" md-ink-ripple="")
-				i.fa.fa-question
-				span.text {{ 'PREGUNTAS_MENU' | translate }}
-
-		li(ui-sref-active="active" ng-if="hasRoleOrPerm('admin', 'tecnico', 'profesor')")
-			a(href="" ui-sref="panel.evaluaciones" md-ink-ripple="")
-				i.fa.fa-clipboard
-				span.text {{ 'EVALUACIONES_MENU' | translate }}
-
-		li(ui-sref-active="active" ng-if="hasRoleOrPerm('admin', 'tecnico', 'profesor')")
-			a(href="" ui-sref="panel.usuarios" md-ink-ripple="")
-				i.fa.fa-users
-				span.text {{ 'USERS_MENU' | translate }}
-
-		li(ui-sref-active="active" ng-if="hasRoleOrPerm('admin', 'tecnico', 'profesor')")
-			a(href="" ui-sref="panel.informes" md-ink-ripple="")
-				i.fa.fa-users
-				span.text {{ 'INFORMES_MENU' | translate }}
-
 
 		li(ui-sref-active="active" ng-if="false")
 			a(href="" md-ink-ripple="")

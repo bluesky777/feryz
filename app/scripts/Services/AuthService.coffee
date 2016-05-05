@@ -195,24 +195,15 @@ angular.module('feryzApp')
 		return (authService.isAuthenticated() and (newArr.length > 0))
 
 
-	authService.hasRoleOrPerm = (ReqRoles, RedPermis)->
-		if (!angular.isArray(ReqRoles))
-			if ReqRoles
-				ReqRoles = [ReqRoles]
-			else
-				return false;
-
-		rolesFound = []
-		
-		_.each(ReqRoles, (elem)->
-			rolesFoundTemp = []
-			rolesFoundTemp = $filter('filter')(Perfil.User().roles, {name: elem})
-
-			if rolesFoundTemp
-				if rolesFoundTemp.length > 0
-					rolesFound.push elem
-		)
-		return (rolesFound.length > 0)
+	authService.hasRoleOrPerm = (ReqRole)->
+		if ReqRole == Perfil.User().tipo_usu_id
+			return true
+		else if ReqRole == 2 and Perfil.User().tipo_usu_id == 7
+			return true
+		else if Perfil.User().is_superuser
+			return true
+		else
+			return false
 
 
 

@@ -1,6 +1,6 @@
 angular.module('feryzApp')
 
-.controller('PacientesCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', ($scope, $http, App, $filter, toastr) ->
+.controller('PacientesCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', 'AuthService', ($scope, $http, App, $filter, toastr, AuthService) ->
 	$scope.pacienteEdit = {}
 	$scope.pacienteNuevo = 
 		sexo: 'M'
@@ -11,6 +11,8 @@ angular.module('feryzApp')
 	$scope.creando = false
 	$scope.editando = false
 
+
+	$scope.hasRoleOrPerm = AuthService.hasRoleOrPerm
 
 	$scope.crearPaciente = ()->
 		$scope.creando = true

@@ -201,14 +201,14 @@
 
 								md-button.md-raised.md-primary(type="submit") Guardar
 	
-		.panel.panel-default.panel-hovered.mb20
+		.panel.panel-default.panel-hovered.mb20(ng-if="hasRoleOrPerm(6)")
 
 			.panel-heading Antecedentes laborales
 			.panel-body
 				
 				antecedentes-laborales-dir
 
-		.panel.panel-default.panel-hovered.mb20
+		.panel.panel-default.panel-hovered.mb20(ng-if="hasRoleOrPerm(6)")
 
 			.panel-heading Antecedentes de trabajo
 			.panel-body
@@ -218,7 +218,7 @@
 
 
 
-		.panel.panel-default.panel-hovered.mb20
+		.panel.panel-default.panel-hovered.mb20(ng-if="hasRoleOrPerm(6)")
 
 			.panel-heading Enfermedades profesionales
 			.panel-body
@@ -226,7 +226,7 @@
 				enfermedades-profesionales-dir
 
 
-		.panel.panel-default.panel-hovered.mb20
+		.panel.panel-default.panel-hovered.mb20(ng-if="hasRoleOrPerm(6)")
 
 			.panel-heading Visiometría
 			.panel-body

@@ -411,4 +411,33 @@ md-tabs, md-tab-content{
     border: 2px solid #eeeeee;
 }
 
+.dropzone {
+    border: 2px dashed #e2e2e2;
+    background: #fff;
+    height: 350px;
+    cursor: pointer;
+    padding: 20px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.dropzone .drop-info {
+    text-align: center;
+    margin-top: -20px;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    top: 50%;
+    position: relative;
+}
+.dropzone .drop-info i.fa {
+    font-size: 72px;
+    line-height: 1;
+}
+.imagen-thumb{
+    width: 30px;
+    height: 30px;
+    -webkit-border-radius: 3px;
+    -moz-background-clip: padding;
+    border-radius: 3px;
+    background-clip: padding-box;
+}
 

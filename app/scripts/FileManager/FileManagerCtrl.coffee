@@ -13,9 +13,6 @@ angular.module("feryzApp")
 			imgUsuario:
 				id:		$scope.USER.imagen_id
 				nombre:	$scope.USER.imagen_nombre 
-			imgOficial:
-				id:		$scope.USER.foto_id
-				nombre:	$scope.USER.foto_nombre 
 
 	fixDato()
 
@@ -25,14 +22,19 @@ angular.module("feryzApp")
 	$scope.fileReaderSupported = window.FileReader != null && (window.FileAPI == null || FileAPI.html5 != false);
 	$scope.dato.usuarioElegido = []
 
-	$http.get('::myimages').then((r)->
+	$http.get('::imagenes/usuarios-and-pacientes').then((r)->
 		r = r.data
-		$scope.imagenes_privadas = r.imagenes_privadas
-		$scope.imagenes_publicas = r.imagenes_publicas
-		$scope.dato.imgParaUsuario = r.imagenes_privadas[0]
+		$scope.imagenes = r.imagenes
+		$scope.usuarios = r.usuarios
+		$scope.pacientes = r.pacientes
+		$scope.dato.usuarioElegido = r[0]
+		$scope.dato.imgParaUsuario = r.imagenes[0]
 	, (r2)->
-		toastr.error 'No se trajeron las imágenes.'
+		toastr.error 'No se trajeron las imágenes y usuarios.'
 	)
+
+
+
 
 	$scope.upload =  (files)->
 		$scope.imgFiles = files
@@ -70,7 +72,7 @@ angular.module("feryzApp")
 			return
 
 		$upload.upload({
-			url: App.Server + 'myimages/store' + intactaUrl,
+			url: App.Server + 'imagenes/store' + intactaUrl,
 			#fields: {'username': $scope.username},
 			file: file
 		}).progress( (evt)->
@@ -91,7 +93,7 @@ angular.module("feryzApp")
 
 
 	$scope.pedirCambioUsuario = (imgUsu)->
-		$http.put('::myimages/cambiarimagenperfil/'+$scope.USER.user_id, {imagen_id: imgUsu.id}).then((r)->
+		$http.put('::imagenes/cambiarimagenperfil/'+$scope.USER.user_id, {imagen_id: imgUsu.id}).then((r)->
 			r = r.data
 			Perfil.setImagen(r.imagen_id, imgUsu.nombre)
 			$scope.$emit 'cambianImgs', {image: r}
@@ -101,7 +103,7 @@ angular.module("feryzApp")
 		)
 
 	$scope.pedirCambioOficial = (imgOfi)->
-		$http.put('::myimages/cambiarimagenoficial/'+$scope.USER.user_id, {foto_id: imgOfi.id}).then((r)->
+		$http.put('::imagenes/cambiarimagenoficial/'+$scope.USER.user_id, {foto_id: imgOfi.id}).then((r)->
 			r = r.data
 			if r.asked_by_user_id
 				toastr.info 'Pedido realizado, espera respuesta.'
@@ -116,7 +118,7 @@ angular.module("feryzApp")
 		)
 
 	$scope.cambiarLogoColegio = (imgLogo)->
-		$http.put('::myimages/cambiarlogocolegio', {logo_id: imgLogo.id}).then((r)->
+		$http.put('::imagenes/cambiarlogocolegio', {logo_id: imgLogo.id}).then((r)->
 			toastr.success 'Logo del colegio cambiado'
 		, (r2)->
 			toastr.error 'No se pudo cambiar el logo', 'Problema'
@@ -139,7 +141,7 @@ angular.module("feryzApp")
 		)
 
 	$scope.rotarImagen = (imagen)->
-		$http.put('::myimages/rotarimagen/'+imagen.id).then((r)->
+		$http.put('::imagenes/rotarimagen/'+imagen.id).then((r)->
 			imagen.nombre = ''
 			toastr.success 'Imagen rotada'
 			imagen.nombre = r + '?' + new Date().getTime()
@@ -147,36 +149,6 @@ angular.module("feryzApp")
 			toastr.error 'Imagen no rotada'
 		)
 
-
-	$scope.publicarImagen = (imagen)->
-		$http.put('::myimages/publicar-imagen/'+imagen.id).then((r)->
-			toastr.info 'Ahora la imagen es pública'
-
-			$scope.imagenes_privadas = $filter('filter')($scope.imagenes_privadas, {id: '!'+imagen.id})
-			$scope.imagenes_publicas.push imagen
-
-		, (r2)->
-			toastr.error 'Imagen no publicada'
-		)
-
-
-	$scope.privatizarImagen = (imagen)->
-		$http.put('::myimages/privatizar-imagen/'+imagen.id).then((r)->
-			r = r.data
-			if r.imagen 
-				toastr.warning 'No puede ser logo del año ' + r.imagen.is_logo_of_year
-				return
-
-			toastr.info 'Ahora la imagen es privada'
-
-			if imagen.user_id == $scope.USER.id
-				$scope.imagenes_privadas.push imagen
-			
-			$scope.imagenes_publicas = $filter('filter')($scope.imagenes_publicas, {id: '!'+imagen.id})
-
-		, (r2)->
-			toastr.error 'Imagen no privatizada'
-		)
 
 
 
@@ -189,15 +161,13 @@ angular.module("feryzApp")
 			resolve: 
 				imagen: ()->
 					imagen
-				user_id: ()->
-					$scope.USER.id
 				datos_imagen: ()->
 
 					codigos = 
 						imagen_id: imagen.id
 						user_id: $scope.USER.id
 
-					$http.get('::myimages/datos-imagen', codigos).then((r)->
+					$http.get('::imagenes/datos-imagen', codigos).then((r)->
 						return $scope.datos_imagen = r.data
 					, (r2)->
 						toastr.error 'Error al traer datos de imagen', 'Problema'
@@ -213,79 +183,49 @@ angular.module("feryzApp")
 		)
 
 
-	$http.get('::perfiles/usuariosall').then((r)->
-		r = r.data
-		$scope.usuariosall = r
-		$scope.usuariosprofes = $filter('filter')(r, {tipo: 'Pr'}, true)
-		$scope.dato.usuarioElegido = r[0]
-	, (r2)->
-		toastr.error 'No se pudo traer los usuarios', r2
-	)
-
-
-
-	$http.get('::grupos').then((r)->
-		$scope.grupos = r.data
-	)
-
-	$scope.cambiarImgUnUsuario = (usuarioElegido, imgParaUsuario)->
-		
-		aEnviar = {
-			imgParaUsuario: imgParaUsuario.id
-		}
-		$http.put('::perfiles/cambiarimgunusuario/'+usuarioElegido.user_id, aEnviar).then((r)->
-
-			usuarSelect = $filter('filter')($scope.usuariosall, {user_id: usuarioElegido.user_id})
-			usuarSelect[0].imagen_id = imgParaUsuario.id
-			usuarSelect[0].imagen_nombre = imgParaUsuario.nombre
-
-			toastr.success 'Imagen asignada con éxito'
-		, (r2)->
-			toastr.error 'Error al asignar imagen a usuario', 'Problema'
-		)
 
 	$scope.usuarioSelect = (item, model)->
 		$scope.dato.selectUsuarioModel = item
 
 
-	$scope.cambiarFotoUnAlumno = (alumnoElegido, imgOficialAlumno)->
+	$scope.cambiarFotoUnPaciente = (usuarioElegido, imgPaciente)->
 		aEnviar = {
-			imgOficialAlumno: imgOficialAlumno.id
+			imgPaciente: imgPaciente.id
 		}
-		$http.put('::perfiles/cambiarimgunalumno/'+alumnoElegido.alumno_id, aEnviar).then((r)->
+		$http.put('::perfiles/cambiar-img-paciente/'+usuarioElegido.id, aEnviar).then((r)->
 
-			usuarSelect = $filter('filter')($scope.alumnos, {id: alumnoElegido.id})
-			usuarSelect[0].foto_id = imgOficialAlumno.id
-			usuarSelect[0].foto_nombre = imgOficialAlumno.nombre
+			usuarSelect = $filter('filter')($scope.alumnos, {id: usuarioElegido.id})
+			usuarSelect[0].foto_id = imgPaciente.id
+			usuarSelect[0].foto_nombre = imgPaciente.nombre
 
-			toastr.success 'Foto oficial asignada con éxito'
+			toastr.success 'Foto asignada con éxito'
 		, (r2)->
-			toastr.error 'Error al asignar foto al alumno', 'Problema'
+			toastr.error 'Error al asignar foto al paciente', 'Problema'
 		)
 
 	
 
-	$scope.cambiarFotoUnProfe = (profeElegido, imgOficialProfe)->
+	$scope.cambiarFotoUnUsuario = (usuarioElegido, imgUsuario)->
 		aEnviar = {
-			imgOficialProfe: imgOficialProfe.id
+			imgUsuario: imgUsuario.id
 		}
-		$http.put('::perfiles/cambiarimgunprofe/'+profeElegido.persona_id, aEnviar).then((r)->
+		$http.put('::perfiles/cambiar-img-usuario/'+usuarioElegido.id, aEnviar).then((r)->
 			toastr.success 'Foto oficial asignada con éxito'
 		, (r2)->
-			toastr.error 'Error al asignar foto al profesor', 'Problema'
+			toastr.error 'Error al asignar foto al usuario', 'Problema'
 		)
 
 
 
-	$scope.pedirCambioFirma = (profeElegido, imgFirmaProfe)->
+	$scope.pedirCambioFirma = (usuarioElegido, imgFirma)->
 		
 		aEnviar = {
-			imgFirmaProfe: imgFirmaProfe.id
+			imgFirma: imgFirma.id
 		}
-		$http.put('::perfiles/cambiarfirmaunprofe/'+profeElegido.persona_id, aEnviar).then((r)->
+		$http.put('::perfiles/cambiar-firma/'+usuarioElegido.id, aEnviar).then((r)->
 			toastr.success 'Firma asignada con éxito'
 		, (r2)->
-			toastr.error 'Error al asignar foto al profesor', 'Problema'
+			toastr.error 'Error al asignar firma', 'Problema'
 		)
 
 
