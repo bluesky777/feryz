@@ -105,6 +105,14 @@ angular.module('feryzApp')
 		)
 
 	$scope.actualizarUsuario = (usu)->
+		if $scope.usuarioActualizar.password != $scope.usuarioActualizar.password_confirm
+			toastr.warning 'La contraseña y confirmación no coinciden'
+			return false
+
+		if $scope.usuarioActualizar.password.length < 3
+			toastr.warning 'La contraseña debe tener al menos 3 caracteres'
+			return false
+
 		$http.put('::usuarios/actualizar', $scope.usuarioActualizar).then( (r)->
 			toastr.success 'Actualizado correctamente: ' + $scope.usuarioActualizar.nombres
 			$scope.editando = false
@@ -113,7 +121,6 @@ angular.module('feryzApp')
 			$scope.usuarioActualizar.anterior.tipo_doc = $scope.usuarioActualizar.tipo_doc.id
 		, (r2)->
 			toastr.error 'No se pudo crear', 'Error'
-			console.log 'No se pudo guardar Producto', r2
 		)
 
 	$scope.editarUsuario = (usu)->

@@ -1,10 +1,9 @@
 angular.module("feryzApp")
 
-.controller('RemoveImageCtrl', ['$scope', '$uibModalInstance', 'imagen', 'datos_imagen', 'App', '$http', 'AuthService', 'toastr', ($scope, $modalInstance, imagen, datos_imagen, App, $http, AuthService, toastr)->
+.controller('RemoveImageCtrl', ['$scope', '$uibModalInstance', 'imagen', 'App', '$http', 'AuthService', 'toastr', ($scope, $modalInstance, imagen, App, $http, AuthService, toastr)->
 
 	$scope.imagesPath = App.images + 'perfil/'
 	$scope.imagen = imagen
-	$scope.datos_imagen = datos_imagen
 	$scope.hasRoleOrPerm = AuthService.hasRoleOrPerm
 
 	$scope.ok = ()->

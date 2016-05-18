@@ -76,62 +76,33 @@
 
 			.panel-body
 
-				.col-lg-10.col-xs-12
-					.tickets-container
-						ul.tickets-list
-							li(ng-show="imgFiles.length==0") No has seleccionado ningún archivo
-							li(ng-show="errorMsg!=''") {{errorMsg}}
-							li.ticket-item(ng-repeat="file in imgFiles")
-								.row
-									.ticket-user.col-lg-5.col-sm-12
-										img.user-avatar(ng-src="{{file.dataUrl}}")
-										span.user-name {{file.name}}
-										span.user-company - {{(file.size / 1000000) | number:1 }}MB
-									.ticket-time.col-lg-5.col-sm-6.col-xs-12
-										.divider.hidden-md.hidden-sm.hidden-xs
-										uib-progressbar.progress-xlg.progress-striped.active( value="file.porcentaje")
-											b {{file.porcentaje}}% Completado
+				.row
+					.col-lg-12.col-xs-12
+						form(ng-submit="pedirCambioUsuario(dato.imgUsuario)")
+							.form-group
+								label Imagen de usuario
+								ui-select(ng-model="dato.imgUsuario" on-select="imagenSelect($item, $model)" theme="select2" style="min-width: 200px;")
+									ui-select-match(placeholder="Imagen usuario") 
+										img(ng-src="{{perfilPath + $select.selected.nombre}}" style="width:25px; height:25px;")
+										small(ng-bind-html="' ' + $select.selected.nombre")
+									ui-select-choices(repeat="imagen in imagenes | filter: {nombre: $select.search}")
+										img(ng-src="{{perfilPath + imagen.nombre}}" style="width:25px; height:25px;")
+										small(ng-bind-html="' ' + imagen.nombre | highlight: $select.search")
 
-									.ticket-type.col-lg-2.col-sm-6.col-xs-1
-										span.divider.hidden-xs
-										span.type(ng-show="file.porcentaje==100") Completado
-										span.type(ng-show="file.porcentaje<100") Subiendo...
-										span.type(ng-show="file.porcentaje==undefined") problema.
-									.ticket-state.bg-palegreen(ng-show="file.porcentaje==100")
-										i.fa.fa-check
-									.ticket-state.bg-palegreen(ng-show="file.porcentaje<100")
-										i.fa.fa-cloud-upload
-									.ticket-state.bg-yellow(ng-show="file.porcentaje==undefined")
-										i.fa.fa-info
-			
-			hr.wide
-			.row
-				.col-lg-12.col-xs-12
-					form(ng-submit="pedirCambioUsuario(dato.imgUsuario)")
-						.form-group
-							label Imagen de usuario
-							ui-select(ng-model="dato.imgUsuario" on-select="imagenSelect($item, $model)" theme="select2" style="min-width: 200px;")
-								ui-select-match(placeholder="Imagen usuario") 
-									img(ng-src="{{perfilPath + $select.selected.nombre}}" style="width:25px; height:25px;")
-									small(ng-bind-html="' ' + $select.selected.nombre")
-								ui-select-choices(repeat="imagen in imagenes | filter: {nombre: $select.search}")
-									img(ng-src="{{perfilPath + imagen.nombre}}" style="width:25px; height:25px;")
-									small(ng-bind-html="' ' + imagen.nombre | highlight: $select.search")
+								input.btn.btn-primary.shiny(type="submit" ng-submit="pedirCambioUsuario(dato.imgUsuario)" value="Cambiar perfil") 
 
-							input.btn.btn-primary.shiny(type="submit" ng-submit="pedirCambioUsuario(dato.imgUsuario)" value="Cambiar perfil") 
+						form(ng-submit="cambiarLogo(dato.imgLogo)" ng-show="hasRoleOrPerm('admin')")
+							.form-group
+								label Logo de la IPS
+								ui-select(ng-model="dato.imgLogo" on-select="imagenSelect($item, $model)" theme="select2" style="min-width: 200px;")
+									ui-select-match(placeholder="Logo de la IPS") 
+										img(ng-src="{{perfilPath + $select.selected.nombre}}" style="width:25px; height:25px;")
+										small(ng-bind-html="' ' + $select.selected.nombre")
+									ui-select-choices(repeat="imagen in imagenes | filter: {nombre: $select.search}")
+										img(ng-src="{{perfilPath + imagen.nombre}}" style="width:25px; height:25px;")
+										small(ng-bind-html="' ' + imagen.nombre | highlight: $select.search")
 
-					form(ng-submit="cambiarLogoIPS(dato.imgLogo)" ng-show="hasRoleOrPerm('admin')")
-						.form-group
-							label Logo de la IPS
-							ui-select(ng-model="dato.imgLogo" on-select="imagenSelect($item, $model)" theme="select2" style="min-width: 200px;")
-								ui-select-match(placeholder="Logo de la IPS") 
-									img(ng-src="{{perfilPath + $select.selected.nombre}}" style="width:25px; height:25px;")
-									small(ng-bind-html="' ' + $select.selected.nombre")
-								ui-select-choices(repeat="imagen in imagenes | filter: {nombre: $select.search}")
-									img(ng-src="{{perfilPath + imagen.nombre}}" style="width:25px; height:25px;")
-									small(ng-bind-html="' ' + imagen.nombre | highlight: $select.search")
-
-							input.btn.btn-primary.shiny(type="submit" ng-submit="cambiarLogoIPS(dato.imgLogo)" value="Cambiar logo") 
-					
+								input.btn.btn-primary.shiny(type="submit" ng-submit="cambiarLogoIPS(dato.imgLogo)" value="Cambiar logo") 
+						
 
 											

@@ -1,6 +1,6 @@
 angular.module('feryzApp')
 
-.controller('PacientesCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', 'AuthService', ($scope, $http, App, $filter, toastr, AuthService) ->
+.controller('PacientesCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', 'AuthService','$state', ($scope, $http, App, $filter, toastr, AuthService, $state) ->
 	$scope.pacienteEdit = {}
 	$scope.pacienteNuevo = 
 		sexo: 'M'
@@ -13,6 +13,7 @@ angular.module('feryzApp')
 
 
 	$scope.hasRoleOrPerm = AuthService.hasRoleOrPerm
+
 
 	$scope.crearPaciente = ()->
 		$scope.creando = true
@@ -124,21 +125,17 @@ angular.module('feryzApp')
 
 
 
-		$http.put('::antecedentes-laborales/paciente', {paciente_id: pac.id}).then((r)->
-			$scope.pacienteEdit.antecedentesLaborales = r.data
+		$http.put('::pacientes/datos', {paciente_id: pac.id}).then((r)->
+			r = r.data
+			$scope.pacienteEdit.antecedentesLaborales = r.antLab
+			$scope.pacienteEdit.enfermedadesProfesionales = r.enfProf
+			$scope.pacienteEdit.accidentesTrabajo = r.accTrab
+			$scope.pacienteEdit.visiometria = r.visiometria
 		, (r2)->
 			console.log 'No se pudo traer los antecedentes', r2
 		)		
-		$http.put('::accidentes-trabajo/paciente', {paciente_id: pac.id}).then((r)->
-			$scope.pacienteEdit.accidentesTrabajo = r.data
-		, (r2)->
-			console.log 'No se pudo traer los accidentes', r2
-		)
-		$http.put('::enfermedades-profesionales/paciente', {paciente_id: pac.id}).then((r)->
-			$scope.pacienteEdit.enfermedadesProfesionales = r.data
-		, (r2)->
-			console.log 'No se pudo traer los accidentes', r2
-		)
+
+		console.log $scope.pacienteEdit
 
 	########################	!!! EDITAR PACIENTE 	  ##################
 	########################################################################
@@ -156,15 +153,15 @@ angular.module('feryzApp')
 	$scope.traerPacientes()
 
 
-	btn1 = '<a class="btn btn-default btn-xs" ng-click="grid.appScope.editarPaciente(row.entity)"><md-tooltip md-direction="left">Editar</md-tooltip><i class="fa fa-edit "></i></a>'
+	btn1 = '<a class="btn btn-primary btn-xs" ng-click="grid.appScope.editarPaciente(row.entity)">MODIFICAR <md-tooltip md-direction="left">Editar</md-tooltip><i class="fa fa-edit "></i></a>'
 	btn2 = '<a class="btn btn-default btn-xs" ng-click="grid.appScope.eliminarPaciente(row.entity)"><md-tooltip md-direction="left">Eliminar</md-tooltip><i class="fa fa-times "></i></a>'
 
 	$scope.opcionesGrid = {
 		showGridFooter: true,
 		enableSorting: true,
 		columnDefs: [
-			{field: 'id', width: 60, enableCellEdit: false}
-			{field: 'Edit', cellTemplate: btn1 + btn2, width: 70, enableCellEdit: false }
+			{field: 'id', width: 40, enableCellEdit: false}
+			{field: 'Editar', cellTemplate: btn1 + btn2, width: 145, enableCellEdit: false }
 			{field: 'nombres', minWidth: 100}
 			{field: 'apellidos', minWidth: 100}
 			{field: 'sexo', width: 50}

@@ -305,6 +305,55 @@ a:hover, a:focus {
 
 
 
+@page cartahorizontal{ 
+    -webkit-transform: rotate(-90deg);
+    -moz-transform:rotate(-90deg);
+    filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+    margin: 5mm 25mm 25mm 5mm;
+    background-color: white;
+}
+@page oficiohorizontal{ 
+    -webkit-transform: rotate(-90deg);
+    -moz-transform:rotate(-90deg);
+    filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+    margin: 5mm 25mm 25mm 5mm;
+    background-color: white;
+}
+@page cartavertical{ 
+    size: portrait; 
+    margin: 2cm;
+    background-color: white;
+    
+}
+
+
+.page-vertical{
+    page: cartavertical;
+    width: 22cm;
+    margin-bottom: 0px;
+    border: 0px;
+    counter-reset: numpagina;
+    background-color: white; 
+}
+.page-carta-horizontal{
+    page: cartahorizontal;
+    width: 31cm;
+    margin-bottom: 0px;
+    border: 0px;
+    background-color: white; 
+}
+.page-oficio-horizontal{
+    page: oficiohorizontal;
+    width: 31cm;
+    margin-bottom: 0px;
+    border: 0px;
+    background-color: white; 
+}
+
+
+
+
+
 
 
 
@@ -316,19 +365,19 @@ a:hover, a:focus {
         -moz-transform:rotate(-90deg);
         filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
         margin: 5mm 25mm 25mm 5mm;
-        background-color: white;
+        background-color: #ff0000;
     }
     @page oficiohorizontal{ 
         -webkit-transform: rotate(-90deg);
         -moz-transform:rotate(-90deg);
         filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
         margin: 5mm 25mm 25mm 5mm;
-        background-color: white;
+        background-color: #ff0000;
     }
     @page cartavertical{ 
         size: portrait; 
         margin: 2cm;
-        background-color: white;
+        background-color: #ff0000;
         
     }
     
@@ -339,33 +388,50 @@ a:hover, a:focus {
         margin-bottom: 0px;
         border: 0px;
         counter-reset: numpagina;
+        background-color: #ff0000;
     }
     .page-carta-horizontal{
         page: cartahorizontal;
         width: 31cm;
         margin-bottom: 0px;
         border: 0px;
+        background-color: #ff0000;
     }
     .page-oficio-horizontal{
         page: oficiohorizontal;
         width: 31cm;
         margin-bottom: 0px;
         border: 0px;
+        background-color: #ff0000;
     }
 
     .popover{
         display: none!important;
+        background-color: #ff0000;
     }
 
     .content-container{
         margin-left: 0px!important;
+        background-color: #ff0000;
     }
     .page-dashboard{
         padding: 0px!important;
+        background-color: #ff0000;
+
     }
 
+    .row{
+      padding: 0px !important;
+      margin: 0px !important;
+    }
+
+    .exameningreso{
+      width: 100% !important;
+
+    }
     table{
         border: 1px solid #000!important;
+
     }
     table > thead > tr > td{
         border-bottom-width: 2px!important;
@@ -396,10 +462,21 @@ a:hover, a:focus {
     .salto-pagina, .resumen-perdidas, .footer-boletin {
         page-break-after: always;
     }
+    .page-wrap{
+      width: 100% !important;
+      font-size: 9pt !important;
+    }
 
+    table.antecedentes thead th{
+      padding: 0 4px;
+      text-align: center;
+    }
 
 }
-
+ table.antecedentes thead th{
+      padding: 0 4px;
+      text-align: center;
+    }
 md-tabs, md-tab-content{
   overflow-y: visible!important;
 }
@@ -439,5 +516,16 @@ md-tabs, md-tab-content{
     -moz-background-clip: padding;
     border-radius: 3px;
     background-clip: padding-box;
+}
+.negrita{
+  font-weight: bold
+}
+.btn-pequenito{
+    min-height: 25px;
+    margin: 0px;
+    line-height: 0px;
+}
+.margenarriba{
+  margin: 0px 0px 10px 0px;
 }
 

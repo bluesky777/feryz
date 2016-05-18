@@ -12,7 +12,7 @@ angular.module("feryzApp")
 		$scope.dato = 
 			imgUsuario:
 				id:		$scope.USER.imagen_id
-				nombre:	$scope.USER.imagen_nombre 
+				nombre:	$scope.USER.image_nombre 
 
 	fixDato()
 
@@ -80,10 +80,7 @@ angular.module("feryzApp")
 			file.porcentaje = progressPercentage
 			#console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name, evt.config)
 		).success( (data, status, headers, config)->
-			if $scope.subir_intacta.intacta
-				$scope.imagenes_publicas.push data
-			else
-				$scope.imagenes_privadas.push data
+			$scope.imagenes.push data
 		).error((r2)->
 			console.log 'Falla uploading: ', r2
 		).xhr((xhr)->
@@ -93,7 +90,7 @@ angular.module("feryzApp")
 
 
 	$scope.pedirCambioUsuario = (imgUsu)->
-		$http.put('::imagenes/cambiarimagenperfil/'+$scope.USER.user_id, {imagen_id: imgUsu.id}).then((r)->
+		$http.put('::imagenes/cambiar-imagen-perfil/'+$scope.USER.id, {image_id: imgUsu.id}).then((r)->
 			r = r.data
 			Perfil.setImagen(r.imagen_id, imgUsu.nombre)
 			$scope.$emit 'cambianImgs', {image: r}
@@ -102,23 +99,9 @@ angular.module("feryzApp")
 			toastr.error 'No se pudo cambiar imagen', 'Problema'
 		)
 
-	$scope.pedirCambioOficial = (imgOfi)->
-		$http.put('::imagenes/cambiarimagenoficial/'+$scope.USER.user_id, {foto_id: imgOfi.id}).then((r)->
-			r = r.data
-			if r.asked_by_user_id
-				toastr.info 'Pedido realizado, espera respuesta.'
-			else if r == 'En espera'
-				toastr.info 'Espera respuesta.'
-			else
-				Perfil.setOficial(r.foto_id, imgOfi.nombre)
-				$scope.$emit 'cambianImgs', {foto: r}
-				toastr.success 'Foto oficial cambiada'
-		, (r2)->
-			toastr.error 'No se pudo cambiar foto', 'Problema'
-		)
 
-	$scope.cambiarLogoColegio = (imgLogo)->
-		$http.put('::imagenes/cambiarlogocolegio', {logo_id: imgLogo.id}).then((r)->
+	$scope.cambiarLogo = (imgLogo)->
+		$http.put('::imagenes/cambiar-logo', {logo_id: imgLogo.id}).then((r)->
 			toastr.success 'Logo del colegio cambiado'
 		, (r2)->
 			toastr.error 'No se pudo cambiar el logo', 'Problema'
@@ -130,15 +113,6 @@ angular.module("feryzApp")
 	$scope.fotoSelect = (item, model)->
 		#console.log 'imagenSelect: ', item, model
 
-	$scope.grupoSelect = (item, model)->
-		#console.log 'grupoSelect: ', item, model
-		$http.get('::grupos/listado/'+item.id).then((r)->
-			r = r.data
-			$scope.alumnos = r
-			$scope.dato.alumnoElegido = r[0]
-		, (r2)->
-			toastr.error 'No se pudo traer los usuarios'
-		)
 
 	$scope.rotarImagen = (imagen)->
 		$http.put('::imagenes/rotarimagen/'+imagen.id).then((r)->
@@ -161,25 +135,10 @@ angular.module("feryzApp")
 			resolve: 
 				imagen: ()->
 					imagen
-				datos_imagen: ()->
-
-					codigos = 
-						imagen_id: imagen.id
-						user_id: $scope.USER.id
-
-					$http.get('::imagenes/datos-imagen', codigos).then((r)->
-						return $scope.datos_imagen = r.data
-					, (r2)->
-						toastr.error 'Error al traer datos de imagen', 'Problema'
-						return {}
-					)
 
 		})
 		modalInstance.result.then( (imag)->
-			if imag.publica
-				$scope.imagenes_publicas = $filter('filter')($scope.imagenes_publicas, {id: '!'+imag.id})
-			else
-				$scope.imagenes_privadas = $filter('filter')($scope.imagenes_privadas, {id: '!'+imag.id})
+			$scope.imagenes = $filter('filter')($scope.imagenes, {id: '!'+imag.id})
 		)
 
 

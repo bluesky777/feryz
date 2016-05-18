@@ -17,7 +17,7 @@ angular.module('feryzApp')
 
 	setImagen: (imagen_id, imagen_nombre)->
 		user.imagen_id = imagen_id
-		user.imagen_nombre = imagen_nombre
+		user.image_nombre = imagen_nombre
 
 	deleteUser: ()->
 		user = {}

@@ -12,4 +12,6 @@ angular.module('feryzApp')
 
 			})
 
+		return
+
 	])

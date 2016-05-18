@@ -100,10 +100,10 @@ ul.list-unstyled.right-elems.ng-scope
 
 	li.profile-drop.hidden-xs.dropdown()
 		a(href='' ng-click="logout()" style="color: #fff")
-			i.fa.fa-sign-out(ng-bind-html="('SALIR' | translate)") 
+			i.fa.fa-sign-out(ng-bind-html="'Salir'") 
 			
-	//li.floating-sidebar(ng-class="{'open': floatingSidebar}")
-	li.floating-sidebar(ng-class="{'open': floatingSidebar}")
+
+	li.floating-sidebar(ng-class="{'open': floatingSidebar}" ng-if="true")
 		a(href="" ng-click='toggleFloatingSidebar()')
 			i.fa.fa-th
 		.sidebar-wrap.ps-container.ps-active-y(custom-scrollbar='')
@@ -113,7 +113,7 @@ ul.list-unstyled.right-elems.ng-scope
 					.chat-tab.clearfix
 						h5.title.mt0.mb30 Online
 						.user-container.mb15
-							img(src='images/perfil/pruebaadmin.jpg', alt='')
+							img(ng-src="{{imagesPath + USER.image_nombre}}" alt="{{USER.username}}")
 							.desc
 								p.mb0 John Wick
 								p.xsmall
@@ -121,7 +121,7 @@ ul.list-unstyled.right-elems.ng-scope
 									| San Franciso, USA
 							span.ion.ion-record.avail.right.on
 						.user-container.mb15
-							img(src='images/perfil/pruebaadmin.jpg', alt='')
+							img(ng-src="{{imagesPath + USER.image_nombre}}" alt="{{USER.username}}")
 							.desc
 								p.mb0 John Wick
 								p.xsmall

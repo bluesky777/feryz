@@ -11,10 +11,10 @@ header.hidden-print.site-head.fixedHeader#site-head(ng-class="{'fixedHeader': fi
 		custom-scrollbar="" ng-include=" 'views/panel/nav.tpl.html' ")
 		.nav-head
 
-	div.content-container.fixedHeader(ng-class="{'nav-expand': navFull, 'fixedHeader': fixedHeader}" id="content")
+	div.content-container.fixedHeader.page-wrap(ng-class="{'nav-expand': navFull, 'fixedHeader': fixedHeader}" id="content")
 		.page.page-dashboard
 
-			.page-wrap(ui-view="contenido_panel" style="overflow: auto")
+			div(ui-view="contenido_panel" style="overflow: auto")
 
 				iniciar-dir(eventoactual="evento_actual" user="USER")
 

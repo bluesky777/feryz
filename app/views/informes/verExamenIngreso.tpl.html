@@ -1,222 +1,164 @@
 
-<div class="row">
+<div ng-class="{'page-carta-horizontal': config.orientacion=='carta_horizontal', 'page-oficio-horizontal': config.orientacion=='oficio_horizontal','page-vertical': config.orientacion=='vertical', 'salto-pagina': $parent.$last==false }" class="row">
   <div class="col-lg-12">
-    <div class="panel panel-default panel-hovered mb20">
-      <div class="panel-heading">Paciente</div>
-      <div style="margin: 2px 0px 10px 5px" class="panel-body">
-        <div class="row">
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Departamento:</span><span>{{exameningreso.departamento}}	</span></Div>
-          </div>
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Ciudad: </span><span>{{exameningreso.ciudad}}</span></Div>
-          </div>
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Fecha: </span><span>{{exameningreso.fecha_ingreso}}</span></Div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Empresa usuaria:</span><span>	{{exameningreso.empresa_usuaria}}	</span></Div>
-          </div>
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Empresa temporal: </span><span>{{exameningreso.empresa_temporal}}</span></Div>
-          </div>
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Activida economica: </span><span>{{exameningreso.actividad_economica}}</span></Div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Nombres: </span><span>{{exameningreso.nombres}}</span></Div>
-          </div>
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Apellidos: </span><span>{{exameningreso.apellidos}}</span></Div>
-          </div>
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Documento de identidad: </span><span>{{exameningreso.doc_identidad}}</span></Div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Genero: </span><span>{{exameningreso.sexo}}</span></Div>
-          </div>
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Direccion: </span><span>{{exameningreso.direccion}}</span></Div>
-          </div>
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Telefono: </span><span>{{exameningreso.telefono}}</span></Div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Telefono contacto: </span><span>{{exameningreso.telefono_contacto}}</span></Div>
-          </div>
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Fecha de nacimiento: </span><span>{{exameningreso.fecha_nac}}</span></Div>
-          </div>
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Pais de nacimiento: </span><span>{{exameningreso.pais}}</span></Div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Departamento de nacimiento: </span><span>{{exameningreso.departamento}}</span></Div>
-          </div>
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Ciudad de nacimiento: </span><span>{{exameningreso.ciudad}}</span></Div>
-          </div>
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Estado civil: </span><span>{{exameningreso.estado_civil}}</span></Div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Nivel escolaridad: </span><span>{{exameningreso.nivel_escolaridad}}</span></Div>
-          </div>
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Edad: </span><span>{{exameningreso.edad}}</span></Div>
-          </div>
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Profesion / oficio: </span><span>{{exameningreso.profesion}}</span></Div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Grupo sanguineo: </span><span>{{exameningreso.grupo_sanguineo}}</span></Div>
-          </div>
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">RH: </span><span>{{exameningreso.rh}}</span></Div>
-          </div>
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Eps: </span><span>{{exameningreso.eps}}</span></Div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Arp: </span><span>{{exameningreso.arp}}</span></Div>
-          </div>
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Afp: </span><span>{{exameningreso.afp}}</span></Div>
-          </div>
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Fecha ingreso: </span><span>{{exameningreso.fecha_ingreso}}</span></Div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Cargo: </span><span>{{exameningreso.cargo}}</span></Div>
-          </div>
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Descripcion de cargo: </span><span>{{exameningreso.descripcion_cargo}}</span></Div>
-          </div>
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Motivo consulta: </span><span>{{exameningreso.motivo_consulta}}</span></Div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Antecedentes patologicos: </span><span>{{exameningreso.antec_patologicos}}</span></Div>
-          </div>
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Antecedentes hospitalarios: </span><span>{{exameningreso.antec_hospitalarios}}</span></Div>
-          </div>
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Antecedentes quirurgicos: </span><span>{{exameningreso.antec_quirurgicos}}</span></Div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-4">
-            <Div style="margin: 0px 0px 10px 0px"><span style="font-weight: bold">Antecedentes familiares: </span><span>{{exameningreso.antec_familiares}}</span></Div>
-          </div>
-        </div>
+    <div class="row">
+      <div class="col-lg-12"><img style="width: 21cm" ng-src="{{imagesPath + 'user_1/encabezado_certificado.jpg'}}"></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-sm-4 col-xs-4"><span class="negrita">Departamento:</span><span>{{exameningreso.departamento}}	</span></div>
+      <div class="col-lg-4 col-sm-4 col-xs-4"><span class="negrita">Ciudad: </span><span>{{exameningreso.ciudad}}</span></div>
+      <div class="col-lg-4 col-sm-4 col-xs-4"><span class="negrita">Fecha: </span><span>{{exameningreso.fecha_ingreso}}</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Empresa usuaria:</span><span>	{{exameningreso.empresa_usuaria}}	</span></div>
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Empresa temporal: </span><span>{{exameningreso.empresa_temporal}}</span></div>
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Activida economica: </span><span>{{exameningreso.actividad_economica}}</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-xs-4">
+        <div class="margenarriba"><span class="negrita">Nombres: </span><span>{{exameningreso.nombres}}</span></div>
       </div>
-      <div class="panel-heading">Antecedentes Laborales</div>
-      <div style="margin: 2px 0px 10px 5px" class="panel-body">
-        <div class="row">
-          <div class="col-lg-4">
-            <table class="table">
-              <tr>
-                <td><span style="font-weight: bold">Empresa</span></td>
-                <td> <span style="font-weight: bold">Activida economica</span></td>
-                <td> <span style="font-weight: bold">Cargo</span></td>
-                <td> <span style="font-weight: bold">Factores de riesgo</span></td>
-                <td> <span style="font-weight: bold">Tiempo de exposicion</span></td>
-                <td> <span style="font-weight: bold">Nivel de exposicion</span></td>
-                <td> <span style="font-weight: bold">Controles</span></td>
-                <td> <span style="font-weight: bold">Epp</span></td>
-              </tr>
-              <tr ng-repeat="antecedente in exameningreso.ant_laborales"> 
-                <td>{{antecedente.empresa}} </td>
-                <td>{{antecedente.activ_economica}} </td>
-                <td>{{antecedente.cargo}} </td>
-                <td>{{antecedente.fact_riesgo}} </td>
-                <td>{{antecedente.tiempo_exposicion}} </td>
-                <td>{{antecedente.niv_exposicion}} </td>
-                <td>{{antecedente.controles}} </td>
-                <td>{{antecedente.epp}}</td>
-              </tr>
-            </table>
-          </div>
-        </div>
+      <div class="col-lg-4 col-xs-4">
+        <div class="margenarriba"><span class="negrita">Apellidos: </span><span>{{exameningreso.apellidos}}</span></div>
       </div>
-      <div class="panel-heading">Accidentes de trabajo</div>
-      <div style="margin: 2px 0px 10px 5px" class="panel-body">
-        <div class="row">
-          <div class="col-lg-4">
-            <table class="table">
-              <tr>
-                <td><span style="font-weight: bold">Fecha</span></td>
-                <td> <span style="font-weight: bold">Diagnostico</span></td>
-                <td> <span style="font-weight: bold">Arp</span></td>
-                <td> <span style="font-weight: bold">Organo afectado</span></td>
-                <td> <span style="font-weight: bold">Agente</span></td>
-                <td> <span style="font-weight: bold">Tipo de accidente</span></td>
-                <td> <span style="font-weight: bold">Severidad</span></td>
-                <td> <span style="font-weight: bold">Secuelas</span></td>
-              </tr>
-              <tr ng-repeat="accidente in exameningreso.accid_trabajo"> 
-                <td>{{accidente.fecha}} </td>
-                <td>{{accidente.diagnostico}} </td>
-                <td>{{accidente.arp}} </td>
-                <td>{{accidente.organo_afectado}} </td>
-                <td>{{accidente.agente}} </td>
-                <td>{{accidente.tipo_accidente}} </td>
-                <td>{{accidente.severidad}} </td>
-                <td>{{accidente.secuelas}}</td>
-              </tr>
-            </table>
-          </div>
-        </div>
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Documento de identidad: </span><span>{{exameningreso.doc_identidad}}</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Genero: </span><span>{{exameningreso.sexo}}</span></div>
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Direccion: </span><span>{{exameningreso.direccion}}</span></div>
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Telefono: </span><span>{{exameningreso.telefono}}</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Telefono contacto: </span><span>{{exameningreso.telefono_contacto}}</span></div>
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Fecha de nacimiento: </span><span>{{exameningreso.fecha_nac}}</span></div>
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Pais de nacimiento: </span><span>{{exameningreso.pais}}</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Departamento de nacimiento: </span><span>{{exameningreso.departamento}}</span></div>
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Ciudad de nacimiento: </span><span>{{exameningreso.ciudad}}</span></div>
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Estado civil: </span><span>{{exameningreso.estado_civil}}</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Nivel escolaridad: </span><span>{{exameningreso.nivel_escolaridad}}</span></div>
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Edad: </span><span>{{exameningreso.edad}}</span></div>
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Profesion / oficio: </span><span>{{exameningreso.profesion}}</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Grupo sanguineo: </span><span>{{exameningreso.grupo_sanguineo}}</span></div>
+      <div class="col-lg-4 col-xs-4"><span class="negrita">RH: </span><span>{{exameningreso.rh}}</span></div>
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Eps: </span><span>{{exameningreso.eps}}</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Arp: </span><span>{{exameningreso.arp}}</span></div>
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Afp: </span><span>{{exameningreso.afp}}</span></div>
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Fecha ingreso: </span><span>{{exameningreso.fecha_ingreso}}</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Cargo: </span><span>{{exameningreso.cargo}}</span></div>
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Descripcion de cargo: </span><span>{{exameningreso.descripcion_cargo}}</span></div>
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Motivo consulta: </span><span>{{exameningreso.motivo_consulta}}</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Antecedentes patologicos: </span><span>{{exameningreso.antec_patologicos}}</span></div>
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Antecedentes hospitalarios: </span><span>{{exameningreso.antec_hospitalarios}}</span></div>
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Antecedentes quirurgicos: </span><span>{{exameningreso.antec_quirurgicos}}</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Antecedentes familiares: </span><span>{{exameningreso.antec_familiares}}</span></div>
+    </div>
+  </div>
+  <div class="panel-heading">Antecedentes Laborales</div>
+  <div style="margin: 2px 0px 10px 5px" class="panel-body">
+    <div class="row">
+      <div class="col-lg-4 col-xs-4">
+        <table border="1px solid" class="antecedentes">
+          <thead>
+            <tr>
+              <th><span class="negrita">Empresa</span></th>
+              <th> <span class="negrita">Activida economica</span></th>
+              <th> <span class="negrita">Cargo</span></th>
+              <th style="min-width:100px; "> <span class="negrita">Factores de riesgo</span></th>
+              <th><span class="negrita">Tiempo de exposicion</span></th>
+              <th> <span class="negrita">Nivel de exposicion</span></th>
+              <th> <span class="negrita">Controles</span></th>
+              <th> <span class="negrita">Epp</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="antecedente in exameningreso.ant_laborales"> 
+              <td>{{antecedente.empresa}} </td>
+              <td>{{antecedente.activ_economica}} </td>
+              <td>{{antecedente.cargo}} </td>
+              <td>{{antecedente.fact_riesgo}} </td>
+              <td>{{antecedente.tiempo_exposicion}} </td>
+              <td>{{antecedente.niv_exposicion}} </td>
+              <td>{{antecedente.controles}} </td>
+              <td>{{antecedente.epp}}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="panel-heading">Enfermedades profesionales</div>
-      <div style="margin: 2px 0px 10px 5px" class="panel-body">
-        <div class="row">
-          <div class="col-lg-4">
-            <table class="table">
-              <tr>
-                <td><span style="font-weight: bold">Fecha</span></td>
-                <td> <span style="font-weight: bold">Diagnostico</span></td>
-                <td> <span style="font-weight: bold">Arp</span></td>
-                <td> <span style="font-weight: bold">Organo afectado</span></td>
-                <td> <span style="font-weight: bold">Agente</span></td>
-                <td> <span style="font-weight: bold">Tipo de accidente</span></td>
-                <td> <span style="font-weight: bold">Severidad</span></td>
-                <td> <span style="font-weight: bold">Secuelas</span></td>
-              </tr>
-              <tr ng-repeat="accidente in exameningreso.enfermedades_prof"> 
-                <td>{{accidente.fecha}} </td>
-                <td>{{accidente.diagnostico}} </td>
-                <td>{{accidente.arp}} </td>
-                <td>{{accidente.organo_afectado}} </td>
-                <td>{{accidente.agente}} </td>
-                <td>{{accidente.tipo_accidente}} </td>
-                <td>{{accidente.severidad}} </td>
-                <td>{{accidente.secuelas}}</td>
-              </tr>
-            </table>
-          </div>
-        </div>
+    </div>
+  </div>
+  <div class="panel-heading">Accidentes de trabajo</div>
+  <div style="margin: 2px 0px 10px 5px" class="panel-body">
+    <div class="row">
+      <div class="col-lg-4">
+        <table border="1px solid" class="antecedentes">
+          <thead>
+            <tr>
+              <th><span class="negrita">Fecha</span></th>
+              <th> <span class="negrita">Diagnostico</span></th>
+              <th> <span class="negrita">Arp</span></th>
+              <th> <span class="negrita">Organo afectado</span></th>
+              <th> <span class="negrita">Agente</span></th>
+              <th> <span class="negrita">Tipo de accidente</span></th>
+              <th> <span class="negrita">Severidad</span></th>
+              <th> <span class="negrita">Secuelas</span></th>
+            </tr>
+          </thead>
+          <tr ng-repeat="accidente in exameningreso.accid_trabajo"> 
+            <td>{{accidente.fecha}} </td>
+            <td>{{accidente.diagnostico}} </td>
+            <td>{{accidente.arp}} </td>
+            <td>{{accidente.organo_afectado}} </td>
+            <td>{{accidente.agente}} </td>
+            <td>{{accidente.tipo_accidente}} </td>
+            <td>{{accidente.severidad}} </td>
+            <td>{{accidente.secuelas}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="panel-heading">Enfermedades profesionales</div>
+  <div style="margin: 2px 0px 10px 5px" class="panel-body">
+    <div class="row">
+      <div class="col-lg-4">
+        <table border="1px solid" class="antecedentes">
+          <thead>
+            <tr>
+              <th><span class="negrita">Fecha</span></th>
+              <th> <span class="negrita">Diagnostico</span></th>
+              <th> <span class="negrita">Arp</span></th>
+              <th> <span class="negrita">Organo afectado</span></th>
+              <th> <span class="negrita">Agente</span></th>
+              <th> <span class="negrita">Tipo de accidente</span></th>
+              <th> <span class="negrita">Severidad</span></th>
+              <th> <span class="negrita">Secuelas</span></th>
+            </tr>
+          </thead>
+          <tr ng-repeat="accidente in exameningreso.enfermedades_prof"> 
+            <td>{{accidente.fecha}} </td>
+            <td>{{accidente.diagnostico}} </td>
+            <td>{{accidente.arp}} </td>
+            <td>{{accidente.organo_afectado}} </td>
+            <td>{{accidente.agente}} </td>
+            <td>{{accidente.tipo_accidente}} </td>
+            <td>{{accidente.severidad}} </td>
+            <td>{{accidente.secuelas}}</td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>

@@ -197,6 +197,10 @@
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Password
 									input(ng-model="usuarioActualizar.password")
+							.col-lg-3
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+									label Repita contraseña
+									input(ng-model="usuarioActualizar.password_confirm" type="password")
 						.row
 							.form-group.col-lg-8.col-sm-12.col-xs-12
 								label Tipo usuario
