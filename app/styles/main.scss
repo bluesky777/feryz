@@ -376,19 +376,21 @@ a:hover, a:focus {
     }
     @page cartavertical{ 
         size: portrait; 
-        margin: 2cm;
-        background-color: #ff0000;
-        
+        margin: 0cm !important;
+        padding: 0 !important;
     }
     
 
     .page-vertical{
         page: cartavertical;
-        width: 22cm;
-        margin-bottom: 0px;
+        width: 100%;
+        margin-bottom: 0px !important;
         border: 0px;
         counter-reset: numpagina;
-        background-color: #ff0000;
+        
+        font-size: 12px;
+        padding: 0px !important;
+        margin: 0px !important;
     }
     .page-carta-horizontal{
         page: cartahorizontal;
@@ -416,6 +418,7 @@ a:hover, a:focus {
     }
     .page-dashboard{
         padding: 0px!important;
+        margin: 0px!important;
         background-color: #ff0000;
 
     }
@@ -465,16 +468,29 @@ a:hover, a:focus {
     .page-wrap{
       width: 100% !important;
       font-size: 9pt !important;
-    }
+      margin: 0px !important;
+      padding: 0px !important;
 
+    }
+    .pintar{
+      background-color: red !important;
+    }
     table.antecedentes thead th{
-      padding: 0 4px;
+      padding: -4px !important;
       text-align: center;
+    }
+    .marg-pad-0{
+      margin: 0px !important;
+      padding: 0px !important;
+    }
+    .page-wrap > .row{
+      padding: 0px !important;
+      margin: 0px !important;
     }
 
 }
  table.antecedentes thead th{
-      padding: 0 4px;
+      padding: 0px;
       text-align: center;
     }
 md-tabs, md-tab-content{
@@ -527,5 +543,23 @@ md-tabs, md-tab-content{
 }
 .margenarriba{
   margin: 0px 0px 10px 0px;
+}
+
+#ng-camera-action{
+  
+}
+
+.subtitulo-informe{
+  padding: 0px 0px 0px 4px !important;
+  margin:0px !important;
+
+}
+.alinear{
+  padding: 0px 0px 0px -4px !important;
+  margin:0px !important;  
+}
+.marg-pad-0{
+  margin: 0px !important;
+  padding: 0px !important;
 }
 

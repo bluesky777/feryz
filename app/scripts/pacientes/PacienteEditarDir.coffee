@@ -28,22 +28,17 @@ angular.module('feryzApp')
 
 	$scope.upload = ()->
 		file = $scope.vm.picture
-		console.log file 
+		
 		if (file) 
 
-			Upload.upload({
-					url: "::imagenes/store",
-					fields: {'Title': "test"},
-					file: file,
-					headers: {
-						'Accept': 'application/json;odata=verbose', 'content-type': 'image/jpeg', 'X-RequestDigest': $("#__REQUESTDIGEST").val()
-				}
-			}).progress((evt)->
-				progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-				console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
-			).success((data, status, headers, config)->
-				console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-			);
+			file = file.replace(/^data\:image\/\w+\;base64\,/, '')
+
+			$http.post('::imagenes/store', {foto: file, paciente_id: $scope.pacienteEdit.id}).then( (r)->
+				toastr.success 'Foto subida correctamente.'
+			, (r2)->
+				toastr.error 'No se pudo subir foto', 'Error'
+			)
+
 
 		
 

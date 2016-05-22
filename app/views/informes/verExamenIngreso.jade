@@ -1,79 +1,97 @@
 .row(ng-class="{'page-carta-horizontal': config.orientacion=='carta_horizontal', 'page-oficio-horizontal': config.orientacion=='oficio_horizontal','page-vertical': config.orientacion=='vertical', 'salto-pagina': $parent.$last==false }")
-	.col-lg-12
+	.col-lg-12.col-sm-12.col-xs-12.marg-pad-0
 
 		.row
-			.col-lg-12
-				img(style="width: 21cm" ng-src="{{imagesPath + 'user_1/encabezado_certificado.jpg'}}")
+			.col-lg-10.col-sm-10.col-xs-10
+				img(style="width: 100%" ng-src="{{imagesPath + 'user_1/encabezado_certificado.jpg'}}")
+			.col-lg-2.col-sm-2.col-xs-2
+				img(style="width: 3cm" ng-src="{{imagesPath + exameningreso.imagen.nombre}}")
 
-	
 		.row
-			.col-lg-4.col-sm-4.col-xs-4
-				span.negrita Departamento:
-				span {{exameningreso.departamento}}	
+
 			
-			.col-lg-4.col-sm-4.col-xs-4
+			.col-lg-12.col-sm-12.col-xs-12
+				center
+					h3 Examen ingreso
+			
+							
+		.row
+			.col-lg-4.col-sm-4.col-xs-4.marg-pad-0
+				span.negrita Departamento: 
+				span(ng-show="exameningreso.departamento") {{exameningreso.departamento}}
+				span(ng-hide="exameningreso.departamento") N/A	
+			
+			.col-lg-4.col-sm-4.col-xs-4.marg-pad-0
 				
 					span.negrita Ciudad: 
 					span {{exameningreso.ciudad}}
 
-			.col-lg-4.col-sm-4.col-xs-4
+			.col-lg-4.col-sm-4.col-xs-4.marg-pad-0
 				
 					span.negrita Fecha: 
 					span {{exameningreso.fecha_ingreso}}
 
 		.row
-			.col-lg-4.col-xs-4
-				
+			.col-lg-12.col-sm-12.col-xs-12.marg-pad-0
 				
 					span.negrita Empresa usuaria:
 					span	{{exameningreso.empresa_usuaria}}	
-			
-			.col-lg-4.col-xs-4
+
+		.row			
+			.col-lg-12.col-sm-12.col-xs-12.marg-pad-0
 				
 					span.negrita Empresa temporal: 
 					span {{exameningreso.empresa_temporal}}
 
-			.col-lg-4.col-xs-4
+		.row
+			.col-lg-12.col-sm-12.col-xs-12.marg-pad-0
 				
 					span.negrita Activida economica: 
 					span {{exameningreso.actividad_economica}}
 
 		.row
-			.col-lg-4.col-xs-4
+			.col-lg-12.col-sm-12.col-xs-12.marg-pad-0
+				
+					span.negrita 1.Datos de identificacion y sociodemograficos del trabajador
+
+		.row
+			.col-lg-6.col-sm-6.col-xs-6.marg-pad-0
 				.margenarriba
 					span.negrita Nombres: 
 					span {{exameningreso.nombres}}
-			.col-lg-4.col-xs-4
+			.col-lg-6.col-sm-6.col-xs-6.marg-pad-0
 				.margenarriba
 					span.negrita Apellidos: 
 					span {{exameningreso.apellidos}}
-			.col-lg-4.col-xs-4
+
+		.row
+			.col-lg-4.col-xs-4.marg-pad-0
 				
 					span.negrita Documento de identidad: 
 					span {{exameningreso.doc_identidad}}
 
 
 		.row
-			.col-lg-4.col-xs-4
+			.col-lg-4.col-xs-4.marg-pad-0
 				
 					span.negrita Genero: 
 					span {{exameningreso.sexo}}
-			.col-lg-4.col-xs-4
+			.col-lg-4.col-xs-4.marg-pad-0
 				
 					span.negrita Direccion: 
 					span {{exameningreso.direccion}}
-			.col-lg-4.col-xs-4
+			.col-lg-4.col-xs-4.marg-pad-0
 				
 					span.negrita Telefono: 
 					span {{exameningreso.telefono}}
 
 
 		.row
-			.col-lg-4.col-xs-4
+			.col-lg-4.col-xs-4.marg-pad-0
 				
 					span.negrita Telefono contacto: 
 					span {{exameningreso.telefono_contacto}}
-			.col-lg-4.col-xs-4
+			.col-lg-4.col-xs-4.marg-pad-0
 				
 					span.negrita Fecha de nacimiento: 
 					span {{exameningreso.fecha_nac}}
@@ -84,107 +102,109 @@
 
 
 		.row
-			.col-lg-4.col-xs-4
+			.col-lg-4.col-xs-4.marg-pad-0
 				
 					span.negrita Departamento de nacimiento: 
 					span {{exameningreso.departamento}}
-			.col-lg-4.col-xs-4
+			.col-lg-4.col-xs-4.marg-pad-0
 				
 					span.negrita Ciudad de nacimiento: 
 					span {{exameningreso.ciudad}}
-			.col-lg-4.col-xs-4
+			.col-lg-4.col-xs-4.marg-pad-0
 				
 					span.negrita Estado civil: 
 					span {{exameningreso.estado_civil}}
 
 
 		.row
-			.col-lg-4.col-xs-4
+			.col-lg-4.col-xs-4.marg-pad-0
 				
 					span.negrita Nivel escolaridad: 
 					span {{exameningreso.nivel_escolaridad}}
-			.col-lg-4.col-xs-4
+			.col-lg-4.col-xs-4.marg-pad-0
 				
 					span.negrita Edad: 
 					span {{exameningreso.edad}}
-			.col-lg-4.col-xs-4
+			.col-lg-4.col-xs-4.marg-pad-0
 				
-					span.negrita Profesion / oficio: 
+					span.negrita Profesión / oficio: 
 					span {{exameningreso.profesion}}
 
 
 		.row
-			.col-lg-4.col-xs-4
+			.col-lg-4.col-xs-4.marg-pad-0
 				
 					span.negrita Grupo sanguineo: 
 					span {{exameningreso.grupo_sanguineo}}
-			.col-lg-4.col-xs-4
+			.col-lg-4.col-xs-4.marg-pad-0
 				
 					span.negrita RH: 
 					span {{exameningreso.rh}}
-			.col-lg-4.col-xs-4
+			.col-lg-4.col-xs-4.marg-pad-0
 				
 					span.negrita Eps: 
 					span {{exameningreso.eps}}
 
 
 		.row
-			.col-lg-4.col-xs-4
+			.col-lg-4.col-xs-4.marg-pad-0
 				
 					span.negrita Arp: 
 					span {{exameningreso.arp}}
-			.col-lg-4.col-xs-4
+			.col-lg-4.col-xs-4.marg-pad-0
 				
 					span.negrita Afp: 
 					span {{exameningreso.afp}}
-			.col-lg-4.col-xs-4
+			.col-lg-4.col-xs-4.marg-pad-0
 				
 					span.negrita Fecha ingreso: 
 					span {{exameningreso.fecha_ingreso}}
 
 
 		.row
-			.col-lg-4.col-xs-4
+			.col-lg-4.col-xs-4.marg-pad-0
 				
-					span.negrita Cargo: 
-					span {{exameningreso.cargo}}
-			.col-lg-4.col-xs-4
+				span.negrita Cargo: 
+				span {{exameningreso.cargo}}
+			.col-lg-4.col-xs-4.marg-pad-0
 				
-					span.negrita Descripcion de cargo: 
-					span {{exameningreso.descripcion_cargo}}
-			.col-lg-4.col-xs-4
+				span.negrita Descripcion de cargo: 
+				span {{exameningreso.descripcion_cargo}}
+			.col-lg-4.col-xs-4.marg-pad-0
 				
-					span.negrita Motivo consulta: 
-					span {{exameningreso.motivo_consulta}}
+				span.negrita Motivo consulta: 
+				span {{exameningreso.motivo_consulta}}
 
 
 		.row
-			.col-lg-4.col-xs-4
+			.col-lg-4.col-xs-4.marg-pad-0
 				
-					span.negrita Antecedentes patologicos: 
-					span {{exameningreso.antec_patologicos}}
-			.col-lg-4.col-xs-4
+				span.negrita Antecedentes patologicos: 
+				span {{exameningreso.antec_patologicos}}
+			.col-lg-4.col-xs-4.marg-pad-0
 				
-					span.negrita Antecedentes hospitalarios: 
-					span {{exameningreso.antec_hospitalarios}}
-			.col-lg-4.col-xs-4
-				
-					span.negrita Antecedentes quirurgicos: 
-					span {{exameningreso.antec_quirurgicos}}
+				span.negrita Antecedentes hospitalarios: 
+				span {{exameningreso.antec_hospitalarios}}
+			.col-lg-4.col-xs-4.marg-pad-0
+			
+				span.negrita Antecedentes quirurgicos: 
+				span {{exameningreso.antec_quirurgicos}}
 
 
 		.row
-			.col-lg-4.col-xs-4
+			.col-lg-4.col-xs-4.marg-pad-0
 				
-					span.negrita Antecedentes familiares: 
-					span {{exameningreso.antec_familiares}}
+				span.negrita Antecedentes familiares: 
+				span {{exameningreso.antec_familiares}}
 
-	.panel-heading Antecedentes Laborales
+	
+	.col-lg-12.col-xs-12.marg-pad-0
 
-	.panel-body(style="margin: 2px 0px 10px 5px")
+		.row 
+			.col-lg-12.col-xs-12.marg-pad-0.negrita Antecedentes Laborales:
 
 		.row
-			.col-lg-4.col-xs-4
+			.col-lg-12.col-xs-12.marg-pad-0
 				table.antecedentes(border="1px solid")
 					thead
 						tr
@@ -216,12 +236,12 @@
 							td {{antecedente.epp}}
 
 
-	.panel-heading Accidentes de trabajo
+	.col-lg-12.col-xs-12.marg-pad-0
 
-	.panel-body(style="margin: 2px 0px 10px 5px")
-
+		.row 
+			.col-lg-12.col-xs-12.marg-pad-0.negrita Accidentes de trabajo:
 		.row
-			.col-lg-4
+			.col-lg-12.col-xs-12.marg-pad-0
 				table.antecedentes(border="1px solid")
 					thead
 						tr
@@ -253,12 +273,14 @@
 						td {{accidente.secuelas}}
 
 
-	.panel-heading Enfermedades profesionales
 
-	.panel-body(style="margin: 2px 0px 10px 5px")
+	.col-lg-12.col-xs-12.marg-pad-0
+
+		.row 
+			.col-lg-12.col-xs-12.marg-pad-0.negrita Enfermedades profesionales:
 
 		.row
-			.col-lg-4
+			.col-lg-12.col-xs-12.marg-pad-0
 				table.antecedentes(border="1px solid")
 					thead
 						tr
@@ -278,16 +300,16 @@
 								span.negrita Severidad
 							th 
 								span.negrita Secuelas
+					tbody
+						tr(ng-repeat="accidente in exameningreso.enfermedades_prof") 
+							td {{accidente.fecha}} 
+							td {{accidente.diagnostico}} 
+							td {{accidente.arp}} 
+							td {{accidente.organo_afectado}} 
+							td {{accidente.agente}} 
+							td {{accidente.tipo_accidente}} 
+							td {{accidente.severidad}} 
+							td {{accidente.secuelas}}
+						
 
-					tr(ng-repeat="accidente in exameningreso.enfermedades_prof") 
-						td {{accidente.fecha}} 
-						td {{accidente.diagnostico}} 
-						td {{accidente.arp}} 
-						td {{accidente.organo_afectado}} 
-						td {{accidente.agente}} 
-						td {{accidente.tipo_accidente}} 
-						td {{accidente.severidad}} 
-						td {{accidente.secuelas}}
-					
-
-	
+		
