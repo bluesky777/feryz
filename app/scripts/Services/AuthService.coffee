@@ -55,10 +55,10 @@ angular.module('feryzApp')
 
 		next = $state.current
 
-		if next.data.needed_permissions
-			needed_permissions = next.data.needed_permissions 
+		if next.data.needed_roles
+			needed_roles = next.data.needed_roles 
 
-			if (!authService.isAuthorized(needed_permissions))
+			if (!authService.isAuthorized(needed_roles))
 				#event.preventDefault()
 				console.log 'No tiene permisos, y... '
 				
@@ -174,22 +174,22 @@ angular.module('feryzApp')
 
 	authService.isAuthorized = (neededPermissions)->
 
+
 		user = Perfil.User()
 		if user.is_superuser
 			return true
 
+
 		if (!angular.isArray(neededPermissions))
 			neededPermissions = [neededPermissions]
 
-		if (!angular.isArray(user.perms))
-			if neededPermissions.length > 0
-				return false; # Hay permisos requeridos pero el usuario no tiene ninguno
-			else
+		if (user.tipo_usu_id)
+			if neededPermissions.length == 0
 				return true; # El usuarios no tiene permisos pero no se requiere ninguno
 
 		newArr = []
 		_.each(neededPermissions, (elem)->
-			if (user.perms.indexOf(elem)) != -1
+			if (user.tipo_usu_id == elem)
 				newArr.push elem
 		)
 		return (authService.isAuthenticated() and (newArr.length > 0))

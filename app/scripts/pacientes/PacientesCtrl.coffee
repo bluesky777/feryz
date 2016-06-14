@@ -7,13 +7,91 @@ angular.module('feryzApp')
 		estereopsis: 'N' 
 		test_color: 'N'
 		sintomas_vision: []
+		cigarrillo : 0
+		alcohol : 0
+		drogas : 0
+		dieta : 1
+		ejercicio : 1
+
+
+
 
 	$scope.creando = false
 	$scope.editando = false
-
-
+	$scope.estados_generales = [
+		{descripcion: 'Alerta, orientado en persona, tiempo y lugar, ingresa caminando por sus propios medios, responde atento al interrogatorio.'}
+		{descripcion: 'calmado, todo bien todo bonito, tiempo y lugar, ingresa caminando por sus propios medios, responde atento al interrogatorio.'}
+		{descripcion: 'otro, todo bien todo bonito, tiempo y lugar, ingresa caminando por sus propios medios, responde atento al interrogatorio.'}
+	]
+	$scope.constituciones = [
+		{descripcion: 'Eutrófica.'}
+		{descripcion: 'Eulargica.'}
+		{descripcion: 'Histérica.'}
+	]
+	$scope.dominancias = [
+		{descripcion: 'Mano derecha.'}
+		{descripcion: 'Mano izquierda.'}
+	]
+	$scope.agudeza_visual = [
+		{descripcion: 'Normal.'}
+		{descripcion: 'Anormal.'}
+	]
+	$scope.ojo_derecho = [
+		{descripcion: 'Normal.'}
+		{descripcion: 'Anormal.'}
+	]
+	$scope.ojo_izquierdo = [
+		{descripcion: 'Normal.'}
+		{descripcion: 'Anormal.'}
+	]
+	$scope.organos_sentidos = [
+		{descripcion: 'Otoscopia bilateral normal, orofaringe normal, ojos sin alteracion.'}
+		{descripcion: 'Anormal.'}
+	]
+	$scope.cardio_pulmonar = [
+		{descripcion: 'Ruidos cardiacos ritmicos, sin soplos, murmullo vesicular normal. resto normal.'}
+		{descripcion: 'Anormal.'}
+	]
+	$scope.abdomen = [
+		{descripcion: 'Blando, no masas, pristaltismo normal, no eventraciones.'}
+		{descripcion: 'Anormal.'}
+	]
+	$scope.genito_urinario = [
+		{descripcion: 'No masas ni eventraciones.'}
+		{descripcion: 'Anormal.'}
+	]
+	$scope.columna_vertebral = [
+		{descripcion: 'Simetrica, sin desviaciones, no deformidades patologicas evidentes.'}
+		{descripcion: 'Anormal.'}
+	]
+	$scope.neurologico = [
+		{descripcion: 'No deficit motor ni sensitivo, marcha normal, sensibilidad superficial y profunda sin alteraciones, equilibrio normal, romberg normal.'}
+		{descripcion: 'Anormal.'}
+	]
+	$scope.osteo_muscular = [
+		{descripcion: 'Fuerza muscular consevada, reflejos musculotendinosos presentes simetricos.'}
+		{descripcion: 'Anormal.'}
+	]
+	$scope.extremidades = [
+		{descripcion: 'Eutroficas, moviles, sin eema, articulaciones estables, arcos de movimiento conservados sin limitacion.'}
+		{descripcion: 'Anormal.'}
+	]
+	$scope.piel_anexos = [
+		{descripcion: 'Piel eucromica, uñas normales, cabello de implantacion normal.'}
+		{descripcion: 'Anormal.'}
+	]
+	$scope.examen_mental = [
+		{descripcion: 'Porte y actitud adecuados, lenguaje y pensamiento normal, memoria sin alteraciones.'}
+		{descripcion: 'Anormal.'}
+	]
+	$scope.observaciones = [
+		{descripcion: 'ADULTO EN BUENAS CONDICIONES GENERALES DE SALUD. CON EXAMEN MEDICO DENTRO DE LIMITES NORMALES. EXAMENES VALORADOS.'}
+		{descripcion: 'Anormal.'}
+	]
 	$scope.hasRoleOrPerm = AuthService.hasRoleOrPerm
 
+	$scope.cancelarEdicion = ()->
+		$scope.editando = false
 
 	$scope.crearPaciente = ()->
 		$scope.creando = true
@@ -94,8 +172,8 @@ angular.module('feryzApp')
 	########################	 EDITAR PACIENTE 	  ######################
 	########################################################################
 	$scope.editarPaciente = (pac)->
-
-		$scope.editando = true
+		$scope.creando = false
+		
 		$scope.pacienteEdit = pac
 
 		# Configuramos el tipo para el SELECT2
@@ -127,15 +205,40 @@ angular.module('feryzApp')
 
 		$http.put('::pacientes/datos', {paciente_id: pac.id}).then((r)->
 			r = r.data
-			$scope.pacienteEdit.antecedentesLaborales = r.antLab
+			$scope.pacienteEdit.antecedentesLaborales 	= r.antLab
 			$scope.pacienteEdit.enfermedadesProfesionales = r.enfProf
-			$scope.pacienteEdit.accidentesTrabajo = r.accTrab
-			$scope.pacienteEdit.visiometria = r.visiometria
+			$scope.pacienteEdit.accidentesTrabajo 		= r.accTrab
+			$scope.pacienteEdit.visiometria 			= r.visiometria
+			$scope.pacienteEdit.vacunas 				= r.vacunas
+			$scope.pacienteEdit.habitos 				= r.habitos
+			$scope.pacienteEdit.inmunizaciones 			= r.inmunizaciones
+			$scope.pacienteEdit.examen_fisico 			= r.examen_fisico
+
+			$scope.pacienteEdit.examen_fisico.estado_general 	= {descripcion: $scope.pacienteEdit.examen_fisico.estado_general}
+			$scope.pacienteEdit.examen_fisico.contitucion 		= {descripcion: $scope.pacienteEdit.examen_fisico.contitucion}
+			$scope.pacienteEdit.examen_fisico.dominancia 		= {descripcion: $scope.pacienteEdit.examen_fisico.dominancia}
+			$scope.pacienteEdit.examen_fisico.agudeza_visual 		= {descripcion: $scope.pacienteEdit.examen_fisico.agudeza_visual}
+			$scope.pacienteEdit.examen_fisico.ojo_derecho 		= {descripcion: $scope.pacienteEdit.examen_fisico.ojo_derecho}
+			$scope.pacienteEdit.examen_fisico.ojo_izquierdo		= {descripcion: $scope.pacienteEdit.examen_fisico.ojo_izquierdo}
+			$scope.pacienteEdit.examen_fisico.organos_sentidos		= {descripcion: $scope.pacienteEdit.examen_fisico.organos_sentidos}
+			$scope.pacienteEdit.examen_fisico.cardio_pulmonar		= {descripcion: $scope.pacienteEdit.examen_fisico.cardio_pulmonar}
+			$scope.pacienteEdit.examen_fisico.abdomen		= {descripcion: $scope.pacienteEdit.examen_fisico.abdomen}
+			$scope.pacienteEdit.examen_fisico.genito_urinario		= {descripcion: $scope.pacienteEdit.examen_fisico.genito_urinario}
+			$scope.pacienteEdit.examen_fisico.columna_vertebral		= {descripcion: $scope.pacienteEdit.examen_fisico.columna_vertebral}
+			$scope.pacienteEdit.examen_fisico.neurologico		= {descripcion: $scope.pacienteEdit.examen_fisico.neurologico}
+			$scope.pacienteEdit.examen_fisico.osteo_muscular		= {descripcion: $scope.pacienteEdit.examen_fisico.osteo_muscular}
+			$scope.pacienteEdit.examen_fisico.extremidades		= {descripcion: $scope.pacienteEdit.examen_fisico.extremidades}
+			$scope.pacienteEdit.examen_fisico.piel_anexos		= {descripcion: $scope.pacienteEdit.examen_fisico.piel_anexos}
+			$scope.pacienteEdit.examen_fisico.examen_mental		= {descripcion: $scope.pacienteEdit.examen_fisico.examen_mental}
+			$scope.pacienteEdit.examen_fisico.observaciones		= {descripcion: $scope.pacienteEdit.examen_fisico.observaciones}
+
+			$scope.editando = true
+
 		, (r2)->
 			console.log 'No se pudo traer los antecedentes', r2
 		)		
 
-		console.log $scope.pacienteEdit
+
 
 	########################	!!! EDITAR PACIENTE 	  ##################
 	########################################################################
@@ -165,9 +268,9 @@ angular.module('feryzApp')
 			{field: 'nombres', minWidth: 100}
 			{field: 'apellidos', minWidth: 100}
 			{field: 'sexo', width: 50}
-			{field: 'username', displayName: 'Usuario'}
-			{field: 'email'}
-			{field: 'fecha_nac', type: 'date', format: 'yyyy-mm-dd'}
+			{field: 'empresa_usuaria', displayName: 'Empresa'}
+			{field: 'actividad_economica', displayName: 'Actividad'}
+			{field: 'fecha_ingreso', type: 'date', format: 'yyyy-mm-dd'}
 		]
 		onRegisterApi: ( gridApi ) ->
 			$scope.gridApi = gridApi

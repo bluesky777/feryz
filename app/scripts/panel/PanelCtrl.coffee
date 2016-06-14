@@ -43,7 +43,7 @@ angular.module('feryzApp')
 		$scope.logout = ()->
 			AuthService.logout()
 
-			$http.one('login/logout').customPUT().then((r)->
+			$http.put('login/logout').then((r)->
 				console.log 'Desconectado con éxito: ', r
 			, (r2)->
 				console.log 'Error desconectando!', r2

@@ -10,21 +10,7 @@
 
 						
 
-						.row
-							.col-lg-4.col-sm-6
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Empresa usuaria
-									input(ng-model="pacienteNuevo.empresa_usuaria")
-
-							.col-lg-4.col-sm-6
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Empresa temporal
-									input(ng-model="pacienteNuevo.empresa_temporal")
-							.col-lg-4.col-sm-12
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Actividad economica
-									input(ng-model="pacienteNuevo.actividad_economica")
-
+						
 						.row
 							.col-lg-4.col-sm-6
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
@@ -62,6 +48,20 @@
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Direccion
 									input(ng-model="pacienteNuevo.direccion")
+						.row
+							.col-lg-4.col-sm-6
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+									label Empresa usuaria
+									input(ng-model="pacienteNuevo.empresa_usuaria")
+
+							.col-lg-4.col-sm-6
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+									label Empresa temporal
+									input(ng-model="pacienteNuevo.empresa_temporal")
+							.col-lg-4.col-sm-12
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+									label Actividad economica
+									input(ng-model="pacienteNuevo.actividad_economica")
 						.row
 							.col-lg-4.col-sm-6
 								md-input-container.md-block(flex-gt-sm style="margin: 1!important; padding-bottom: 0!important")
@@ -173,9 +173,62 @@
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Motivo consulta
 									input(ng-model="pacienteNuevo.motivo_consulta")
+						div.panel-heading Habitos
+							div(style="margin: 10px")
+
+						.row(style="padding-bottom:4px;")
+							.col-lg-5.col-md-7.col-xs-12
+								md-radio-group(ng-model="pacienteNuevo.cigarrillo" layout="row")
+									md-radio-button.md-primary(value="1") Fuma
+									md-radio-button(value="0") NO fuma
+
+							.col-lg-7.col-md-5.col-xs-12(ng-show="pacienteNuevo.cigarrillo=='1'")
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+									label Observaciones
+									textarea(ng-model="pacienteNuevo.cigarrillo_desc")
+						.row
+							.col-lg-4.col-md-7.col-xs-12
+								md-radio-group(ng-model="pacienteNuevo.alcohol" layout="row")
+									md-radio-button.md-primary(value="1") Toma alcohol
+									md-radio-button(value="0") NO toma alcohol
+
+							.col-lg-7.col-md-5.col-xs-12(ng-show="pacienteNuevo.alcohol=='1'")
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+									label Observaciones
+									textarea(ng-model="pacienteNuevo.alcohol_desc")
+						.row
+							.col-lg-4.col-md-7.col-xs-12
+								md-radio-group(ng-model="pacienteNuevo.drogas" layout="row")
+									md-radio-button.md-primary(value="1") Consume drogas
+									md-radio-button(value="0") No consume drogas
+
+							.col-lg-7.col-md-5.col-xs-12(ng-show="pacienteNuevo.drogas=='1'")
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+									label Observaciones
+									textarea(ng-model="pacienteNuevo.drogas_desc")
+						.row
+							.col-lg-4.col-md-7.col-xs-12
+								md-radio-group(ng-model="pacienteNuevo.dieta" layout="row")
+									md-radio-button.md-primary(value="1") Hace dieta
+									md-radio-button(value="0") No hace dieta
+
+							.col-lg-7.col-md-5.col-xs-12(ng-show="pacienteNuevo.dieta=='1'")
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+									label Observaciones
+									textarea(ng-model="pacienteNuevo.dieta_desc")
+						.row
+							.col-lg-4.col-md-7.col-xs-12
+								md-radio-group(ng-model="pacienteNuevo.ejercicio" layout="row")
+									md-radio-button.md-primary(value="1") Hace ejercicio
+									md-radio-button(value="0") No hace ejercicio
+
+							.col-lg-7.col-md-5.col-xs-12(ng-show="pacienteNuevo.ejercicio=='1'")
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+									label Observaciones
+									textarea(ng-model="pacienteNuevo.ejercicio_desc")
 
 						.row
-							.col-lg-12.col-sm-12
+							.col-lg-12.col-sm-12(style="text-align: center;margin-bottom: 40px")
 
 								md-button.md-raised.md-default(type="button" ng-click="$parent.creando=false") Cancelar
 

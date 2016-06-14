@@ -1,5 +1,5 @@
 
-<div ng-class="{'page-carta-horizontal': config.orientacion=='carta_horizontal', 'page-oficio-horizontal': config.orientacion=='oficio_horizontal','page-vertical': config.orientacion=='vertical', 'salto-pagina': $parent.$last==false }" class="row">
+<div ng-class="{'page-carta-horizontal': config.orientacion=='carta_horizontal', 'page-oficio-horizontal': config.orientacion=='oficio_horizontal','page-vertical': config.orientacion=='vertical', 'salto-pagina': $parent.$last==false }" class="row body">
   <div class="col-lg-12 col-sm-12 col-xs-12 marg-pad-0">
     <div class="row">
       <div class="col-lg-10 col-sm-10 col-xs-10"><img style="width: 100%" ng-src="{{imagesPath + 'user_1/encabezado_certificado.jpg'}}"></div>
@@ -14,83 +14,109 @@
     </div>
     <div class="row">
       <div class="col-lg-4 col-sm-4 col-xs-4 marg-pad-0"><span class="negrita">Departamento: </span><span ng-show="exameningreso.departamento">{{exameningreso.departamento}}</span><span ng-hide="exameningreso.departamento">N/A	</span></div>
-      <div class="col-lg-4 col-sm-4 col-xs-4 marg-pad-0"><span class="negrita">Ciudad: </span><span>{{exameningreso.ciudad}}</span></div>
-      <div class="col-lg-4 col-sm-4 col-xs-4 marg-pad-0"><span class="negrita">Fecha: </span><span>{{exameningreso.fecha_ingreso}}</span></div>
+      <div class="col-lg-4 col-sm-4 col-xs-4 marg-pad-0"><span class="negrita">Ciudad: </span><span ng-show="exameningreso.ciudad">{{exameningreso.ciudad}}</span><span ng-hide="exameningreso.ciudad">N/A</span></div>
+      <div class="col-lg-4 col-sm-4 col-xs-4 marg-pad-0"><span class="negrita">Fecha: </span><span ng-show="exameningreso.fecha_ingreso">{{exameningreso.fecha_ingreso}}</span><span ng-hide="exameningreso.fecha_ingreso">N/A</span></div>
     </div>
     <div class="row">
-      <div class="col-lg-12 col-sm-12 col-xs-12 marg-pad-0"><span class="negrita">Empresa usuaria:</span><span>	{{exameningreso.empresa_usuaria}}	</span></div>
-    </div>
-    <div class="row">			
-      <div class="col-lg-12 col-sm-12 col-xs-12 marg-pad-0"><span class="negrita">Empresa temporal: </span><span>{{exameningreso.empresa_temporal}}</span></div>
+      <div class="col-lg-12 col-sm-12 col-xs-12 marg-pad-0"><span class="negrita">Empresa usuaria:</span><span ng-show="exameningreso.empresa_usuaria">{{exameningreso.empresa_usuaria}}	</span><span ng-hide="exameningreso.empresa_usuaria">N/A</span></div>
     </div>
     <div class="row">
-      <div class="col-lg-12 col-sm-12 col-xs-12 marg-pad-0"><span class="negrita">Activida economica: </span><span>{{exameningreso.actividad_economica}}</span></div>
+      <div class="col-lg-12 col-sm-12 col-xs-12 marg-pad-0"><span class="negrita">Empresa temporal: </span><span ng-show="exameningreso.empresa_temporal">{{exameningreso.empresa_temporal}}</span><span ng-hide="exameningreso.empresa_temporal">N/A</span></div>
     </div>
     <div class="row">
-      <div class="col-lg-12 col-sm-12 col-xs-12 marg-pad-0"><span class="negrita">1.Datos de identificacion y sociodemograficos del trabajador</span></div>
+      <div class="col-lg-12 col-sm-12 col-xs-12 marg-pad-0"><span class="negrita">Activida economica: </span><span ng-show="exameningreso.actividad_economica">{{exameningreso.actividad_economica}}</span><span ng-hide="exameningreso.actividad_economica">N/A</span></div>
     </div>
     <div class="row">
-      <div class="col-lg-6 col-sm-6 col-xs-6 marg-pad-0">
-        <div class="margenarriba"><span class="negrita">Nombres: </span><span>{{exameningreso.nombres}}</span></div>
-      </div>
-      <div class="col-lg-6 col-sm-6 col-xs-6 marg-pad-0">
-        <div class="margenarriba"><span class="negrita">Apellidos: </span><span>{{exameningreso.apellidos}}</span></div>
+      <div class="col-lg-12 col-sm-12 col-xs-12 marg-pad-0">
+        <center class="margen"><span style=" font-size: 15px;font-style: italic" class="negrita margen">1.Datos de identificacion y sociodemograficos del trabajador</span></center>
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-4 col-xs-4 marg-pad-0"><span class="negrita">Documento de identidad: </span><span>{{exameningreso.doc_identidad}}</span></div>
+      <div class="col-lg-6 col-sm-6 col-xs-6 marg-pad-0"><span class="negrita">Nombres: </span><span ng-show="exameningreso.nombres">{{exameningreso.nombres}}</span><span ng-hide="exameningreso.nombres">N/A</span></div>
+      <div class="col-lg-6 col-sm-6 col-xs-6 marg-pad-0"><span class="negrita">Apellidos: </span><span ng-show="exameningreso.apellidos">{{exameningreso.apellidos}}</span><span ng-hide="exameningreso.apellidos">N/A</span></div>
     </div>
     <div class="row">
-      <div class="col-lg-4 col-xs-4 marg-pad-0"><span class="negrita">Genero: </span><span>{{exameningreso.sexo}}</span></div>
-      <div class="col-lg-4 col-xs-4 marg-pad-0"><span class="negrita">Direccion: </span><span>{{exameningreso.direccion}}</span></div>
-      <div class="col-lg-4 col-xs-4 marg-pad-0"><span class="negrita">Telefono: </span><span>{{exameningreso.telefono}}</span></div>
+      <div class="col-lg-6 col-sm-6 col-xs-6 marg-pad-0"><span class="negrita">Documento de identidad: </span><span ng-show="exameningreso.doc_identidad">{{exameningreso.doc_identidad}}</span><span ng-hide="exameningreso.doc_identidad">N/A</span></div>
+      <div class="col-lg-6 col-sm-6 col-xs-6 marg-pad-0"><span class="negrita">Genero: </span><span ng-show="exameningreso.sexo">{{exameningreso.sexo}}</span><span ng-hide="exameningreso.sexo">N/A</span></div>
     </div>
     <div class="row">
-      <div class="col-lg-4 col-xs-4 marg-pad-0"><span class="negrita">Telefono contacto: </span><span>{{exameningreso.telefono_contacto}}</span></div>
-      <div class="col-lg-4 col-xs-4 marg-pad-0"><span class="negrita">Fecha de nacimiento: </span><span>{{exameningreso.fecha_nac}}</span></div>
-      <div class="col-lg-4 col-xs-4"><span class="negrita">Pais de nacimiento: </span><span>{{exameningreso.pais}}</span></div>
+      <div class="col-lg-12 col-sm-12 col-xs-12 marg-pad-0"><span class="negrita">Direccion: </span><span ng-show="exameningreso.direccion">{{exameningreso.direccion}}</span><span ng-hide="exameningreso.direccion">N/A</span></div>
     </div>
     <div class="row">
-      <div class="col-lg-4 col-xs-4 marg-pad-0"><span class="negrita">Departamento de nacimiento: </span><span>{{exameningreso.departamento}}</span></div>
-      <div class="col-lg-4 col-xs-4 marg-pad-0"><span class="negrita">Ciudad de nacimiento: </span><span>{{exameningreso.ciudad}}</span></div>
-      <div class="col-lg-4 col-xs-4 marg-pad-0"><span class="negrita">Estado civil: </span><span>{{exameningreso.estado_civil}}</span></div>
+      <div class="col-lg-6 col-sm-6 col-xs-6 marg-pad-0"><span class="negrita">Telefono: </span><span ng-show="exameningreso.telefono">{{exameningreso.telefono}}</span><span ng-hide="exameningreso.telefono">N/A</span></div>
+      <div class="col-lg-6 col-sm-6 col-xs-6 marg-pad-0"><span class="negrita">Telefono contacto: </span><span ng-show="exameningreso.telefono_contacto">{{exameningreso.telefono_contacto}}</span><span ng-hide="exameningreso.telefono_contacto">N/A</span></div>
     </div>
     <div class="row">
-      <div class="col-lg-4 col-xs-4 marg-pad-0"><span class="negrita">Nivel escolaridad: </span><span>{{exameningreso.nivel_escolaridad}}</span></div>
-      <div class="col-lg-4 col-xs-4 marg-pad-0"><span class="negrita">Edad: </span><span>{{exameningreso.edad}}</span></div>
-      <div class="col-lg-4 col-xs-4 marg-pad-0"><span class="negrita">Profesión / oficio: </span><span>{{exameningreso.profesion}}</span></div>
+      <div class="col-lg-6 col-sm-6 col-xs-6 marg-pad-0"><span class="negrita">Fecha de nacimiento: </span><span ng-show="exameningreso.fecha_nac">{{exameningreso.fecha_nac}}</span><span ng-hide="exameningreso.fecha_nac">N/A</span></div>
+      <div class="col-lg-6 col-sm-6 col-xs-6 marg-pad-0"><span class="negrita">Ciudad de nacimiento: </span><span ng-show="exameningreso.ciudad">{{exameningreso.ciudad}} - {{exameningreso.departamento}}</span><span ng-hide="exameningreso.ciudad">N/A</span></div>
     </div>
     <div class="row">
-      <div class="col-lg-4 col-xs-4 marg-pad-0"><span class="negrita">Grupo sanguineo: </span><span>{{exameningreso.grupo_sanguineo}}</span></div>
-      <div class="col-lg-4 col-xs-4 marg-pad-0"><span class="negrita">RH: </span><span>{{exameningreso.rh}}</span></div>
-      <div class="col-lg-4 col-xs-4 marg-pad-0"><span class="negrita">Eps: </span><span>{{exameningreso.eps}}</span></div>
+      <div class="col-lg-4 col-sm-4 col-xs-4 marg-pad-0"><span class="negrita">Estado civil: </span><span ng-show="exameningreso.estado_civil">{{exameningreso.estado_civil}}</span><span ng-hide="exameningreso.estado_civil">N/A</span></div>
+      <div class="col-lg-4 col-sm-4 col-xs-4 marg-pad-0"><span class="negrita">Nivel escolaridad: </span><span ng-show="exameningreso.nivel_escolaridad">{{exameningreso.nivel_escolaridad}}</span><span ng-hide="exameningreso.nivel_escolaridad">N/A</span></div>
+      <div class="col-lg-4 col-sm-4 col-xs-4 marg-pad-0"><span class="negrita">Edad: </span><span ng-show="exameningreso.edad">{{exameningreso.edad}}</span><span ng-hide="exameningreso.edad">N/A</span></div>
     </div>
     <div class="row">
-      <div class="col-lg-4 col-xs-4 marg-pad-0"><span class="negrita">Arp: </span><span>{{exameningreso.arp}}</span></div>
-      <div class="col-lg-4 col-xs-4 marg-pad-0"><span class="negrita">Afp: </span><span>{{exameningreso.afp}}</span></div>
-      <div class="col-lg-4 col-xs-4 marg-pad-0"><span class="negrita">Fecha ingreso: </span><span>{{exameningreso.fecha_ingreso}}</span></div>
+      <div class="col-lg-4 col-sm-4 col-xs-4 marg-pad-0"><span class="negrita">Profesión / oficio: </span><span ng-show="exameningreso.profesion">{{exameningreso.profesion}}</span><span ng-hide="exameningreso.profesion">N/A</span></div>
+      <div class="col-lg-4 col-sm-4 col-xs-4 marg-pad-0"><span class="negrita">Grupo sanguineo: </span><span ng-show="exameningreso.grupo_sanguineo">{{exameningreso.grupo_sanguineo}}</span><span ng-hide="exameningreso.grupo_sanguineo">N/A</span></div>
+      <div class="col-lg-4 col-sm-4 col-xs-4 marg-pad-0"><span class="negrita">RH: </span><span ng-show="exameningreso.rh">{{exameningreso.rh}}</span><span ng-hide="exameningreso.rh">N/A</span></div>
     </div>
     <div class="row">
-      <div class="col-lg-4 col-xs-4 marg-pad-0"><span class="negrita">Cargo: </span><span>{{exameningreso.cargo}}</span></div>
-      <div class="col-lg-4 col-xs-4 marg-pad-0"><span class="negrita">Descripcion de cargo: </span><span>{{exameningreso.descripcion_cargo}}</span></div>
-      <div class="col-lg-4 col-xs-4 marg-pad-0"><span class="negrita">Motivo consulta: </span><span>{{exameningreso.motivo_consulta}}</span></div>
+      <div class="col-lg-4 col-sm-4 col-xs-4 marg-pad-0"><span class="negrita">Seguridad social:  </span><span class="negrita">Eps: </span><span ng-show="exameningreso.eps">{{exameningreso.eps}}</span><span ng-hide="exameningreso.eps">NA</span></div>
+      <div class="col-lg-4 col-sm-4 col-xs-4 marg-pad-0"><span class="negrita">Arp: </span><span ng-show="exameningreso.arp">{{exameningreso.arp}}</span><span ng-hide="exameningreso.arp">N/A</span></div>
+      <div class="col-lg-4 col-sm-4 col-xs-4 marg-pad-0"><span class="negrita">Afp: </span><span ng-show="exameningreso.afp">{{exameningreso.afp}}</span></div>
     </div>
     <div class="row">
-      <div class="col-lg-4 col-xs-4 marg-pad-0"><span class="negrita">Antecedentes patologicos: </span><span>{{exameningreso.antec_patologicos}}</span></div>
-      <div class="col-lg-4 col-xs-4 marg-pad-0"><span class="negrita">Antecedentes hospitalarios: </span><span>{{exameningreso.antec_hospitalarios}}</span></div>
-      <div class="col-lg-4 col-xs-4 marg-pad-0"><span class="negrita">Antecedentes quirurgicos: </span><span>{{exameningreso.antec_quirurgicos}}</span></div>
+      <div class="col-lg-12 col-sm-12 col-xs-12 marg-pad-0">
+        <center class="margen"><span style=" font-size: 15px;font-style: italic" class="negrita margen">2. Informacion ocupacional				</span></center>
+      </div>
     </div>
     <div class="row">
-      <div class="col-lg-4 col-xs-4 marg-pad-0"><span class="negrita">Antecedentes familiares: </span><span>{{exameningreso.antec_familiares}}</span></div>
+      <div class="col-lg-6 col-sm-12 col-xs-6 marg-pad-0"><span class="negrita">Fecha ingreso: </span><span ng-show="exameningreso.fecha_ingreso">{{exameningreso.fecha_ingreso}}</span><span ng-hide="exameningreso.fecha_ingreso">N/A</span></div>
+      <div class="col-lg-6 col-sm-12 col-xs-6 marg-pad-0"><span class="negrita">Cargo: </span><span ng-show="exameningreso.cargo">{{exameningreso.cargo}}</span><span ng-hide="exameningreso.cargo">N/A</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-xs-12 marg-pad-0"><span class="negrita">Descripcion de cargo: </span><span ng-show="exameningreso.descripcion_cargo">{{exameningreso.descripcion_cargo}}</span><span ng-hide="exameningreso.descripcion_cargo">N/A</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-xs-12 marg-pad-0">
+        <center class="margen"><span style=" font-size: 15px;font-style: italic" class="negrita margen">3. Motivo de consulta y enfermedad actual: </span></center>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-xs-12 marg-pad-0"><span class="negrita">Motivo consulta: </span><span ng-show="exameningreso.motivo_consulta">{{exameningreso.motivo_consulta}}</span><span ng-hide="exameningreso.motivo_consulta">N/A</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-xs-12 marg-pad-0">
+        <center class="margen"><span style=" font-size: 15px;font-style: italic" class="negrita margen">4. Antecedentes personales: </span></center>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-xs-12 marg-pad-0"><span class="negrita">Antecedentes patologicos: </span><span ng-show="exameningreso.antec_patologicos">{{exameningreso.antec_patologicos}}</span><span ng-hide="exameningreso.antec_patologicos">N/A</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-xs-12 marg-pad-0"><span class="negrita">Antecedentes hospitalarios: </span><span ng-show="exameningreso.antec_hospitalarios">{{exameningreso.antec_hospitalarios}}</span><span ng-hide="exameningreso.antec_hospitalarios">N/A</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-xs-12 marg-pad-0"><span class="negrita">Antecedentes quirurgicos: </span><span ng-show="exameningreso.antec_quirurgicos">{{exameningreso.antec_quirurgicos}}</span><span ng-hide="exameningreso.antec_quirurgicos">N/A</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-xs-12 marg-pad-0">
+        <center class="margen"><span style=" font-size: 15px;font-style: italic" class="negrita margen">5. Antecedentes familiares: </span></center>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-xs-12 marg-pad-0"><span ng-show="exameningreso.antec_familiares">{{exameningreso.antec_familiares}}</span><span ng-hide="exameningreso.antec_familiares">N/A</span></div>
     </div>
   </div>
   <div class="col-lg-12 col-xs-12 marg-pad-0">
     <div class="row"> 
-      <div class="col-lg-12 col-xs-12 marg-pad-0 negrita">Antecedentes Laborales:</div>
+      <div class="col-lg-12 col-xs-12">
+        <center class="margen"><span style=" font-size: 15px;font-style: italic" class="negrita">6. Antecedentes Laborales:</span></center>
+      </div>
     </div>
     <div class="row">
       <div class="col-lg-12 col-xs-12 marg-pad-0">
-        <table border="1px solid" class="antecedentes">
+        <table border="1px solid" style=" width: 100%;" class="antecedentes">
           <thead>
             <tr>
               <th><span class="negrita">Empresa</span></th>
@@ -121,11 +147,13 @@
   </div>
   <div class="col-lg-12 col-xs-12 marg-pad-0">
     <div class="row"> 
-      <div class="col-lg-12 col-xs-12 marg-pad-0 negrita">Accidentes de trabajo:</div>
+      <div class="col-lg-12 col-xs-12">
+        <center class="margen"><span style=" font-size: 15px;font-style: italic" class="negrita margen">7. Accidentes de trabajo:</span></center>
+      </div>
     </div>
     <div class="row">
       <div class="col-lg-12 col-xs-12 marg-pad-0">
-        <table border="1px solid" class="antecedentes">
+        <table border="1px solid" style=" width: 100%;" class="antecedentes">
           <thead>
             <tr>
               <th><span class="negrita">Fecha</span></th>
@@ -154,11 +182,13 @@
   </div>
   <div class="col-lg-12 col-xs-12 marg-pad-0">
     <div class="row"> 
-      <div class="col-lg-12 col-xs-12 marg-pad-0 negrita">Enfermedades profesionales:</div>
+      <div class="col-lg-12 col-xs-12">
+        <center class="margen"><span style=" font-size: 15px;font-style: italic" class="negrita margen">8. Enfermedades profesionales:</span></center>
+      </div>
     </div>
     <div class="row">
       <div class="col-lg-12 col-xs-12 marg-pad-0">
-        <table border="1px solid" class="antecedentes">
+        <table border="1px solid" style=" width: 100%;" class="antecedentes">
           <thead>
             <tr>
               <th><span class="negrita">Fecha</span></th>

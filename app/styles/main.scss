@@ -487,6 +487,14 @@ a:hover, a:focus {
       padding: 0px !important;
       margin: 0px !important;
     }
+    .margen{
+      margin: 4px !important;
+      text-align: center !important;
+    }
+    .body{
+      letter-spacing: 0px !important;
+    }
+
 
 }
  table.antecedentes thead th{
@@ -558,8 +566,10 @@ md-tabs, md-tab-content{
   padding: 0px 0px 0px -4px !important;
   margin:0px !important;  
 }
-.marg-pad-0{
-  margin: 0px !important;
-  padding: 0px !important;
+
+.margen{
+  margin: 4px !important;
+
+  text-align: center !important;
 }
 

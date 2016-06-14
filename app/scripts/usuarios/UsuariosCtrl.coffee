@@ -1,7 +1,9 @@
 angular.module('feryzApp')
 
-.controller('UsuariosCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', ($scope, $http, App, $filter, toastr) ->
-		
+.controller('UsuariosCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', 'AuthService', ($scope, $http, App, $filter, toastr, AuthService) ->
+	
+	AuthService.verificar_acceso()
+
 	$scope.creando = false
 	$scope.editando = false
 	$scope.usuarioActualizar = {}

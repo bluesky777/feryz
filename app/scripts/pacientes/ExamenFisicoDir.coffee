@@ -1,23 +1,19 @@
 angular.module('feryzApp')
 
-.directive('nuevoPacienteDir',['toastr', '$http', (toastr, $http)-> 
+.directive('examenFisicoDir',['toastr', '$http', (toastr, $http)-> 
 
 	restrict: 'AE'
 	transclude: true,
-	templateUrl: "==pacientes/nuevoPacienteDir.tpl.html"
+	templateUrl: "==pacientes/examenFisicoDir.tpl.html"
 	#scope: 
 	#	ngModel: "="
 	#require: 'ngModel'
 
-	controller: 'NuevoPacienteCtrl'
+	controller: 'ExamenFisicoCtrl'
 ])
 
-.controller('NuevoPacienteCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', ($scope, $http, App, $filter, toastr) ->
+.controller('ExamenFisicoCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', ($scope, $http, App, $filter, toastr) ->
 	
-	$scope.imagesPath = App.images
-	$scope.vm = {} 
-
-
 
 	$scope.guardarPaciente = ()->
 

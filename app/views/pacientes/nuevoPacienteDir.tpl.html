@@ -9,26 +9,6 @@
             <div class="row">
               <div class="col-lg-4 col-sm-6">
                 <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Empresa usuaria</label>
-                  <input ng-model="pacienteNuevo.empresa_usuaria">
-                </md-input-container>
-              </div>
-              <div class="col-lg-4 col-sm-6">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Empresa temporal</label>
-                  <input ng-model="pacienteNuevo.empresa_temporal">
-                </md-input-container>
-              </div>
-              <div class="col-lg-4 col-sm-12">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Actividad economica</label>
-                  <input ng-model="pacienteNuevo.actividad_economica">
-                </md-input-container>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-4 col-sm-6">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Nombres</label>
                   <input ng-model="pacienteNuevo.nombres">
                 </md-input-container>
@@ -71,6 +51,26 @@
                 <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Direccion</label>
                   <input ng-model="pacienteNuevo.direccion">
+                </md-input-container>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4 col-sm-6">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Empresa usuaria</label>
+                  <input ng-model="pacienteNuevo.empresa_usuaria">
+                </md-input-container>
+              </div>
+              <div class="col-lg-4 col-sm-6">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Empresa temporal</label>
+                  <input ng-model="pacienteNuevo.empresa_temporal">
+                </md-input-container>
+              </div>
+              <div class="col-lg-4 col-sm-12">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Actividad economica</label>
+                  <input ng-model="pacienteNuevo.actividad_economica">
                 </md-input-container>
               </div>
             </div>
@@ -211,8 +211,81 @@
                 </md-input-container>
               </div>
             </div>
+            <div class="panel-heading">Habitos
+              <div style="margin: 10px"></div>
+            </div>
+            <div style="padding-bottom:4px;" class="row">
+              <div class="col-lg-5 col-md-7 col-xs-12">
+                <md-radio-group ng-model="pacienteNuevo.cigarrillo" layout="row">
+                  <md-radio-button value="1" class="md-primary">Fuma</md-radio-button>
+                  <md-radio-button value="0">NO fuma</md-radio-button>
+                </md-radio-group>
+              </div>
+              <div ng-show="pacienteNuevo.cigarrillo=='1'" class="col-lg-7 col-md-5 col-xs-12">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Observaciones</label>
+                  <textarea ng-model="pacienteNuevo.cigarrillo_desc"></textarea>
+                </md-input-container>
+              </div>
+            </div>
             <div class="row">
-              <div class="col-lg-12 col-sm-12">
+              <div class="col-lg-4 col-md-7 col-xs-12">
+                <md-radio-group ng-model="pacienteNuevo.alcohol" layout="row">
+                  <md-radio-button value="1" class="md-primary">Toma alcohol</md-radio-button>
+                  <md-radio-button value="0">NO toma alcohol</md-radio-button>
+                </md-radio-group>
+              </div>
+              <div ng-show="pacienteNuevo.alcohol=='1'" class="col-lg-7 col-md-5 col-xs-12">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Observaciones</label>
+                  <textarea ng-model="pacienteNuevo.alcohol_desc"></textarea>
+                </md-input-container>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4 col-md-7 col-xs-12">
+                <md-radio-group ng-model="pacienteNuevo.drogas" layout="row">
+                  <md-radio-button value="1" class="md-primary">Consume drogas</md-radio-button>
+                  <md-radio-button value="0">No consume drogas</md-radio-button>
+                </md-radio-group>
+              </div>
+              <div ng-show="pacienteNuevo.drogas=='1'" class="col-lg-7 col-md-5 col-xs-12">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Observaciones</label>
+                  <textarea ng-model="pacienteNuevo.drogas_desc"></textarea>
+                </md-input-container>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4 col-md-7 col-xs-12">
+                <md-radio-group ng-model="pacienteNuevo.dieta" layout="row">
+                  <md-radio-button value="1" class="md-primary">Hace dieta</md-radio-button>
+                  <md-radio-button value="0">No hace dieta</md-radio-button>
+                </md-radio-group>
+              </div>
+              <div ng-show="pacienteNuevo.dieta=='1'" class="col-lg-7 col-md-5 col-xs-12">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Observaciones</label>
+                  <textarea ng-model="pacienteNuevo.dieta_desc"></textarea>
+                </md-input-container>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4 col-md-7 col-xs-12">
+                <md-radio-group ng-model="pacienteNuevo.ejercicio" layout="row">
+                  <md-radio-button value="1" class="md-primary">Hace ejercicio</md-radio-button>
+                  <md-radio-button value="0">No hace ejercicio</md-radio-button>
+                </md-radio-group>
+              </div>
+              <div ng-show="pacienteNuevo.ejercicio=='1'" class="col-lg-7 col-md-5 col-xs-12">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Observaciones</label>
+                  <textarea ng-model="pacienteNuevo.ejercicio_desc"></textarea>
+                </md-input-container>
+              </div>
+            </div>
+            <div class="row">
+              <div style="text-align: center;margin-bottom: 40px" class="col-lg-12 col-sm-12">
                 <md-button type="button" ng-click="$parent.creando=false" class="md-raised md-default">Cancelar</md-button>
                 <md-button type="submit" class="md-raised md-primary">Guardar</md-button>
               </div>

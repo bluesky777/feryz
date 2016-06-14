@@ -8,6 +8,10 @@ angular.module('feryzApp')
 					'contenido_panel':
 						templateUrl: "#{App.views}usuarios/usuarios.tpl.html"
 						controller: 'UsuariosCtrl'
+
+				data: 
+					pageTitle: 'Usuarios - Feryz'
+					needed_roles: [10]
 		 	})
 
 	])

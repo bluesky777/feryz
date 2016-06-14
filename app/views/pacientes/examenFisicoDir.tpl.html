@@ -1,0 +1,389 @@
+
+<div ng-if="hasRoleOrPerm(6)" class="panel panel-default panel-hovered mb20">
+  <div class="panel-heading">Examen fisico</div>
+  <div class="panel-body">
+    <div>
+      <form ng-submit="guardarPaciente()">
+        <div class="row">
+          <div class="col-lg-12">
+            <h6>SIGNOS VITALES</h6>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-2">
+            <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+              <label>FR (min)</label>
+              <input ng-model="pacienteEdit.examen_fisico.sign_vit_fr">
+            </md-input-container>
+          </div>
+          <div class="col-lg-1">
+            <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+              <label>TA</label>
+              <input ng-model="pacienteEdit.examen_fisico.sign_vit_ta">
+            </md-input-container>
+          </div>
+          <div style="margin-left: -20px !important;margin-right: -100px;margin-top: 9px;" class="col-lg-1">/</div>
+          <div class="col-lg-1">
+            <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+              <label>mmHG</label>
+              <input ng-model="pacienteEdit.examen_fisico.sign_vit_ta1">
+            </md-input-container>
+          </div>
+          <div class="col-lg-1">
+            <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+              <label>Temp</label>
+              <input ng-model="pacienteEdit.examen_fisico.sign_vit_temp">
+            </md-input-container>
+          </div>
+          <div class="col-lg-2">
+            <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+              <label>FC (min)</label>
+              <input ng-model="pacienteEdit.examen_fisico.sign_vit_fc">
+            </md-input-container>
+          </div>
+          <div class="col-lg-2">
+            <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+              <label>PESO (kg)</label>
+              <input ng-model="pacienteEdit.examen_fisico.sign_vit_peso">
+            </md-input-container>
+          </div>
+          <div class="col-lg-2">
+            <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+              <label>TALLA (cm)</label>
+              <input ng-model="pacienteEdit.examen_fisico.sign_vit_talla">
+            </md-input-container>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-2">
+            <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+              <label>IMC (Kg/m)</label>
+              <input ng-model="pacienteEdit.examen_fisico.sign_vit_imc">
+            </md-input-container>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <h6>Estado general</h6>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-lg-12 col-sm-12 col-xs-12">
+            <ui-select ng-model="pacienteEdit.examen_fisico.estado_general" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
+              <ui-select-match placeholder="Estado General" allow-clear="true">{{$select.selected.descripcion}}</ui-select-match>
+              <ui-select-choices repeat="estado in estados_generales | filter: $select.search">
+                <div ng-bind-html="estado.descripcion | highlight: $select.search"></div>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-lg-12 col-sm-12 col-xs-12">
+                <h6>Constitución</h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-lg-12 col-sm-12 col-xs-12">
+                <ui-select ng-model="pacienteEdit.examen_fisico.contitucion" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
+                  <ui-select-match placeholder="Estado General" allow-clear="true">{{$select.selected.descripcion}}</ui-select-match>
+                  <ui-select-choices repeat="contit in constituciones | filter: $select.search">
+                    <div ng-bind-html="contit.descripcion | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-lg-12 col-sm-12 col-xs-12">
+                <h6>Dominancia</h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-lg-12 col-sm-12 col-xs-12">
+                <ui-select ng-model="pacienteEdit.examen_fisico.dominancia" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
+                  <ui-select-match placeholder="Estado General" allow-clear="true">{{$select.selected.descripcion}}</ui-select-match>
+                  <ui-select-choices repeat="dominan in dominancias | filter: $select.search">
+                    <div ng-bind-html="dominan.descripcion | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="row">
+              <div class="col-lg-12 col-sm-12 col-xs-12">
+                <h6>Agudeza Visual</h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-lg-12 col-sm-12 col-xs-12">
+                <ui-select ng-model="pacienteEdit.examen_fisico.agudeza_visual" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
+                  <ui-select-match placeholder="Agudeza visual" allow-clear="true">{{$select.selected.descripcion}}</ui-select-match>
+                  <ui-select-choices repeat="aguvis in agudeza_visual | filter: $select.search">
+                    <div ng-bind-html="aguvis.descripcion | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="row">
+              <div class="col-lg-12 col-sm-12 col-xs-12">
+                <h6>Ojo Derecho</h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-lg-12 col-sm-12 col-xs-12">
+                <ui-select ng-model="pacienteEdit.examen_fisico.ojo_derecho" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
+                  <ui-select-match placeholder="Ojo derecho" allow-clear="true">{{$select.selected.descripcion}}</ui-select-match>
+                  <ui-select-choices repeat="ojod in ojo_derecho | filter: $select.search">
+                    <div ng-bind-html="ojod.descripcion | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="row">
+              <div class="col-lg-12 col-sm-12 col-xs-12">
+                <h6>Ojo Izquierdo</h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-lg-12 col-sm-12 col-xs-12">
+                <ui-select ng-model="pacienteEdit.examen_fisico.ojo_izquierdo" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
+                  <ui-select-match placeholder="Ojo izquierdo" allow-clear="true">{{$select.selected.descripcion}}</ui-select-match>
+                  <ui-select-choices repeat="ojoi in ojo_izquierdo | filter: $select.search">
+                    <div ng-bind-html="ojoi.descripcion | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+              <label>Cabeza / Cuello</label>
+              <input ng-model="pacienteEdit.examen_fisico.cabeza_cuello">
+            </md-input-container>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-12 col-sm-12 col-xs-12">
+                <h6>Organos de los sentidos</h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-lg-12 col-sm-12 col-xs-12">
+                <ui-select ng-model="pacienteEdit.examen_fisico.organos_sentidos" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
+                  <ui-select-match placeholder="Organos sentidos" allow-clear="true">{{$select.selected.descripcion}}</ui-select-match>
+                  <ui-select-choices repeat="orgsen in organos_sentidos | filter: $select.search">
+                    <div ng-bind-html="orgsen.descripcion | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-12 col-sm-12 col-xs-12">
+                <h6>Cardio / Pulmonar</h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-lg-12 col-sm-12 col-xs-12">
+                <ui-select ng-model="pacienteEdit.examen_fisico.cardio_pulmonar" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
+                  <ui-select-match placeholder="Cardio pulmonar" allow-clear="true">{{$select.selected.descripcion}}</ui-select-match>
+                  <ui-select-choices repeat="carpul in cardio_pulmonar | filter: $select.search">
+                    <div ng-bind-html="carpul.descripcion | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-12 col-sm-12 col-xs-12">
+                <h6>Abdomen</h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-lg-12 col-sm-12 col-xs-12">
+                <ui-select ng-model="pacienteEdit.examen_fisico.abdomen" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
+                  <ui-select-match placeholder="Abdomen" allow-clear="true">{{$select.selected.descripcion}}</ui-select-match>
+                  <ui-select-choices repeat="abdomen in abdomen | filter: $select.search">
+                    <div ng-bind-html="abdomen.descripcion | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-12 col-sm-12 col-xs-12">
+                <h6>Genito / Urinario</h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-lg-12 col-sm-12 col-xs-12">
+                <ui-select ng-model="pacienteEdit.examen_fisico.genito_urinario" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
+                  <ui-select-match placeholder="Genito Urinario" allow-clear="true">{{$select.selected.descripcion}}</ui-select-match>
+                  <ui-select-choices repeat="genuri in genito_urinario | filter: $select.search">
+                    <div ng-bind-html="genuri.descripcion | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-12 col-sm-12 col-xs-12">
+                <h6>Columna Vertebral</h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-lg-12 col-sm-12 col-xs-12">
+                <ui-select ng-model="pacienteEdit.examen_fisico.columna_vertebral" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
+                  <ui-select-match placeholder="Columna vertebral" allow-clear="true">{{$select.selected.descripcion}}</ui-select-match>
+                  <ui-select-choices repeat="colver in columna_vertebral | filter: $select.search">
+                    <div ng-bind-html="colver.descripcion | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-12 col-sm-12 col-xs-12">
+                <h6>Neurologico</h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-lg-12 col-sm-12 col-xs-12">
+                <ui-select ng-model="pacienteEdit.examen_fisico.neurologico" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
+                  <ui-select-match placeholder="Neurologico" allow-clear="true">{{$select.selected.descripcion}}</ui-select-match>
+                  <ui-select-choices repeat="neurologico in neurologico | filter: $select.search">
+                    <div ng-bind-html="neurologico.descripcion | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-12 col-sm-12 col-xs-12">
+                <h6>Osteo / muscular</h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-lg-12 col-sm-12 col-xs-12">
+                <ui-select ng-model="pacienteEdit.examen_fisico.osteo_muscular" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
+                  <ui-select-match placeholder="Osteo Muscular" allow-clear="true">{{$select.selected.descripcion}}</ui-select-match>
+                  <ui-select-choices repeat="ostmusc in osteo_muscular | filter: $select.search">
+                    <div ng-bind-html="ostmusc.descripcion | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-12 col-sm-12 col-xs-12">
+                <h6>Extremidades</h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-lg-12 col-sm-12 col-xs-12">
+                <ui-select ng-model="pacienteEdit.examen_fisico.extremidades" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
+                  <ui-select-match placeholder="Extremidades" allow-clear="true">{{$select.selected.descripcion}}</ui-select-match>
+                  <ui-select-choices repeat="extremidades in extremidades | filter: $select.search">
+                    <div ng-bind-html="extremidades.descripcion | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-12 col-sm-12 col-xs-12">
+                <h6>Piel y Anexos</h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-lg-12 col-sm-12 col-xs-12">
+                <ui-select ng-model="pacienteEdit.examen_fisico.piel_anexos" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
+                  <ui-select-match placeholder="Piel y Anexos" allow-clear="true">{{$select.selected.descripcion}}</ui-select-match>
+                  <ui-select-choices repeat="pielanexos in piel_anexos | filter: $select.search">
+                    <div ng-bind-html="pielanexos.descripcion | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-12 col-sm-12 col-xs-12">
+                <h6>Examen mental</h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-lg-12 col-sm-12 col-xs-12">
+                <ui-select ng-model="pacienteEdit.examen_fisico.examen_mental" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
+                  <ui-select-match placeholder="Examen mental" allow-clear="true">{{$select.selected.descripcion}}</ui-select-match>
+                  <ui-select-choices repeat="examenmental in examen_mental | filter: $select.search">
+                    <div ng-bind-html="examenmental.descripcion | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-12 col-sm-12 col-xs-12">
+                <h6>Observaciones</h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-lg-12 col-sm-12 col-xs-12">
+                <ui-select ng-model="pacienteEdit.examen_fisico.observaciones" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
+                  <ui-select-match placeholder="Observaciones" allow-clear="true">{{$select.selected.descripcion}}</ui-select-match>
+                  <ui-select-choices repeat="observacion in observaciones | filter: $select.search">
+                    <div ng-bind-html="observacion.descripcion | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

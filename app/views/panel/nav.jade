@@ -22,7 +22,7 @@ nav.site-nav.clearfix(role="navigation")
 				i.fa.fa-home
 				span.text Inicio
 
-		li(ui-sref-active="active" )
+		li(ui-sref-active="active" ng-if="hasRoleOrPerm(10)")
 			a(href="" ui-sref="panel.usuarios" md-ink-ripple="")
 				i.fa.fa-users
 				span.text Usuarios
@@ -38,12 +38,12 @@ nav.site-nav.clearfix(role="navigation")
 				span.text Informes
 
 		li(ui-sref-active="active")
-			a(href="" ui-sref="panel.ciudades" md-ink-ripple="")
+			a(href="" ui-sref="panel.ciudades" md-ink-ripple="" ng-if="hasRoleOrPerm(10)")
 				i.fa.fa-flag
 				span.text Ciudades
 
 		li(ui-sref-active="active")
-			a(href="" ui-sref="panel.configuraciones" md-ink-ripple="")
+			a(href="" ui-sref="panel.configuraciones" md-ink-ripple="" ng-if="hasRoleOrPerm(10)")
 				i.fa.fa-cog
 				span.text Configuraciones
 

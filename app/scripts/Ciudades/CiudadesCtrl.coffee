@@ -158,9 +158,9 @@ angular.module('feryzApp')
 				$scope.usuarioActualizar.pais = r2.pais
 				$scope.usuarioActualizar.depart_nac = r2.departamento
 				$scope.usuarioActualizar.ciudad_nac = r2.ciudad
-		
 
-	
-	
 
 ])
+
+
+

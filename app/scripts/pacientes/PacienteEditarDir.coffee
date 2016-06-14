@@ -16,6 +16,8 @@ angular.module('feryzApp')
 	
 	$scope.actualizarPaciente = ()->
 
+		console.log $scope.pacienteEdit
+
 		$http.put('::pacientes/actualizar', $scope.pacienteEdit).then( (r)->
 			toastr.success 'Actualizado correctamente: ' + r.nombre
 			$scope.editando = false
