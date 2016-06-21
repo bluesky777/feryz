@@ -356,7 +356,18 @@
 										md-item-text="item.nombre"
 										placeholder="Copie el síntoma")
 										span(md-highlight-text="ctrl.searchText") {{item.nombre}}
+		
 		examen-fisico-dir(ng-if="hasRoleOrPerm(6)")
+
+		examen-paraclinico-dir(ng-if="hasRoleOrPerm(6)")
+
+		diagnosticos-dir(ng-if="hasRoleOrPerm(6)")
+
+		antecedentes-auditivos-dir(ng-if="hasRoleOrPerm(6)")
+
+
+
+
 		.row
 			.col-lg-12(style="text-align: center;margin-bottom: 40px")
 				md-button.md-raised.md-default(type="button" ng-click="cancelarEdicion()") Cancelar

@@ -16,14 +16,11 @@ angular.module('feryzApp')
 	
 	$scope.actualizarPaciente = ()->
 
-		console.log $scope.pacienteEdit
-
 		$http.put('::pacientes/actualizar', $scope.pacienteEdit).then( (r)->
 			toastr.success 'Actualizado correctamente: ' + r.nombre
 			$scope.editando = false
 		, (r2)->
 			toastr.error 'No se pudo crear', 'Error'
-			console.log 'No se pudo guardar Paciente', r2
 		)
 
 

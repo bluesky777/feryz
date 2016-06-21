@@ -212,7 +212,7 @@
 									md-radio-button.md-primary(value="1") Hace dieta
 									md-radio-button(value="0") No hace dieta
 
-							.col-lg-7.col-md-5.col-xs-12(ng-show="pacienteNuevo.dieta=='1'")
+							.col-lg-7.col-md-5.col-xs-12(ng-show="pacienteNuevo.dieta=='0'")
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Observaciones
 									textarea(ng-model="pacienteNuevo.dieta_desc")
@@ -222,7 +222,7 @@
 									md-radio-button.md-primary(value="1") Hace ejercicio
 									md-radio-button(value="0") No hace ejercicio
 
-							.col-lg-7.col-md-5.col-xs-12(ng-show="pacienteNuevo.ejercicio=='1'")
+							.col-lg-7.col-md-5.col-xs-12(ng-show="pacienteNuevo.ejercicio=='0'")
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Observaciones
 									textarea(ng-model="pacienteNuevo.ejercicio_desc")

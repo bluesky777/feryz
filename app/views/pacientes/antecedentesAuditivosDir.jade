@@ -1,0 +1,106 @@
+.row
+	.col-lg-12
+		.panel.panel-default.panel-hovered.mb20
+			.panel-heading Antecedentes Auditivos
+
+			.panel-body
+				
+				div
+					form(ng-submit="guardarAntAudit()")
+
+						
+
+						div.panel-heading Otologicos					
+						.row
+							
+							
+							.col-lg-2.col-sm-1
+								md-checkbox.md-primary(ng-model="AntAudit.otalgia" ng-click="modificarAntAudit(AntAudit)" ng-true-value="1" ng-false-value="0" aria-label="Dosis 1") Otalgia
+							.col-lg-2.col-sm-1
+								md-checkbox.md-primary(ng-model="AntAudit.otitis" ng-click="modificarAntAudit(AntAudit)" ng-true-value="1" ng-false-value="0" aria-label="Dosis 2") Otitis
+							.col-lg-2.col-sm-1
+								md-checkbox.md-primary(ng-model="AntAudit.sensacion_oido_tapado" ng-click="modificarAntAudit(AntAudit)" ng-true-value="1" ng-false-value="0" aria-label="Dosis 3") Sensacion oido tapado
+							.col-lg-1.col-sm-1
+								md-checkbox.md-primary(ng-model="AntAudit.tinitus" ng-click="modificarAntAudit(AntAudit)" ng-true-value="1" ng-false-value="0" aria-label="Dosis 4") Tinutus
+							.col-lg-1.col-sm-1
+								md-checkbox.md-primary(ng-model="AntAudit.vertigo" ng-click="modificarAntAudit(AntAudit)" ng-true-value="1" ng-false-value="0" aria-label="Dosis 5") Vertigo
+							.col-lg-2.col-sm-2
+								md-checkbox.md-primary(ng-model="AntAudit.Prurito" ng-click="modificarAntAudit(AntAudit)" ng-true-value="1" ng-false-value="0" aria-label="Refuerzo") Prurito
+						div.panel-heading Traumaticos					
+						.row
+							
+							
+							.col-lg-2.col-sm-1
+								md-checkbox.md-primary(ng-model="AntAudit.trauma_craneoencefalico" ng-click="modificarAntAudit(AntAudit)" ng-true-value="1" ng-false-value="0" aria-label="Dosis 1") Trauma  craneoencefalico
+							.col-lg-2.col-sm-1
+								md-checkbox.md-primary(ng-model="AntAudit.trauma_acustico" ng-click="modificarAntAudit(AntAudit)" ng-true-value="1" ng-false-value="0" aria-label="Dosis 2") Trauma acustico
+							.col-lg-2.col-sm-1
+								md-checkbox.md-primary(ng-model="AntAudit.cirugia_oido" ng-click="modificarAntAudit(AntAudit)" ng-true-value="1" ng-false-value="0" aria-label="Dosis 3") Cirugia de oido
+							.col-lg-2.col-sm-1
+								md-checkbox.md-primary(ng-model="AntAudit.timpanoplastia" ng-click="modificarAntAudit(AntAudit)" ng-true-value="1" ng-false-value="0" aria-label="Dosis 4") Timpanoplastia
+						div.panel-heading Patologicos					
+						.row
+							.col-lg-2.col-sm-1
+								md-checkbox.md-primary(ng-model="AntAudit.hipertension_arterial" ng-click="modificarAntAudit(AntAudit)" ng-true-value="1" ng-false-value="0" aria-label="Dosis 1") Hipertension arterial
+							.col-lg-2.col-sm-1
+								md-checkbox.md-primary(ng-model="AntAudit.diabetes" ng-click="modificarAntAudit(AntAudit)" ng-true-value="1" ng-false-value="0" aria-label="Dosis 2") Diabetes
+							.col-lg-2.col-sm-1
+								md-checkbox.md-primary(ng-model="AntAudit.rinitis" ng-click="modificarAntAudit(AntAudit)" ng-true-value="1" ng-false-value="0" aria-label="Dosis 3") Rinitis / sinusitis					
+						div.panel-heading Hereditarias						
+						.row							
+							.col-lg-2.col-sm-1
+								md-checkbox.md-primary(ng-model="AntAudit.fam_prom_auditivos" ng-click="modificarAntAudit(AntAudit)" ng-true-value="1" ng-false-value="0" aria-label="Dosis 1") Familia problemas auditivos
+							.col-lg-2.col-sm-1
+								md-checkbox.md-primary(ng-model="AntAudit.exposicion_al_ruido" ng-click="modificarAntAudit(AntAudit)" ng-true-value="1" ng-false-value="0" aria-label="Dosis 2") exposicion al ruido		
+						
+						div.panel-heading Otoscopia						
+						
+						.row
+							.col-lg-3
+								h5 Estructura
+							.col-lg-3
+								h5 Oido derecho	
+							.col-lg-3
+								h5 Oido Izquierdo			
+						.row							
+							.col-lg-3
+								| Pabellon auriculas							
+							.col-lg-3.col-sm-4
+								md-checkbox.md-primary(ng-model="AntAudit.otoscopia.pabellon_auricular_der" ng-click="modificarAntAudit(AntAudit)" ng-true-value="1" ng-false-value="0" aria-label="Dosis 1") Oido Derecho
+							.col-lg-3.col-sm-4
+								md-checkbox.md-primary(ng-model="AntAudit.otoscopia.pabellon_auricular_izq" ng-click="modificarAntAudit(AntAudit)" ng-true-value="1" ng-false-value="0" aria-label="Dosis 2") Oido izquierdo
+			
+						.row							
+							.col-lg-3
+								| CAE							
+							.col-lg-3.col-sm-4
+								md-checkbox.md-primary(ng-model="AntAudit.otoscopia.cae_der" ng-click="modificarAntAudit(AntAudit)" ng-true-value="1" ng-false-value="0" aria-label="Dosis 1") Oido Derecho
+							.col-lg-3.col-sm-4
+								md-checkbox.md-primary(ng-model="AntAudit.otoscopia.cae_izq" ng-click="modificarAntAudit(AntAudit)" ng-true-value="1" ng-false-value="0" aria-label="Dosis 2") Oido izquierdo			
+						.row							
+							.col-lg-3
+								| Membrana timpanica							
+							.col-lg-3.col-sm-4
+								md-checkbox.md-primary(ng-model="AntAudit.otoscopia.membrana_timpanica_der" ng-click="modificarAntAudit(AntAudit)" ng-true-value="1" ng-false-value="0" aria-label="Dosis 1") Oido Derecho
+							.col-lg-3.col-sm-4
+								md-checkbox.md-primary(ng-model="AntAudit.otoscopia.membrana_timpanica_izq" ng-click="modificarAntAudit(AntAudit)" ng-true-value="1" ng-false-value="0" aria-label="Dosis 2") Oido izquierdo
+
+
+
+
+						.row
+							.col-lg-12.col-sm-12
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+									label Diagnostico
+									input(ng-model="pacienteNuevo.diagnostico")
+
+
+						.row
+							.col-lg-12.col-sm-12(style="text-align: center;margin-bottom: 40px")
+
+								md-button.md-raised.md-default(type="button" ng-click="$parent.creando=false") Cancelar
+
+								md-button.md-raised.md-primary(type="submit") Guardar
+
+ 
+		

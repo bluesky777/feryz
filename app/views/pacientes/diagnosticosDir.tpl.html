@@ -1,0 +1,34 @@
+
+<div class="panel panel-default panel-hovered mb20">
+  <div class="panel-heading">Diganosticos</div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-lg-6 col-sm-6">
+        <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+          <label>Diagnostico</label>
+          <input ng-model="pacienteEdit.diagnostico.diagnostico">
+        </md-input-container>
+      </div>
+      <div class="col-lg-6 col-sm-6 col-xs-12">
+        <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+          <label>Nivel de aptitud</label>
+          <input ng-model="pacienteEdit.diagnostico.nivel_aptitud">
+        </md-input-container>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-sm-12 col-xs-12">
+        <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+          <label>Restricciones / Temporales o Permanentes</label>
+          <input ng-model="pacienteEdit.diagnostico.restricciones_temp_perm" value="No presenta resticcion alguna pra el cargo que aspira">
+        </md-input-container>
+      </div>
+      <div class="col-lg-6 col-sm-12 col-xs-12">
+        <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+          <label>Recomendaciones de Diagnostico</label>
+          <input ng-model="pacienteEdit.diagnostico.recomendaciones_diagnostico">
+        </md-input-container>
+      </div>
+    </div>
+  </div>
+</div>

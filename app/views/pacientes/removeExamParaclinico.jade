@@ -1,0 +1,14 @@
+.modal-header
+	h3.modal-title ¿Seguro que deseas eliminar?
+.modal-body
+	.row
+		.col-lg-12.col-xs-12
+			h4 Examen paraclínico: 
+			div(style="text-overflow: ellipsis") {{exam.examen}} 
+			div(style="text-overflow: ellipsis") {{exam.diagnostico}} 
+			h5 Id: {{exam.id}}
+.modal-footer
+	button.btn.btn-labeled.btn-danger(ng-click="ok()") Eliminar
+		i.btn-label.fa.fa-times
+	button.btn.btn-yellow(ng-click="cancel()") Cancelar
+	

@@ -91,10 +91,17 @@ angular.module('feryzApp')
 	$scope.hasRoleOrPerm = AuthService.hasRoleOrPerm
 
 	$scope.cancelarEdicion = ()->
+	
 		$scope.editando = false
 
 	$scope.crearPaciente = ()->
+
+		$scope.editando = false
 		$scope.creando = true
+		$scope.pacienteNuevo.doc_tipo = $filter('filter')($scope.tipos_doc,{id:1} )[0]
+
+
+
 
 	
 	$scope.opt_sintomas_vision = [
@@ -213,24 +220,27 @@ angular.module('feryzApp')
 			$scope.pacienteEdit.habitos 				= r.habitos
 			$scope.pacienteEdit.inmunizaciones 			= r.inmunizaciones
 			$scope.pacienteEdit.examen_fisico 			= r.examen_fisico
+			$scope.pacienteEdit.examenes_paraclinicos 	= r.examenes_paraclinicos
+			$scope.pacienteEdit.diagnostico 	= r.diagnostico
 
-			$scope.pacienteEdit.examen_fisico.estado_general 	= {descripcion: $scope.pacienteEdit.examen_fisico.estado_general}
-			$scope.pacienteEdit.examen_fisico.contitucion 		= {descripcion: $scope.pacienteEdit.examen_fisico.contitucion}
-			$scope.pacienteEdit.examen_fisico.dominancia 		= {descripcion: $scope.pacienteEdit.examen_fisico.dominancia}
-			$scope.pacienteEdit.examen_fisico.agudeza_visual 		= {descripcion: $scope.pacienteEdit.examen_fisico.agudeza_visual}
-			$scope.pacienteEdit.examen_fisico.ojo_derecho 		= {descripcion: $scope.pacienteEdit.examen_fisico.ojo_derecho}
-			$scope.pacienteEdit.examen_fisico.ojo_izquierdo		= {descripcion: $scope.pacienteEdit.examen_fisico.ojo_izquierdo}
-			$scope.pacienteEdit.examen_fisico.organos_sentidos		= {descripcion: $scope.pacienteEdit.examen_fisico.organos_sentidos}
-			$scope.pacienteEdit.examen_fisico.cardio_pulmonar		= {descripcion: $scope.pacienteEdit.examen_fisico.cardio_pulmonar}
-			$scope.pacienteEdit.examen_fisico.abdomen		= {descripcion: $scope.pacienteEdit.examen_fisico.abdomen}
-			$scope.pacienteEdit.examen_fisico.genito_urinario		= {descripcion: $scope.pacienteEdit.examen_fisico.genito_urinario}
-			$scope.pacienteEdit.examen_fisico.columna_vertebral		= {descripcion: $scope.pacienteEdit.examen_fisico.columna_vertebral}
-			$scope.pacienteEdit.examen_fisico.neurologico		= {descripcion: $scope.pacienteEdit.examen_fisico.neurologico}
-			$scope.pacienteEdit.examen_fisico.osteo_muscular		= {descripcion: $scope.pacienteEdit.examen_fisico.osteo_muscular}
-			$scope.pacienteEdit.examen_fisico.extremidades		= {descripcion: $scope.pacienteEdit.examen_fisico.extremidades}
-			$scope.pacienteEdit.examen_fisico.piel_anexos		= {descripcion: $scope.pacienteEdit.examen_fisico.piel_anexos}
-			$scope.pacienteEdit.examen_fisico.examen_mental		= {descripcion: $scope.pacienteEdit.examen_fisico.examen_mental}
-			$scope.pacienteEdit.examen_fisico.observaciones		= {descripcion: $scope.pacienteEdit.examen_fisico.observaciones}
+
+			$scope.pacienteEdit.examen_fisico.estado_general 		= if $scope.pacienteEdit.examen_fisico.estado_general == "" 	then null else {descripcion: $scope.pacienteEdit.examen_fisico.estado_general}
+			$scope.pacienteEdit.examen_fisico.contitucion 			= if $scope.pacienteEdit.examen_fisico.contitucion == "" 		then null else {descripcion: $scope.pacienteEdit.examen_fisico.contitucion}
+			$scope.pacienteEdit.examen_fisico.dominancia 			= if $scope.pacienteEdit.examen_fisico.dominancia == "" 		then null else {descripcion: $scope.pacienteEdit.examen_fisico.dominancia}
+			$scope.pacienteEdit.examen_fisico.agudeza_visual 		= if $scope.pacienteEdit.examen_fisico.agudeza_visual == "" 	then null else {descripcion: $scope.pacienteEdit.examen_fisico.agudeza_visual}
+			$scope.pacienteEdit.examen_fisico.ojo_derecho 			= if $scope.pacienteEdit.examen_fisico.ojo_derecho == "" 		then null else {descripcion: $scope.pacienteEdit.examen_fisico.ojo_derecho}
+			$scope.pacienteEdit.examen_fisico.ojo_izquierdo			= if $scope.pacienteEdit.examen_fisico.ojo_izquierdo == "" 		then null else {descripcion: $scope.pacienteEdit.examen_fisico.ojo_izquierdo}
+			$scope.pacienteEdit.examen_fisico.organos_sentidos		= if $scope.pacienteEdit.examen_fisico.organos_sentidos == "" 	then null else {descripcion: $scope.pacienteEdit.examen_fisico.organos_sentidos}
+			$scope.pacienteEdit.examen_fisico.cardio_pulmonar		= if $scope.pacienteEdit.examen_fisico.cardio_pulmonar == "" 	then null else {descripcion: $scope.pacienteEdit.examen_fisico.cardio_pulmonar}
+			$scope.pacienteEdit.examen_fisico.abdomen				= if $scope.pacienteEdit.examen_fisico.abdomen == "" 			then null else {descripcion: $scope.pacienteEdit.examen_fisico.abdomen}
+			$scope.pacienteEdit.examen_fisico.genito_urinario		= if $scope.pacienteEdit.examen_fisico.genito_urinario == "" 	then null else {descripcion: $scope.pacienteEdit.examen_fisico.genito_urinario}
+			$scope.pacienteEdit.examen_fisico.columna_vertebral		= if $scope.pacienteEdit.examen_fisico.columna_vertebral == "" 	then null else {descripcion: $scope.pacienteEdit.examen_fisico.columna_vertebral}
+			$scope.pacienteEdit.examen_fisico.neurologico			= if $scope.pacienteEdit.examen_fisico.neurologico == "" 		then null else {descripcion: $scope.pacienteEdit.examen_fisico.neurologico}
+			$scope.pacienteEdit.examen_fisico.osteo_muscular		= if $scope.pacienteEdit.examen_fisico.osteo_muscular == "" 	then null else {descripcion: $scope.pacienteEdit.examen_fisico.osteo_muscular}
+			$scope.pacienteEdit.examen_fisico.extremidades			= if $scope.pacienteEdit.examen_fisico.extremidades == "" 		then null else {descripcion: $scope.pacienteEdit.examen_fisico.extremidades}
+			$scope.pacienteEdit.examen_fisico.piel_anexos			= if $scope.pacienteEdit.examen_fisico.piel_anexos == "" 		then null else {descripcion: $scope.pacienteEdit.examen_fisico.piel_anexos}
+			$scope.pacienteEdit.examen_fisico.examen_mental			= if $scope.pacienteEdit.examen_fisico.examen_mental == "" 		then null else {descripcion: $scope.pacienteEdit.examen_fisico.examen_mental}
+			$scope.pacienteEdit.examen_fisico.observaciones			= if $scope.pacienteEdit.examen_fisico.observaciones == "" 		then null else {descripcion: $scope.pacienteEdit.examen_fisico.observaciones}
 
 			$scope.editando = true
 
