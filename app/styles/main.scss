@@ -573,3 +573,13 @@ md-tabs, md-tab-content{
   text-align: center !important;
 }
 
+.clickeable-auditivo:hover{
+  background-color: #909FF3;
+  cursor: pointer
+}
+
+.clickeable-auditivo.clickeado{
+  background-color: #3F51B5;
+}
+
+

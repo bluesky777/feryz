@@ -221,7 +221,10 @@ angular.module('feryzApp')
 			$scope.pacienteEdit.inmunizaciones 			= r.inmunizaciones
 			$scope.pacienteEdit.examen_fisico 			= r.examen_fisico
 			$scope.pacienteEdit.examenes_paraclinicos 	= r.examenes_paraclinicos
-			$scope.pacienteEdit.diagnostico 	= r.diagnostico
+			$scope.pacienteEdit.diagnostico 			= r.diagnostico
+			$scope.pacienteEdit.AntAudit 				= r.antAud
+			$scope.pacienteEdit.audiometria 			= r.audiometria
+			$scope.pacienteEdit.otoscopia 				= r.otoscopia
 
 
 			$scope.pacienteEdit.examen_fisico.estado_general 		= if $scope.pacienteEdit.examen_fisico.estado_general == "" 	then null else {descripcion: $scope.pacienteEdit.examen_fisico.estado_general}
