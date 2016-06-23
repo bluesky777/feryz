@@ -59,6 +59,7 @@
         <md-checkbox ng-model="pacienteEdit.AntAudit.exposicion_al_ruido" ng-true-value="1" ng-false-value="0" aria-label="Dosis 2" class="md-primary">exposicion al ruido		</md-checkbox>
       </div>
     </div>
+    <hr>
     <div class="panel-heading">Otoscopia						</div>
     <div class="row">
       <div class="col-lg-3">
@@ -98,16 +99,9 @@
         <md-checkbox ng-model="pacienteEdit.otoscopia.membrana_timpanica_izq" ng-true-value="1" ng-false-value="0" aria-label="Dosis 2" class="md-primary">Oido izquierdo</md-checkbox>
       </div>
     </div>
-    <div class="row">
-      <div class="col-lg-12 col-sm-12">
-        <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-          <label>Diagnostico</label>
-          <input ng-model="pacienteEdit.AntAudit.diagnostico">
-        </md-input-container>
-      </div>
-    </div>
   </div>
   <div class="panel-heading">Otoscopia						
+    <hr>
     <div class="row">
       <div class="col-lg-12">
         <table class="table">
@@ -284,6 +278,14 @@
             </tr>
           </tbody>
         </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-sm-12">
+        <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+          <label>Diagnostico</label>
+          <input ng-model="pacienteEdit.AntAudit.diagnostico">
+        </md-input-container>
       </div>
     </div>
   </div>

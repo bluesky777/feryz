@@ -46,7 +46,7 @@
 				md-checkbox.md-primary(ng-model="pacienteEdit.AntAudit.fam_prom_auditivos"  ng-true-value="1" ng-false-value="0" aria-label="Dosis 1") Familia problemas auditivos
 			.col-lg-2.col-sm-1
 				md-checkbox.md-primary(ng-model="pacienteEdit.AntAudit.exposicion_al_ruido"  ng-true-value="1" ng-false-value="0" aria-label="Dosis 2") exposicion al ruido		
-		
+		hr
 		div.panel-heading Otoscopia						
 		
 		.row
@@ -82,15 +82,11 @@
 
 
 
-		.row
-			.col-lg-12.col-sm-12
-				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-					label Diagnostico
-					input(ng-model="pacienteEdit.AntAudit.diagnostico")
+
 
 
 	div.panel-heading Otoscopia						
-		
+		hr
 		.row
 			.col-lg-12
 				table.table
@@ -262,7 +258,11 @@
 							td.clickeable-auditivo(ng-click="clickeando120(6000)" ng-class="{'clickeado': pacienteEdit.audiometria.int120==6000}") 
 							td.clickeable-auditivo(ng-click="clickeando120(8000)" ng-class="{'clickeado': pacienteEdit.audiometria.int120==8000}") 
 							td.clickeable-auditivo(ng-click="clickeando120(1200)" ng-class="{'clickeado': pacienteEdit.audiometria.int120==1200}") 
-
+		.row
+			.col-lg-12.col-sm-12
+				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+					label Diagnostico
+					input(ng-model="pacienteEdit.AntAudit.diagnostico")
 
 
 
