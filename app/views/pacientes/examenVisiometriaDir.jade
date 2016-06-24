@@ -20,7 +20,7 @@
 				h5 No
 
 		.row
-			
+
 			.col-lg-4.col-md-7.col-xs-12
 				md-radio-group(ng-model="pacienteEdit.visiometria.enrojecimiento_ojo_si" layout="row")
 					md-radio-button.md-primary(value="1") Si
@@ -98,45 +98,110 @@
 					label Antecedentes Personales
 					input(ng-model="pacienteEdit.visiometria.antecedentes_personales")
 
-
+		hr
 
 		.row
-			.col-lg-1
-				| Agudeza visual
+			.col-lg-2(style="text-align: center")
+				b Agudeza visual
 			.col-lg-4
-				| Corracion optica en uso 
-				md-checkbox.md-primary(ng-model="pacienteEdit.visiometria.otros_si"  ng-true-value="1" ng-false-value="0" aria-label="Dosis 1") Si
-				md-checkbox.md-primary(ng-model="pacienteEdit.visiometria.otros_no"  ng-true-value="1" ng-false-value="0" aria-label="Dosis 2") No	
-			.col-lg-2
-				| Vision de Lejos
-			.col-lg-2
-				| Vision de cerca
-			.col-lg-1
-				| P.H
+				.row
+					.col-lg-8
+						b Correccion optica en uso 
+					.col-lg-4
+						md-radio-group(ng-model="pacienteEdit.visiometria.correccion_optica_uso" layout="row")
+							md-radio-button.md-primary(value="S" ) Si
+							md-radio-button(value="N" ) No
+			.col-lg-1(style="width: 1px !important;")
+				| |
+			.col-lg-2(style="text-align: center")
+				b Vision de Lejos
+			.col-lg-1(style="width: 1px !important;")
+				| |
+			.col-lg-2(style="text-align: center")
+				b Vision de cerca
+			.col-lg-1(style="width: 1px !important;")
+				| |
+			.col-lg-1(style="text-align: center")
+				b P.H
 	
 		.row
-			.col-lg-1
+			.col-lg-2
 				| 
-			.col-lg-1
+			.col-lg-1(style="text-align: center")
 				| Esfera
-			.col-lg-1
+			.col-lg-1(style="text-align: center")
 				| Cilindro
-			.col-lg-1
+			.col-lg-1(style="text-align: center")
 				| Eje
-			.col-lg-1
+			.col-lg-1(style="text-align: center")
 				| ADD
-			.col-lg-1
+			.col-lg-1(style="width: 1px !important;")
+				| 
+			.col-lg-1(style="text-align: center;")
 				| S.C.
-			.col-lg-1
+			.col-lg-1(style="text-align: center")
 				| C.C
-			.col-lg-1
+			.col-lg-1(style="text-align: centerpadding-left: 74px !important;")
 				| S.C
-			.col-lg-1
+			.col-lg-1(style="text-align: center;padding-left: 65px !important;")
 				| C.C
 			.col-lg-1
 				| 
-						
+	
+		.row
+			.col-lg-2
+				b Ojo derecho
+			.col-lg-4(ng-show="pacienteEdit.visiometria.correccion_optica_uso=='S'")
+				md-radio-group(ng-model="pacienteEdit.visiometria.od_vcorreccion_optica_uso"  layout="row" )
+					md-radio-button.md-primary(value="esfera" style="margin-right: 40px !important;" ) Esfera
+					md-radio-button(value="cilindro" style="margin-right: 40px !important;" ) Cilindro
+					md-radio-button(value="eje" style="margin-right: 40px !important;" ) Eje
+					md-radio-button(value="add" style="margin-right: 40px !important;" ) ADD
+			.col-lg-1(style="width: 1px !important;")
+				| |
+			.col-lg-2(style="text-align: center")
+				md-radio-group(ng-model="pacienteEdit.visiometria.od_vvision_lejos" layout="row" )
+					md-radio-button.md-primary(value="sc_lejos" style="margin-right: 40px !important;") S.C
+					md-radio-button(value="cc_lejos" style="margin-right: 40px !important;") C.C
+			.col-lg-1(style="width: 1px !important;")
+				| |
+			.col-lg-2(style="text-align: center")
+				md-radio-group(ng-model="pacienteEdit.visiometria.od_vvision_cerca" layout="row" )
+					md-radio-button.md-primary(value="sc_cerca" style="margin-right: 40px !important;") S.C
+					md-radio-button(value="cc_cerca" style="margin-right: 40px !important;") C.C
+			.col-lg-1(style="width: 1px !important;")
+				| |
+
+			.col-lg-1.col-sm-2(style="text-align: center")
+				md-checkbox.md-primary(ng-model="pacienteEdit.od_visiometria.ph"  ng-true-value="1" ng-false-value="0" aria-label="Dosis 2") PH
+				
+		.row
+			.col-lg-2
+				b Ojo Izquierdo	
+			.col-lg-4
+				md-radio-group(ng-model="pacienteEdit.visiometria.oi_correccion_optica_uso" layout="row" )
+					md-radio-button.md-primary(value="esfera" style="margin-right: 40px !important;") Esfera
+					md-radio-button(value="cilindro" style="margin-right: 40px !important;") Cilindro
+					md-radio-button(value="eje" style="margin-right: 40px !important;") Eje
+					md-radio-button(value="add" style="margin-right: 40px !important;") ADD
+			.col-lg-1(style="width: 1px !important;")
+				| |
+			.col-lg-2(style="text-align: center")
+				md-radio-group(ng-model="pacienteEdit.visiometria.oi_vision_lejos" layout="row" )
+					md-radio-button.md-primary(value="sc_lejos" style="margin-right: 40px !important;") S.C
+					md-radio-button(value="cc_lejos" style="margin-right: 40px !important;") C.C
+			.col-lg-1(style="width: 1px !important;")
+				| |
+			.col-lg-2(style="text-align: center")
+				md-radio-group(ng-model="pacienteEdit.visiometria.oi_vision_cerca" layout="row" )
+					md-radio-button.md-primary(value="sc_cerca" style="margin-right: 40px !important;") S.C
+					md-radio-button(value="cc_cerca" style="margin-right: 40px !important;") C.C
+			.col-lg-1(style="width: 1px !important;")
+				| |
+			.col-lg-1.col-sm-2(style="text-align: center")
+				md-checkbox.md-primary(ng-model="pacienteEdit.oi_visiometria.ph"  ng-true-value="1" ng-false-value="0" aria-label="Dosis 2") PH
 					
+		hr			
 							
 
 		.row

@@ -13,9 +13,8 @@ angular.module('feryzApp')
 		dieta : 1
 		ejercicio : 1
 
-
-
-
+    
+    	
 	$scope.creando = false
 	$scope.editando = false
 	$scope.estados_generales = [
