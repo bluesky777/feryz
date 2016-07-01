@@ -3,114 +3,88 @@
   <div class="panel-heading">Examen visiometria</div>
   <div class="panel-body">
     <div class="row">
+      <div class="col-lg-3">
+        <h5> </h5>
+      </div>
+      <div class="col-lg-1"><b>Si</b></div>
+      <div class="col-lg-2"><b>No	</b></div>
       <div class="col-lg-2">
         <h5> </h5>
       </div>
-      <div class="col-lg-1">
-        <h5>Si</h5>
-      </div>
-      <div class="col-lg-1">
-        <h5>No	</h5>
-      </div>
-      <div class="col-lg-2">
-        <h5> </h5>
-      </div>
-      <div class="col-lg-1">
-        <h5>Si</h5>
-      </div>
-      <div class="col-lg-1">
-        <h5>No</h5>
-      </div>
+      <div class="col-lg-1"><b>Si</b></div>
+      <div class="col-lg-1"><b>No</b></div>
     </div>
     <div class="row">
-      <div class="col-lg-4 col-md-7 col-xs-12">
-        <md-radio-group ng-model="pacienteEdit.visiometria.enrojecimiento_ojo_si" layout="row">
-          <md-radio-button value="1" class="md-primary">Si</md-radio-button>
-          <md-radio-button value="0">No</md-radio-button>
+      <div class="col-lg-4 col-md-7 col-xs-12"> </div>
+      <div class="col-lg-1 col-md-7 col-xs-12"> </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3"><b>Enrojecimiento en algun ojo</b></div>
+      <div class="col-lg-2 col-sm-4">
+        <md-radio-group ng-model="pacienteEdit.visiometria.enrojecimiento_ojo" layout="row">
+          <md-radio-button value="S" class="md-primary">Si</md-radio-button>
+          <md-radio-button value="N">No</md-radio-button>
+        </md-radio-group>
+      </div>
+      <div class="col-lg-3"><b>Vision doble</b></div>
+      <div class="col-lg-2 col-sm-2">
+        <md-radio-group ng-model="pacienteEdit.visiometria.vision_doble" layout="row">
+          <md-radio-button value="S" class="md-primary">Si</md-radio-button>
+          <md-radio-button value="N">No</md-radio-button>
         </md-radio-group>
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-2">
-        <h5>Enrojecimiento en algun ojo						</h5>
+      <div class="col-lg-3"><b>Lagrimeo		</b></div>
+      <div class="col-lg-2 col-sm-2">
+        <md-radio-group ng-model="pacienteEdit.visiometria.lagrimeo" layout="row">
+          <md-radio-button value="S" class="md-primary">Si</md-radio-button>
+          <md-radio-button value="N">No</md-radio-button>
+        </md-radio-group>
       </div>
-      <div class="col-lg-1 col-sm-4">
-        <md-checkbox ng-model="pacienteEdit.visiometria.enrojecimiento_ojo_si" ng-true-value="1" ng-false-value="0" aria-label="Dosis 1" class="md-primary">Si</md-checkbox>
-      </div>
-      <div class="col-lg-1 col-sm-4">
-        <md-checkbox ng-model="pacienteEdit.visiometria.enrojecimiento_ojo_no" ng-true-value="1" ng-false-value="0" aria-label="Dosis 2" class="md-primary">No</md-checkbox>
-      </div>
-      <div class="col-lg-2">
-        <h5>Vision doble				</h5>
-      </div>
-      <div class="col-lg-1 col-sm-2">
-        <md-checkbox ng-model="pacienteEdit.vision_doble_si" ng-true-value="1" ng-false-value="0" aria-label="Dosis 1" class="md-primary">Si</md-checkbox>
-      </div>
-      <div class="col-lg-1 col-sm-2">
-        <md-checkbox ng-model="pacienteEdit.visiometria.vision_doble_no" ng-true-value="1" ng-false-value="0" aria-label="Dosis 2" class="md-primary">No	</md-checkbox>
+      <div class="col-lg-3"><b>Prurito				</b></div>
+      <div class="col-lg-2 col-sm-2">
+        <md-radio-group ng-model="pacienteEdit.visiometria.prurito" layout="row">
+          <md-radio-button value="S" class="md-primary">Si</md-radio-button>
+          <md-radio-button value="N">No</md-radio-button>
+        </md-radio-group>
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-2">
-        <h5>Lagrimeo					</h5>
+      <div class="col-lg-3"><b>Ardor ocular			</b></div>
+      <div class="col-lg-2 col-sm-2">
+        <md-radio-group ng-model="pacienteEdit.visiometria.ardor_ocular" layout="row">
+          <md-radio-button value="S" class="md-primary">Si</md-radio-button>
+          <md-radio-button value="N">No</md-radio-button>
+        </md-radio-group>
       </div>
-      <div class="col-lg-1 col-sm-4">
-        <md-checkbox ng-model="pacienteEdit.visiometria.lagrimeo_si" ng-true-value="1" ng-false-value="0" aria-label="Dosis 1" class="md-primary">Si</md-checkbox>
-      </div>
-      <div class="col-lg-1 col-sm-2">
-        <md-checkbox ng-model="pacienteEdit.visiometria.lagrimeo_no" ng-true-value="1" ng-false-value="0" aria-label="Dosis 2" class="md-primary">No</md-checkbox>
-      </div>
-      <div class="col-lg-2">
-        <h5>Prurito					</h5>
-      </div>
-      <div class="col-lg-1 col-sm-2">
-        <md-checkbox ng-model="pacienteEdit.visiometria.prurito_si" ng-true-value="1" ng-false-value="0" aria-label="Dosis 1" class="md-primary">Si</md-checkbox>
-      </div>
-      <div class="col-lg-1 col-sm-2">
-        <md-checkbox ng-model="pacienteEdit.visiometria.prurito_no" ng-true-value="1" ng-false-value="0" aria-label="Dosis 2" class="md-primary">No		</md-checkbox>
+      <div class="col-lg-3"><b>Cefalea				</b></div>
+      <div class="col-lg-2 col-sm-2">
+        <md-radio-group ng-model="pacienteEdit.visiometria.cefalea" layout="row">
+          <md-radio-button value="S" class="md-primary">Si</md-radio-button>
+          <md-radio-button value="N">No</md-radio-button>
+        </md-radio-group>
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-2">
-        <h5>Ardor ocular			</h5>
+      <div class="col-lg-3"><b>Vision borrosa		</b></div>
+      <div class="col-lg-2 col-sm-2">
+        <md-radio-group ng-model="pacienteEdit.visiometria.vision_borrosa" layout="row">
+          <md-radio-button value="S" class="md-primary">Si</md-radio-button>
+          <md-radio-button value="N">No</md-radio-button>
+        </md-radio-group>
       </div>
-      <div class="col-lg-1 col-sm-4">
-        <md-checkbox ng-model="pacienteEdit.visiometria.ardor_ocular_si" ng-true-value="1" ng-false-value="0" aria-label="Dosis 1" class="md-primary">Si</md-checkbox>
-      </div>
-      <div class="col-lg-1 col-sm-2">
-        <md-checkbox ng-model="pacienteEdit.visiometria.ardor_ocular_no" ng-true-value="1" ng-false-value="0" aria-label="Dosis 2" class="md-primary">No</md-checkbox>
-      </div>
-      <div class="col-lg-2">
-        <h5>Cefalea				</h5>
-      </div>
-      <div class="col-lg-1 col-sm-2">
-        <md-checkbox ng-model="pacienteEdit.visiometria.cefalea_si" ng-true-value="1" ng-false-value="0" aria-label="Dosis 1" class="md-primary">Si</md-checkbox>
-      </div>
-      <div class="col-lg-1 col-sm-2">
-        <md-checkbox ng-model="pacienteEdit.visiometria.cefalea_no" ng-true-value="1" ng-false-value="0" aria-label="Dosis 2" class="md-primary">No	</md-checkbox>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-2">
-        <h5>Vision borrosa		</h5>
-      </div>
-      <div class="col-lg-1 col-sm-4">
-        <md-checkbox ng-model="pacienteEdit.visiometria.vision_borrosa_si" ng-true-value="1" ng-false-value="0" aria-label="Dosis 1" class="md-primary">Si</md-checkbox>
-      </div>
-      <div class="col-lg-1 col-sm-2">
-        <md-checkbox ng-model="pacienteEdit.visiometria.vision_borrosa_no" ng-true-value="1" ng-false-value="0" aria-label="Dosis 2" class="md-primary">No</md-checkbox>
-      </div>
-      <div class="col-lg-2 col-sm-2 col-xs-2">
+      <div class="col-lg-3 col-sm-2 col-xs-2">
         <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
           <label>Otros</label>
           <input ng-model="pacienteEdit.visiometria.otros">
         </md-input-container>
       </div>
-      <div class="col-lg-1 col-sm-2">
-        <md-checkbox ng-model="pacienteEdit.visiometria.otros_si" ng-true-value="1" ng-false-value="0" aria-label="Dosis 1" class="md-primary">Si</md-checkbox>
-      </div>
-      <div class="col-lg-1 col-sm-2">
-        <md-checkbox ng-model="pacienteEdit.visiometria.otros_no" ng-true-value="1" ng-false-value="0" aria-label="Dosis 2" class="md-primary">No		</md-checkbox>
+      <div class="col-lg-2 col-sm-2">
+        <md-radio-group ng-model="pacienteEdit.visiometria.otros" layout="row">
+          <md-radio-button value="S" class="md-primary">Si</md-radio-button>
+          <md-radio-button value="N">No</md-radio-button>
+        </md-radio-group>
       </div>
     </div>
     <div class="row">
@@ -123,8 +97,8 @@
     </div>
     <hr>
     <div class="row">
-      <div style="text-align: center" class="col-lg-2"><b>Agudeza visual</b></div>
-      <div class="col-lg-4">
+      <div style="text-align: center" class="col-lg-2 col-md-2"><b>Agudeza visual</b></div>
+      <div class="col-lg-4 col-md-4">
         <div class="row">
           <div class="col-lg-8"><b>Correccion optica en uso </b></div>
           <div class="col-lg-4">
@@ -135,29 +109,29 @@
           </div>
         </div>
       </div>
-      <div style="width: 1px !important;" class="col-lg-1">|</div>
-      <div style="text-align: center" class="col-lg-2"><b>Vision de Lejos</b></div>
-      <div style="width: 1px !important;" class="col-lg-1">|</div>
-      <div style="text-align: center" class="col-lg-2"><b>Vision de cerca</b></div>
-      <div style="width: 1px !important;" class="col-lg-1">|</div>
-      <div style="text-align: center" class="col-lg-1"><b>P.H</b></div>
+      <div style="width: 1px !important;" class="col-lg-1 col-md-1">|</div>
+      <div style="text-align: center" class="col-lg-2 col-md-2"><b>Vision de Lejos</b></div>
+      <div style="width: 1px !important;" class="col-lg-1 col-md-1">|</div>
+      <div style="text-align: center" class="col-lg-2 col-md-2"><b>Vision de cerca</b></div>
+      <div style="width: 1px !important;" class="col-lg-1 col-md-1">|</div>
+      <div style="text-align: center" class="col-lg-1 col-md-1"><b>P.H</b></div>
     </div>
     <div class="row">
-      <div class="col-lg-2"> </div>
-      <div style="text-align: center" class="col-lg-1">Esfera</div>
-      <div style="text-align: center" class="col-lg-1">Cilindro</div>
-      <div style="text-align: center" class="col-lg-1">Eje</div>
-      <div style="text-align: center" class="col-lg-1">ADD</div>
-      <div style="width: 1px !important;" class="col-lg-1"> </div>
-      <div style="text-align: center;" class="col-lg-1">S.C.</div>
-      <div style="text-align: center" class="col-lg-1">C.C</div>
-      <div style="text-align: centerpadding-left: 74px !important;" class="col-lg-1">S.C</div>
-      <div style="text-align: center;padding-left: 65px !important;" class="col-lg-1">C.C</div>
-      <div class="col-lg-1"> </div>
+      <div class="col-lg-2 col-md-2"> </div>
+      <div style="text-align: center" class="col-lg-1 col-md-1">Esfera</div>
+      <div style="text-align: center" class="col-lg-1 col-md-1"> Cilindro</div>
+      <div style="text-align: center" class="col-lg-1 col-md-1">  Eje</div>
+      <div style="text-align: center" class="col-lg-1 col-md-1">ADD</div>
+      <div style="width: 1px !important;" class="col-lg-1 col-md-1"> </div>
+      <div style="text-align: center;" class="col-lg-1 col-md-1">  S.C.</div>
+      <div style="text-align: center" class="col-lg-1 col-md-1">  C.C</div>
+      <div style="text-align: centerpadding-left: 74px !important;" class="col-lg-1 col-md-1">  S.C</div>
+      <div style="text-align: center;padding-left: 65px !important;" class="col-lg-1 col-md-1">  C.C</div>
+      <div class="col-lg-1 col-md-1"> </div>
     </div>
     <div class="row">
-      <div class="col-lg-2"><b>Ojo derecho</b></div>
-      <div ng-show="pacienteEdit.visiometria.correccion_optica_uso=='S'" class="col-lg-4">
+      <div class="col-lg-2 col-md-2"><b>Ojo derecho</b></div>
+      <div ng-show="pacienteEdit.visiometria.correccion_optica_uso=='S'" class="col-lg-4 col-md-4">
         <md-radio-group ng-model="pacienteEdit.visiometria.od_vcorreccion_optica_uso" layout="row">
           <md-radio-button value="esfera" style="margin-right: 40px !important;" class="md-primary">Esfera</md-radio-button>
           <md-radio-button value="cilindro" style="margin-right: 40px !important;">Cilindro</md-radio-button>
@@ -165,28 +139,36 @@
           <md-radio-button value="add" style="margin-right: 40px !important;">ADD</md-radio-button>
         </md-radio-group>
       </div>
-      <div style="width: 1px !important;" class="col-lg-1">|</div>
-      <div style="text-align: center" class="col-lg-2">
+      <div ng-show="pacienteEdit.visiometria.correccion_optica_uso=='N'" class="col-lg-4 col-md-4">
+        <div class="row">
+          <div class="col-lg-3"> </div>
+          <div class="col-lg-3"> </div>
+          <div class="col-lg-3"> </div>
+          <div class="col-lg-3"> </div>
+        </div>
+      </div>
+      <div style="width: 1px !important;" class="col-lg-1 col-md-1">  |</div>
+      <div style="text-align: center" class="col-lg-2 col-md-2">
         <md-radio-group ng-model="pacienteEdit.visiometria.od_vvision_lejos" layout="row">
           <md-radio-button value="sc_lejos" style="margin-right: 40px !important;" class="md-primary">S.C</md-radio-button>
           <md-radio-button value="cc_lejos" style="margin-right: 40px !important;">C.C</md-radio-button>
         </md-radio-group>
       </div>
-      <div style="width: 1px !important;" class="col-lg-1">|</div>
-      <div style="text-align: center" class="col-lg-2">
+      <div style="width: 1px !important;" class="col-lg-1 col-md-1">|</div>
+      <div style="text-align: center" class="col-lg-2 col-md-1">
         <md-radio-group ng-model="pacienteEdit.visiometria.od_vvision_cerca" layout="row">
           <md-radio-button value="sc_cerca" style="margin-right: 40px !important;" class="md-primary">S.C</md-radio-button>
           <md-radio-button value="cc_cerca" style="margin-right: 40px !important;">C.C</md-radio-button>
         </md-radio-group>
       </div>
-      <div style="width: 1px !important;" class="col-lg-1">|</div>
-      <div style="text-align: center" class="col-lg-1 col-sm-2">
+      <div style="width: 1px !important;" class="col-lg-1 col-md-1">|</div>
+      <div style="text-align: center" class="col-lg-1 col-md-1">
         <md-checkbox ng-model="pacienteEdit.od_visiometria.ph" ng-true-value="1" ng-false-value="0" aria-label="Dosis 2" class="md-primary">PH</md-checkbox>
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-2"><b>Ojo Izquierdo	</b></div>
-      <div class="col-lg-4">
+      <div class="col-lg-2 col-md-1"><b>Ojo Izquierdo	</b></div>
+      <div class="col-lg-4 col-md-4">
         <md-radio-group ng-model="pacienteEdit.visiometria.oi_correccion_optica_uso" layout="row">
           <md-radio-button value="esfera" style="margin-right: 40px !important;" class="md-primary">Esfera</md-radio-button>
           <md-radio-button value="cilindro" style="margin-right: 40px !important;">Cilindro</md-radio-button>
@@ -194,28 +176,28 @@
           <md-radio-button value="add" style="margin-right: 40px !important;">ADD</md-radio-button>
         </md-radio-group>
       </div>
-      <div style="width: 1px !important;" class="col-lg-1">|</div>
-      <div style="text-align: center" class="col-lg-2">
+      <div style="width: 1px !important;" class="col-lg-1 col-md-1">  |</div>
+      <div style="text-align: center" class="col-lg-2 col-md-2">
         <md-radio-group ng-model="pacienteEdit.visiometria.oi_vision_lejos" layout="row">
           <md-radio-button value="sc_lejos" style="margin-right: 40px !important;" class="md-primary">S.C</md-radio-button>
           <md-radio-button value="cc_lejos" style="margin-right: 40px !important;">C.C</md-radio-button>
         </md-radio-group>
       </div>
-      <div style="width: 1px !important;" class="col-lg-1">|</div>
-      <div style="text-align: center" class="col-lg-2">
+      <div style="width: 1px !important;" class="col-lg-1 col-md-1">|</div>
+      <div style="text-align: center" class="col-lg-2 col-md-2">
         <md-radio-group ng-model="pacienteEdit.visiometria.oi_vision_cerca" layout="row">
           <md-radio-button value="sc_cerca" style="margin-right: 40px !important;" class="md-primary">S.C</md-radio-button>
           <md-radio-button value="cc_cerca" style="margin-right: 40px !important;">C.C</md-radio-button>
         </md-radio-group>
       </div>
-      <div style="width: 1px !important;" class="col-lg-1">|</div>
-      <div style="text-align: center" class="col-lg-1 col-sm-2">
+      <div style="width: 1px !important;" class="col-lg-1 col-md-1">|</div>
+      <div style="text-align: center" class="col-lg-1 col-md-1">
         <md-checkbox ng-model="pacienteEdit.oi_visiometria.ph" ng-true-value="1" ng-false-value="0" aria-label="Dosis 2" class="md-primary">PH</md-checkbox>
       </div>
     </div>
     <hr>
     <div class="row">
-      <div class="col-lg-12 col-sm-12">
+      <div class="col-lg-12 col-md-12">
         <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
           <label>Recomendacion</label>
           <input ng-model="pacienteEdit.visiometria.recomendaciones">

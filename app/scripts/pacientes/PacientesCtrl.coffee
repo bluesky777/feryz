@@ -1,7 +1,9 @@
 angular.module('feryzApp')
 
 .controller('PacientesCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', 'AuthService','$state', ($scope, $http, App, $filter, toastr, AuthService, $state) ->
-	$scope.pacienteEdit = {}
+	
+	$scope.pacienteEdit = {}	
+
 	$scope.pacienteNuevo = 
 		sexo: 'M'
 		estereopsis: 'N' 
