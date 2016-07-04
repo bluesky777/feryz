@@ -200,11 +200,11 @@
 		.row
 			.col-lg-3.col-md-3.col-xs-12
 				|  
-			.col-lg-2.col-md-2.col-xs-12
+			.col-lg-1.col-md-2.col-xs-12
 				b Normal
-			.col-lg-2.col-md-2.col-xs-12
+			.col-lg-2.col-md-2.col-xs-12(style="text-align: center")
 				b Anormal
-			.col-lg-3.col-md-3.col-xs-12
+			.col-lg-3.col-md-3.col-xs-12(style="text-align: center")
 				b Observaciones
 		.row
 			.col-lg-5.col-md-5.col-xs-12(style="padding-bottom: 20px;")
@@ -221,13 +221,13 @@
 			.col-lg-1.col-md-5.col-xs-12
 				b OD
 			.col-lg-4.col-md-5.col-xs-12
-				md-radio-group(ng-model="pacienteEdit.visiometria.ofta" layout="row" )
+				md-radio-group(ng-model="pacienteEdit.visiometria.oftalmoscopia_od" layout="row" )
 					md-radio-button.md-primary(value="1" style="margin-right: 40px !important;") Normal
 					md-radio-button(value="0" style="margin-right: 40px !important;") Anormal
 			.col-lg-3.col-md-3.col-xs-12
 				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 					label Observaciones
-					input(ng-model="pacienteEdit.visiometria.antecedentes_personales")
+					input(ng-model="pacienteEdit.visiometria.oftalmoscopia_od_observ")
 
 		.row
 			.col-lg-2.col-md-5.col-xs-12
@@ -235,13 +235,13 @@
 			.col-lg-1.col-md-5.col-xs-12
 				b OI
 			.col-lg-4.col-md-5.col-xs-12
-				md-radio-group(ng-model="pacienteEdit.visiometria.ofta" layout="row" )
+				md-radio-group(ng-model="pacienteEdit.visiometria.oftalmoscopia_oi" layout="row" )
 					md-radio-button.md-primary(value="1" style="margin-right: 40px !important;") Normal
 					md-radio-button(value="0" style="margin-right: 40px !important;") Anormal
 			.col-lg-3.col-md-3.col-xs-12
 				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 					label Observaciones
-					input(ng-model="pacienteEdit.visiometria.antecedentes_personales")
+					input(ng-model="pacienteEdit.visiometria.oftalmoscopia_oi_observ")
 
 		.row
 			.col-lg-2.col-md-2.col-xs-12(style="padding-top: 20px;")
@@ -249,13 +249,13 @@
 			.col-lg-1.col-md-5.col-xs-12
 				b OI
 			.col-lg-4.col-md-5.col-xs-12
-				md-radio-group(ng-model="pacienteEdit.visiometria.ofta" layout="row" )
+				md-radio-group(ng-model="pacienteEdit.visiometria.externo_od" layout="row" )
 					md-radio-button.md-primary(value="1" style="margin-right: 40px !important;") Normal
 					md-radio-button(value="0" style="margin-right: 40px !important;") Anormal
 			.col-lg-3.col-md-3.col-xs-12
 				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 					label Observaciones
-					input(ng-model="pacienteEdit.visiometria.antecedentes_personales")
+					input(ng-model="pacienteEdit.visiometria.externo_od_observ")
 
 		.row
 			.col-lg-2.col-md-2.col-xs-12
@@ -263,13 +263,13 @@
 			.col-lg-1.col-md-5.col-xs-12
 				b OI
 			.col-lg-4.col-md-5.col-xs-12
-				md-radio-group(ng-model="pacienteEdit.visiometria.ofta" layout="row" )
+				md-radio-group(ng-model="pacienteEdit.visiometria.externo_oi" layout="row" )
 					md-radio-button.md-primary(value="1" style="margin-right: 40px !important;") Normal
 					md-radio-button(value="0" style="margin-right: 40px !important;") Anormal
 			.col-lg-3.col-md-3.col-xs-12(style="text-align: center")
 				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 					label Observaciones
-					input(ng-model="pacienteEdit.visiometria.antecedentes_personales")
+					input(ng-model="pacienteEdit.visiometria.externo_oi_observ")
 
 
 		hr
@@ -292,7 +292,7 @@
 			.col-lg-7.col-md-5.col-xs-12(ng-show="pacienteEdit.visiometria.estereopsis=='A'")
 				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 					label Observaciones
-					textarea(ng-model="pacienteEdit.estereopsis_observ")
+					input(ng-model="pacienteEdit.visiometria.estereopsis_observ")
 		.row
 			.col-lg-5.col-md-7.col-xs-12
 				md-radio-group(ng-model="pacienteEdit.visiometria.test_color" layout="row" style="padding-bottom: 30px")
@@ -302,7 +302,7 @@
 			.col-lg-7.col-md-5.col-xs-12(ng-show="pacienteEdit.visiometria.test_color=='A'")
 				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 					label Observaciones
-					textarea(ng-model="pacienteEdit.test_color_observ")
+					input(ng-model="pacienteEdit.visiometria.test_color_observ")
 		.row
 			.col-lg-12.col-md-12
 				md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")

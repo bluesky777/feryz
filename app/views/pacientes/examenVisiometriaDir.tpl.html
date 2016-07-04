@@ -190,9 +190,9 @@
     <hr>
     <div class="row">
       <div class="col-lg-3 col-md-3 col-xs-12"> </div>
-      <div class="col-lg-2 col-md-2 col-xs-12"><b>Normal</b></div>
-      <div class="col-lg-2 col-md-2 col-xs-12"><b>Anormal</b></div>
-      <div class="col-lg-3 col-md-3 col-xs-12"><b>Observaciones</b></div>
+      <div class="col-lg-1 col-md-2 col-xs-12"><b>Normal</b></div>
+      <div style="text-align: center" class="col-lg-2 col-md-2 col-xs-12"><b>Anormal</b></div>
+      <div style="text-align: center" class="col-lg-3 col-md-3 col-xs-12"><b>Observaciones</b></div>
     </div>
     <div class="row">
       <div style="padding-bottom: 20px;" class="col-lg-5 col-md-5 col-xs-12"><b>Motilidad ocular</b></div>
@@ -204,7 +204,7 @@
       <div style="padding-top: 20px;" class="col-lg-2 col-md-5 col-xs-12"><b>Oftalmoscopia</b></div>
       <div class="col-lg-1 col-md-5 col-xs-12"><b>OD</b></div>
       <div class="col-lg-4 col-md-5 col-xs-12">
-        <md-radio-group ng-model="pacienteEdit.visiometria.ofta" layout="row">
+        <md-radio-group ng-model="pacienteEdit.visiometria.oftalmoscopia_od" layout="row">
           <md-radio-button value="1" style="margin-right: 40px !important;" class="md-primary">Normal</md-radio-button>
           <md-radio-button value="0" style="margin-right: 40px !important;">Anormal</md-radio-button>
         </md-radio-group>
@@ -212,7 +212,7 @@
       <div class="col-lg-3 col-md-3 col-xs-12">
         <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
           <label>Observaciones</label>
-          <input ng-model="pacienteEdit.visiometria.antecedentes_personales">
+          <input ng-model="pacienteEdit.visiometria.oftalmoscopia_od_observ">
         </md-input-container>
       </div>
     </div>
@@ -220,7 +220,7 @@
       <div class="col-lg-2 col-md-5 col-xs-12"> </div>
       <div class="col-lg-1 col-md-5 col-xs-12"><b>OI</b></div>
       <div class="col-lg-4 col-md-5 col-xs-12">
-        <md-radio-group ng-model="pacienteEdit.visiometria.ofta" layout="row">
+        <md-radio-group ng-model="pacienteEdit.visiometria.oftalmoscopia_oi" layout="row">
           <md-radio-button value="1" style="margin-right: 40px !important;" class="md-primary">Normal</md-radio-button>
           <md-radio-button value="0" style="margin-right: 40px !important;">Anormal</md-radio-button>
         </md-radio-group>
@@ -228,7 +228,7 @@
       <div class="col-lg-3 col-md-3 col-xs-12">
         <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
           <label>Observaciones</label>
-          <input ng-model="pacienteEdit.visiometria.antecedentes_personales">
+          <input ng-model="pacienteEdit.visiometria.oftalmoscopia_oi_observ">
         </md-input-container>
       </div>
     </div>
@@ -236,7 +236,7 @@
       <div style="padding-top: 20px;" class="col-lg-2 col-md-2 col-xs-12"><b>Examen externo</b></div>
       <div class="col-lg-1 col-md-5 col-xs-12"><b>OI</b></div>
       <div class="col-lg-4 col-md-5 col-xs-12">
-        <md-radio-group ng-model="pacienteEdit.visiometria.ofta" layout="row">
+        <md-radio-group ng-model="pacienteEdit.visiometria.externo_od" layout="row">
           <md-radio-button value="1" style="margin-right: 40px !important;" class="md-primary">Normal</md-radio-button>
           <md-radio-button value="0" style="margin-right: 40px !important;">Anormal</md-radio-button>
         </md-radio-group>
@@ -244,7 +244,7 @@
       <div class="col-lg-3 col-md-3 col-xs-12">
         <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
           <label>Observaciones</label>
-          <input ng-model="pacienteEdit.visiometria.antecedentes_personales">
+          <input ng-model="pacienteEdit.visiometria.externo_od_observ">
         </md-input-container>
       </div>
     </div>
@@ -252,7 +252,7 @@
       <div class="col-lg-2 col-md-2 col-xs-12">  </div>
       <div class="col-lg-1 col-md-5 col-xs-12"><b>OI</b></div>
       <div class="col-lg-4 col-md-5 col-xs-12">
-        <md-radio-group ng-model="pacienteEdit.visiometria.ofta" layout="row">
+        <md-radio-group ng-model="pacienteEdit.visiometria.externo_oi" layout="row">
           <md-radio-button value="1" style="margin-right: 40px !important;" class="md-primary">Normal</md-radio-button>
           <md-radio-button value="0" style="margin-right: 40px !important;">Anormal</md-radio-button>
         </md-radio-group>
@@ -260,7 +260,7 @@
       <div style="text-align: center" class="col-lg-3 col-md-3 col-xs-12">
         <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
           <label>Observaciones</label>
-          <input ng-model="pacienteEdit.visiometria.antecedentes_personales">
+          <input ng-model="pacienteEdit.visiometria.externo_oi_observ">
         </md-input-container>
       </div>
     </div>
@@ -280,7 +280,7 @@
       <div ng-show="pacienteEdit.visiometria.estereopsis=='A'" class="col-lg-7 col-md-5 col-xs-12">
         <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
           <label>Observaciones</label>
-          <textarea ng-model="pacienteEdit.estereopsis_observ"></textarea>
+          <input ng-model="pacienteEdit.visiometria.estereopsis_observ">
         </md-input-container>
       </div>
     </div>
@@ -294,7 +294,7 @@
       <div ng-show="pacienteEdit.visiometria.test_color=='A'" class="col-lg-7 col-md-5 col-xs-12">
         <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
           <label>Observaciones</label>
-          <textarea ng-model="pacienteEdit.test_color_observ"></textarea>
+          <input ng-model="pacienteEdit.visiometria.test_color_observ">
         </md-input-container>
       </div>
     </div>
