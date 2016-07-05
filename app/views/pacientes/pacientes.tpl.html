@@ -6,7 +6,7 @@
     <div class="panel panel-default panel-hovered mb20">
       <div class="panel-heading">Pacientes</div>
       <div style="overflow: auto" class="panel-body">
-        <md-button ng-click="crearPaciente()" class="md-raised md-primary">Crear Nuevo Paciente</md-button>
+        <md-button ng-click="crearPaciente()" ng-if="hasRoleOrPerm(6) || hasRoleOrPerm(7)" class="md-raised md-primary">Crear Nuevo Paciente</md-button>
         <div ui-grid="opcionesGrid" ui-grid-edit ui-grid-resize-columns></div>
       </div>
     </div>

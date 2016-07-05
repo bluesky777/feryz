@@ -11,7 +11,7 @@ paciente-editar-dir
 
 			.panel-body(style="overflow: auto")
 				
-				md-button.md-raised.md-primary(ng-click="crearPaciente()") Crear Nuevo Paciente
+				md-button.md-raised.md-primary(ng-click="crearPaciente()" ng-if="hasRoleOrPerm(6) || hasRoleOrPerm(7)") Crear Nuevo Paciente
 
 				div(ui-grid="opcionesGrid" ui-grid-edit ui-grid-resize-columns)
 			

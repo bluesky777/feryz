@@ -1,6 +1,7 @@
-.panel.panel-default.panel-hovered.mb20(ng-if="hasRoleOrPerm(6)")
+.panel.panel-default.panel-hovered.mb20
 
 			.panel-heading Examen fisico
+				md-checkbox.md-checked.green(style="float: right" ng-model="pacienteEdit.examen_fisico.completado"  ng-true-value="1" ng-false-value="0" aria-label="Dosis 2") Completado
 			.panel-body
 				div
 					form(ng-submit="guardarPaciente()")

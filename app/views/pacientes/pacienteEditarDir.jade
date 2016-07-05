@@ -2,7 +2,7 @@
 
 .row(ng-if="editando")
 	.col-lg-12
-		ver-datos-ctrl(ng-if="!hasRoleOrPerm(6)")
+		ver-datos-ctrl(ng-if="!hasRoleOrPerm(6)" ng-hide="editandomas")
 
 		.panel.panel-default.panel-hovered.mb20
 			.panel-heading Editar Paciente (datos básicos)
@@ -29,7 +29,7 @@
 
 						
 					
-					.col-lg-8.col-sm-6
+					.col-lg-7.col-sm-6
 						.row
 							.col-lg-12.col-sm-12
 								image(ng-src="{{vm.picture}}")
@@ -37,8 +37,14 @@
 							.col-lg-12.col-sm-12
 								md-button.md-raised(ng-show="vm.picture" type="button" ng-click="upload()" aria-label="guardar foto") Guardar foto
 
+						
+					
+					.col-lg-1.col-sm-1
+						md-button.md-raised( type="button" style="float: right" ng-click="$parent.editandomas=false" aria-label="Cancelar") Cancelar
 
-				.row
+
+
+				.row 
 					.col-lg-12.col-sm-12
 						form(ng-submit="actualizarPaciente()")
 
@@ -287,16 +293,12 @@
 			
 		antecedentes-laborales-dir(ng-if="hasRoleOrPerm(6)")
 
-		
 		accidentes-trabajo-dir(ng-if="hasRoleOrPerm(6)")
-					
 
 		enfermedades-profesionales-dir(ng-if="hasRoleOrPerm(6)")
-					
 
 		inmunizaciones-dir(ng-if="hasRoleOrPerm(6)")
 
-		
 		examen-fisico-dir(ng-if="hasRoleOrPerm(3)")
 
 		examen-paraclinico-dir(ng-if="hasRoleOrPerm(7)")
