@@ -108,7 +108,7 @@
       <div class="col-lg-12 col-xs-12 marg-pad-0"><span ng-show="exameningreso.antec_familiares">{{exameningreso.antec_familiares}}</span><span ng-hide="exameningreso.antec_familiares">N/A</span></div>
     </div>
   </div>
-  <div class="col-lg-12 col-xs-12 marg-pad-0">
+  <div class="col-lg-12 col-xs-12 marg-pad-0 sin-cortar">
     <div class="row"> 
       <div class="col-lg-12 col-xs-12">
         <center class="margen"><span style=" font-size: 15px;font-style: italic" class="negrita">6. Antecedentes Laborales:</span></center>
@@ -145,7 +145,7 @@
       </div>
     </div>
   </div>
-  <div class="col-lg-12 col-xs-12 marg-pad-0">
+  <div class="col-lg-12 col-xs-12 marg-pad-0 sin-cortar">
     <div class="row"> 
       <div class="col-lg-12 col-xs-12">
         <center class="margen"><span style=" font-size: 15px;font-style: italic" class="negrita margen">7. Accidentes de trabajo:</span></center>
@@ -180,7 +180,7 @@
       </div>
     </div>
   </div>
-  <div class="col-lg-12 col-xs-12 marg-pad-0">
+  <div class="col-lg-12 col-xs-12 marg-pad-0 sin-cortar">
     <div class="row"> 
       <div class="col-lg-12 col-xs-12">
         <center class="margen"><span style=" font-size: 15px;font-style: italic" class="negrita margen">8. Enfermedades profesionales:</span></center>
@@ -216,5 +216,111 @@
         </table>
       </div>
     </div>
+  </div>
+  <div class="col-lg-12 col-xs-12 marg-pad-0 sin-cortar">
+    <md-list-item ng-repeat="inmunizacion in exameningreso.inmunizaciones"> 
+      <div class="row"> 
+        <div class="col-lg-4 col-xs-4">{{inmunizacion.vacuna}}</div>
+        <div class="col-lg-1 col-xs-1">
+          <md-checkbox ng-model="inmunizacion.d1" ng-true-value="1" ng-false-value="0" aria-label="Dosis 1" ng-disabled="true" class="md-primary infocheck">D1</md-checkbox>
+        </div>
+        <div class="col-lg-1 col-xs-1">
+          <md-checkbox ng-model="inmunizacion.d2" ng-true-value="1" ng-false-value="0" aria-label="Dosis 2" ng-disabled="true" class="md-primary infocheck">D2</md-checkbox>
+        </div>
+        <div class="col-lg-1 col-xs-1">
+          <md-checkbox ng-model="inmunizacion.d3" ng-true-value="1" ng-false-value="0" aria-label="Dosis 3" ng-disabled="true" class="md-primary infocheck">D3</md-checkbox>
+        </div>
+        <div class="col-lg-1 col-xs-1">
+          <md-checkbox ng-model="inmunizacion.d4" ng-true-value="1" ng-false-value="0" aria-label="Dosis 4" ng-disabled="true" class="md-primary infocheck">D4</md-checkbox>
+        </div>
+        <div class="col-lg-1 col-xs-1">
+          <md-checkbox ng-model="inmunizacion.d5" ng-true-value="1" ng-false-value="0" aria-label="Dosis 5" ng-disabled="true" class="md-primary infocheck">D5</md-checkbox>
+        </div>
+        <div class="col-lg-2 col-xs-2">
+          <md-checkbox ng-model="inmunizacion.refuerzo" ng-click="modificarInmunizacion(inmunizacion)" ng-true-value="1" ng-false-value="0" aria-label="Refuerzo" ng-disabled="true" class="md-primary infocheck">Refuerzo			</md-checkbox>
+        </div>
+      </div>
+    </md-list-item>
+  </div>
+  <div class="col-lg-12 col-xs-12 marg-pad-0 sin-cortar">
+    <div class="row"> 
+      <div class="col-lg-12 col-xs-12">
+        <center class="margen"><span style=" font-size: 15px;font-style: italic" class="negrita margen">9. Examen fisico:</span></center>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-2 col-xs-2"><span class="negrita">FR (min): </span><span ng-show="exameningreso.examen_fisico.sign_vit_fr">{{exameningreso.examen_fisico.sign_vit_fr}}</span><span ng-hide="exameningreso.examen_fisico.sign_vit_fr">N/A</span></div>
+      <div class="col-lg-1 col-xs-1"><span class="negrita">TA: </span><span ng-show="exameningreso.examen_fisico.sign_vit_ta">{{exameningreso.examen_fisico.sign_vit_ta}}</span><span ng-hide="exameningreso.examen_fisico.sign_vit_ta">N/A</span></div>
+      <div style="margin-left: -20px !important;margin-right: -100px;margin-top: 9px;" class="col-lg-1 col-xs-1">/</div>
+      <div class="col-lg-1 col-xs-1"><span class="negrita">mmHG: </span><span ng-show="exameningreso.examen_fisico.sign_vit_ta1">{{exameningreso.examen_fisico.sign_vit_ta1}}</span><span ng-hide="exameningreso.examen_fisico.sign_vit_ta1">N/A</span></div>
+      <div class="col-lg-1 col-xs-1"><span class="negrita">Temp: </span><span ng-show="exameningreso.examen_fisico.sign_vit_temp">{{exameningreso.examen_fisico.sign_vit_temp}}</span><span ng-hide="exameningreso.examen_fisico.sign_vit_temp">N/A</span></div>
+      <div class="col-lg-2 col-xs-2"><span class="negrita">FC (min): </span><span ng-show="exameningreso.examen_fisico.sign_vit_fc">{{exameningreso.examen_fisico.sign_vit_fc}}</span><span ng-hide="exameningreso.examen_fisico.sign_vit_fc">N/A</span></div>
+      <div class="col-lg-2 col-xs-2"><span class="negrita">PESO (kg): </span><span ng-show="exameningreso.examen_fisico.sign_vit_peso">{{exameningreso.examen_fisico.sign_vit_peso}}</span><span ng-hide="exameningreso.examen_fisico.sign_vit_peso">N/A</span></div>
+      <div class="col-lg-2 col-xs-2"><span class="negrita">TALLA (cm): </span><span ng-show="exameningreso.examen_fisico.sign_vit_talla">{{exameningreso.examen_fisico.sign_vit_talla}}</span><span ng-hide="exameningreso.examen_fisico.sign_vit_talla">N/A</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-2 col-xs-2"><span class="negrita">IMC (Kg/m): </span><span ng-show="exameningreso.examen_fisico.sign_vit_imc">{{exameningreso.examen_fisico.sign_vit_imc}}</span><span ng-hide="exameningreso.examen_fisico.sign_vit_imc">N/A</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-xs-12"><span class="negrita">Estado general: </span><span ng-show="exameningreso.examen_fisico.estado_general">{{exameningreso.examen_fisico.estado_general}}</span><span ng-hide="exameningreso.examen_fisico.estado_general">N/A</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-xs-12"><span class="negrita">Constitución: </span><span ng-show="exameningreso.examen_fisico.contitucion">{{exameningreso.examen_fisico.contitucion}}</span><span ng-hide="exameningreso.examen_fisico.contitucion">N/A</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-xs-12"><span class="negrita">Dominancia: </span><span ng-show="exameningreso.examen_fisico.dominancia">{{exameningreso.examen_fisico.dominancia}}</span><span ng-hide="exameningreso.examen_fisico.dominancia">N/A</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Agudeza Visual: </span><span ng-show="exameningreso.examen_fisico.agudeza_visual">{{exameningreso.examen_fisico.agudeza_visual}}</span><span ng-hide="exameningreso.examen_fisico.agudeza_visual">N/A</span></div>
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Ojo Derecho: </span><span ng-show="exameningreso.examen_fisico.ojo_derecho">{{exameningreso.examen_fisico.ojo_derecho}}</span><span ng-hide="exameningreso.examen_fisico.ojo_derecho">N/A</span></div>
+      <div class="col-lg-4 col-xs-4"><span class="negrita">Ojo Izquierdo: </span><span ng-show="exameningreso.examen_fisico.ojo_izquierdo">{{exameningreso.examen_fisico.ojo_izquierdo}}</span><span ng-hide="exameningreso.examen_fisico.ojo_izquierdo">N/A</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-xs-12"><span class="negrita">Cabeza / Cuello: </span><span ng-show="exameningreso.examen_fisico.cabeza_cuello">{{exameningreso.examen_fisico.cabeza_cuello}}</span><span ng-hide="exameningreso.examen_fisico.cabeza_cuello">N/A</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-xs-12"><span class="negrita">Organos de los sentidos: </span><span ng-show="exameningreso.examen_fisico.organos_sentidos">{{exameningreso.examen_fisico.organos_sentidos}}</span><span ng-hide="exameningreso.examen_fisico.organos_sentidos">N/A</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-xs-12"><span class="negrita">Cardio / Pulmonar: </span><span ng-show="exameningreso.examen_fisico.cardio_pulmonar">{{exameningreso.examen_fisico.cardio_pulmonar}}</span><span ng-hide="exameningreso.examen_fisico.cardio_pulmonar">N/A</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-xs-12"><span class="negrita">Abdomen: </span><span ng-show="exameningreso.examen_fisico.abdomen">{{exameningreso.examen_fisico.abdomen}}</span><span ng-hide="exameningreso.examen_fisico.abdomen">N/A</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-xs-12"><span class="negrita">Genito / Urinario: </span><span ng-show="exameningreso.examen_fisico.genito_urinario">{{exameningreso.examen_fisico.genito_urinario}}</span><span ng-hide="exameningreso.examen_fisico.genito_urinario">N/A</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-xs-12"><span class="negrita">Columna Vertebral: </span><span ng-show="exameningreso.examen_fisico.columna_vertebral">{{exameningreso.examen_fisico.columna_vertebral}}</span><span ng-hide="exameningreso.examen_fisico.columna_vertebral">N/A</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-xs-12"><span class="negrita">Neurologico: </span><span ng-show="exameningreso.examen_fisico.neurologico">{{exameningreso.examen_fisico.neurologico}}</span><span ng-hide="exameningreso.examen_fisico.neurologico">N/A</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-xs-12"><span class="negrita">Osteo / muscular: </span><span ng-show="exameningreso.examen_fisico.osteo_muscular">{{exameningreso.examen_fisico.osteo_muscular}}</span><span ng-hide="exameningreso.examen_fisico.osteo_muscular">N/A</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-xs-12"><span class="negrita">Extremidades: </span><span ng-show="exameningreso.examen_fisico.Extremidades">{{exameningreso.examen_fisico.Extremidades}}</span><span ng-hide="exameningreso.examen_fisico.Extremidades">N/A</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-xs-12"><span class="negrita">Piel y Anexos: {{exameningreso.examen_fisico.piel_anexos}} </span><span ng-show="exameningreso.examen_fisico.piel_anexos">{{exameningreso.examen_fisico.piel_anexos}}</span><span ng-hide="exameningreso.examen_fisico.piel_anexos">N/A</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-xs-12"><span class="negrita">Examen mental: </span><span ng-show="exameningreso.examen_fisico.examen_mental">{{exameningreso.examen_fisico.examen_mental}}</span><span ng-hide="exameningreso.examen_fisico.examen_mental">N/A</span></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-xs-12"><span class="negrita">Observaciones: </span><span ng-show="exameningreso.examen_fisico.observaciones">{{exameningreso.examen_fisico.observaciones}}</span><span ng-hide="exameningreso.examen_fisico.observaciones">N/A</span></div>
+    </div>
+  </div>
+  <div class="col-lg-12 col-xs-12 marg-pad-0 sin-cortar">
+    <md-list-item ng-repeat="exam in exameningreso.examen_paraclinico"> 
+      <div class="col-lg-3 col-md-3 col-xs-3">
+        <div class="negrita">{{exam.examen}}</div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-xs-6">
+        <div ng-show="exam.diagnostico">{{exam.diagnostico}}</div>
+        <div ng-hide="exam.diagnostico">N/A</div>
+      </div>
+    </md-list-item>
   </div>
 </div>

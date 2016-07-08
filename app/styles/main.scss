@@ -494,8 +494,22 @@ a:hover, a:focus {
     .body{
       letter-spacing: 0px !important;
     }
-
-
+    md-checkbox.md-default-theme[disabled].infocheck .md-label, md-checkbox[disabled].infocheck .md-label {
+      color: rgb(0,0,0);
+    }
+    md-checkbox.md-checked.infocheck .md-icon {
+     background-color: rgb(0,0,0);
+     border-color: black;
+    }
+    md-checkbox.md-default-theme[disabled].md-checked.infocheck .md-icon:after, md-checkbox[disabled].md-checked.infocheck .md-icon:after{
+      border-color: rgb(0, 0, 0);
+    }
+    md-checkbox.md-checked.infocheck .md-container:before{
+      background-color: rgb(63, 81, 181);
+    }
+    .sin-cortar{
+      page-break-inside: avoid;
+    }
 }
  table.antecedentes thead th{
       padding: 0px;
@@ -586,3 +600,12 @@ md-checkbox.md-checked.green .md-icon {
  background-color: rgba(81, 150, 57, 0.87);
 }
 
+md-checkbox.md-default-theme[disabled].infocheck .md-label, md-checkbox[disabled].infocheck .md-label {
+  color: rgb(0,0,0);
+}
+
+
+md-checkbox.md-checked.infocheck .md-icon {
+ background-color: rgb(63,81,181);
+ border-color: black;
+}
