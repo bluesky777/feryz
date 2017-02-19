@@ -2,8 +2,8 @@
 <div class="page page-auth">
   <div class="auth-container">
     <div class="form-head mb20">
-      <h1 class="site-logo h2 mb5 mt5 text-center text-uppercase text-bold"><a href="">IPS</a></h1>
-      <h5 class="text-normal h5 text-center">Sistema de Salud ocupacional</h5>
+      <h1 class="site-logo h2 mb5 mt5 text-center text-uppercase text-bold"><a href="">Feryz</a></h1>
+      <h5 class="text-normal h5 text-center">Sistema de inventario</h5>
     </div>
     <div class="form-container">
       <form ng-submit="login()" class="form-horizontal">
@@ -18,13 +18,16 @@
           <md-tooltip> Ingresa tu password</md-tooltip>
         </md-input-container>
         <div ng-if="false" class="clearfix">
-          <div class="ui-checkbox ui-checkbox-primary right">
+          <div class="ui-checkox ui-checkbox-primary right">
             <label>
-              <input type="checkbox"><span>Remember me</span>
+              <input type="checkbox"><span>Recordar contraseña</span>
             </label>
           </div>
         </div>
         <div class="btn-group btn-group-justified mb15">
+          <div class="btn-group">
+            <button type="button" ng-click="entrar_como_invitado()" class="btn btn-facebook"><span class="fa fa-smile-o"> Soy invitado</span></button>
+          </div>
           <div class="btn-group">
             <button type="submit" class="btn btn-success">Entrar</button>
           </div>

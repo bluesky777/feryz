@@ -4,8 +4,8 @@
 		
 		.form-head.mb20
 			h1.site-logo.h2.mb5.mt5.text-center.text-uppercase.text-bold
-				a(href="") IPS
-			h5.text-normal.h5.text-center Sistema de Salud ocupacional
+				a(href="") Feryz
+			h5.text-normal.h5.text-center Sistema de inventario
 
 
 		.form-container
@@ -24,13 +24,15 @@
 
 				
 				.clearfix(ng-if="false")
-					.ui-checkbox.ui-checkbox-primary.right
+					.ui-checkox.ui-checkbox-primary.right
 						label
 							input(type="checkbox")
-							span Remember me
+							span Recordar contraseña
 				
 				.btn-group.btn-group-justified.mb15
-					
+					.btn-group
+						button.btn.btn-facebook(type="button" ng-click="entrar_como_invitado()")
+							span.fa.fa-smile-o  Soy invitado
 					.btn-group
 						button.btn.btn-success(type="submit") Entrar
 

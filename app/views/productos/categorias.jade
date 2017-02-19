@@ -1,0 +1,55 @@
+.row
+	.col-lg-12
+		.panel.panel-default.panel-hovered.mb20(ng-show="creando" )
+			.panel-heading Nueva categoría
+
+			.panel-body
+				div
+					form(ng-submit="guardarCategoria()")
+
+						.row
+							.col-lg-4
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+									label Nombre
+									input(ng-model="cateNuevo.nombre")
+
+						.row
+							.col-lg-12(style="text-align: center;margin-bottom: 40px")
+								md-button.md-raised.md-default(type="button" ng-click="creando=false") Cancelar
+
+								md-button.md-raised.md-primary(type="submit" ng-disabled="guardando") Guardar
+
+.row
+	.col-lg-12
+		.panel.panel-default.panel-hovered.mb20(ng-show="editando" )
+			.panel-heading Editar categoría
+
+			.panel-body
+				div(ng-show="editando")
+					form(ng-submit="actualizarCategoria()")
+						.row
+							.col-lg-4
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+									label Nombre
+									input(ng-model="cateActualizar.nombre")
+							
+						.row
+							.col-lg-12(style="text-align: center;margin-bottom: 40px")
+								md-button.md-raised.md-default(type="button" ng-click="editando=false") Cancelar
+
+								md-button.md-raised.md-primary(type="submit" ng-disabled="guardando") Actualizar
+
+
+
+
+.row
+	.col-lg-12
+		.panel.panel-default.panel-hovered.mb20
+			.panel-heading Categorías
+			
+			.panel-body(style="overflow: auto")
+				
+				md-button(ng-click="crearCategoria()" class="md-raised md-primary") Nuevo Categoría
+
+				div(ui-grid="opcionesGrid" ui-grid-edit ui-grid-resize-columns)
+

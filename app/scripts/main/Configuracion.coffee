@@ -63,7 +63,7 @@ angular.module('feryzApp')
 				templateUrl: App.views+'main/landing.tpl.html'
 				controller: 'LandingCtrl' # El controlador está en 'main.coffee'
 		data: 
-			pageTitle: 'Liceo Adventista Libertad'
+			pageTitle: 'Inicio Feryz'
 	})
 
 	.state('login', { 
@@ -73,7 +73,7 @@ angular.module('feryzApp')
 				templateUrl: "#{App.views}login/login.tpl.html"
 				controller: 'LoginCtrl'
 		data: 
-			pageTitle: 'Ingresar a Wissen'
+			pageTitle: 'Ingresar a Feryz'
 
 	})
 	.state('logout', { 

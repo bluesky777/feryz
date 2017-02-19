@@ -41,12 +41,6 @@
               </div>
               <div class="col-lg-3">
                 <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Email</label>
-                  <input ng-model="usuarioNuevo.email">
-                </md-input-container>
-              </div>
-              <div class="col-lg-3">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Contraseña</label>
                   <input ng-model="usuarioNuevo.password" type="password">
                 </md-input-container>
@@ -57,14 +51,20 @@
                   <input ng-model="usuarioNuevo.password_confirm" type="password">
                 </md-input-container>
               </div>
+              <div class="col-lg-3">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Email</label>
+                  <input ng-model="usuarioNuevo.email">
+                </md-input-container>
+              </div>
             </div>
             <div class="row">
               <div class="form-group col-lg-8 col-sm-12 col-xs-12">
                 <label>Tipo usuario</label>
-                <ui-select ng-model="usuarioNuevo.tipo_usu_id" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
-                  <ui-select-match placeholder="Tipo usuario" allow-clear="true">{{$select.selected.titulo}}</ui-select-match>
+                <ui-select ng-model="usuarioNuevo.tipo" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
+                  <ui-select-match placeholder="Tipo usuario" allow-clear="true">{{$select.selected.tipo}}</ui-select-match>
                   <ui-select-choices repeat="tipo in tipos_usuarios | filter: $select.search">
-                    <div ng-bind-html="tipo.titulo | highlight: $select.search"></div>
+                    <div ng-bind-html="tipo.tipo | highlight: $select.search"></div>
                   </ui-select-choices>
                 </ui-select>
               </div>
@@ -78,7 +78,7 @@
                   </ui-select-choices>
                 </ui-select>
               </div>
-              <div class="col-lg-4">
+              <div class="col-lg-4 col-sm-12 col-xs-12">
                 <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Número de documento</label>
                   <input ng-model="usuarioNuevo.num_doc">
@@ -144,59 +144,36 @@
               </div>
             </div>
             <div class="row">
-              <div style="margin-bottom: 12px;" class="form-group col-lg-4 col-sm-6 col-xs-12">
-                <label for="usuario-fecha-nacimiento">Fecha de nacimiento</label>
-                <div class="controls">
-                  <div class="input-group"><span ng-click="data.isOpen2 = true" class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    <input id="usuario-fecha-nacimiento" type="text" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="usuarioNuevo.fecha_nac" is-open="data.isOpen2" ng-click="data.isOpen2 = true" max-date="'2020-12-12'" datepicker-options="dateOptions" close-text="Aceptar" current-text="Hoy" clear-text="Borrar" placeholder="Fecha nacimiento" class="form-control active">
-                  </div>
+              <div style="margin-bottom: 12px;" class="col-lg-4 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label for="usuarionew-fecha-nacimiento">Fecha de nacimiento
+                    <div class="controls">
+                      <div class="input-group"><span ng-click="data.isOpen = true" class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input id="usuarionew-fecha-nacimiento" type="text" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="usuarioNuevo.fecha_nac" is-open="data.isOpen" ng-click="data.isOpen = true" max-date="'2020-12-12'" datepicker-options="dateOptions" close-text="Aceptar" current-text="Hoy" clear-text="Borrar" placeholder="Fecha nacimiento" class="form-control active">
+                      </div>
+                    </div>
+                  </label>
                 </div>
               </div>
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm style="padding-bottom: 0!important" class="md-block">
-                  <label>Estado Civil</label>
-                  <input ng-model="usuarioNuevo.estado_civil">
-                </md-input-container>
-              </div>
             </div>
             <div class="row">
               <div class="col-lg-4">
                 <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Barrio</label>
-                  <input ng-model="usuarioNuevo.barrio">
+                  <label>Teléfono 1</label>
+                  <input ng-model="usuarioNuevo.telefono1">
                 </md-input-container>
               </div>
               <div class="col-lg-4">
                 <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Direccion</label>
-                  <input ng-model="usuarioNuevo.direccion">
-                </md-input-container>
-              </div>
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Telefono</label>
-                  <input ng-model="usuarioNuevo.telefono">
-                </md-input-container>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Celular</label>
-                  <input ng-model="usuarioNuevo.celular">
-                </md-input-container>
-              </div>
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Facebook</label>
-                  <input ng-model="usuarioNuevo.facebook">
+                  <label>Teléfono 2</label>
+                  <input ng-model="usuarioNuevo.telefono2">
                 </md-input-container>
               </div>
             </div>
             <div class="row">
               <div style="text-align: center;margin-bottom: 40px" class="col-lg-12">
                 <md-button type="button" ng-click="creando=false" class="md-raised md-default">Cancelar</md-button>
-                <md-button type="submit" class="md-raised md-primary">Guardar</md-button>
+                <md-button type="submit" ng-disabled="guardando" class="md-raised md-primary">Guardar</md-button>
               </div>
             </div>
           </form>
@@ -247,12 +224,6 @@
               </div>
               <div class="col-lg-4">
                 <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Email</label>
-                  <input ng-model="usuarioActualizar.email">
-                </md-input-container>
-              </div>
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Password</label>
                   <input ng-model="usuarioActualizar.password">
                 </md-input-container>
@@ -263,14 +234,20 @@
                   <input ng-model="usuarioActualizar.password_confirm" type="password">
                 </md-input-container>
               </div>
+              <div class="col-lg-4">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Email</label>
+                  <input ng-model="usuarioActualizar.email">
+                </md-input-container>
+              </div>
             </div>
             <div class="row">
               <div class="form-group col-lg-8 col-sm-12 col-xs-12">
                 <label>Tipo usuario</label>
-                <ui-select ng-model="usuarioActualizar.tipo_usu_id" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
-                  <ui-select-match placeholder="Tipo usuario" allow-clear="true">{{$select.selected.titulo}}</ui-select-match>
+                <ui-select ng-model="usuarioActualizar.tipo" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
+                  <ui-select-match placeholder="Tipo usuario" allow-clear="true">{{$select.selected.tipo}}</ui-select-match>
                   <ui-select-choices repeat="tipo in tipos_usuarios | filter: $select.search">
-                    <div ng-bind-html="tipo.titulo | highlight: $select.search"></div>
+                    <div ng-bind-html="tipo.tipo | highlight: $select.search"></div>
                   </ui-select-choices>
                 </ui-select>
               </div>
@@ -284,7 +261,7 @@
                   </ui-select-choices>
                 </ui-select>
               </div>
-              <div class="col-lg-4">
+              <div class="col-lg-4 col-sm-12 col-xs-12">
                 <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Numero de documento</label>
                   <input ng-model="usuarioActualizar.num_doc">
@@ -351,58 +328,32 @@
             </div>
             <div class="row">
               <div style="margin-bottom: 12px;" class="form-group col-lg-4 col-sm-6 col-xs-12">
-                <label for="usuario-fecha-nacimiento">Fecha de nacimiento</label>
+                <label for="usuarioact-fecha-nacimiento">Fecha de nacimiento</label>
                 <div class="controls">
                   <div class="input-group"><span ng-click="data.isOpen2 = true" class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    <input id="usuario-fecha-nacimiento" type="text" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="usuarioActualizar.fecha_nac" is-open="data.isOpen2" ng-click="data.isOpen2 = true" max-date="'2020-12-12'" datepicker-options="dateOptions" close-text="Aceptar" current-text="Hoy" clear-text="Borrar" placeholder="Fecha Nacimiento" class="form-control active">
+                    <input id="usuarioact-fecha-nacimiento" type="text" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="usuarioActualizar.fecha_nac" is-open="data.isOpen2" ng-click="data.isOpen2 = true" max-date="'2020-12-12'" datepicker-options="dateOptions" close-text="Aceptar" current-text="Hoy" clear-text="Borrar" placeholder="Fecha Nacimiento" class="form-control active">
                   </div>
                 </div>
               </div>
-              <f class="col-lg-4">
-                <md-input-container flex-gt-sm style="padding-bottom: 0!important" class="md-block">
-                  <label>Estado Civil</label>
-                  <input ng-model="usuarioActualizar.estado_civil">
-                </md-input-container>
-              </f>
             </div>
             <div class="row">
               <div class="col-lg-4">
                 <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Barrio</label>
-                  <input ng-model="usuarioActualizar.barrio">
+                  <label>Telefono 1</label>
+                  <input ng-model="usuarioActualizar.telefono1">
                 </md-input-container>
               </div>
               <div class="col-lg-4">
                 <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Direccion</label>
-                  <input ng-model="usuarioActualizar.direccion">
-                </md-input-container>
-              </div>
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Telefono</label>
-                  <input ng-model="usuarioActualizar.telefono">
-                </md-input-container>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Celular</label>
-                  <input ng-model="usuarioActualizar.celular">
-                </md-input-container>
-              </div>
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Facebook</label>
-                  <input ng-model="usuarioActualizar.facebook">
+                  <label>Telefono 2</label>
+                  <input ng-model="usuarioActualizar.telefono2">
                 </md-input-container>
               </div>
             </div>
             <div class="row">
               <div style="text-align: center;margin-bottom: 40px" class="col-lg-12">
                 <md-button type="button" ng-click="editando=false" class="md-raised md-default">Cancelar</md-button>
-                <md-button type="submit" class="md-raised md-primary">Actualizar</md-button>
+                <md-button type="submit" ng-disabled="guardando" class="md-raised md-primary">Actualizar</md-button>
               </div>
             </div>
           </form>

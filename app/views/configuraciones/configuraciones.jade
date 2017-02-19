@@ -18,27 +18,7 @@
 								label Telefono
 								input(ng-model="configuracion.telefono")
 
-					.row
-						.form-group.col-lg-4.col-sm-6.col-xs-12
-							label Pais
-							ui-select(ng-model="configuracion.pais" on-select="paisSeleccionado($item, $model)" style="width: 100%;")
-								ui-select-match(placeholder="Pais" allow-clear="true") {{$select.selected.pais}}
-								ui-select-choices(repeat="pais in paises | filter: $select.search")
-									div(ng-bind-html="pais.pais | highlight: $select.search")
-
-						.form-group.col-lg-4.col-sm-6.col-xs-12
-							label Departamento 
-							ui-select(ng-model="configuracion.depart" on-select="departamentoSeleccionado($item, $model)" style="width: 100%;")
-								ui-select-match(placeholder="Departamento" allow-clear="true") {{$select.selected.departamento}}
-								ui-select-choices(repeat="depart in departamentos | filter: $select.search")
-									div(ng-bind-html="depart.departamento | highlight: $select.search")
-
-						.form-group.col-lg-4.col-sm-12.col-xs-12
-							label Ciudad 
-							ui-select(ng-model="configuracion.ciudad_id" style="width: 100%;")
-								ui-select-match(placeholder="Ciudad" allow-clear="true") {{$select.selected.ciudad}}
-								ui-select-choices(repeat="ciudad in ciudades | filter: $select.search")
-									div(ng-bind-html="ciudad.ciudad| highlight: $select.search")
+					
 					.row
 							.col-lg-12
 

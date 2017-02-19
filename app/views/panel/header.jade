@@ -15,45 +15,12 @@ ul.list-unstyled.left-elems
 	li
 		.site-logo.visible-xs
 			a.text-uppercase.h3(ui-sref="panel")
-				span.text Wissen
+				span.text Feryz
 
 	// fullscreen
-	li.fullscreen.hidden-xs(ng-click="goFullScreen()")
+	li.fullscreen.hidden-xs(ng-click="setFullScreen()")
 		a(href="")
 			i.fa.fa-arrows-alt
-
-	// notification drop
-	li.notify-drop.hidden-xs.dropdown(dropdown="" ng-if="hasRoleOrPerm('admin', 'tecnico', 'profesor')")
-		a(href="" dropdown-toggle="")
-			i.fa.fa-laptop
-			span(ng-bind=" evento_actual.alias")
-			//span.badge.badge-danger.badge-xs.circle {{ USER.eventos.length }}
-		
-		.panel.panel-default.dropdown-menu(custom-scrollbar="")
-			.panel-heading Selecciona el evento que deseas
-				a.right.btn.btn-xs.btn-pink.mt-3(ui-sref="panel.eventos") Eventos
-			.panel-body
-				ul.list-unstyled
-					li.clearfix(ng-repeat="evento in USER.eventos")
-						
-
-						//a(href="" ng-click="set_system_event(evento)")
-							span.fa.fa-laptop.left(ng-class="(evento.actual) ? 'bg-primary': 'bg-success' ")
-							.desc
-								strong {{ evento.nombre }}
-								p.small.text-muted(ng-show="evento.actual") Actual
-						
-						a.right.btn.btn-xs.btn-purple.mt-3(href="" ng-click="set_system_event(evento)" style="color: #fff" ng-hide="evento.actual")
-							| Actual
-							md-tooltip Establecer como evento actual
-
-						a(href="" ng-click="set_user_event(evento)")
-							span.fa.fa-laptop.left(ng-class="(evento.id==USER.evento_selected_id) ? 'bg-primary': 'bg-success' ")
-							.desc
-								strong {{ evento.nombre }}
-								p.small.text-muted(ng-show="evento.actual") Actual
-						
-
 
 
 	// Idiomas
@@ -83,18 +50,21 @@ ul.list-unstyled.right-elems.ng-scope
 			md-menu-content(style="margin-top: 40px;" width="3")
 				md-menu-item
 					md-button(ng-click="ctrl.redial($event)")
-						i.fa.fa-person
+						md-icon.fa.fa-user
 						| Perfil
 				md-menu-item
-					md-button
-						a(ui-sref="panel.filemanager()")
-							i.fa.fa-lock-combination
-							| Imágenes
+					md-button(ng-click="gotoFilemanager()")
+						md-icon.fa.fa-image
+						| Imágenes
+				md-menu-item
+					md-button(ng-click="gotoUsuarios()")
+						md-icon.fa.fa-users
+						| Usuarios
 
 				md-menu-divider
 				md-menu-item
 					md-button(ng-click="logout()")
-						i.fa.fa-power
+						md-icon.fa.fa-sign-out
 						| Salir
 
 

@@ -80,25 +80,6 @@ angular.module('feryzApp')
 			EXAM_HECHOS: 'Testes feitos'
 
 		)
-		.translations('FR',
-			INICIO_MENU: 'Initiation'
-			EVENTS_MENU: 'Événements'
-			ENTIDADES_MENU: 'Entités'
-			CATEGS_MENU: 'Catégories'
-			PREGUNTAS_MENU: 'Questionnement'
-			EVALUACIONES_MENU: 'Evaluations'
-			USERS_MENU: 'Utilisateurs'
-			IDIOMA_MENU: 'Langue'
-			INFORMES_MENU: 'Rapports'
-			SALIR: 'Laisser'
-
-			ELIMINATORIAS: 'Playoffs'
-			GRAN_FINAL: 'Grande finale'
-			INSCRITO_EN: 'Vous êtes inscrit à:'
-			NO_ESTAS_INSCRITO: "Vous n'êtes pas inscrit dans aucune catégorie."
-			EXAM_HECHOS: 'Tests effectués'
-
-		)
 
 
 		return

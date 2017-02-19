@@ -27,7 +27,7 @@ angular.module('feryzApp', [
 #- Valores que usaremos para nuestro proyecto
 .constant('App', (()->
 
-  dominio = 'http://localhost/' # Pruebas en mi localhost
+  dominio = location.protocol + '//' + location.hostname + '/'
   #dominio = 'http://olimpiadaslibertad.com/'
   #dominio = 'http://192.168.1.100/'
   
@@ -36,14 +36,9 @@ angular.module('feryzApp', [
   if(location.hostname.match('lalvirtual'))
     dominio = 'http://lalvirtual.com/'
     
-  if(location.hostname.match('olimpiadaslibertad'))
-    dominio = 'http://olimpiadaslibertad.com/'
-  
   server = dominio + 'feryz_server/public/'
-  #server = ''
   frontapp = dominio + 'feryz/'
-
-
+  
 
 
   return {

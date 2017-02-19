@@ -13,34 +13,10 @@
   -->
   <!-- site-logo for mobile nav-->
   <li>
-    <div class="site-logo visible-xs"><a ui-sref="panel" class="text-uppercase h3"><span class="text">Wissen</span></a></div>
+    <div class="site-logo visible-xs"><a ui-sref="panel" class="text-uppercase h3"><span class="text">Feryz</span></a></div>
   </li>
   <!-- fullscreen-->
-  <li ng-click="goFullScreen()" class="fullscreen hidden-xs"><a href=""><i class="fa fa-arrows-alt"></i></a></li>
-  <!-- notification drop-->
-  <li dropdown="" ng-if="hasRoleOrPerm('admin', 'tecnico', 'profesor')" class="notify-drop hidden-xs dropdown"><a href="" dropdown-toggle=""><i class="fa fa-laptop"></i><span ng-bind=" evento_actual.alias"></span>
-      <!--span.badge.badge-danger.badge-xs.circle {{ USER.eventos.length }}--></a>
-    <div custom-scrollbar="" class="panel panel-default dropdown-menu">
-      <div class="panel-heading">Selecciona el evento que deseas<a ui-sref="panel.eventos" class="right btn btn-xs btn-pink mt-3">Eventos</a></div>
-      <div class="panel-body">
-        <ul class="list-unstyled">
-          <li ng-repeat="evento in USER.eventos" class="clearfix">
-            <!--a(href="" ng-click="set_system_event(evento)")
-            span.fa.fa-laptop.left(ng-class="(evento.actual) ? 'bg-primary': 'bg-success' ")
-            .desc
-            	strong {{ evento.nombre }}
-            	p.small.text-muted(ng-show="evento.actual") Actual
-            
-            --><a href="" ng-click="set_system_event(evento)" style="color: #fff" ng-hide="evento.actual" class="right btn btn-xs btn-purple mt-3">Actual
-              <md-tooltip>Establecer como evento actual</md-tooltip></a><a href="" ng-click="set_user_event(evento)"><span ng-class="(evento.id==USER.evento_selected_id) ? 'bg-primary': 'bg-success' " class="fa fa-laptop left"></span>
-              <div class="desc"><strong>{{ evento.nombre }}</strong>
-                <p ng-show="evento.actual" class="small text-muted">Actual</p>
-              </div></a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </li>
+  <li ng-click="setFullScreen()" class="fullscreen hidden-xs"><a href=""><i class="fa fa-arrows-alt"></i></a></li>
   <!-- Idiomas-->
   <li dropdown="" class="notify-drop hidden-xs dropdown"><a href="" dropdown-toggle=""><i class="fa fa-flag-checkered"></i></a>
     <div custom-scrollbar="" class="panel panel-default dropdown-menu">
@@ -61,14 +37,25 @@
     <md-menu> <a href="" ng-click="openMenu($mdOpenMenu, $event)"><img ng-src="{{imagesPath + USER.image_nombre}}" alt="{{USER.username}}" class="imagen-perfil"></a>
       <md-menu-content style="margin-top: 40px;" width="3">
         <md-menu-item>
-          <md-button ng-click="ctrl.redial($event)"><i class="fa fa-person"></i>Perfil</md-button>
+          <md-button ng-click="ctrl.redial($event)">
+            <md-icon class="fa fa-user"></md-icon>Perfil
+          </md-button>
         </md-menu-item>
         <md-menu-item>
-          <md-button><a ui-sref="panel.filemanager()"><i class="fa fa-lock-combination"></i>Imágenes</a></md-button>
+          <md-button ng-click="gotoFilemanager()">
+            <md-icon class="fa fa-image"></md-icon>Imágenes
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button ng-click="gotoUsuarios()">
+            <md-icon class="fa fa-users"></md-icon>Usuarios
+          </md-button>
         </md-menu-item>
         <md-menu-divider></md-menu-divider>
         <md-menu-item>
-          <md-button ng-click="logout()"><i class="fa fa-power"></i>Salir</md-button>
+          <md-button ng-click="logout()">
+            <md-icon class="fa fa-sign-out"></md-icon>Salir
+          </md-button>
         </md-menu-item>
       </md-menu-content>
     </md-menu>

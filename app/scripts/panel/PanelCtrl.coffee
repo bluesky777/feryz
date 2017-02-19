@@ -2,8 +2,8 @@
 
 angular.module('feryzApp')
 
-.controller('PanelCtrl', ['$scope', '$http', '$state', '$cookies', '$rootScope', 'AuthService', 'Perfil', 'App', 'resolved_user', 'toastr', '$translate', '$filter', '$uibModal', 
-	($scope, $http, $state, $cookies, $rootScope, AuthService, Perfil, App, resolved_user, toastr, $translate, $filter, $uibModal) ->
+.controller('PanelCtrl', ['$scope', '$http', '$state', '$cookies', '$rootScope', 'AuthService', 'Perfil', 'App', 'resolved_user', 'toastr', '$translate', '$filter', '$uibModal', 'Fullscreen', 
+	($scope, $http, $state, $cookies, $rootScope, AuthService, Perfil, App, resolved_user, toastr, $translate, $filter, $uibModal, Fullscreen) ->
 
 
 		$scope.USER = resolved_user
@@ -21,6 +21,12 @@ angular.module('feryzApp')
 		$scope.openMenu = ($mdOpenMenu, ev)->
 			originatorEv = ev
 			$mdOpenMenu(ev)
+
+		$scope.gotoFilemanager = ()->
+			$state.go 'panel.filemanager'
+
+		$scope.gotoUsuarios = ()->
+			$state.go 'panel.usuarios'
 
 
 			
@@ -66,6 +72,10 @@ angular.module('feryzApp')
 			console.log Perfil.User()
 			$scope.USER = Perfil.User()
 			$scope.setImagenPrincipal()
+
+
+		$scope.setFullScreen = ()->
+			Fullscreen.toggleAll()
 
 				
 		return

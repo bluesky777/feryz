@@ -31,11 +31,6 @@
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Nombre usuario
 									input(ng-model="usuarioNuevo.username")
-
-							.col-lg-3
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Email
-									input(ng-model="usuarioNuevo.email")
 						
 							.col-lg-3
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
@@ -45,13 +40,18 @@
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Repita contraseña
 									input(ng-model="usuarioNuevo.password_confirm" type="password")
+
+							.col-lg-3
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+									label Email
+									input(ng-model="usuarioNuevo.email")
 						.row
 							.form-group.col-lg-8.col-sm-12.col-xs-12
 								label Tipo usuario
-								ui-select(ng-model="usuarioNuevo.tipo_usu_id" style="margin: 0!important;width: 100%; padding-bottom: 0!important")
-									ui-select-match(placeholder="Tipo usuario" allow-clear="true") {{$select.selected.titulo}}
+								ui-select(ng-model="usuarioNuevo.tipo" style="margin: 0!important;width: 100%; padding-bottom: 0!important")
+									ui-select-match(placeholder="Tipo usuario" allow-clear="true") {{$select.selected.tipo}}
 									ui-select-choices(repeat="tipo in tipos_usuarios | filter: $select.search")
-										div(ng-bind-html="tipo.titulo | highlight: $select.search")
+										div(ng-bind-html="tipo.tipo | highlight: $select.search")
 						.row
 							.form-group.col-lg-4.col-sm-12.col-xs-12
 							
@@ -59,7 +59,7 @@
 									ui-select-match(placeholder="Tipo documento" allow-clear="true") {{$select.selected.tipo}}
 									ui-select-choices(repeat="tipo in tipos_doc | filter: $select.search")
 										div(ng-bind-html="tipo.tipo | highlight: $select.search")
-							.col-lg-4
+							.col-lg-4.col-sm-12.col-xs-12
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Número de documento
 									input(ng-model="usuarioNuevo.num_doc")
@@ -109,52 +109,33 @@
 									ui-select-choices(repeat="ciudad in ciudades | filter: $select.search")
 										div(ng-bind-html="ciudad.ciudad | highlight: $select.search")
 						.row
-							.form-group.col-lg-4.col-sm-6.col-xs-12(style="margin-bottom: 12px;")
-								label(for="usuario-fecha-nacimiento") Fecha de nacimiento
-								.controls
-									.input-group
-										span.input-group-addon(ng-click="data.isOpen2 = true")
-											i.fa.fa-calendar
-										input.form-control.active#usuario-fecha-nacimiento(type="text" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="usuarioNuevo.fecha_nac" is-open="data.isOpen2" ng-click="data.isOpen2 = true" max-date="'2020-12-12'" datepicker-options="dateOptions" close-text="Aceptar" current-text="Hoy" clear-text="Borrar" placeholder="Fecha nacimiento")
+							.col-lg-4.col-sm-6.col-xs-12(style="margin-bottom: 12px;")
+								.form-group
+									label(for="usuarionew-fecha-nacimiento") Fecha de nacimiento
+										.controls
+											.input-group
+												span.input-group-addon(ng-click="data.isOpen = true")
+													i.fa.fa-calendar
+												input.form-control.active#usuarionew-fecha-nacimiento(type="text" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="usuarioNuevo.fecha_nac" is-open="data.isOpen" ng-click="data.isOpen = true" max-date="'2020-12-12'" datepicker-options="dateOptions" close-text="Aceptar" current-text="Hoy" clear-text="Borrar" placeholder="Fecha nacimiento")
 							
-							
-						
-							.col-lg-4
-								md-input-container.md-block(flex-gt-sm style="padding-bottom: 0!important")
-									label Estado Civil
-									input(ng-model="usuarioNuevo.estado_civil")
 						
 						.row
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Barrio
-									input(ng-model="usuarioNuevo.barrio")
+									label Teléfono 1
+									input(ng-model="usuarioNuevo.telefono1")
 
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Direccion
-									input(ng-model="usuarioNuevo.direccion")
-						
-							.col-lg-4
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Telefono
-									input(ng-model="usuarioNuevo.telefono")
+									label Teléfono 2
+									input(ng-model="usuarioNuevo.telefono2")
+					
 
-						.row
-							.col-lg-4
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Celular
-									input(ng-model="usuarioNuevo.celular")
-						
-							.col-lg-4
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Facebook
-									input(ng-model="usuarioNuevo.facebook")
 						.row
 							.col-lg-12(style="text-align: center;margin-bottom: 40px")
 								md-button.md-raised.md-default(type="button" ng-click="creando=false") Cancelar
 
-								md-button.md-raised.md-primary(type="submit") Guardar
+								md-button.md-raised.md-primary(type="submit" ng-disabled="guardando") Guardar
 
 .row
 	.col-lg-12
@@ -186,11 +167,6 @@
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Nombre usuario
 									input(ng-model="usuarioActualizar.username")
-
-							.col-lg-4
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Email
-									input(ng-model="usuarioActualizar.email")
 						
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
@@ -200,13 +176,18 @@
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Repita contraseña
 									input(ng-model="usuarioActualizar.password_confirm" type="password")
+
+							.col-lg-4
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+									label Email
+									input(ng-model="usuarioActualizar.email")
 						.row
 							.form-group.col-lg-8.col-sm-12.col-xs-12
 								label Tipo usuario
-								ui-select(ng-model="usuarioActualizar.tipo_usu_id" style="margin: 0!important;width: 100%; padding-bottom: 0!important")
-									ui-select-match(placeholder="Tipo usuario" allow-clear="true") {{$select.selected.titulo}}
+								ui-select(ng-model="usuarioActualizar.tipo" style="margin: 0!important;width: 100%; padding-bottom: 0!important")
+									ui-select-match(placeholder="Tipo usuario" allow-clear="true") {{$select.selected.tipo}}
 									ui-select-choices(repeat="tipo in tipos_usuarios | filter: $select.search")
-										div(ng-bind-html="tipo.titulo | highlight: $select.search")
+										div(ng-bind-html="tipo.tipo | highlight: $select.search")
 
 						.row
 							.form-group.col-lg-4.col-sm-12.col-xs-12
@@ -216,7 +197,7 @@
 									ui-select-choices(repeat="tipo in tipos_doc | filter: $select.search")
 										div(ng-bind-html="tipo.tipo | highlight: $select.search")
 						
-							.col-lg-4
+							.col-lg-4.col-sm-12.col-xs-12
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Numero de documento
 									input(ng-model="usuarioActualizar.num_doc")
@@ -270,49 +251,31 @@
 						
 						.row
 							.form-group.col-lg-4.col-sm-6.col-xs-12(style="margin-bottom: 12px;")
-								label(for="usuario-fecha-nacimiento") Fecha de nacimiento
+								label(for="usuarioact-fecha-nacimiento") Fecha de nacimiento
 								.controls
 									.input-group
 										span.input-group-addon(ng-click="data.isOpen2 = true")
 											i.fa.fa-calendar
-										input.form-control.active#usuario-fecha-nacimiento(type="text" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="usuarioActualizar.fecha_nac" is-open="data.isOpen2" ng-click="data.isOpen2 = true" max-date="'2020-12-12'" datepicker-options="dateOptions" close-text="Aceptar" current-text="Hoy" clear-text="Borrar" placeholder="Fecha Nacimiento")
+										input.form-control.active#usuarioact-fecha-nacimiento(type="text" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="usuarioActualizar.fecha_nac" is-open="data.isOpen2" ng-click="data.isOpen2 = true" max-date="'2020-12-12'" datepicker-options="dateOptions" close-text="Aceptar" current-text="Hoy" clear-text="Borrar" placeholder="Fecha Nacimiento")
 
 						
-							f.col-lg-4
-								md-input-container.md-block(flex-gt-sm style="padding-bottom: 0!important")
-									label Estado Civil
-									input(ng-model="usuarioActualizar.estado_civil")
 						.row
-							.col-lg-4
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Barrio
-									input(ng-model="usuarioActualizar.barrio")
 						
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Direccion
-									input(ng-model="usuarioActualizar.direccion")
+									label Telefono 1
+									input(ng-model="usuarioActualizar.telefono1")
 						
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Telefono
-									input(ng-model="usuarioActualizar.telefono")
-						.row
-							.col-lg-4
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Celular
-									input(ng-model="usuarioActualizar.celular")
-						
-							.col-lg-4
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Facebook
-									input(ng-model="usuarioActualizar.facebook")
+									label Telefono 2
+									input(ng-model="usuarioActualizar.telefono2")
 						
 						.row
 							.col-lg-12(style="text-align: center;margin-bottom: 40px")
 								md-button.md-raised.md-default(type="button" ng-click="editando=false") Cancelar
 
-								md-button.md-raised.md-primary(type="submit") Actualizar
+								md-button.md-raised.md-primary(type="submit" ng-disabled="guardando") Actualizar
 
 
 

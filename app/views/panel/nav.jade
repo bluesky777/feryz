@@ -2,7 +2,7 @@
 	// site logo
 	a.site-logo.text-uppercase(ui-sref="panel")
 		i.fa.fa-globe
-		span.text Wissen
+		span.text Feryz
 
 // Site nav (vertical) 
 nav.site-nav.clearfix(role="navigation")
@@ -22,28 +22,48 @@ nav.site-nav.clearfix(role="navigation")
 				i.fa.fa-home
 				span.text Inicio
 
-		li(ui-sref-active="active" ng-if="hasRoleOrPerm(10)")
-			a(href="" ui-sref="panel.usuarios" md-ink-ripple="")
-				i.fa.fa-users
-				span.text Usuarios
-
 		li(ui-sref-active="active")
-			a(href="" ui-sref="panel.pacientes" md-ink-ripple="")
+			a(href="" ui-sref="panel.proveedores")
 				i.fa.fa-map-marker
-				span.text Pacientes
+				span.text Proveedores
 
 		li(ui-sref-active="active")
-			a(href="" ui-sref="panel.informes" md-ink-ripple="")
+			a(href="" ui-sref="panel.clientes")
+				i.fa.fa-map-marker
+				span.text Clientes
+
+		li(ui-sref-active="active")
+			a(href="" ui-sref="panel.categorias")
+				i.fa.fa-map-marker
+				span.text Categorías
+
+		li(ui-sref-active="active")
+			a(href="" ui-sref="panel.productos")
+				i.fa.fa-map-marker
+				span.text Productos
+
+		li(ui-sref-active="active")
+			a(href="" ui-sref="panel.compras")
+				i.fa.fa-map-marker
+				span.text Compras
+
+		li(ui-sref-active="active")
+			a(href="" ui-sref="panel.ventas")
+				i.fa.fa-map-marker
+				span.text Ventas
+
+		li(ui-sref-active="active")
+			a(href="" ui-sref="panel.informes")
 				i.fa.fa-print
 				span.text Informes
 
 		li(ui-sref-active="active")
-			a(href="" ui-sref="panel.ciudades" md-ink-ripple="" ng-if="hasRoleOrPerm(10)")
+			a(href="" ui-sref="panel.ciudades")
 				i.fa.fa-flag
 				span.text Ciudades
 
 		li(ui-sref-active="active")
-			a(href="" ui-sref="panel.configuraciones" md-ink-ripple="" ng-if="hasRoleOrPerm(10)")
+			a(href="" ui-sref="panel.configuraciones")
 				i.fa.fa-cog
 				span.text Configuraciones
 
