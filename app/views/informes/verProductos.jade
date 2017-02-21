@@ -1,0 +1,25 @@
+.row.body(ng-class="{'page-carta-horizontal': config.orientacion=='carta_horizontal', 'page-oficio-horizontal': config.orientacion=='oficio_horizontal','page-vertical': config.orientacion=='vertical', 'salto-pagina': $parent.$last==false }")
+
+	.col-lg-12.marg-pad-0
+
+		h2 Productos
+
+		table.table.table-bordered.table-bordered2.table-striped.table-striped2
+			thead
+				tr(style="border-bottom: 2px solid;")
+					th Nombre
+					th Categoría
+					th Unidad de medida
+					th Precio compra
+					th Precio venta
+					th Nota
+
+			tbody
+				tr(ng-repeat="producto in productos")
+					td {{producto.nombres}}
+					td {{producto.categoria_id}}
+					td {{producto.unidad_medida}}
+					td {{producto.precio_compra}}
+					td {{producto.precio_venta}}
+					td {{producto.nota}}
+

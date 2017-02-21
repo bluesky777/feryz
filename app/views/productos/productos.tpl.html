@@ -10,12 +10,12 @@
               <div class="col-lg-4">
                 <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Nombre</label>
-                  <input ng-model="clieNuevo.nombre">
+                  <input ng-model="prodNuevo.nombre">
                 </md-input-container>
               </div>
               <div class="form-group col-lg-4 col-sm-12 col-xs-12">
                 <label>Unidad de medida</label>
-                <ui-select ng-model="clieNuevo.unidad" style="width: 100%;">
+                <ui-select ng-model="prodNuevo.unidad_medida" style="width: 100%;">
                   <ui-select-match placeholder="Unidad" allow-clear="true">{{$select.selected.unidad}}</ui-select-match>
                   <ui-select-choices repeat="unidad in unidades | filter: $select.search">
                     <div ng-bind-html="unidad.unidad | highlight: $select.search"></div>
@@ -24,7 +24,7 @@
               </div>
               <div class="form-group col-lg-4 col-sm-12 col-xs-12">
                 <label>Categoría</label>
-                <ui-select ng-model="clieNuevo.categoria" style="width: 100%;">
+                <ui-select ng-model="prodNuevo.categoria" style="width: 100%;">
                   <ui-select-match placeholder="Categoría" allow-clear="true">{{$select.selected.nombre}}</ui-select-match>
                   <ui-select-choices repeat="categoria in categorias | filter: $select.search">
                     <div ng-bind-html="categoria.nombre | highlight: $select.search"></div>
@@ -35,20 +35,20 @@
             <div class="row">
               <div class="col-lg-4">
                 <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Precio compra</label>
-                  <input ng-model="clieNuevo.precio_compra">
+                  <label>Precio compra $</label>
+                  <input ng-model="prodNuevo.precio_compra" type="number" min="50">
                 </md-input-container>
               </div>
               <div class="col-lg-4">
                 <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Precio venta</label>
-                  <input ng-model="clieNuevo.precio_venta">
+                  <label>Precio venta $</label>
+                  <input ng-model="prodNuevo.precio_venta" type="number" min="50">
                 </md-input-container>
               </div>
               <div class="col-lg-4">
                 <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Cantidad</label>
-                  <input ng-model="clieNuevo.cantidad" type="number">
+                  <input ng-model="prodNuevo.cantidad" type="number" min="0">
                 </md-input-container>
               </div>
             </div>
@@ -56,7 +56,7 @@
               <div class="col-lg-4">
                 <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Nota</label>
-                  <input ng-model="clieNuevo.nota">
+                  <input ng-model="prodNuevo.nota">
                 </md-input-container>
               </div>
             </div>
@@ -83,31 +83,24 @@
               <div class="col-lg-4">
                 <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Nombre</label>
-                  <input ng-model="clieActualizar.nombres">
+                  <input ng-model="prodActualizar.nombre">
                 </md-input-container>
               </div>
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Dirección</label>
-                  <input ng-model="clieActualizar.direccion">
-                </md-input-container>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Email</label>
-                  <input ng-model="clieActualizar.email">
-                </md-input-container>
-              </div>
-            </div>
-            <div class="row">
               <div class="form-group col-lg-4 col-sm-12 col-xs-12">
-                <label>Ciudad </label>
-                <ui-select ng-model="clieActualizar.ciudad" style="width: 100%;">
-                  <ui-select-match placeholder="Ciudad" allow-clear="true">{{$select.selected.ciudad}}</ui-select-match>
-                  <ui-select-choices repeat="ciudad in categorias | filter: $select.search">
-                    <div ng-bind-html="ciudad.ciudad | highlight: $select.search"></div>
+                <label>Unidad de medida</label>
+                <ui-select ng-model="prodActualizar.unidad_medida" style="width: 100%;">
+                  <ui-select-match placeholder="Unidad" allow-clear="true">{{$select.selected.unidad}}</ui-select-match>
+                  <ui-select-choices repeat="unidad in unidades | filter: $select.search">
+                    <div ng-bind-html="unidad.unidad | highlight: $select.search"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+              <div class="form-group col-lg-4 col-sm-12 col-xs-12">
+                <label>Categoría</label>
+                <ui-select ng-model="prodActualizar.categoria" style="width: 100%;">
+                  <ui-select-match placeholder="Categoría" allow-clear="true">{{$select.selected.nombre}}</ui-select-match>
+                  <ui-select-choices repeat="categoria in categorias | filter: $select.search">
+                    <div ng-bind-html="categoria.nombre | highlight: $select.search"></div>
                   </ui-select-choices>
                 </ui-select>
               </div>
@@ -115,14 +108,20 @@
             <div class="row">
               <div class="col-lg-4">
                 <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Telefono 2</label>
-                  <input ng-model="clieActualizar.telefono2">
+                  <label>Precio compra $</label>
+                  <input ng-model="prodActualizar.precio_compra" type="number" min="50">
                 </md-input-container>
               </div>
               <div class="col-lg-4">
                 <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Persona contacto</label>
-                  <input ng-model="clieActualizar.persona_contacto">
+                  <label>Precio venta $</label>
+                  <input ng-model="prodActualizar.precio_venta" type="number" min="50">
+                </md-input-container>
+              </div>
+              <div class="col-lg-4">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Cantidad</label>
+                  <input ng-model="prodActualizar.cantidad" type="number" min="0">
                 </md-input-container>
               </div>
             </div>
@@ -130,13 +129,7 @@
               <div class="col-lg-4">
                 <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Nota</label>
-                  <input ng-model="clieActualizar.nota">
-                </md-input-container>
-              </div>
-              <div class="col-lg-4">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Balance</label>
-                  <input ng-model="clieActualizar.balance">
+                  <input ng-model="prodActualizar.nota">
                 </md-input-container>
               </div>
             </div>

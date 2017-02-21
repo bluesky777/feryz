@@ -6,20 +6,20 @@
       <div class="panel-body">
         <md-content style="overflow: visible;">
           <md-tabs md-selected="config.informe_tab_actual" md-dynamic-height md-border-bottom>
-            <md-tab label="Pacientes" md-on-select="tabSeleccionado(0)">
+            <md-tab label="Productos" md-on-select="tabSeleccionado(0)">
               <md-content style="overflow-y: visible; height: 300px" class="md-padding">
                 <!--h1.md-display-2 Tab One	-->
                 
-                <div class="form-group col-lg-4 col-sm-12 col-xs-12">
-                  <ui-select ng-model="seleccion.paciente" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
-                    <ui-select-match placeholder="Pacientes" allow-clear="true">{{$select.selected.nombres + ' ' + $select.selected.apellidos}}</ui-select-match>
-                    <ui-select-choices repeat="paciente in pacientes | filter: $select.search">
-                      <div ng-bind-html="paciente.nombres + ' ' + paciente.apellidos | highlight: $select.search"></div>
+                <div ng-show="false" class="form-group col-lg-4 col-sm-12 col-xs-12">
+                  <ui-select ng-model="seleccion.proveedor" style="margin: 0!important;width: 100%; padding-bottom: 0!important">
+                    <ui-select-match placeholder="Productos" allow-clear="true">{{ $select.selected.nombre }}</ui-select-match>
+                    <ui-select-choices repeat="proveedor in proveedores | filter: $select.search">
+                      <div ng-bind-html="proveedor.nombre | highlight: $select.search"></div>
                     </ui-select-choices>
                   </ui-select>
                 </div>
-                <md-button ng-click="verPacientes()">Pacientes</md-button>
-                <md-button ng-click="verExamenIngreso()">Examen de ingreso</md-button>
+                <md-button ng-click="verProductos()">Productos</md-button>
+                <md-button ng-click="verProveedores()">Proveedores</md-button>
               </md-content>
             </md-tab>
             <md-tab label="Usuarios" md-on-select="tabSeleccionado(1)">

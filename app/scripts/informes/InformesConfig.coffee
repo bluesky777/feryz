@@ -10,7 +10,7 @@ angular.module('feryzApp')
 					'contenido_panel':
 						templateUrl: "==informes/informes.tpl.html"
 						controller: 'InformesCtrl'
-				resolve: { 
+				###resolve: { 
 					resolved_user: ['AuthService', (AuthService)->
 						AuthService.verificar()
 					]
@@ -18,6 +18,7 @@ angular.module('feryzApp')
 						$http.get('::pacientes/all')
 					]
 				}
+				###
 				data: 
 					pageTitle: 'Informes'
 			})
@@ -37,32 +38,32 @@ angular.module('feryzApp')
 				pageTitle: 'Usuarios - Feryz'
 
 
-		.state 'panel.informes.ver_pacientes',
-			url: 'ver_pacientes'
+		.state 'panel.informes.ver_productos',
+			url: 'ver_productos'
 			views: 
 				'report_content':
-					templateUrl: "==informes/verPacientes.tpl.html"
-					controller: 'VerPacientesCtrl'
+					templateUrl: "==informes/verProductos.tpl.html"
+					controller: 'VerProductosCtrl'
 					resolve:
-						pacientes: ['$http', '$stateParams', ($http, $stateParams)->
-							$http.get('::pacientes/resumen');
+						productos: ['$http', '$stateParams', ($http, $stateParams)->
+							$http.get('::productos/all');
 						],
 			data: 
-				pageTitle: 'Pacientes - Feryz'
+				pageTitle: 'Productos - Feryz'
 
 
-		.state 'panel.informes.ver_exameningreso',
-			url: 'ver_exameningreso'
+		.state 'panel.informes.ver_proveedores',
+			url: 'ver_proveedores'
 			views: 
 				'report_content':
-					templateUrl: "==informes/verExamenIngreso.tpl.html"
-					controller: 'VerExamenIngresoCtrl'
+					templateUrl: "==informes/verProveedores.tpl.html"
+					controller: 'VerProveedoresCtrl'
 					resolve:
-						exameningreso: ['$http', '$stateParams', ($http, $stateParams)->
-							$http.get('::pacientes/examen-ingreso');
+						proveedores: ['$http', '$stateParams', ($http, $stateParams)->
+							$http.get('::proveedores/all');
 						],
 			data: 
-				pageTitle: 'Pacientes - Feryz'
+				pageTitle: 'Proveedores - Feryz'
 
 
 		

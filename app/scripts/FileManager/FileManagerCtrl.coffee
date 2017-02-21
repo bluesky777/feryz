@@ -22,11 +22,10 @@ angular.module("feryzApp")
 	$scope.fileReaderSupported = window.FileReader != null && (window.FileAPI == null || FileAPI.html5 != false);
 	$scope.dato.usuarioElegido = []
 
-	$http.get('::imagenes/usuarios-and-pacientes').then((r)->
+	$http.get('::imagenes/con-usuarios').then((r)->
 		r = r.data
 		$scope.imagenes = r.imagenes
 		$scope.usuarios = r.usuarios
-		$scope.pacientes = r.pacientes
 		$scope.dato.usuarioElegido = r[0]
 		$scope.dato.imgParaUsuario = r.imagenes[0]
 	, (r2)->
@@ -102,13 +101,10 @@ angular.module("feryzApp")
 
 	$scope.cambiarLogo = (imgLogo)->
 		$http.put('::imagenes/cambiar-logo', {logo_id: imgLogo.id}).then((r)->
-			toastr.success 'Logo del colegio cambiado'
+			toastr.success 'Logo de la empresa cambiado'
 		, (r2)->
 			toastr.error 'No se pudo cambiar el logo', 'Problema'
 		)
-
-	$scope.imagenSelect = (item, model)->
-		#console.log 'imagenSelect: ', item, model
 
 	$scope.fotoSelect = (item, model)->
 		#console.log 'imagenSelect: ', item, model
@@ -146,23 +142,6 @@ angular.module("feryzApp")
 	$scope.usuarioSelect = (item, model)->
 		$scope.dato.selectUsuarioModel = item
 
-
-	$scope.cambiarFotoUnPaciente = (usuarioElegido, imgPaciente)->
-		aEnviar = {
-			imgPaciente: imgPaciente.id
-		}
-		$http.put('::perfiles/cambiar-img-paciente/'+usuarioElegido.id, aEnviar).then((r)->
-
-			usuarSelect = $filter('filter')($scope.alumnos, {id: usuarioElegido.id})
-			usuarSelect[0].foto_id = imgPaciente.id
-			usuarSelect[0].foto_nombre = imgPaciente.nombre
-
-			toastr.success 'Foto asignada con éxito'
-		, (r2)->
-			toastr.error 'Error al asignar foto al paciente', 'Problema'
-		)
-
-	
 
 	$scope.cambiarFotoUnUsuario = (usuarioElegido, imgUsuario)->
 		aEnviar = {

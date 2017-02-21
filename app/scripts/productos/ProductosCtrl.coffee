@@ -16,7 +16,7 @@ angular.module('feryzApp')
 	$scope.categorias = []
 	
 
-	$scope.prodNuevo = { unidad: {unidad: '-'} }
+	$scope.prodNuevo = { unidad_medida: {unidad: '-'} }
 
 
 
@@ -38,20 +38,20 @@ angular.module('feryzApp')
 		)
 		
 
-	$scope.eliminarProducto = (prov)->
+	$scope.eliminarProducto = (prod)->
 		
 		modalInstance = $uibModal.open({
 			templateUrl: '==productos/removeProducto.tpl.html'
 			controller: 'RemoveProductoCtrl'
 			resolve: 
 				producto: ()->
-					prov
+					prod
 		})
 		modalInstance.result.then( (producto)->
 			$scope.opcionesGrid.data = $filter('filter')($scope.opcionesGrid.data, {id: '!'+producto.id})
 		)
 
-	$scope.actualizarProducto = (prov)->
+	$scope.actualizarProducto = (prod)->
 		$scope.guardando = true
 		$http.put('::productos/actualizar', $scope.prodActualizar).then( (r)->
 			toastr.success 'Actualizado correctamente: ' + $scope.prodActualizar.nombre
@@ -62,18 +62,25 @@ angular.module('feryzApp')
 			toastr.error 'No se pudo actualizar', 'Error'
 		)
 
-	$scope.editarProducto = (prov)->
+	$scope.editarProducto = (prod)->
 
 		$scope.creando = false
 		$scope.editando = true
-		angular.copy prov, $scope.prodActualizar
-		$scope.prodActualizar.anterior = prov
+		angular.copy prod, $scope.prodActualizar
+		$scope.prodActualizar.anterior = prod
+
+		categ = $filter('filter')($scope.categorias, {id: $scope.prodActualizar.categoria_id}, true)[0]
+		$scope.prodActualizar.categoria = categ
+
+		unid = $filter('filter')($scope.unidades, {unidad: $scope.prodActualizar.unidad_medida}, true)[0]
+		$scope.prodActualizar.unidad_medida = unid
 
 	
 	$scope.traerProductos = ()->
 
 		$http.get('::categorias/all').then((r)->
 			$scope.categorias = r.data
+			$scope.opcionesGrid.columnDefs[3].editDropdownOptionsArray = $scope.categorias;
 		, (r2)->
 			console.log 'No se pudo traer las categorías', r2
 		)
@@ -92,12 +99,20 @@ angular.module('feryzApp')
 	$scope.opcionesGrid = {
 		showGridFooter: true,
 		enableSorting: true,
+		enableFiltering: true,
 		columnDefs: [
 			{field: 'id', width: 60, enableCellEdit: false}
 			{field: 'Edición', cellTemplate: btn1 + btn2, width: 120, enableCellEdit: false }
 			{field: 'nombre', minWidth: 100}
-			{field: 'proveedor_id', displayName: 'Proveedor', minWidth: 100}
-			{field: 'categoria_id', displayName: 'Categoría', minWidth: 100}
+			{field: 'categoria_id',	displayName: 'Categoría',		cellFilter: 'mapCategorias:grid.appScope.categorias',
+			filter: {
+				condition: (searchTerm, cellValue)->
+					foundCategorias = $filter('filter')($scope.categorias, {nombre: searchTerm})
+					actual 			= $filter('filter')(foundCategorias, {id: cellValue}, true)
+					return actual.length > 0;
+			}
+			editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownIdLabel: 'id', editDropdownValueLabel: 'nombre', enableCellEditOnFocus: true }
+			
 			{field: 'precio_compra'}
 			{field: 'precio_venta'}
 		]
@@ -137,4 +152,19 @@ angular.module('feryzApp')
 		$modalInstance.dismiss('cancel')
 
 ])
+
+
+.filter('mapCategorias', ['$filter', ($filter)->
+
+	return (input, categorias)->
+		if not input
+			return 'Elija...'
+		else
+			categ = $filter('filter')(categorias, {id: input}, true)[0]
+			if categ
+				return  categ.nombre
+			else
+				return 'En papelera...'
+])
+
 

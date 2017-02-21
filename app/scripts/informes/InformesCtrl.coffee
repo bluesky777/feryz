@@ -2,21 +2,20 @@
 
 angular.module('feryzApp')
 
-.controller('InformesCtrl', ['$scope', '$http', '$state', '$cookieStore', '$rootScope', 'toastr', '$filter', 'pacientes', 
-	($scope, $http, $state, $cookieStore, $rootScope, toastr, $filter, pacientes) ->
+.controller('InformesCtrl', ['$scope', '$http', '$state', '$cookieStore', '$rootScope', 'toastr', '$filter', 
+	($scope, $http, $state, $cookieStore, $rootScope, toastr, $filter) ->
 		
 		$scope.config = {}
-		$scope.pacientes = pacientes.data
 
+
+		$scope.verProductos = ()->
+			$state.go 'panel.informes.ver_productos', {}, {reload: true}
+		
+		$scope.verProveedores = ()->
+			$state.go 'panel.informes.ver_proveedores', {}, {reload: true}
 
 		$scope.verUsuarios = ()->
 			$state.go 'panel.informes.ver_usuarios', {}, {reload: true}
-		
-		$scope.verPacientes = ()->
-			$state.go 'panel.informes.ver_pacientes', {}, {reload: true}
-
-		$scope.verExamenIngreso = ()->
-			$state.go 'panel.informes.ver_exameningreso', {}, {reload: true}
 
 
 		$scope.$on 'cambia_descripcion', (event, descrip)->
@@ -26,7 +25,7 @@ angular.module('feryzApp')
 
 		if $cookieStore.get 'config'
 			$scope.config = $cookieStore.get 'config'
-			$scope.informe_tab_pacientes 	= if $scope.config.informe_tab_actual 	=='pacientes' then true else false
+			$scope.informe_tab_productos 	= if $scope.config.informe_tab_actual 	=='productos' then true else false
 			#console.log '$scope.config', $scope.config
 		else
 			$scope.config.orientacion = 'vertical'

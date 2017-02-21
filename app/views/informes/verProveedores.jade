@@ -4,15 +4,13 @@
 		.row
 			.col-lg-12.col-sm-12.col-xs-12
 				img(style="width: 100%" ng-src="{{imagesPath + 'user_1/encabezado_certificado.jpg'}}")
-			.col-lg-2.col-sm-2.col-xs-2(ng-if="false")
-				img(style="width: 3cm" ng-src="{{imagesPath + exameningreso.imagen.nombre}}")
-
+			
 		.row
 
 			
 			.col-lg-12.col-sm-12.col-xs-12
 				center
-					h3 Usuarios del sistema
+					h3 Proveedores
 			
 			
 		.row
@@ -23,18 +21,18 @@
 							th
 								span.negrita Nombre
 							th 
-								span.negrita Apellidos
+								span.negrita Dirección
 							th 
-								span.negrita Sexo
+								span.negrita Persona contacto
 							th 
 								span.negrita Email
 							th 
 								span.negrita Telefono 1
 					tbody
-						tr(ng-repeat="usu in usuarios") 
-							td {{usu.nombres}} 
-							td {{usu.apellidos}} 
-							td {{usu.sexo}} 
-							td {{usu.email}} 
-							td {{usu.telefono1}} 
+						tr(ng-repeat="prov in proveedores") 
+							td {{prov.nombre}} 
+							td {{prov.direccion}} 
+							td {{prov.persona_contacto}} 
+							td {{prov.email}} 
+							td {{prov.telefono1}} 
 

@@ -11,19 +11,19 @@
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Nombre
-									input(ng-model="clieNuevo.nombre")
+									input(ng-model="prodNuevo.nombre")
 
 							
 							.form-group.col-lg-4.col-sm-12.col-xs-12
 								label Unidad de medida
-								ui-select(ng-model="clieNuevo.unidad" style="width: 100%;")
+								ui-select(ng-model="prodNuevo.unidad_medida" style="width: 100%;")
 									ui-select-match(placeholder="Unidad" allow-clear="true") {{$select.selected.unidad}}
 									ui-select-choices(repeat="unidad in unidades | filter: $select.search")
 										div(ng-bind-html="unidad.unidad | highlight: $select.search")
 						
 							.form-group.col-lg-4.col-sm-12.col-xs-12
 								label Categoría
-								ui-select(ng-model="clieNuevo.categoria" style="width: 100%;")
+								ui-select(ng-model="prodNuevo.categoria" style="width: 100%;")
 									ui-select-match(placeholder="Categoría" allow-clear="true") {{$select.selected.nombre}}
 									ui-select-choices(repeat="categoria in categorias | filter: $select.search")
 										div(ng-bind-html="categoria.nombre | highlight: $select.search")
@@ -32,24 +32,25 @@
 						.row
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Precio compra
-									input(ng-model="clieNuevo.precio_compra")
+									label Precio compra $
+									input(ng-model="prodNuevo.precio_compra" type="number" min="50")
 
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Precio venta
-									input(ng-model="clieNuevo.precio_venta")
+									label Precio venta $
+									input(ng-model="prodNuevo.precio_venta" type="number" min="50")
 					
+
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Cantidad
-									input(ng-model="clieNuevo.cantidad" type="number")
+									input(ng-model="prodNuevo.cantidad" type="number" min="0")
 					
 						.row
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Nota
-									input(ng-model="clieNuevo.nota")
+									input(ng-model="prodNuevo.nota")
 
 
 
@@ -71,50 +72,47 @@
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Nombre
-									input(ng-model="clieActualizar.nombres")
-							.col-lg-4
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Dirección
-									input(ng-model="clieActualizar.direccion")
+									input(ng-model="prodActualizar.nombre")
+
+							
+							.form-group.col-lg-4.col-sm-12.col-xs-12
+								label Unidad de medida
+								ui-select(ng-model="prodActualizar.unidad_medida" style="width: 100%;")
+									ui-select-match(placeholder="Unidad" allow-clear="true") {{$select.selected.unidad}}
+									ui-select-choices(repeat="unidad in unidades | filter: $select.search")
+										div(ng-bind-html="unidad.unidad | highlight: $select.search")
 						
-						.row
-							.col-lg-4
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Email
-									input(ng-model="clieActualizar.email")
+							.form-group.col-lg-4.col-sm-12.col-xs-12
+								label Categoría
+								ui-select(ng-model="prodActualizar.categoria" style="width: 100%;")
+									ui-select-match(placeholder="Categoría" allow-clear="true") {{$select.selected.nombre}}
+									ui-select-choices(repeat="categoria in categorias | filter: $select.search")
+										div(ng-bind-html="categoria.nombre | highlight: $select.search")
 						
 
 						.row
-							.form-group.col-lg-4.col-sm-12.col-xs-12
-								label Ciudad 
-								ui-select(ng-model="clieActualizar.ciudad" style="width: 100%;")
-									ui-select-match(placeholder="Ciudad" allow-clear="true") {{$select.selected.ciudad}}
-									ui-select-choices(repeat="ciudad in categorias | filter: $select.search")
-										div(ng-bind-html="ciudad.ciudad | highlight: $select.search")
-						
-						
-						.row
-						
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Telefono 2
-									input(ng-model="clieActualizar.telefono2")
-						
+									label Precio compra $
+									input(ng-model="prodActualizar.precio_compra" type="number" min="50")
+
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Persona contacto
-									input(ng-model="clieActualizar.persona_contacto")
+									label Precio venta $
+									input(ng-model="prodActualizar.precio_venta" type="number" min="50")
+					
+
+							.col-lg-4
+								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+									label Cantidad
+									input(ng-model="prodActualizar.cantidad" type="number" min="0")
 					
 						.row
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Nota
-									input(ng-model="clieActualizar.nota")
+									input(ng-model="prodActualizar.nota")
 
-							.col-lg-4
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Balance
-									input(ng-model="clieActualizar.balance")
 
 						.row
 							.col-lg-12(style="text-align: center;margin-bottom: 40px")
