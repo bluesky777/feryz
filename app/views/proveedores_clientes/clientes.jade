@@ -1,7 +1,7 @@
 .row
 	.col-lg-12
 		.panel.panel-default.panel-hovered.mb20(ng-show="creando" )
-			.panel-heading Nuevo cliente
+			.panel-heading(style="margin-bottom: 10px;") Nuevo cliente
 
 			.panel-body
 				div
@@ -26,21 +26,21 @@
 									input(ng-model="clieNuevo.email")
 						
 						.row
-							.form-group.col-lg-4.col-sm-6.col-xs-12
+							.form-group.col-lg-4.col-sm-6.col-xs-12(style="margin-bottom: 20px;")
 								label Pais
 								ui-select(ng-model="clieNuevo.pais" on-select="paisSeleccionado($item, $model)" style="width: 100%;")
 									ui-select-match(placeholder="Pais" allow-clear="true") {{$select.selected.pais}}
 									ui-select-choices(repeat="pais in paises | filter: $select.search")
 										div(ng-bind-html="pais.pais | highlight: $select.search")
 
-							.form-group.col-lg-4.col-sm-6.col-xs-12
+							.form-group.col-lg-4.col-sm-6.col-xs-12(style="margin-bottom: 20px;")
 								label Departamento
 								ui-select(ng-model="clieNuevo.depart_nac" on-select="departamentoSeleccionado($item, $model)" style="width: 100%;padding-bottom: 0")
 									ui-select-match(placeholder="Departamento" allow-clear="true") {{$select.selected.departamento}}
 									ui-select-choices(repeat="depart in departamentos | filter: $select.search")
 										div(ng-bind-html="depart.departamento | highlight: $select.search")
 
-							.form-group.col-lg-4.col-sm-12.col-xs-12
+							.form-group.col-lg-4.col-sm-12.col-xs-12(style="margin-bottom: 20px;")
 								label Ciudad
 								ui-select(ng-model="clieNuevo.ciudad" style="width: 100%;")
 									ui-select-match(placeholder="Ciudad" allow-clear="true") {{$select.selected.ciudad}}
@@ -85,7 +85,7 @@
 .row
 	.col-lg-12
 		.panel.panel-default.panel-hovered.mb20(ng-show="editando" )
-			.panel-heading Editar cliente
+			.panel-heading(style="margin-bottom: 10px;") Editar cliente
 
 			.panel-body
 				div(ng-show="editando")
@@ -108,21 +108,21 @@
 						
 
 						.row
-							.form-group.col-lg-4.col-sm-6.col-xs-12
+							.form-group.col-lg-4.col-sm-6.col-xs-12(style="margin-bottom: 20px;")
 								label Pais 
 								ui-select(ng-model="clieActualizar.pais" on-select="paisSeleccionado($item, $model)" style="width: 100%;")
 									ui-select-match(placeholder="Pais" allow-clear="true") {{$select.selected.pais}}
 									ui-select-choices(repeat="pais in paises | filter: $select.search")
 										div(ng-bind-html="pais.pais | highlight: $select.search")
 
-							.form-group.col-lg-4.col-sm-6.col-xs-12
+							.form-group.col-lg-4.col-sm-6.col-xs-12(style="margin-bottom: 20px;")
 								label Departamento
 								ui-select(ng-model="clieActualizar.departamento" on-select="departamentoSeleccionado($item, $model)" style="width: 100%;")
 									ui-select-match(placeholder="Departamento" allow-clear="true") {{$select.selected.departamento}}
 									ui-select-choices(repeat="depart in departamentos | filter: $select.search")
 										div(ng-bind-html="depart.departamento | highlight: $select.search")
 
-							.form-group.col-lg-4.col-sm-12.col-xs-12
+							.form-group.col-lg-4.col-sm-12.col-xs-12(style="margin-bottom: 20px;")
 								label Ciudad 
 								ui-select(ng-model="clieActualizar.ciudad" style="width: 100%;")
 									ui-select-match(placeholder="Ciudad" allow-clear="true") {{$select.selected.ciudad}}
@@ -176,5 +176,5 @@
 				
 				md-button(ng-click="crearCliente()" class="md-raised md-primary") Nuevo Cliente
 
-				div(ui-grid="opcionesGrid" ui-grid-edit ui-grid-resize-columns)
+				div(ui-grid="opcionesGrid" ui-grid-edit ui-grid-resize-columns ui-grid-cellnav)
 

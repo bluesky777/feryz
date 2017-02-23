@@ -18,11 +18,14 @@ angular.module('feryzApp', [
   'ui.grid.resizeColumns'
   'ui.grid.exporter'
   'ui.grid.selection'
+  'ui.grid.cellNav'
   'FBAngular'
   'ngMaterial'
   'angular-svg-round-progress'
   'camera'
   'ngFileUpload'
+  'angular-barcode'
+  'ui.utils.masks'
 ])
 #- Valores que usaremos para nuestro proyecto
 .constant('App', (()->

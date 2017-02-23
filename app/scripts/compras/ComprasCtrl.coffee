@@ -1,6 +1,6 @@
 angular.module('feryzApp')
 
-.controller('ProductosCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', 'AuthService', '$uibModal', '$timeout', ($scope, $http, App, $filter, toastr, AuthService, $uibModal, $timeout) ->
+.controller('ComprasCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', 'AuthService', '$uibModal', '$timeout', ($scope, $http, App, $filter, toastr, AuthService, $uibModal, $timeout) ->
 	
 	AuthService.verificar_acceso()
 
@@ -17,32 +17,6 @@ angular.module('feryzApp')
 	
 
 	$scope.prodNuevo = { unidad_medida: {unidad: '-'}, iva: 0, activo: 1, cantidad_minima: 5 }
-
-
-	$scope.bc = {
-		format: 'CODE128',
-		lineColor: '#000000',
-		width: 2,
-		height: 70,
-		displayValue: true,
-		fontOptions: '',
-		font: 'monospace',
-		textAlign: 'center',
-		textPosition: 'bottom',
-		textMargin: 2,
-		fontSize: 20,
-		background: '#ffffff',
-		margin: 0,
-		marginTop: undefined,
-		marginBottom: undefined,
-		marginLeft: undefined,
-		marginRight: undefined,
-		valid: (valid)->
-			#console.log valid
-	}
-
-	ivasComunes = ['3.00', '9.5', '19']
-
 
 	$scope.crearProducto = ()->
 		$scope.creando = true
@@ -180,7 +154,7 @@ angular.module('feryzApp')
 
 ])
 
-.controller('RemoveProductoCtrl', ['$scope', '$uibModalInstance', 'Producto', '$http', 'toastr', ($scope, $modalInstance, Producto, $http, toastr)->
+.controller('RemoveCompraCtrl', ['$scope', '$uibModalInstance', 'Producto', '$http', 'toastr', ($scope, $modalInstance, Producto, $http, toastr)->
 	$scope.Producto = Producto
 
 	$scope.ok = ()->
@@ -198,7 +172,7 @@ angular.module('feryzApp')
 ])
 
 
-.filter('mapCategorias', ['$filter', ($filter)->
+.filter('mapProd', ['$filter', ($filter)->
 
 	return (input, categorias)->
 		if not input
@@ -211,25 +185,6 @@ angular.module('feryzApp')
 				return 'En papelera...'
 ])
 
-.filter('porcentaje', ['$filter', ($filter)->
-  return (input, decimals)->
-    return $filter('number')(input * 100, decimals) + '%';
-])
-
-
-.directive('focusMe', ['$timeout', ($timeout)->
-	return {
-		scope: { trigger: '=focusMe' },
-		link: (scope, element)->
-			scope.$watch('trigger', (value)->
-				#console.log('trigger',value)
-				if(value == true) 
-					element[0].focus()
-					scope.trigger = false
-			
-			)
-	}
-])
 
 
 

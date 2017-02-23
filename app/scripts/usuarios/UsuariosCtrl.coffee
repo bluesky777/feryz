@@ -223,6 +223,9 @@ angular.module('feryzApp')
 	$scope.opcionesGrid = {
 		showGridFooter: true,
 		enableSorting: true,
+		enableFiltering: true,
+		enableCellEdit: true,
+		enableCellEditOnFocus: true,
 		columnDefs: [
 			{field: 'id', width: 60, enableCellEdit: false}
 			{field: 'Edición', cellTemplate: btn1 + btn2, width: 120, enableCellEdit: false }
