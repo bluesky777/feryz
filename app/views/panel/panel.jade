@@ -1,17 +1,17 @@
-header.hidden-print.site-head.fixedHeader#site-head.nav-expand(ng-class="{'nav-expand': navFull, 'fixedHeader': fixedHeader}" ng-include=" 'views/panel/header.tpl.html' " style="z-index: 90")
+header.hidden-print.site-head.fixedHeader#site-head(ng-class="{'nav-expand': getNavFull(), 'fixedHeader': fixedHeader}" ng-include=" 'views/panel/header.tpl.html' " style="z-index: 90")
 	
 
 
 
 
 // main-container
-.main-container.clearfix.nav-expand(ng-class="{'nav-expand': navFull, 'nav-horizontal': navHorizontal}")
+.main-container.clearfix(ng-class="{'nav-expand': getNavFull(), 'nav-horizontal': navHorizontal}")
 
-	aside.hidden-print.nav-wrap.ps-container.nav-expand.ps-active-y#site-nav(ng-class="{'nav-expand': navFull, 'nav-offcanvas': navOffCanvas}" 
+	aside.hidden-print.nav-wrap.ps-container.ps-active-y#site-nav(ng-class="{'nav-expand': getNavFull(), 'nav-offcanvas': navOffCanvas}" 
 		custom-scrollbar="" ng-include=" 'views/panel/nav.tpl.html' ")
 		.nav-head
 
-	div.content-container.fixedHeader.page-wrap(ng-class="{'nav-expand': navFull, 'fixedHeader': fixedHeader}" id="content")
+	div.content-container.fixedHeader.page-wrap(ng-class="{'nav-expand': getNavFull(), 'fixedHeader': fixedHeader}" id="content")
 		.page.page-dashboard
 
 			div(ui-view="contenido_panel" style="overflow: auto")

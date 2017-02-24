@@ -17,9 +17,15 @@
 
 						.row
 							.col-lg-4
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+								//md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Nombre
 									input(ng-model="prodNuevo.nombre" required)
+								md-autocomplete(md-search-text="prodNuevo.nombre" md-dropdown-items="8"
+									md-items="item in resultProductos(prodNuevo.nombre)" md-item-text="item.nombre"
+									md-floating-label="Nombre producto" md-input-minlength="2" 
+									md-no-cache="false")
+
+									span(md-highlight-text="prodNuevo.nombre") {{item.nombre}}
 
 
 							span(ng-if="false")

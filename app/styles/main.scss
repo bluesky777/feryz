@@ -1,7 +1,6 @@
 //$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
-@import "components-font-awesome/scss/font-awesome.scss";
 // endbower
 
 
@@ -609,3 +608,7 @@ md-checkbox.md-checked.infocheck .md-icon {
  background-color: rgb(63,81,181);
  border-color: black;
 }
+.grid-align-right{
+  text-align: right;
+}
+

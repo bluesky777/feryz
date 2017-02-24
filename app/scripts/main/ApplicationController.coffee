@@ -16,9 +16,18 @@ angular.module('feryzApp')
 		skin: 21
 
 
-	$scope.navFull = true
+	$scope.aplicacion = {navFull: true}
 	$scope.toggleNav = ()->
-		$scope.navFull = !$scope.navFull
+		$scope.aplicacion.navFull = !$scope.aplicacion.navFull
+
+	$scope.ocultarNav = ()->
+		$scope.aplicacion.navFull = false
+
+	$scope.mostrarNav = ()->
+		$scope.aplicacion.navFull = true
+
+	$scope.getNavFull = ()->
+		$scope.aplicacion.navFull
 
 
 	

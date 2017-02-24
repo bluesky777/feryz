@@ -1,6 +1,6 @@
 angular.module('feryzApp')
 
-.controller('ProductosCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', 'AuthService', '$uibModal', '$timeout', ($scope, $http, App, $filter, toastr, AuthService, $uibModal, $timeout) ->
+.controller('ProductosCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', 'AuthService', '$uibModal', '$timeout', '$q', 'removeAccents', ($scope, $http, App, $filter, toastr, AuthService, $uibModal, $timeout, $q, removeAccents) ->
 	
 	AuthService.verificar_acceso()
 
@@ -105,22 +105,33 @@ angular.module('feryzApp')
 			$scope.focusOnEdit = true
 		, 100)
 
-	
-	$scope.traerProductos = ()->
 
-		$http.get('::categorias/all').then((r)->
-			$scope.categorias = r.data
+	$scope.resultProductos = (searchTerm)->
+		d = $q.defer();
+
+		removeAccents.search = searchTerm
+
+		res = $filter('filter')($scope.opcionesGrid.data, removeAccents.ignoreAccents )
+
+		d.resolve res
+		promesa = d.promise
+		
+		return promesa
+
+	
+	$scope.traerDatos = ()->
+
+		$http.put('::productos/datos').then((r)->
+			r = r.data
+			$scope.opcionesGrid.data 	= r.productos
+			$scope.categorias 			= r.categorias
+			$scope.codigos_barras 		= r.codigos_barras
+
 			$scope.opcionesGrid.columnDefs[3].editDropdownOptionsArray = $scope.categorias;
 		, (r2)->
-			console.log 'No se pudo traer las categorías', r2
+			console.log 'No se pudo traer los datos', r2
 		)
-
-		$http.get('::productos/all').then((r)->
-			$scope.opcionesGrid.data = r.data
-		, (r2)->
-			console.log 'No se pudo traer los productos', r2
-		)
-	$scope.traerProductos()
+	$scope.traerDatos()
 
 
 	btn1 = '<span class="btn-group"><a class="btn btn-default btn-xs" ng-click="grid.appScope.editarProducto(row.entity)"><md-tooltip md-direction="left">Editar</md-tooltip><i class="fa fa-edit "></i>Edit</a>'

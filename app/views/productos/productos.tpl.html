@@ -19,10 +19,11 @@
             </div>
             <div class="row">
               <div class="col-lg-4">
-                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Nombre</label>
-                  <input ng-model="prodNuevo.nombre" required>
-                </md-input-container>
+                <!--md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
+                label Nombre
+                input(ng-model="prodNuevo.nombre" required)
+                -->
+                <md-autocomplete md-search-text="prodNuevo.nombre" md-dropdown-items="8" md-items="item in resultProductos(prodNuevo.nombre)" md-item-text="item.nombre" md-floating-label="Nombre producto" md-input-minlength="2" md-no-cache="false"><span md-highlight-text="prodNuevo.nombre">{{item.nombre}}</span></md-autocomplete>
               </div><span ng-if="false">
                 <div class="form-group col-lg-4 col-sm-12 col-xs-12">
                   <label>Unidad de medida</label>
