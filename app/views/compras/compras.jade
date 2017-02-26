@@ -56,13 +56,20 @@
 									i.fa.fa-calendar
 								input.form-control.active#fecha-compra-new(type="text" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="compraNueva.fecha" is-open="data.isOpenNew" ng-click="data.isOpenNew = true" max-date="'2030-12-12'" datepicker-options="dateOptions" close-text="Aceptar" current-text="Hoy" clear-text="Borrar" placeholder="Fecha")
 									
-						
+					.col-lg-10.col-sm-8.col-xs-12.formato-total(style="margin-top: 20px;")
+						span(style="background-color: #337ab7; padding: 5px; border-radius:4px; color:white")
+							| {{totalCompraValue(opcionesGrid.data)}}
+						a(ng-click="conIva=!conIva" style="position: relative" href="")
+							span(ng-show="conIva" style="position: absolute; top: -30px; right: 0; width: 200px; text-decoration: underline;") 
+								| Con iva
+							span(ng-hide="conIva" style="position: absolute; top: -30px; right: 0; width: 200px; text-decoration: underline;") 
+								| Sin iva
 				
 				.row
 			
 					.form-group.col-lg-9.col-sm-8.col-xs-12(style="margin-bottom: 10px;")
 						label(style="font-weight: 400; margin-bottom:0") Proveedor
-						ui-select(ng-model="compraNueva.proveedor" style="width: 100%;" autofocus on-select="proveedorSeleccionado($item, $model)" )
+						ui-select(ng-model="detalle.proveedor" style="width: 100%;" autofocus on-select="proveedorSeleccionado($item, $model)" )
 							ui-select-match(placeholder="Proveedor" allow-clear="true") {{$select.selected.nombre}}
 							ui-select-choices(repeat="proveedor in proveedores | filter: $select.search")
 								div(ng-bind-html="proveedor.nombre | highlight: $select.search")
@@ -71,14 +78,14 @@
 			
 					.form-group.col-lg-3.col-sm-4.col-xs-12(style="margin-bottom: 10px;")
 						label(style="font-weight: 400; margin-bottom:0") Código de barras
-						ui-select(ng-model="compraNueva.codigo_barras" style="width: 100%;" on-select="codigoBarrasSeleccionado($item, $model)" focus-on="focusOnCodigoBarras")
+						ui-select(ng-model="detalle.codigo_barras" style="width: 100%;" on-select="codigoBarrasSeleccionado($item, $model)" focus-on="focusOnCodigoBarras")
 							ui-select-match(placeholder="Codigo de barras" allow-clear="true") {{$select.selected.codigo_barras }}
 							ui-select-choices(repeat="codigos in codigos_barras | filter: $select.search")
 								div(ng-bind-html="codigos.codigo_barras | highlight: $select.search")
 				
 					.form-group.col-lg-9.col-sm-8.col-xs-12(style="margin-bottom: 10px;")
 						label(style="font-weight: 400; margin-bottom:0") Nombre
-						ui-select(ng-model="compraNueva.producto" style="width: 100%;" on-select="productoSeleccionado($item, $model)" focus-on="focusOnProducto")
+						ui-select(ng-model="detalle.producto" style="width: 100%;" on-select="productoSeleccionado($item, $model)" focus-on="focusOnProducto")
 							ui-select-match(placeholder="Producto" allow-clear="true") {{$select.selected.nombre}}
 							ui-select-choices(repeat="producto in productos | filter: $select.search")
 								div(ng-bind-html="producto.nombre | highlight: $select.search")
@@ -86,10 +93,10 @@
 				.row(style="margin-top: 10px;")
 					.col-lg-2.col-sm-3.col-xs-12
 					.col-lg-2.col-sm-3.col-xs-12(style="height: 40px;")
-						div.pointer(ng-click="clickPrecioVentaConIva(compraNueva.precio_venta + (compraNueva.precio_venta * compraNueva.iva / 100))" 
+						div.pointer(ng-click="clickPrecioVentaConIva(detalle.precio_venta + (detalle.precio_venta * detalle.iva / 100))" 
 							style="color: #444" ng-show="mostrarPrecioVentaConIva" 
 							uib-tooltip="Click para asignar")
-							| Con iva: {{ compraNueva.precio_venta + (compraNueva.precio_venta * compraNueva.iva / 100) | currency }}
+							| Con iva: {{ detalle.precio_venta + (detalle.precio_venta * detalle.iva / 100) | currency }}
 
 					.col-lg-1.col-sm-1.col-xs-12(style="padding: 0")
 					.col-lg-1.col-sm-1.col-xs-12(style="padding: 0")
@@ -98,25 +105,25 @@
 					.col-lg-2.col-sm-3.col-xs-12
 						md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 							label Precio compra
-							input(ng-model="compraNueva.precio_compra" ui-money-mask maxlength="20" focus-me="focusOnPrecioCompra")
+							input(ng-model="detalle.precio_compra" ui-money-mask maxlength="20" focus-me="focusOnPrecioCompra")
 					.col-lg-2.col-sm-3.col-xs-12
 						md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 							label Precio venta
-							input(ng-model="compraNueva.precio_venta" ui-money-mask maxlength="20" focus-me="focusOnPrecioVenta")
+							input(ng-model="detalle.precio_venta" ui-money-mask maxlength="20" focus-me="focusOnPrecioVenta")
 
 					.col-lg-1.col-sm-1.col-xs-12(style="padding: 0")
 						md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 							label Cantidad
-							input(ng-model="compraNueva.cantidad" type="number" min="0")
+							input(ng-model="detalle.cantidad" type="number" min="0")
 					.col-lg-1.col-sm-1.col-xs-12(style="padding: 0")
 						md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 							label Iva
-							input(ng-model="compraNueva.iva" ui-percentage-mask="0" ui-percentage-value)
+							input(ng-model="detalle.iva" ui-percentage-mask="0" ui-percentage-value)
 					
 					.col-lg-2.col-sm-2.col-xs-12
 						md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 							label Total
-							input(value="{{totalCompra()}}" disabled style="color: black; font-weight: 500")
+							input(value="{{totalDetalle()}}" disabled style="color: black; font-weight: 500")
 
 					.col-lg-1.col-sm-2.col-xs-12
 						button.btn.btn-primary(ng-click="agregarProducto()" ng-disabled="agregando_producto") 

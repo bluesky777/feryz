@@ -2,13 +2,18 @@
 
 angular.module('feryzApp')
 
-.controller('PanelCtrl', ['$scope', '$http', '$state', '$cookies', '$rootScope', 'AuthService', 'Perfil', 'App', 'resolved_user', 'toastr', '$translate', '$filter', '$uibModal', 'Fullscreen', 
-	($scope, $http, $state, $cookies, $rootScope, AuthService, Perfil, App, resolved_user, toastr, $translate, $filter, $uibModal, Fullscreen) ->
+.controller('PanelCtrl', ['$scope', '$http', '$state', '$cookies', '$rootScope', 'AuthService', 'Perfil', 'App', 'USER_ROLES', 'resolved_user', 'toastr', '$translate', '$filter', '$uibModal', 'Fullscreen', 
+	($scope, $http, $state, $cookies, $rootScope, AuthService, Perfil, App, USER_ROLES, resolved_user, toastr, $translate, $filter, $uibModal, Fullscreen) ->
 
 
-		$scope.USER = resolved_user
-		#console.log '$scope.USER', $scope.USER
-		$scope.imagesPath = App.images + 'perfil/'
+		$scope.USER 		= resolved_user
+		$scope.hasRole 		= AuthService.hasRole
+		$scope.USER_ROLES 	= USER_ROLES
+		$scope.imagesPath 	= App.images + 'perfil/'
+
+		$scope.isAdmin 		= $scope.hasRole([USER_ROLES.administrador])
+		$scope.isVendedor 	= $scope.hasRole([USER_ROLES.vendedor])
+		$scope.isTecnico 	= $scope.hasRole([USER_ROLES.tecnico])
 
 		AuthService.verificar_acceso()
 

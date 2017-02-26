@@ -49,7 +49,9 @@
 			
 			.panel-body(style="overflow: auto")
 				
-				md-button(ng-click="crearCategoria()" class="md-raised md-primary") Nuevo Categoría
+				md-button(ng-click="crearCategoria()" class="md-raised md-primary" ng-if="hasRole([USER_ROLES.administrador, USER_ROLES.tecnico])") Nuevo Categoría
+
 
 				div(ui-grid="opcionesGrid" ui-grid-edit ui-grid-resize-columns ui-grid-cellnav)
+
 

@@ -1,8 +1,10 @@
 angular.module('feryzApp')
 
-.controller('UsuariosCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', 'AuthService', '$uibModal', ($scope, $http, App, $filter, toastr, AuthService, $uibModal) ->
+.controller('UsuariosCtrl', ['$scope', '$http', 'App', 'USER_ROLES', '$filter', 'toastr', 'AuthService', '$uibModal', ($scope, $http, App, USER_ROLES, $filter, toastr, AuthService, $uibModal) ->
 	
 	AuthService.verificar_acceso()
+	$scope.hasRole 		= AuthService.hasRole
+	$scope.USER_ROLES 	= USER_ROLES
 
 	$scope.creando 		= false
 	$scope.editando 	= false
@@ -224,11 +226,11 @@ angular.module('feryzApp')
 		showGridFooter: true,
 		enableSorting: true,
 		enableFiltering: true,
-		enableCellEdit: true,
+		enableCellEdit: $scope.isAdmin,
 		enableCellEditOnFocus: true,
 		columnDefs: [
 			{field: 'id', width: 60, enableCellEdit: false}
-			{field: 'Edición', cellTemplate: btn1 + btn2, width: 120, enableCellEdit: false }
+			{field: 'Edición', visible: $scope.isAdmin, cellTemplate: btn1 + btn2, width: 120, enableCellEdit: false }
 			{field: 'nombres', minWidth: 100}
 			{field: 'apellidos', minWidth: 100}
 			{field: 'sexo', width: 50}

@@ -1,4 +1,4 @@
-.row
+.row(ng-if="hasRole([USER_ROLES.administrador])")
 	.col-lg-12
 		.panel.panel-default.panel-hovered.mb20(ng-show="creando" )
 			.panel-heading Nuevo usuario
@@ -137,7 +137,7 @@
 
 								md-button.md-raised.md-primary(type="submit" ng-disabled="guardando") Guardar
 
-.row
+.row(ng-if="hasRole([USER_ROLES.administrador])")
 	.col-lg-12
 		.panel.panel-default.panel-hovered.mb20(ng-show="editando" )
 			.panel-heading Editar usuario
@@ -287,7 +287,9 @@
 			
 			.panel-body(style="overflow: auto")
 				
-				md-button(ng-click="crearUsuario()" class="md-raised md-primary") Nuevo Usuario
+				md-button(ng-click="crearUsuario()" class="md-raised md-primary" ng-if="hasRole([USER_ROLES.administrador])") Nuevo Usuario
+
 
 				div(ui-grid="opcionesGrid" ui-grid-edit ui-grid-resize-columns ui-grid-cellnav)
+
 

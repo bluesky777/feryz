@@ -129,11 +129,11 @@ angular.module('feryzApp')
 		showGridFooter: true,
 		enableSorting: true,
 		enableFiltering: true,
-		enableCellEdit: true,
+		enableCellEdit: $scope.isAdmin,
 		enableCellEditOnFocus: true,
 		columnDefs: [
 			{field: 'id', width: 60, enableCellEdit: false}
-			{field: 'Edición', cellTemplate: btn1 + btn2, width: 120, enableCellEdit: false }
+			{field: 'Edición', visible: $scope.isAdmin, cellTemplate: btn1 + btn2, width: 120, enableCellEdit: false }
 			{field: 'nombre', minWidth: 100}
 			{field: 'direccion', displayName: 'Dirección', minWidth: 100}
 			{field: 'persona_contacto', displayName: 'Persona contacto', minWidth: 100}

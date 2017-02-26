@@ -174,7 +174,9 @@
 			
 			.panel-body(style="overflow: auto")
 				
-				md-button(ng-click="crearCliente()" class="md-raised md-primary") Nuevo Cliente
+				md-button(ng-click="crearCliente()" class="md-raised md-primary" ng-if="hasRole([USER_ROLES.administrador, USER_ROLES.tecnico])") Nuevo Cliente
+
 
 				div(ui-grid="opcionesGrid" ui-grid-edit ui-grid-resize-columns ui-grid-cellnav)
+
 

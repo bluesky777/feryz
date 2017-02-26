@@ -9,7 +9,7 @@
 				tr(style="border-bottom: 2px solid;")
 					th Nombre
 					th Categoría
-					th Unidad de medida
+					th Cant mín
 					th Precio compra
 					th Precio venta
 					th Nota
@@ -18,7 +18,7 @@
 				tr(ng-repeat="producto in productos")
 					td {{producto.nombres}}
 					td {{producto.categoria_id}}
-					td {{producto.unidad_medida}}
+					td {{producto.cantidad_minima}}
 					td {{producto.precio_compra}}
 					td {{producto.precio_venta}}
 					td {{producto.nota}}

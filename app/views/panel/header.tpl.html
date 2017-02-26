@@ -46,7 +46,7 @@
             <md-icon class="fa fa-image"></md-icon>Imágenes
           </md-button>
         </md-menu-item>
-        <md-menu-item>
+        <md-menu-item ng-if="hasRole([USER_ROLES.administrador])">
           <md-button ng-click="gotoUsuarios()">
             <md-icon class="fa fa-users"></md-icon>Usuarios
           </md-button>

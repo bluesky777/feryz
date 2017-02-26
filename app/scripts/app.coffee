@@ -65,9 +65,9 @@ angular.module('feryzApp', [
 })
 .constant('USER_ROLES', {
   all:            '*',
-  admin:          'admin',
-  vendedor:       'vendedor',
-  tecnico:        'tecnico'
+  administrador:  'Administrador',
+  vendedor:       'Vendedor',
+  tecnico:        'Técnico'
 })
 .constant('PERMISSIONS', {
   can_work_like_admin:            'can_work_like_admin'

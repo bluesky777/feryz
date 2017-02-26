@@ -164,7 +164,9 @@
 			
 			.panel-body(style="overflow: auto")
 				
-				md-button(ng-click="crearProveedor()" class="md-raised md-primary") Nuevo Proveedor
+				md-button(ng-click="crearProveedor()" class="md-raised md-primary" ng-if="hasRole([USER_ROLES.administrador, USER_ROLES.tecnico])") Nuevo Proveedor
+
 
 				div(ui-grid="opcionesGrid" ui-grid-edit ui-grid-resize-columns ui-grid-cellnav)
+
 

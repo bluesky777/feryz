@@ -1,8 +1,11 @@
 angular.module('feryzApp')
 
-.controller('ProductosCtrl', ['$scope', '$http', 'App', '$filter', 'toastr', 'AuthService', '$uibModal', '$timeout', '$q', 'removeAccents', ($scope, $http, App, $filter, toastr, AuthService, $uibModal, $timeout, $q, removeAccents) ->
+.controller('ProductosCtrl', ['$scope', '$http', 'App', 'USER_ROLES', '$filter', 'toastr', 'AuthService', '$uibModal', '$timeout', '$q', 'removeAccents', ($scope, $http, App, USER_ROLES, $filter, toastr, AuthService, $uibModal, $timeout, $q, removeAccents) ->
 	
 	AuthService.verificar_acceso()
+	$scope.hasRole 		= AuthService.hasRole
+	$scope.USER_ROLES 	= USER_ROLES
+
 
 	$scope.creando 		= false
 	$scope.editando 	= false
@@ -142,11 +145,11 @@ angular.module('feryzApp')
 		showGridFooter: true,
 		enableSorting: true,
 		enableFiltering: true,
-		enableCellEdit: true,
+		enableCellEdit: $scope.isAdmin,
 		enableCellEditOnFocus: true,
 		columnDefs: [
 			{field: 'id', width: 60, enableCellEdit: false}
-			{field: 'Edición', cellTemplate: btn1 + btn2, width: 90, enableCellEdit: false, enableFiltering: false }
+			{field: 'Edición', visible: $scope.isAdmin, cellTemplate: btn1 + btn2, width: 90, enableCellEdit: false, enableFiltering: false }
 			{field: 'nombre', minWidth: 270}
 			{field: 'categoria_id',	displayName: 'Categoría',		cellFilter: 'mapCategorias:grid.appScope.categorias',
 			filter: {
@@ -159,7 +162,7 @@ angular.module('feryzApp')
 			
 			{field: 'cantidad_minima', displayName: 'Min', cellFilter: 'number'}
 			{field: 'iva', cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.iva}}%</div>', editableCellTemplate: ivaEdit }
-			{field: 'activo', type: 'boolean', width: 60, cellTemplate: '<input type="checkbox" ng-model="row.entity.activo" ng-true-value="1" ng-false-value="0" ng-change="grid.appScope.guardarToggleActivo(row.entity)">'}
+			{field: 'activo', type: 'boolean', width: 60, cellTemplate: '<input type="checkbox" ng-model="row.entity.activo" ng-true-value="1" ng-false-value="0" ng-change="grid.appScope.guardarToggleActivo(row.entity)" ng-disabled="!grid.appScope.isAdmin">'}
 			{field: 'precio_venta', cellFilter: 'currency'}
 		]
 		onRegisterApi: ( gridApi ) ->
@@ -180,13 +183,15 @@ angular.module('feryzApp')
 	}
 
 	$scope.guardarToggleActivo = (rowEntity)->
-		$http.put('::productos/actualizar/' + rowEntity.id, rowEntity).then((r)->
-			toastr.success 'Producto actualizado con éxito', 'Actualizado'
-		, (r2)->
-			toastr.error 'Cambio no guardado', 'Error'
-			console.log 'Falló al intentar guardar: ', r2
-		)
-
+		if $scope.isAdmin
+			$http.put('::productos/actualizar/' + rowEntity.id, rowEntity).then((r)->
+				toastr.success 'Producto actualizado con éxito', 'Actualizado'
+			, (r2)->
+				toastr.error 'Cambio no guardado', 'Error'
+				console.log 'Falló al intentar guardar: ', r2
+			)
+		else
+			toastr.warning 'No tienes permiso para modificar productos', 'Lo sentimos'
 	
 
 ])

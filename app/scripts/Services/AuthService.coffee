@@ -72,6 +72,8 @@ angular.module('feryzApp')
 					#$rootScope.$broadcast(AUTH_EVENTS.notAuthenticated)
 					console.log '...NO está Autenticado.'
 					$state.transitionTo 'login'
+			else
+				return true
 		else
 			return true
 
@@ -172,38 +174,40 @@ angular.module('feryzApp')
 	authService.isAuthenticated = ()->
 		return !!Perfil.User().id;
 
-	authService.isAuthorized = (neededPermissions)->
 
+	authService.isAuthorized = (needed_roles)->
 
 		user = Perfil.User()
 		if user.is_superuser
 			return true
 
 
-		if (!angular.isArray(neededPermissions))
-			neededPermissions = [neededPermissions]
+		if (!angular.isArray(needed_roles))
+			needed_roles = [needed_roles]
 
-		if (user.tipo_usu_id)
-			if neededPermissions.length == 0
-				return true; # El usuarios no tiene permisos pero no se requiere ninguno
+		if needed_roles.length == 0
+			return true; # No se requiere ningún permiso
 
 		newArr = []
-		_.each(neededPermissions, (elem)->
-			if (user.tipo_usu_id == elem)
+		_.each(needed_roles, (elem)->
+			if (user.tipo == elem)
 				newArr.push elem
 		)
 		return (authService.isAuthenticated() and (newArr.length > 0))
 
 
-	authService.hasRoleOrPerm = (ReqRole)->
-		if ReqRole == Perfil.User().tipo_usu_id
+	authService.hasRole = (needed_roles)->
+		user = Perfil.User()
+
+		if user.is_superuser
 			return true
-		else if ReqRole == 2 and Perfil.User().tipo_usu_id == 7
-			return true
-		else if Perfil.User().is_superuser
-			return true
-		else
-			return false
+
+		newArr = []
+		_.each(needed_roles, (elem)->
+			if (user.tipo == elem)
+				newArr.push elem
+		)
+		return (authService.isAuthenticated() and (newArr.length > 0))
 
 
 

@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('feryzApp')
-	.config ['$stateProvider', 'App', 'USER_ROLES', 'PERMISSIONS', '$translateProvider', ($state, App, USER_ROLES, PERMISSIONS, $translateProvider) ->
+	.config ['$stateProvider', 'App', 'USER_ROLES', '$translateProvider', ($state, App, USER_ROLES, $translateProvider) ->
 
 		$state
 			.state('panel', { #- Estado admin.
@@ -18,6 +18,7 @@ angular.module('feryzApp')
 				}
 				data: 
 					pageTitle: 'Feryz - Bienvenido'
+					needed_roles: [USER_ROLES.administrador, USER_ROLES.vendedor, USER_ROLES.tecnico ]
 			})
 
 

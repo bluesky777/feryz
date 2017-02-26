@@ -79,11 +79,11 @@ angular.module('feryzApp')
 		showGridFooter: true,
 		enableSorting: true,
 		enableFiltering: true,
-		enableCellEdit: true,
+		enableCellEdit: $scope.isAdmin,
 		enableCellEditOnFocus: true,
 		columnDefs: [
 			{field: 'id', width: 60, enableCellEdit: false}
-			{field: 'Edición', enableFiltering: false, cellTemplate: btn1 + btn2, width: 120, enableCellEdit: false }
+			{field: 'Edición', visible: $scope.isAdmin, enableFiltering: false, cellTemplate: btn1 + btn2, width: 120, enableCellEdit: false }
 			{field: 'nombre', minWidth: 100}
 		]
 		onRegisterApi: ( gridApi ) ->

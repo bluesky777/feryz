@@ -1,5 +1,5 @@
 angular.module('feryzApp')
-	.config(['$stateProvider', 'App', ($state, App) ->
+	.config(['$stateProvider', 'App', 'USER_ROLES', ($state, App, USER_ROLES) ->
 
 		 $state.
 		 	state('panel.usuarios', {
@@ -11,7 +11,7 @@ angular.module('feryzApp')
 
 				data: 
 					pageTitle: 'Usuarios - Feryz'
-					needed_roles: [10]
+					needed_roles: [USER_ROLES.administrador]
 		 	})
 
 	])
