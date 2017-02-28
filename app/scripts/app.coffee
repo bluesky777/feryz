@@ -19,6 +19,7 @@ angular.module('feryzApp', [
   'ui.grid.exporter'
   'ui.grid.selection'
   'ui.grid.cellNav'
+  'ui.grid.autoResize'
   'FBAngular'
   'ngMaterial'
   'angular-svg-round-progress'

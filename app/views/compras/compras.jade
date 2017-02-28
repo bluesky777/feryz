@@ -1,48 +1,4 @@
-.row
-	.col-lg-12
-		.panel.panel-default.panel-hovered.mb20(ng-show="creando" )
-			.panel-heading(style="margin-bottom: 10px;") Nueva compra
-
-			.panel-body
-				div
-					form(ng-submit="guardarProducto()")
-
-
-						.row
-							.col-lg-4.col-sm-6.col-xs-12
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Precio compra $
-									input(ng-model="prodNuevo.precio_compra" type="text" ui-money-mask maxlength="20")
-
-							.col-lg-4.col-sm-12.col-xs-12
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Cantidad mínima
-									input(ng-model="prodNuevo.cantidad_minima" type="number" min="0")
-					
-							.col-lg-4
-								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-									label Iva %
-									input(type="text" ng-model="prodNuevo.iva" ui-percentage-mask="0" ui-percentage-value required  list="ivas-comunes")
-
-
-							.col-lg-4
-								.checkbox
-									label
-										input(type="checkbox" ng-model="prodNuevo.activo" ng-true-value="1" ng-false-value="0") 
-										| Activo
-
-
-
-
-						.row
-							.col-lg-12(style="text-align: center;margin-bottom: 40px")
-								md-button.md-raised.md-default(type="button" ng-click="creando=false") Cancelar
-
-								md-button.md-raised.md-primary(type="submit" ng-disabled="guardando") Guardar
-
-
-
-.row
+.row(ng-if="!mostrandoCompras")
 	.col-lg-12
 		.panel.panel-default.panel-hovered.mb20
 			.panel-heading Nueva compra
@@ -69,11 +25,21 @@
 			
 					.form-group.col-lg-9.col-sm-8.col-xs-12(style="margin-bottom: 10px;")
 						label(style="font-weight: 400; margin-bottom:0") Proveedor
-						ui-select(ng-model="detalle.proveedor" style="width: 100%;" autofocus on-select="proveedorSeleccionado($item, $model)" )
+						ui-select(ng-model="compraNueva.proveedor" style="width: 100%;" autofocus on-select="proveedorSeleccionado($item, $model)" )
 							ui-select-match(placeholder="Proveedor" allow-clear="true") {{$select.selected.nombre}}
 							ui-select-choices(repeat="proveedor in proveedores | filter: $select.search")
 								div(ng-bind-html="proveedor.nombre | highlight: $select.search")
 
+					.col-lg-3.col-sm-4.col-xs-12
+						md-button.md-raised.md-success(type="button" ng-click="guardarCompra()" style="margin: 8px 0;") 
+							i.fa.fa-save  
+							|   Guardar
+
+						md-button.md-raised.md-success(type="button" ng-click="guardarCompraImprimir()" style="margin: 8px 0;") 
+							i.fa.fa-print  
+							|   e imprimir
+
+						
 				.row
 			
 					.form-group.col-lg-3.col-sm-4.col-xs-12(style="margin-bottom: 10px;")
@@ -130,8 +96,23 @@
 							i.fa.fa-plus
 
 
-				md-button(ng-click="crearProducto()" ng-if="false" class="md-raised md-primary") Nuevo Producto
+
+				div(ui-grid="opcionesGrid" ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-auto-resize ng-style="{height: altura+'px'}")
 
 
-				div(ui-grid="opcionesGrid" ui-grid-edit ui-grid-resize-columns ui-grid-cellnav style="height: 600px")
+
+a(href="" ng-show="!mostrandoCompras" ng-click="mostrarCompras()" style="font-weight: 500; font-size: 30px;") Mostrar compras
+
+.row(ng-if="mostrandoCompras")
+	.col-lg-12
+		.panel.panel-default.panel-hovered.mb20
+			.panel-heading Compras
+			
+			.panel-body(style="overflow: auto")
+				
+
+				md-button(ng-click="ocultarCompras()" class="md-raised md-primary") Ocultar compras
+
+
+				div(ui-grid="gridCompras" ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-auto-resize style="height: 400px")
 

@@ -11,9 +11,10 @@ angular.module('feryzApp')
 	$scope.guardando 	= false
 	$scope.prodActualizar = {}
 	$scope.conIva 		= true
+	$scope.altura 		= 400
 
 	$scope.mostrarPrecioVentaConIva = true
-	$scope.compraNueva 		= { fecha: new Date() }
+	$scope.compraNueva 		= { fecha: new Date(), proveedor: undefined }
 	$scope.detalle 			= { precio_venta: 0, precio_compra: 0, cantidad: 1, iva: 0, codigo_barras: undefined }
 	$scope.detalleT 		= { precio_venta: 0, precio_compra: 0, cantidad: 1, iva: 0, codigo_barras: undefined }
 
@@ -32,6 +33,9 @@ angular.module('feryzApp')
 	$scope.categorias 			= []
 	$scope.codigos_barras 		= []
 	$scope.productos_agregados 	= []
+
+
+	$scope.mostrandoCompras = false
 
 	
 	$scope.traerDatos = ()->
@@ -97,7 +101,6 @@ angular.module('feryzApp')
 
 	$scope.proveedorSeleccionado = ($item, $model)->
 		if $item
-			$scope.detalle.proveedor_id = $item.id
 			$scope.$broadcast('focusOnCodigoBarras');
 
 
@@ -154,7 +157,6 @@ angular.module('feryzApp')
 
 	# Asignar iva al precio venta
 	$scope.clickPrecioVentaConIva = (conIva)->
-		console.log $scope.mostrarPrecioVentaConIva
 		$scope.mostrarPrecioVentaConIva = false
 		$scope.detalle.precio_venta = conIva
 
@@ -176,16 +178,14 @@ angular.module('feryzApp')
 			$scope.productos_agregados.push otro
 
 			$scope.opcionesGrid.data = $scope.productos_agregados
-			console.log $scope.opcionesGrid.data
-
-			# Para que no se borre el proveedor en el siguiente producto
-			$scope.detalleT.proveedor_id 	= $scope.detalle.proveedor_id
-			$scope.detalleT.proveedor 		= $scope.detalle.proveedor
 
 			$scope.detalleT.producto_id 	= $scope.detalle.producto.id
 
 			angular.copy $scope.detalleT, $scope.detalle
 			$scope.agregando_producto = false
+			
+			if $scope.productos_agregados.length > 10
+				$scope.altura = 600
 		else
 			toastr.warning 'Debe elegir un producto'
 			$scope.agregando_producto = false
@@ -193,14 +193,32 @@ angular.module('feryzApp')
 
 	# Quitar producto de la compra
 	$scope.quitarProducto = (prod)->
+
+		$scope.productos_agregados = $filter('filter')($scope.productos_agregados, {producto_id: '!'+prod.producto_id})
+		$scope.opcionesGrid.data = $scope.productos_agregados
 		
-		console.log prod
+		if $scope.productos_agregados.length < 11
+			$scope.altura = 400
+		
+
+
+	# Guardar en el servidor
+	$scope.guardarCompra = ()->
+		if $scope.compraNueva.proveedor
+
+			$http.post('::compras/guardar', {productos: $scope.productos_agregados, compra: $scope.compraNueva }).then((r)->
+				toastr.success 'Guardada'
+			, (r2)->
+				toastr.error 'No se pudo guardar la compra'
+			)
+		else
+			toastr.warning 'Debes elegir el proveedor'
 
 
 
 
-	btn1 = '<span class="btn-group"><a class="btn btn-default btn-xs" ng-click="grid.appScope.editarProducto(row.entity)"><md-tooltip md-direction="left">Editar</md-tooltip><i class="fa fa-edit "></i>Edit</a>'
-	btn2 = '<a class="btn btn-danger btn-xs" ng-click="grid.appScope.quitarProducto(row.entity)"><md-tooltip md-direction="left">Eliminar</md-tooltip><i class="fa fa-times "></i></a><span>'
+	btn1 	= '<span class="btn-group"><a class="btn btn-default btn-xs" ng-click="grid.appScope.editarProducto(row.entity)"><md-tooltip md-direction="left">Editar</md-tooltip><i class="fa fa-edit "></i>Edit</a>'
+	btn2 	= '<a class="btn btn-danger btn-xs" ng-click="grid.appScope.quitarProducto(row.entity)"><md-tooltip md-direction="left">Quitar</md-tooltip><i class="fa fa-times "></i></a><span>'
 	ivaEdit = '<div><form name="inputForm"><input ui-percentage-mask="0" ui-percentage-value type="INPUT_TYPE" ng-class="\'colt\' + col.uid" ui-grid-editor ng-model="MODEL_COL_FIELD" /></form</div>'
 
 	$scope.opcionesGrid = {
@@ -213,28 +231,17 @@ angular.module('feryzApp')
 		gridFooterTemplate: '<div class="ui-grid-footer-info ui-grid-grid-footer row"><span class="col-lg-4 col-sm-4">Productos: {{grid.rows.length}}<span ng-if="grid.renderContainers.body.visibleRowCache.length !== grid.rows.length" class="ngLabel"> (mostrando {{grid.renderContainers.body.visibleRowCache.length}})</span></span>   <span class="col-lg-8 col-sm-8 formato-total">{{grid.appScope.totalCompra(grid.rows)}}</span></div>'
 		columnDefs: [
 			{field: 'No', width: 60, enableCellEdit: false, cellTemplate: '<div class="ui-grid-cell-contents">{{rowRenderIndex + 1}}</div>'}
-			{field: 'Edit', cellTemplate: btn2, width: 40, enableCellEdit: false, enableFiltering: false }
+			{field: 'Ed', displayName: '', cellTemplate: btn2, width: 35, enableCellEdit: false, enableFiltering: false }
 			{field: 'nombre', displayName: 'Producto', minWidth: 270 }
-			{field: 'proveedor_id',	displayName: 'Proveedor',		cellFilter: 'mapProveedores:grid.appScope.proveedores',
-			filter: {
-				condition: (searchTerm, cellValue)->
-					foundProveed 	= $filter('filter')($scope.proveedores, {nombre: searchTerm})
-					actual 			= $filter('filter')(foundProveed, {id: cellValue}, true)
-					return actual.length > 0;
-			}
-			editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownIdLabel: 'id', editDropdownValueLabel: 'nombre', enableCellEditOnFocus: true, minWidth: 80 }
-			
-			{field: 'iva', type: 'text', cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.iva}}%</div>', editableCellTemplate: ivaEdit, minWidth: 70 }
+			{field: 'iva', type: 'text', cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.iva}}%</div>', editableCellTemplate: ivaEdit, width: 50 }
 			{field: 'precio_compra', displayName: '$Compra', cellFilter: 'currency', cellClass: 'grid-align-right', minWidth: 80}
 			{field: 'precio_venta', displayName: '$Venta', cellFilter: 'currency', cellClass: 'grid-align-right', minWidth: 70}
-			{field: 'cantidad', displayName: 'Cant', enableSorting: true, cellFilter: 'number', minWidth: 70}
-			{displayName: 'Total', name: 'Total', enableSorting: true, enableCellEdit: false, cellFilter: 'number', minWidth: 70, cellTemplate: '<div class="ui-grid-cell-contents" style="text-align: right">{{row.entity.precio_compra * row.entity.cantidad | currency}}</div>' }
+			{field: 'cantidad', displayName: 'Cant', enableSorting: true, cellFilter: 'number', minWidth: 50, maxWidth: 70}
+			{displayName: 'Total', name: 'Total', enableSorting: true, enableCellEdit: false, cellFilter: 'number', minWidth: 100, cellTemplate: '<div class="ui-grid-cell-contents" style="text-align: right">{{row.entity.precio_compra * row.entity.cantidad | currency}}</div>' }
 		]
 		onRegisterApi: ( gridApi ) ->
 			$scope.gridApi = gridApi
 			gridApi.edit.on.afterCellEdit($scope, (rowEntity, colDef, newValue, oldValue)->
-				
-				$scope.$apply()
 				
 				if newValue != oldValue
 					if colDef.field == 'nombre'
@@ -243,17 +250,6 @@ angular.module('feryzApp')
 						, (r2)->
 							toastr.error 'Cambio no guardado', 'Error'
 						)
-
-
-				return
-				if newValue != oldValue
-
-					$http.put('::productos/actualizar/' + rowEntity.id, rowEntity).then((r)->
-						toastr.success 'Producto actualizado con éxito', 'Actualizado'
-					, (r2)->
-						toastr.error 'Cambio no guardado', 'Error'
-						console.log 'Falló al intentar guardar: ', r2
-					)
 
 				$scope.$apply()
 			)
@@ -280,6 +276,60 @@ angular.module('feryzApp')
 		)
 
 	
+
+
+
+
+
+	# LÓGICA PARA LAS COMPRAS
+
+
+	$scope.gridCompras = {
+		showGridFooter: true,
+		enableSorting: false,
+		enableColumnMenus: false,
+		enableFiltering: true,
+		enableCellEdit: true,
+		enableCellEditOnFocus: true,
+		gridFooterTemplate: '<div class="ui-grid-footer-info ui-grid-grid-footer row"><span class="col-lg-4 col-sm-4">Productos: {{grid.rows.length}}<span ng-if="grid.renderContainers.body.visibleRowCache.length !== grid.rows.length" class="ngLabel"> (mostrando {{grid.renderContainers.body.visibleRowCache.length}})</span></span>   <span class="col-lg-8 col-sm-8 formato-total">{{grid.appScope.totalCompra(grid.rows)}}</span></div>'
+		columnDefs: [
+			{field: 'id', width: 60, enableCellEdit: false}
+			{field: 'Ed', displayName: '', cellTemplate: btn2, width: 35, enableCellEdit: false, enableFiltering: false }
+			{field: 'fecha'}
+			{field: 'proveedor_id'}
+			{field: 'created_by', displayName: 'Creado por'}
+			{field: 'created_at', displayName: 'Creado en'}
+		]
+		onRegisterApi: ( gridApi ) ->
+			$scope.gridApi = gridApi
+			gridApi.edit.on.afterCellEdit($scope, (rowEntity, colDef, newValue, oldValue)->
+				
+				if newValue != oldValue
+					if colDef.field == 'nombre'
+						$http.put('::productos/actualizar-nombre', {producto_id: rowEntity.producto.id, nombre: rowEntity.nombre}).then((r)->
+							toastr.success 'Nombre de Producto actualizado', 'Actualizado'
+						, (r2)->
+							toastr.error 'Cambio no guardado', 'Error'
+						)
+
+				$scope.$apply()
+			)
+	}
+
+
+	$scope.mostrarCompras = ()->
+		$http.put('::compras/all').then((r)->
+			$scope.gridCompras.data = r.data.compras
+			$scope.mostrandoCompras = true
+		, (r2)->
+			toastr.error 'No se pudo traer las compras'
+		)
+	
+	$scope.ocultarCompras = ()->
+		$scope.mostrandoCompras = false
+
+
+
 
 ])
 
