@@ -5,6 +5,8 @@ angular.module('feryzApp')
 	AuthService.verificar_acceso()
 	$scope.hasRole 		= AuthService.hasRole
 	$scope.USER_ROLES 	= USER_ROLES
+	$scope.USER 		= $scope.USER # para evitar la búscada en scope padre
+	USER 				= $scope.USER # para usarlo aquí sin el scope
 
 
 	$scope.creando 		= false
@@ -73,7 +75,7 @@ angular.module('feryzApp')
 			templateUrl: '==productos/removeProducto.tpl.html'
 			controller: 'RemoveProductoCtrl'
 			resolve: 
-				producto: ()->
+				Producto: ()->
 					prod
 		})
 		modalInstance.result.then( (producto)->
@@ -136,6 +138,7 @@ angular.module('feryzApp')
 		)
 	$scope.traerDatos()
 
+	console.log USER.deci_salida
 
 	btn1 = '<span class="btn-group"><a class="btn btn-default btn-xs" ng-click="grid.appScope.editarProducto(row.entity)"><md-tooltip md-direction="left">Editar</md-tooltip><i class="fa fa-edit "></i>Edit</a>'
 	btn2 = '<a class="btn btn-danger btn-xs" ng-click="grid.appScope.eliminarProducto(row.entity)"><md-tooltip md-direction="left">Eliminar</md-tooltip><i class="fa fa-times "></i></a><span>'
@@ -161,9 +164,9 @@ angular.module('feryzApp')
 			editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownIdLabel: 'id', editDropdownValueLabel: 'nombre', enableCellEditOnFocus: true }
 			
 			{field: 'cantidad_minima', displayName: 'Min', cellFilter: 'number'}
-			{field: 'iva', cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.iva}}%</div>', editableCellTemplate: ivaEdit }
+			{field: 'iva', cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.iva | number:0}}%</div>', editableCellTemplate: ivaEdit }
 			{field: 'activo', type: 'boolean', width: 60, cellTemplate: '<input type="checkbox" ng-model="row.entity.activo" ng-true-value="1" ng-false-value="0" ng-change="grid.appScope.guardarToggleActivo(row.entity)" ng-disabled="!grid.appScope.isAdmin">'}
-			{field: 'precio_venta', cellFilter: 'currency'}
+			{field: 'precio_venta',	displayName: 'Prec venta', cellFilter: 'currency:undefined:grid.appScope.USER.deci_salida', minWidth: 90}
 		]
 		onRegisterApi: ( gridApi ) ->
 			$scope.gridApi = gridApi
@@ -228,23 +231,8 @@ angular.module('feryzApp')
 ])
 
 .filter('porcentaje', ['$filter', ($filter)->
-  return (input, decimals)->
-    return $filter('number')(input * 100, decimals) + '%';
-])
-
-
-.directive('focusMe', ['$timeout', ($timeout)->
-	return {
-		scope: { trigger: '=focusMe' },
-		link: (scope, element)->
-			scope.$watch('trigger', (value)->
-				#console.log('trigger',value)
-				if(value == true) 
-					element[0].focus()
-					scope.trigger = false
-			
-			)
-	}
+	return (input, decimals)->
+		return $filter('number')(input * 100, decimals) + '%';
 ])
 
 

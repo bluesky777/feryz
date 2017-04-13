@@ -1,7 +1,19 @@
-.row(ng-if="!mostrandoCompras")
+.row(ng-if="!mostrandoEntradas" )
 	.col-lg-12
 		.panel.panel-default.panel-hovered.mb20
-			.panel-heading Nueva compra
+			.panel-heading Nueva entrada 
+				span(ng-show="EntSinGuardar.length > 1")
+					span(ng-repeat="entrad in EntSinGuardar" uib-tooltip="Entradas sin guardar" tooltip-append-to-body="true")  
+						a(href="" style="color: black" ng-show="$index == indiceEnt && entrad.descartada != true" ng-click="setEntradaSinGuardar($index)") {{ $index+1 }} 
+						a(href="" ng-show="$index != indiceEnt && entrad.descartada != true" ng-click="setEntradaSinGuardar($index)") {{ $index+1 }}  
+						a(href="" style="color: white" ng-show="entrad.descartada == true" ) {{ $index+1 }}  
+
+
+					a(href="" ng-click="nuevaEntrada()" uib-tooltip="Nueva entrada" tooltip-append-to-body="true" style="font-size: 14pt")  +
+					a(href="" ng-click="descartarEntrada()" uib-tooltip="Descartar entrada" tooltip-append-to-body="true" style="font-size: 11pt; color: red;")  X
+
+				span(ng-hide="EntSinGuardar.length > 1")
+					a(href="" ng-click="nuevaEntrada()" uib-tooltip="Nueva entrada" tooltip-append-to-body="true" style="font-size: 14pt")  +
 			
 			.panel-body(style="overflow: auto")
 				.row
@@ -10,12 +22,12 @@
 							.input-group
 								span.input-group-addon()
 									i.fa.fa-calendar
-								input.form-control.active#fecha-compra-new(type="text" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="compraNueva.fecha" is-open="data.isOpenNew" ng-click="data.isOpenNew = true" max-date="'2030-12-12'" datepicker-options="dateOptions" close-text="Aceptar" current-text="Hoy" clear-text="Borrar" placeholder="Fecha")
+								input.form-control.active#fecha-entrada-new(type="text" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="entradaNueva.fecha" is-open="data.isOpenNew" ng-click="data.isOpenNew = true" max-date="'2030-12-12'" datepicker-options="dateOptions" close-text="Aceptar" current-text="Hoy" clear-text="Borrar" placeholder="Fecha")
 									
 					.col-lg-10.col-sm-8.col-xs-12.formato-total(style="margin-top: 20px;")
 						span(style="background-color: #337ab7; padding: 5px; border-radius:4px; color:white")
-							| {{totalCompraValue(opcionesGrid.data)}}
-						a(ng-click="conIva=!conIva" style="position: relative" href="")
+							| {{totalEntradaValue(opcionesGrid.data)}}
+						a#focusOnConSinIva(ng-click="toggleConIva()" style="position: relative" href="" focus-me="focusOnConSinIva")
 							span(ng-show="conIva" style="position: absolute; top: -30px; right: 0; width: 200px; text-decoration: underline;") 
 								| Con iva
 							span(ng-hide="conIva" style="position: absolute; top: -30px; right: 0; width: 200px; text-decoration: underline;") 
@@ -25,17 +37,17 @@
 			
 					.form-group.col-lg-9.col-sm-8.col-xs-12(style="margin-bottom: 10px;")
 						label(style="font-weight: 400; margin-bottom:0") Proveedor
-						ui-select(ng-model="compraNueva.proveedor" style="width: 100%;" autofocus on-select="proveedorSeleccionado($item, $model)" )
+						ui-select(ng-model="entradaNueva.proveedor" style="width: 100%;" autofocus on-select="proveedorSeleccionado($item, $model)" )
 							ui-select-match(placeholder="Proveedor" allow-clear="true") {{$select.selected.nombre}}
 							ui-select-choices(repeat="proveedor in proveedores | filter: $select.search")
 								div(ng-bind-html="proveedor.nombre | highlight: $select.search")
 
 					.col-lg-3.col-sm-4.col-xs-12
-						md-button.md-raised.md-success(type="button" ng-click="guardarCompra()" style="margin: 8px 0;") 
+						md-button.md-raised.md-success(type="button" ng-click="guardarEntrada()" style="margin: 8px 0;") 
 							i.fa.fa-save  
 							|   Guardar
 
-						md-button.md-raised.md-success(type="button" ng-click="guardarCompraImprimir()" style="margin: 8px 0;") 
+						md-button.md-raised.md-success(type="button" ng-click="guardarEntradaImprimir()" style="margin: 8px 0;") 
 							i.fa.fa-print  
 							|   e imprimir
 
@@ -57,25 +69,25 @@
 								div(ng-bind-html="producto.nombre | highlight: $select.search")
 
 				.row(style="margin-top: 10px;")
-					.col-lg-2.col-sm-3.col-xs-12
+					
 					.col-lg-2.col-sm-3.col-xs-12(style="height: 40px;")
 						div.pointer(ng-click="clickPrecioVentaConIva(detalle.precio_venta + (detalle.precio_venta * detalle.iva / 100))" 
 							style="color: #444" ng-show="mostrarPrecioVentaConIva" 
 							uib-tooltip="Click para asignar")
-							| Con iva: {{ detalle.precio_venta + (detalle.precio_venta * detalle.iva / 100) | currency }}
-
+							| Con iva: {{ detalle.precio_venta + (detalle.precio_venta * detalle.iva / 100) | currency:undefined:USER.deci_venta }}
+					.col-lg-2.col-sm-3.col-xs-12
 					.col-lg-1.col-sm-1.col-xs-12(style="padding: 0")
 					.col-lg-1.col-sm-1.col-xs-12(style="padding: 0")
 
 				.row(style="margin-top: 15px;")
 					.col-lg-2.col-sm-3.col-xs-12
 						md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
-							label Precio compra
-							input(ng-model="detalle.precio_compra" ui-money-mask maxlength="20" focus-me="focusOnPrecioCompra")
+							label Precio de coste
+							input(ng-model="detalle.precio_costo" ui-money-mask="USER.deci_costo" maxlength="20" focus-me="focusOnPrecioCosto")
 					.col-lg-2.col-sm-3.col-xs-12
 						md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 							label Precio venta
-							input(ng-model="detalle.precio_venta" ui-money-mask maxlength="20" focus-me="focusOnPrecioVenta")
+							input(ng-model="detalle.precio_venta" ui-money-mask="USER.deci_venta" maxlength="20" focus-me="focusOnPrecioVenta")
 
 					.col-lg-1.col-sm-1.col-xs-12(style="padding: 0")
 						md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
@@ -101,18 +113,18 @@
 
 
 
-a(href="" ng-show="!mostrandoCompras" ng-click="mostrarCompras()" style="font-weight: 500; font-size: 30px;") Mostrar compras
+a(href="" ng-show="!mostrandoEntradas" ng-click="mostrarEntradas()" style="font-weight: 500; font-size: 30px;") Mostrar Entradas
 
-.row(ng-if="mostrandoCompras")
+.row(ng-if="mostrandoEntradas")
 	.col-lg-12
 		.panel.panel-default.panel-hovered.mb20
-			.panel-heading Compras
+			.panel-heading Entradas
 			
 			.panel-body(style="overflow: auto")
 				
 
-				md-button(ng-click="ocultarCompras()" class="md-raised md-primary") Ocultar compras
+				md-button(ng-click="ocultarEntradas()" class="md-raised md-primary") Ocultar Entradas
 
 
-				div(ui-grid="gridCompras" ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-auto-resize style="height: 400px")
+				div(ui-grid="gridEntradas" ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-auto-resize style="height: 400px")
 

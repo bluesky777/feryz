@@ -2,7 +2,7 @@ angular.module('feryzApp')
 
 
 # Configuración principal de nuestra aplicación.
-.config(['$cookiesProvider', '$stateProvider', '$urlRouterProvider', '$httpProvider', '$locationProvider', 'App', 'PERMISSIONS', '$intervalProvider', '$rootScopeProvider', 'USER_ROLES', 'toastrConfig', 'uiSelectConfig', ($cookies, $state, $urlRouter, $httpProvider, $locationProvider, App, PERMISSIONS, $intervalProvider, $rootScopeProvider, USER_ROLES, toastrConfig, uiSelectConfig)->
+.config(['$cookiesProvider', '$stateProvider', '$urlRouterProvider', '$httpProvider', '$locationProvider', 'App', 'PERMISSIONS', '$intervalProvider', '$rootScopeProvider', 'USER_ROLES', 'toastrConfig', 'uiSelectConfig', 'hotkeysProvider', ($cookies, $state, $urlRouter, $httpProvider, $locationProvider, App, PERMISSIONS, $intervalProvider, $rootScopeProvider, USER_ROLES, toastrConfig, uiSelectConfig, hotkeysProvider)->
 
 	#Restangular.setBaseUrl App.Server # Url a la que se harán todas las llamadas.
 
@@ -40,6 +40,12 @@ angular.module('feryzApp')
 
 	uiSelectConfig.theme = 'select2'
 	uiSelectConfig.resetSearchInput = true
+
+
+	#- Configuramos los ShortCuts
+	hotkeysProvider.useNgRoute = false
+	hotkeysProvider.templateHeader = '<h4 class="cfp-hotkeys-title">Accesos de teclado</h4>';
+
 
 
 	#- Definimos los estados

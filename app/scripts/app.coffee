@@ -27,6 +27,7 @@ angular.module('feryzApp', [
   'ngFileUpload'
   'angular-barcode'
   'ui.utils.masks'
+  'cfp.hotkeys'
 ])
 #- Valores que usaremos para nuestro proyecto
 .constant('App', (()->

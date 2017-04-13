@@ -1,0 +1,77 @@
+
+<div class="row">
+  <div class="col-lg-12">
+    <div ng-show="creando" class="panel panel-default panel-hovered mb20">
+      <div style="margin-bottom: 10px;" class="panel-heading">Nuevo inventario</div>
+      <div class="panel-body">
+        <div>
+          <form ng-submit="guardarInventario()">
+            <div class="row">
+              <div class="col-lg-4">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Nombre</label>
+                  <input ng-model="cateNuevo.nombre">
+                </md-input-container>
+              </div>
+            </div>
+            <div class="row">
+              <div style="text-align: center;margin-bottom: 40px" class="col-lg-12">
+                <md-button type="button" ng-click="creando=false" class="md-raised md-default">Cancelar</md-button>
+                <md-button type="submit" ng-disabled="guardando" class="md-raised md-primary">Guardar</md-button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div ng-show="editando" class="panel panel-default panel-hovered mb20">
+      <div style="margin-bottom: 10px;" class="panel-heading">Editar inventario</div>
+      <div class="panel-body">
+        <div ng-show="editando">
+          <form ng-submit="actualizarInventario()">
+            <div class="row">
+              <div class="col-lg-4">
+                <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
+                  <label>Nombre</label>
+                  <input ng-model="cateActualizar.nombre">
+                </md-input-container>
+              </div>
+            </div>
+            <div class="row">
+              <div style="text-align: center;margin-bottom: 40px" class="col-lg-12">
+                <md-button type="button" ng-click="editando=false" class="md-raised md-default">Cancelar</md-button>
+                <md-button type="submit" ng-disabled="guardando" class="md-raised md-primary">Actualizar</md-button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default panel-hovered mb20">
+      <div class="panel-heading">Inventarios</div>
+      <div style="overflow: auto" class="panel-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <md-button ng-click="crearInventario()" ng-if="hasRole([USER_ROLES.administrador, USER_ROLES.tecnico])" class="md-raised md-primary">Nuevo Inventario</md-button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div multiple style="width: 130px; height: 200px; border: 1px solid #666; overflow: auto">
+              <div ng-repeat="inventario in inventarios" style="padding: 10px" ng-class="{ 'inv-seleccionado': inventario.seleccionado }" ng-click="seleccionarInventario(inventario)"><span ng-if="inventario.actual" style="font-weight: 600; text-decoration: underline;">{{ inventario.fecha }}</span><span ng-if="!inventario.actual">{{ inventario.fecha }}</span></div>
+            </div>
+          </div>
+        </div>
+        <div ui-grid="opcionesGrid" ui-grid-edit ui-grid-resize-columns ui-grid-cellnav style="height: 600px"></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -8,13 +8,69 @@ header.hidden-print.site-head.fixedHeader#site-head(ng-class="{'nav-expand': get
 .main-container.clearfix(ng-class="{'nav-expand': getNavFull(), 'nav-horizontal': navHorizontal}")
 
 	aside.hidden-print.nav-wrap.ps-container.ps-active-y#site-nav(ng-class="{'nav-expand': getNavFull(), 'nav-offcanvas': navOffCanvas}" 
-		custom-scrollbar="" ng-include=" 'views/panel/nav.tpl.html' ")
+		custom-scrollbar="" ng-include=" 'views/panel/nav.tpl.html' " style="overflow-y: auto")
 		.nav-head
 
 	div.content-container.fixedHeader.page-wrap(ng-class="{'nav-expand': getNavFull(), 'fixedHeader': fixedHeader}" id="content")
 		.page.page-dashboard
 
 			div(ui-view="contenido_panel" style="overflow: auto")
+
+				.row(ng-if="!mostrandoEntradas" )
+					.col-lg-12
+						.panel.panel-default.panel-hovered.mb20
+							.panel-heading Inicio 
+								
+							.panel-body(style="overflow: auto")
+								div(layout="row")
+
+									div(flex layout="row" layout-align="center center" style="padding: 20px 10px;")
+										span Edita los    
+										a.btn.btn-default(href="" ui-sref="panel.inventarios" md-ink-ripple="") 
+											|  Inventarios  
+									
+									md-divider
+									div(flex layout="row" layout-align="center center" style="padding: 20px 10px;")
+										span Edita las 
+										a.btn.btn-default(href="" ui-sref="panel.configuraciones" md-ink-ripple="") 
+											i.fa.fa-cog  
+											|  Configuraciones
+
+								md-divider 
+								
+								div(layout="row")
+
+									div(flex)
+										div(style="padding: 20px 10px;")
+											span Edita los proveedores 
+											a.btn.btn-default(href="" ui-sref="panel.proveedores" md-ink-ripple="") 
+												i.fa.fa-user-plus 
+												|  Proveedores
+										
+										md-divider
+										
+										div(style="padding: 20px 10px;")
+											span Edita los clientes 
+											a.btn.btn-default(href="" ui-sref="panel.clientes" md-ink-ripple="") 
+												i.fa.fa-user-circle-o 
+												|  Clientes
+										
+									md-divider 
+
+									div(flex layout="row")
+										div(flex layout="row" layout-align="center center" style="padding: 20px 10px;")
+											span Ir a  
+											a.btn.btn-default(href="" ui-sref="panel.categorias" md-ink-ripple="") 
+												i.fa.fa-stack-overflow
+												|  Categorías
+										
+										md-divider
+										div(flex layout="row" layout-align="center center" style="padding: 20px 10px;")
+											span Edita las 
+											a.btn.btn-default(href="" ui-sref="panel.ciudades" md-ink-ripple="") 
+												i.fa.fa-flag  
+												|  Ciudades
+
 
 
 

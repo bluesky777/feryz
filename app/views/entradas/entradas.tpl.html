@@ -1,18 +1,18 @@
 
-<div ng-if="!mostrandoCompras" class="row">
+<div ng-if="!mostrandoEntradas" class="row">
   <div class="col-lg-12">
     <div class="panel panel-default panel-hovered mb20">
-      <div class="panel-heading">Nueva compra</div>
+      <div class="panel-heading">Nueva entrada <span ng-show="EntSinGuardar.length &gt; 1"><span ng-repeat="entrad in EntSinGuardar" uib-tooltip="Entradas sin guardar" tooltip-append-to-body="true"> <a href="" style="color: black" ng-show="$index == indiceEnt &amp;&amp; entrad.descartada != true" ng-click="setEntradaSinGuardar($index)">{{ $index+1 }} </a><a href="" ng-show="$index != indiceEnt &amp;&amp; entrad.descartada != true" ng-click="setEntradaSinGuardar($index)">{{ $index+1 }}  </a><a href="" style="color: white" ng-show="entrad.descartada == true">{{ $index+1 }}  </a></span><a href="" ng-click="nuevaEntrada()" uib-tooltip="Nueva entrada" tooltip-append-to-body="true" style="font-size: 14pt"> +</a><a href="" ng-click="descartarEntrada()" uib-tooltip="Descartar entrada" tooltip-append-to-body="true" style="font-size: 11pt; color: red;"> X</a></span><span ng-hide="EntSinGuardar.length &gt; 1"><a href="" ng-click="nuevaEntrada()" uib-tooltip="Nueva entrada" tooltip-append-to-body="true" style="font-size: 14pt"> +</a></span></div>
       <div style="overflow: auto" class="panel-body">
         <div class="row">
           <div style="margin-bottom: 12px;" class="form-group col-lg-2 col-sm-4 col-xs-12">
             <div class="controls">
               <div class="input-group"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                <input id="fecha-compra-new" type="text" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="compraNueva.fecha" is-open="data.isOpenNew" ng-click="data.isOpenNew = true" max-date="'2030-12-12'" datepicker-options="dateOptions" close-text="Aceptar" current-text="Hoy" clear-text="Borrar" placeholder="Fecha" class="form-control active">
+                <input id="fecha-entrada-new" type="text" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="entradaNueva.fecha" is-open="data.isOpenNew" ng-click="data.isOpenNew = true" max-date="'2030-12-12'" datepicker-options="dateOptions" close-text="Aceptar" current-text="Hoy" clear-text="Borrar" placeholder="Fecha" class="form-control active">
               </div>
             </div>
           </div>
-          <div style="margin-top: 20px;" class="col-lg-10 col-sm-8 col-xs-12 formato-total"><span style="background-color: #337ab7; padding: 5px; border-radius:4px; color:white">{{totalCompraValue(opcionesGrid.data)}}</span><a ng-click="conIva=!conIva" style="position: relative" href=""><span ng-show="conIva" style="position: absolute; top: -30px; right: 0; width: 200px; text-decoration: underline;">
+          <div style="margin-top: 20px;" class="col-lg-10 col-sm-8 col-xs-12 formato-total"><span style="background-color: #337ab7; padding: 5px; border-radius:4px; color:white">{{totalEntradaValue(opcionesGrid.data)}}</span><a id="focusOnConSinIva" ng-click="toggleConIva()" style="position: relative" href="" focus-me="focusOnConSinIva"><span ng-show="conIva" style="position: absolute; top: -30px; right: 0; width: 200px; text-decoration: underline;">
                  
                 Con iva</span><span ng-hide="conIva" style="position: absolute; top: -30px; right: 0; width: 200px; text-decoration: underline;">
                  
@@ -21,7 +21,7 @@
         <div class="row">
           <div style="margin-bottom: 10px;" class="form-group col-lg-9 col-sm-8 col-xs-12">
             <label style="font-weight: 400; margin-bottom:0">Proveedor</label>
-            <ui-select ng-model="compraNueva.proveedor" style="width: 100%;" autofocus on-select="proveedorSeleccionado($item, $model)">
+            <ui-select ng-model="entradaNueva.proveedor" style="width: 100%;" autofocus on-select="proveedorSeleccionado($item, $model)">
               <ui-select-match placeholder="Proveedor" allow-clear="true">{{$select.selected.nombre}}</ui-select-match>
               <ui-select-choices repeat="proveedor in proveedores | filter: $select.search">
                 <div ng-bind-html="proveedor.nombre | highlight: $select.search"></div>
@@ -29,8 +29,8 @@
             </ui-select>
           </div>
           <div class="col-lg-3 col-sm-4 col-xs-12">
-            <md-button type="button" ng-click="guardarCompra()" style="margin: 8px 0;" class="md-raised md-success"> <i class="fa fa-save"> </i>  Guardar</md-button>
-            <md-button type="button" ng-click="guardarCompraImprimir()" style="margin: 8px 0;" class="md-raised md-success"> <i class="fa fa-print"> </i>  e imprimir</md-button>
+            <md-button type="button" ng-click="guardarEntrada()" style="margin: 8px 0;" class="md-raised md-success"> <i class="fa fa-save"> </i>  Guardar</md-button>
+            <md-button type="button" ng-click="guardarEntradaImprimir()" style="margin: 8px 0;" class="md-raised md-success"> <i class="fa fa-print"> </i>  e imprimir</md-button>
           </div>
         </div>
         <div class="row">
@@ -54,24 +54,24 @@
           </div>
         </div>
         <div style="margin-top: 10px;" class="row">
-          <div class="col-lg-2 col-sm-3 col-xs-12"></div>
           <div style="height: 40px;" class="col-lg-2 col-sm-3 col-xs-12">
-            <div ng-click="clickPrecioVentaConIva(detalle.precio_venta + (detalle.precio_venta * detalle.iva / 100))" style="color: #444" ng-show="mostrarPrecioVentaConIva" uib-tooltip="Click para asignar" class="pointer">Con iva: {{ detalle.precio_venta + (detalle.precio_venta * detalle.iva / 100) | currency }}</div>
+            <div ng-click="clickPrecioVentaConIva(detalle.precio_venta + (detalle.precio_venta * detalle.iva / 100))" style="color: #444" ng-show="mostrarPrecioVentaConIva" uib-tooltip="Click para asignar" class="pointer">Con iva: {{ detalle.precio_venta + (detalle.precio_venta * detalle.iva / 100) | currency:undefined:USER.deci_venta }}</div>
           </div>
+          <div class="col-lg-2 col-sm-3 col-xs-12"></div>
           <div style="padding: 0" class="col-lg-1 col-sm-1 col-xs-12"></div>
           <div style="padding: 0" class="col-lg-1 col-sm-1 col-xs-12"></div>
         </div>
         <div style="margin-top: 15px;" class="row">
           <div class="col-lg-2 col-sm-3 col-xs-12">
             <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-              <label>Precio compra</label>
-              <input ng-model="detalle.precio_compra" ui-money-mask maxlength="20" focus-me="focusOnPrecioCompra">
+              <label>Precio de coste</label>
+              <input ng-model="detalle.precio_costo" ui-money-mask="USER.deci_costo" maxlength="20" focus-me="focusOnPrecioCosto">
             </md-input-container>
           </div>
           <div class="col-lg-2 col-sm-3 col-xs-12">
             <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
               <label>Precio venta</label>
-              <input ng-model="detalle.precio_venta" ui-money-mask maxlength="20" focus-me="focusOnPrecioVenta">
+              <input ng-model="detalle.precio_venta" ui-money-mask="USER.deci_venta" maxlength="20" focus-me="focusOnPrecioVenta">
             </md-input-container>
           </div>
           <div style="padding: 0" class="col-lg-1 col-sm-1 col-xs-12">
@@ -100,14 +100,14 @@
       </div>
     </div>
   </div>
-</div><a href="" ng-show="!mostrandoCompras" ng-click="mostrarCompras()" style="font-weight: 500; font-size: 30px;">Mostrar compras</a>
-<div ng-if="mostrandoCompras" class="row">
+</div><a href="" ng-show="!mostrandoEntradas" ng-click="mostrarEntradas()" style="font-weight: 500; font-size: 30px;">Mostrar Entradas</a>
+<div ng-if="mostrandoEntradas" class="row">
   <div class="col-lg-12">
     <div class="panel panel-default panel-hovered mb20">
-      <div class="panel-heading">Compras</div>
+      <div class="panel-heading">Entradas</div>
       <div style="overflow: auto" class="panel-body">
-        <md-button ng-click="ocultarCompras()" class="md-raised md-primary">Ocultar compras</md-button>
-        <div ui-grid="gridCompras" ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-auto-resize style="height: 400px"></div>
+        <md-button ng-click="ocultarEntradas()" class="md-raised md-primary">Ocultar Entradas</md-button>
+        <div ui-grid="gridEntradas" ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-auto-resize style="height: 400px"></div>
       </div>
     </div>
   </div>

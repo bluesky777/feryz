@@ -2,7 +2,7 @@
 
 angular.module('feryzApp')
 
-.controller('ApplicationController', ['$scope', 'USER_ROLES', 'AuthService', 'toastr', '$state', '$rootScope', '$http', '$filter', ($scope, USER_ROLES, AuthService, toastr, $state, $rootScope, $http, $filter)->
+.controller('ApplicationController', ['$scope', 'USER_ROLES', 'AuthService', 'toastr', '$state', '$rootScope', '$http', '$filter', 'Local', ($scope, USER_ROLES, AuthService, toastr, $state, $rootScope, $http, $filter, Local)->
 
 
 	$scope.isAuthorized = AuthService.isAuthorized
@@ -11,6 +11,8 @@ angular.module('feryzApp')
 	$scope.USER_ROLES = USER_ROLES
 
 	$scope.isLoginPage = false
+
+	Local.createTables()
 
 	$scope.main = 
 		skin: 21

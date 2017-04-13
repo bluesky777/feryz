@@ -1,10 +1,12 @@
 angular.module('feryzApp')
 
-.controller('ComprasCtrl', ['$scope', '$http', 'App', 'USER_ROLES', '$filter', 'toastr', 'AuthService', '$uibModal', '$timeout', ($scope, $http, App, USER_ROLES, $filter, toastr, AuthService, $uibModal, $timeout) ->
+.controller('EntradasCtrl', ['$scope', '$http', 'App', 'USER_ROLES', '$filter', 'toastr', 'AuthService', '$uibModal', '$timeout', 'Local', 'hotkeys', ($scope, $http, App, USER_ROLES, $filter, toastr, AuthService, $uibModal, $timeout, Local, hotkeys) ->
 	
 	AuthService.verificar_acceso()
 	$scope.hasRole 		= AuthService.hasRole
 	$scope.USER_ROLES 	= USER_ROLES
+	$scope.USER 		= $scope.USER # para evitar la búscada en scope padre
+	USER 				= $scope.USER # para usarlo aquí sin el scope
 
 	$scope.creando 		= false
 	$scope.editando 	= false
@@ -13,16 +15,20 @@ angular.module('feryzApp')
 	$scope.conIva 		= true
 	$scope.altura 		= 400
 
+	$scope.focusOnConSinIva = false
+
 	$scope.mostrarPrecioVentaConIva = true
-	$scope.compraNueva 		= { fecha: new Date(), proveedor: undefined }
-	$scope.detalle 			= { precio_venta: 0, precio_compra: 0, cantidad: 1, iva: 0, codigo_barras: undefined }
-	$scope.detalleT 		= { precio_venta: 0, precio_compra: 0, cantidad: 1, iva: 0, codigo_barras: undefined }
+	$scope.entradaNueva 	= { fecha: new Date(), proveedor: undefined, productos_agregados: [] }
+	$scope.entradaNuevaT 	= { fecha: new Date(), proveedor: undefined, productos_agregados: [] } # Para cuando tenga que crear una nueva entrada vacía
+	$scope.detalle 			= { precio_venta: 0, precio_costo: 0, cantidad: 1, iva: 0, codigo_barras: undefined }
+	$scope.detalleT 		= { precio_venta: 0, precio_costo: 0, cantidad: 1, iva: 0, codigo_barras: undefined }
+	$scope.EntSinGuardar 	= [] # Todas las entradas que NO están en la nube
+	$scope.indiceEnt		= 0 # Indica la entrada sin guardar que está seleccionada
 
 	# Para el date
 	$scope.data = {} 
 	$scope.dateOptions = 
 		formatYear: 'yy'
-	#$scope.compraNueva.fecha = new Date()
 
 
 	$scope.ocultarNav() # Oculto la Navbar
@@ -32,15 +38,14 @@ angular.module('feryzApp')
 	$scope.proveedores 			= []
 	$scope.categorias 			= []
 	$scope.codigos_barras 		= []
-	$scope.productos_agregados 	= []
 
 
-	$scope.mostrandoCompras = false
+	$scope.mostrandoEntrada = false
 
 	
 	$scope.traerDatos = ()->
 
-		$http.put('::compras/datos').then((r)->
+		$http.put('::entradas/datos').then((r)->
 			r = r.data
 			$scope.productos 	= r.productos
 			$scope.proveedores 	= r.proveedores
@@ -55,46 +60,161 @@ angular.module('feryzApp')
 	$scope.traerDatos()
 
 
+
+	verificarEntidadesGuardadas = ()->
+
+		Local.getEntradasSinGuardar().then((r)->
+			
+			if r.length > 0
+				$scope.EntSinGuardar = r
+				console.log $scope.EntSinGuardar
+
+				for entrada in $scope.EntSinGuardar
+					entrada.fecha = new Date(entrada.fecha + ' 00:00:00')
+
+				$scope.setEntradaSinGuardar($scope.EntSinGuardar.length-1)
+			else
+				Local.insertEntrada().then((newEnt)->
+					verificarEntidadesGuardadas()
+				, (r2)->
+					console.log r2
+				)
+
+		, (r2)->
+			console.log r2, 'pailas'
+		)
+
+	verificarEntidadesGuardadas()
+
+
+	$scope.nuevaEntrada = ()->
+		Local.insertEntrada().then((newEnt)->
+			newEnt.fecha = new Date(newEnt.fecha + ' 00:00:00')
+			$scope.EntSinGuardar.push newEnt
+			$scope.setEntradaSinGuardar($scope.EntSinGuardar.length-1)
+		, (r2)->
+			console.log r2
+		)
+
+	$scope.descartarEntrada = (event, hotKey, entrada)->
+		if entrada == 'undefined' or entrada == undefined
+			entrada = $scope.EntSinGuardar[ $scope.indiceEnt ]
+		
+		descartar = true
+		
+		if entrada.productos_agregados.length > 0 
+			descartar = confirm('¿Seguro quiere descartar esta entrada?')
+
+		if descartar
+			Local.deleteEntrada(entrada.rowid).then((r)->
+				entrada.descartada = true
+				$scope.setEntradaSinGuardar()
+			, (r2)->
+				console.log r2
+			)
+
+	$scope.setEntradaSinGuardar = (indice)->
+		if indice == 0 or indice > 0
+			$scope.indiceEnt 	= indice
+		else
+			$scope.indiceEnt++
+			if $scope.indiceEnt > ($scope.EntSinGuardar.length - 1)
+				$scope.indiceEnt = 0
+		
+		$scope.entradaNueva = $scope.EntSinGuardar[$scope.indiceEnt]
+		$scope.opcionesGrid.data = $scope.entradaNueva.productos_agregados
+		console.log $scope.entradaNueva
+		###
+		# PARA PRUEBAS, QUITAR!
+		$scope.entradaNueva.productos_agregados = [
+			{cantidad:16, iva:34, nombre: "GALON VINILO BLANCO TIPO 1", precio_costo: 14000, precio_venta: 30000, 			proveedor_id:2, producto_id:1}
+			{cantidad:30, iva:19, nombre: "UNION PRESION PVC 1/2", precio_costo: 53000, precio_venta: 76000, 				proveedor_id:2, producto_id:2}
+			{cantidad:27, iva:19, nombre: "UNION PRESION PVC 1", precio_costo: 80000, precio_venta: 160000, 				proveedor_id:2, producto_id:4}
+			{cantidad:60, iva:19, nombre: "ADAPTADOR HEMBRA PRESION PVC 1/2", precio_costo: 80000, precio_venta: 160000, 	proveedor_id:2, producto_id:18}
+		]
+		###
+
+
+
+	# Accesos rápidos de teclado
+	hotkeys.bindTo($scope)
+	.add({
+		combo: 'n',
+		description: 'Nueva transacción de Entrada',
+		callback: $scope.nuevaEntrada
+	})
+	.add({
+		combo: 'f2',
+		description: 'Ir a la siguiente Entrada',
+		callback: $scope.setEntradaSinGuardar
+	})
+	.add({
+		combo: 'esc',
+		description: 'Salir de input',
+		allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
+		callback: (event, hotkey)->
+			angular.element('#focusOnConSinIva').trigger('focus');
+
+	})
+	.add({
+		combo: 'ctrl+d',
+		description: 'Descartar entrada',
+		allowIn: ['INPUT', 'SELECT', 'TEXTAREA'],
+		callback: $scope.descartarEntrada
+	});
+
+
+
+
+	
+
+
 	$scope.totalDetalle = (primero)->
 		if primero
 			primero = false
 			return 0
 		else
-			res = $scope.detalle.cantidad * $scope.detalle.precio_compra
-			cres = $filter('currency')( res )
+			res = $scope.detalle.cantidad * $scope.detalle.precio_costo
+			cres = $filter('currency')( res, undefined, USER.deci_total )
 			return cres
 	$scope.totalDetalle(true)
 
 
-	$scope.totalCompra = (filas)->
+	$scope.totalEntrada = (filas)->
 		sum_sin = 0
 		sum_con = 0
 
 		for fila in filas
-			precio 	= fila.entity.precio_compra
+			precio 	= fila.entity.precio_entrada
 			sum_sin = sum_sin + (fila.entity.cantidad * precio)
 			sum_con = sum_con + (fila.entity.cantidad * (precio + precio * (fila.entity.iva/100)))
 
-		total_sin_iva = $filter('currency')(sum_sin)
-		total_con_iva = $filter('currency')(sum_con)
+		total_sin_iva = $filter('currency')(sum_sin, undefined, USER.deci_total)
+		total_con_iva = $filter('currency')(sum_con, undefined, USER.deci_total)
 
 		diagn = 'Tot Iva: ' + total_con_iva + ' - Sin Iva: ' + total_sin_iva
 
 		return diagn
 
 
-	$scope.totalCompraValue = (filas)->
-		sum = 0
-		for fila in filas
-			precio 	= fila.precio_compra
-			if $scope.conIva
-				precio = fila.precio_compra + fila.precio_compra * (fila.iva/100)
+	$scope.totalEntradaValue = (filas)->
+		if filas
+			sum = 0
+			for fila in filas
+				precio 	= fila.precio_costo
+				if $scope.conIva
+					precio = fila.precio_costo + fila.precio_costo * (fila.iva/100)
 
-			sum = sum + (fila.cantidad * precio)
+				sum = sum + (fila.cantidad * precio)
 
-		total = $filter('currency')(sum)
+			total = $filter('currency')(sum, undefined, USER.deci_total)
 
-		return total
+			return total
+		else
+			return 0
+
+	$scope.toggleConIva = ()->
+		$scope.conIva = !$scope.conIva
 
 
 
@@ -108,7 +228,7 @@ angular.module('feryzApp')
 		if $item
 			
 			$timeout(()->
-				$scope.focusOnPrecioCompra = true
+				$scope.focusOnPrecioCosto = true
 			, 100)
 
 			produc = $filter('filter')($scope.productos, {id: $item.id}, true )
@@ -133,7 +253,7 @@ angular.module('feryzApp')
 			$scope.detalle.producto_id 	= $item.id
 
 			$timeout(()->
-				$scope.focusOnPrecioCompra = true
+				$scope.focusOnPrecioCosto = true
 			, 100)
 
 			codigo = $filter('filter')($scope.codigos_barras, {id: $item.id}, true )
@@ -169,47 +289,47 @@ angular.module('feryzApp')
 		, 1000)
 
 
-	# Agregar producto a la grilla (a la compra)
+	# Agregar producto a la grilla (a la entrada)
 	$scope.agregarProducto = ()->
 		if $scope.detalle.producto
 			$scope.agregando_producto = true
 			otro = {}
 			angular.copy $scope.detalle, otro 
-			$scope.productos_agregados.push otro
+			$scope.entradaNueva.productos_agregados.push otro
 
-			$scope.opcionesGrid.data = $scope.productos_agregados
+			$scope.opcionesGrid.data = $scope.entradaNueva.productos_agregados
 
 			$scope.detalleT.producto_id 	= $scope.detalle.producto.id
 
 			angular.copy $scope.detalleT, $scope.detalle
 			$scope.agregando_producto = false
 			
-			if $scope.productos_agregados.length > 10
+			if $scope.entradaNueva.productos_agregados.length > 10
 				$scope.altura = 600
 		else
 			toastr.warning 'Debe elegir un producto'
 			$scope.agregando_producto = false
 		
 
-	# Quitar producto de la compra
+	# Quitar producto de la entrada
 	$scope.quitarProducto = (prod)->
 
-		$scope.productos_agregados = $filter('filter')($scope.productos_agregados, {producto_id: '!'+prod.producto_id})
-		$scope.opcionesGrid.data = $scope.productos_agregados
+		$scope.entradaNueva.productos_agregados = $filter('filter')($scope.entradaNueva.productos_agregados, {producto_id: '!'+prod.producto_id})
+		$scope.opcionesGrid.data = $scope.entradaNueva.productos_agregados
 		
-		if $scope.productos_agregados.length < 11
+		if $scope.entradaNueva.productos_agregados.length < 11
 			$scope.altura = 400
 		
 
 
 	# Guardar en el servidor
-	$scope.guardarCompra = ()->
-		if $scope.compraNueva.proveedor
+	$scope.guardarEntradas = ()->
+		if $scope.entradasNueva.proveedor
 
-			$http.post('::compras/guardar', {productos: $scope.productos_agregados, compra: $scope.compraNueva }).then((r)->
+			$http.post('::entradas/guardar', {productos: $scope.entradaNueva.productos_agregados, compra: $scope.compraNueva }).then((r)->
 				toastr.success 'Guardada'
 			, (r2)->
-				toastr.error 'No se pudo guardar la compra'
+				toastr.error 'No se pudo guardar la entrada'
 			)
 		else
 			toastr.warning 'Debes elegir el proveedor'
@@ -233,11 +353,11 @@ angular.module('feryzApp')
 			{field: 'No', width: 60, enableCellEdit: false, cellTemplate: '<div class="ui-grid-cell-contents">{{rowRenderIndex + 1}}</div>'}
 			{field: 'Ed', displayName: '', cellTemplate: btn2, width: 35, enableCellEdit: false, enableFiltering: false }
 			{field: 'nombre', displayName: 'Producto', minWidth: 270 }
-			{field: 'iva', type: 'text', cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.iva}}%</div>', editableCellTemplate: ivaEdit, width: 50 }
-			{field: 'precio_compra', displayName: '$Compra', cellFilter: 'currency', cellClass: 'grid-align-right', minWidth: 80}
-			{field: 'precio_venta', displayName: '$Venta', cellFilter: 'currency', cellClass: 'grid-align-right', minWidth: 70}
+			{field: 'iva', type: 'text', cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.iva | number:0}}%</div>', editableCellTemplate: ivaEdit, width: 50 }
+			{field: 'precio_costo', displayName: '$Costo', cellFilter: 'currency:undefined:grid.appScope.USER.deci_entrada', cellClass: 'grid-align-right', minWidth: 80}
+			{field: 'precio_venta', displayName: '$Venta', cellFilter: 'currency:undefined:grid.appScope.USER.deci_salida', cellClass: 'grid-align-right', minWidth: 70}
 			{field: 'cantidad', displayName: 'Cant', enableSorting: true, cellFilter: 'number', minWidth: 50, maxWidth: 70}
-			{displayName: 'Total', name: 'Total', enableSorting: true, enableCellEdit: false, cellFilter: 'number', minWidth: 100, cellTemplate: '<div class="ui-grid-cell-contents" style="text-align: right">{{row.entity.precio_compra * row.entity.cantidad | currency}}</div>' }
+			{displayName: 'Total', name: 'Total', enableSorting: true, enableCellEdit: false, cellFilter: 'number', minWidth: 100, cellTemplate: '<div class="ui-grid-cell-contents" style="text-align: right">{{row.entity.precio_costo * row.entity.cantidad | currency:undefined:grid.appScope.USER.deci_total}}</div>' }
 		]
 		onRegisterApi: ( gridApi ) ->
 			$scope.gridApi = gridApi
@@ -256,15 +376,7 @@ angular.module('feryzApp')
 	}
 
 
-	# PARA PRUEBAS, QUITAR!
-	$scope.productos_agregados = [
-		{cantidad:16, iva:34, nombre: "GALON VINILO BLANCO TIPO 1", precio_compra: 14000, precio_venta: 30000, 			proveedor_id:2, producto_id:1}
-		{cantidad:30, iva:19, nombre: "UNION PRESION PVC 1/2", precio_compra: 53000, precio_venta: 76000, 				proveedor_id:2, producto_id:2}
-		{cantidad:27, iva:19, nombre: "UNION PRESION PVC 1", precio_compra: 80000, precio_venta: 160000, 				proveedor_id:2, producto_id:4}
-		{cantidad:60, iva:19, nombre: "ADAPTADOR HEMBRA PRESION PVC 1/2", precio_compra: 80000, precio_venta: 160000, 	proveedor_id:2, producto_id:18}
-	]
-	$scope.opcionesGrid.data = $scope.productos_agregados
-	#
+	
 
 
 	$scope.guardarToggleActivo = (rowEntity)->
@@ -281,17 +393,17 @@ angular.module('feryzApp')
 
 
 
-	# LÓGICA PARA LAS COMPRAS
+	# LÓGICA PARA LAS Entradas
 
 
-	$scope.gridCompras = {
+	$scope.gridEntradas = {
 		showGridFooter: true,
 		enableSorting: false,
 		enableColumnMenus: false,
 		enableFiltering: true,
 		enableCellEdit: true,
 		enableCellEditOnFocus: true,
-		gridFooterTemplate: '<div class="ui-grid-footer-info ui-grid-grid-footer row"><span class="col-lg-4 col-sm-4">Productos: {{grid.rows.length}}<span ng-if="grid.renderContainers.body.visibleRowCache.length !== grid.rows.length" class="ngLabel"> (mostrando {{grid.renderContainers.body.visibleRowCache.length}})</span></span>   <span class="col-lg-8 col-sm-8 formato-total">{{grid.appScope.totalCompra(grid.rows)}}</span></div>'
+		gridFooterTemplate: '<div class="ui-grid-footer-info ui-grid-grid-footer row"><span class="col-lg-4 col-sm-4">Productos: {{grid.rows.length}}<span ng-if="grid.renderContainers.body.visibleRowCache.length !== grid.rows.length" class="ngLabel"> (mostrando {{grid.renderContainers.body.visibleRowCache.length}})</span></span>   <span class="col-lg-8 col-sm-8 formato-total">{{grid.appScope.totalEntrada(grid.rows)}}</span></div>'
 		columnDefs: [
 			{field: 'id', width: 60, enableCellEdit: false}
 			{field: 'Ed', displayName: '', cellTemplate: btn2, width: 35, enableCellEdit: false, enableFiltering: false }
@@ -317,23 +429,23 @@ angular.module('feryzApp')
 	}
 
 
-	$scope.mostrarCompras = ()->
-		$http.put('::compras/all').then((r)->
-			$scope.gridCompras.data = r.data.compras
-			$scope.mostrandoCompras = true
+	$scope.mostrarEntradas = ()->
+		$http.put('::entradas/all').then((r)->
+			$scope.gridEntradas.data = r.data.entradas
+			$scope.mostrandoEntradas = true
 		, (r2)->
-			toastr.error 'No se pudo traer las compras'
+			toastr.error 'No se pudo traer las Entradas'
 		)
 	
-	$scope.ocultarCompras = ()->
-		$scope.mostrandoCompras = false
+	$scope.ocultarEntradas = ()->
+		$scope.mostrandoEntradas = false
 
 
 
 
 ])
 
-.controller('RemoveCompraCtrl', ['$scope', '$uibModalInstance', 'Producto', '$http', 'toastr', ($scope, $modalInstance, Producto, $http, toastr)->
+.controller('RemoveEntradaCtrl', ['$scope', '$uibModalInstance', 'Producto', '$http', 'toastr', ($scope, $modalInstance, Producto, $http, toastr)->
 	$scope.Producto = Producto
 
 	$scope.ok = ()->

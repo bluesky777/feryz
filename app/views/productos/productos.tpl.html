@@ -47,14 +47,14 @@
             <div class="row">
               <div class="col-lg-4 col-sm-6 col-xs-12">
                 <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Precio compra $</label>
-                  <input ng-model="prodNuevo.precio_compra" type="text" ui-money-mask maxlength="20">
+                  <label>Precio costo $</label>
+                  <input ng-model="prodNuevo.precio_costo" type="text" ui-money-mask="USER.deci_entrada" maxlength="20">
                 </md-input-container>
               </div>
               <div class="col-lg-4 col-sm-6 col-xs-12">
                 <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Precio venta $</label>
-                  <input ng-model="prodNuevo.precio_venta" type="text" ui-money-mask maxlength="20">
+                  <input ng-model="prodNuevo.precio_venta" type="text" ui-money-mask="USER.deci_salida" maxlength="20">
                 </md-input-container>
               </div>
               <div class="col-lg-4 col-sm-12 col-xs-12">
@@ -144,14 +144,14 @@
             <div class="row">
               <div class="col-lg-4 col-sm-6 col-xs-12">
                 <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
-                  <label>Precio compra $</label>
-                  <input ng-model="prodActualizar.precio_compra" type="text" ui-money-mask maxlength="20">
+                  <label>Precio costo $</label>
+                  <input ng-model="prodActualizar.precio_costo" type="text" ui-money-mask="USER.deci_entrada" maxlength="20">
                 </md-input-container>
               </div>
               <div class="col-lg-4 col-sm-6 col-xs-12">
                 <md-input-container flex-gt-sm style="margin: 0!important; padding-bottom: 0!important" class="md-block">
                   <label>Precio venta $</label>
-                  <input ng-model="prodActualizar.precio_venta" type="text" ui-money-mask maxlength="20">
+                  <input ng-model="prodActualizar.precio_venta" type="text" ui-money-mask="USER.deci_salida" maxlength="20">
                 </md-input-container>
               </div>
               <div class="col-lg-4 col-sm-12 col-xs-12">
