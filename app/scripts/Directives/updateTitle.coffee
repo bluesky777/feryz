@@ -6,13 +6,13 @@ angular.module('feryzApp')
 
 				listener = (event, toState, toParams)->
 
-					title = 'MyVc'
+					title = 'Feryz'
 					if toState.data and toState.data.pageTitle
 						title = toState.data.pageTitle
 
 					if toParams
 						if toParams.username
-							title = toParams.username + ' - MyVc'
+							title = toParams.username + ' - Feryz'
 
 					$timeout(()->
 						element.text(title)

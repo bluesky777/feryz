@@ -1,7 +1,7 @@
 angular.module('feryzApp')
 
 .controller('ProductosCtrl', ['$scope', '$http', 'App', 'USER_ROLES', '$filter', 'toastr', 'AuthService', '$uibModal', '$timeout', '$q', 'removeAccents', ($scope, $http, App, USER_ROLES, $filter, toastr, AuthService, $uibModal, $timeout, $q, removeAccents) ->
-	
+
 	AuthService.verificar_acceso()
 	$scope.hasRole 		= AuthService.hasRole
 	$scope.USER_ROLES 	= USER_ROLES
@@ -19,7 +19,7 @@ angular.module('feryzApp')
 		{unidad: 'rollos'}
 	]
 	$scope.categorias = []
-	
+
 
 	$scope.prodNuevo = { unidad_medida: {unidad: '-'}, iva: 0, activo: 1, cantidad_minima: 5 }
 
@@ -67,14 +67,14 @@ angular.module('feryzApp')
 			$scope.guardando = false
 			toastr.error 'No se pudo crear Producto', 'Error'
 		)
-		
+
 
 	$scope.eliminarProducto = (prod)->
-		
+
 		modalInstance = $uibModal.open({
 			templateUrl: '==productos/removeProducto.tpl.html'
 			controller: 'RemoveProductoCtrl'
-			resolve: 
+			resolve:
 				Producto: ()->
 					prod
 		})
@@ -120,10 +120,10 @@ angular.module('feryzApp')
 
 		d.resolve res
 		promesa = d.promise
-		
+
 		return promesa
 
-	
+
 	$scope.traerDatos = ()->
 
 		$http.put('::productos/datos').then((r)->
@@ -148,6 +148,12 @@ angular.module('feryzApp')
 		showGridFooter: true,
 		enableSorting: true,
 		enableFiltering: true,
+		exporterSuppressColumns: [ 'Edición' ],
+		exporterCsvColumnSeparator: ';',
+		exporterMenuPdf: false,
+		exporterMenuExcel: false,
+		exporterCsvFilename: "Productos - Feryz.csv",
+		enableGridMenu: true,
 		enableCellEdit: $scope.isAdmin,
 		enableCellEditOnFocus: true,
 		columnDefs: [
@@ -162,16 +168,32 @@ angular.module('feryzApp')
 					return actual.length > 0;
 			}
 			editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownIdLabel: 'id', editDropdownValueLabel: 'nombre', enableCellEditOnFocus: true }
-			
+
 			{field: 'cantidad_minima', displayName: 'Min', cellFilter: 'number'}
 			{field: 'iva', cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.iva | number:0}}%</div>', editableCellTemplate: ivaEdit }
 			{field: 'activo', type: 'boolean', width: 60, cellTemplate: '<input type="checkbox" ng-model="row.entity.activo" ng-true-value="1" ng-false-value="0" ng-change="grid.appScope.guardarToggleActivo(row.entity)" ng-disabled="!grid.appScope.isAdmin">'}
 			{field: 'precio_venta',	displayName: 'Prec venta', cellFilter: 'currency:undefined:grid.appScope.USER.deci_salida', minWidth: 90}
-		]
+		],
+		exporterFieldCallback: ( grid, row, col, input )->
+			if col.name == 'categoria_id'
+				categ = $filter('filter')($scope.categorias, {id: input}, true)[0]
+				if categ
+					return  categ.nombre
+				else
+					return ''
+				#return row.entity.ciudad_nac_nombre
+			if( col.name == 'activo' )
+				if input
+					return 'Si'
+				else
+					return 'No'
+
+			return input;
+		,
 		onRegisterApi: ( gridApi ) ->
 			$scope.gridApi = gridApi
 			gridApi.edit.on.afterCellEdit($scope, (rowEntity, colDef, newValue, oldValue)->
-				
+
 				if newValue != oldValue
 
 					$http.put('::productos/actualizar/' + rowEntity.id, rowEntity).then((r)->
@@ -195,7 +217,7 @@ angular.module('feryzApp')
 			)
 		else
 			toastr.warning 'No tienes permiso para modificar productos', 'Lo sentimos'
-	
+
 
 ])
 

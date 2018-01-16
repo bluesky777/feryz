@@ -22,7 +22,7 @@
 									input(ng-model="prodNuevo.nombre" required)
 								md-autocomplete(md-search-text="prodNuevo.nombre" md-dropdown-items="8"
 									md-items="item in resultProductos(prodNuevo.nombre)" md-item-text="item.nombre"
-									md-floating-label="Nombre producto" md-input-minlength="2" 
+									md-floating-label="Nombre producto" md-input-minlength="2"
 									md-no-cache="false")
 
 									span(md-highlight-text="prodNuevo.nombre") {{item.nombre}}
@@ -35,14 +35,14 @@
 										ui-select-match(placeholder="Unidad" allow-clear="true") {{$select.selected.unidad}}
 										ui-select-choices(repeat="unidad in unidades | filter: $select.search")
 											div(ng-bind-html="unidad.unidad | highlight: $select.search")
-						
+
 							.form-group.col-lg-4.col-sm-12.col-xs-12(style="margin-bottom: 20px;")
 								label Categoría
 								ui-select(ng-model="prodNuevo.categoria" style="width: 100%;")
 									ui-select-match(placeholder="Categoría" allow-clear="true") {{$select.selected.nombre}}
 									ui-select-choices(repeat="categoria in categorias | filter: $select.search")
 										div(ng-bind-html="categoria.nombre | highlight: $select.search")
-						
+
 
 						.row
 							.col-lg-4.col-sm-6.col-xs-12
@@ -54,13 +54,13 @@
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Precio venta $
 									input(ng-model="prodNuevo.precio_venta" type="text" ui-money-mask="USER.deci_salida" maxlength="20")
-					
+
 
 							.col-lg-4.col-sm-12.col-xs-12
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Cantidad mínima
 									input(ng-model="prodNuevo.cantidad_minima" type="number" min="0")
-					
+
 						.row
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
@@ -76,7 +76,7 @@
 							.col-lg-4
 								.checkbox
 									label
-										input(type="checkbox" ng-model="prodNuevo.activo" ng-true-value="1" ng-false-value="0") 
+										input(type="checkbox" ng-model="prodNuevo.activo" ng-true-value="1" ng-false-value="0")
 										| Activo
 
 
@@ -96,7 +96,7 @@
 			.panel-body
 				div(ng-show="editando")
 					form(ng-submit="actualizarProducto()")
-						
+
 						.row
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
@@ -120,14 +120,14 @@
 										ui-select-match(placeholder="Unidad" allow-clear="true") {{$select.selected.unidad}}
 										ui-select-choices(repeat="unidad in unidades | filter: $select.search")
 											div(ng-bind-html="unidad.unidad | highlight: $select.search")
-						
+
 							.form-group.col-lg-4.col-sm-12.col-xs-12(style="margin-bottom: 20px;")
 								label Categoría
 								ui-select(ng-model="prodActualizar.categoria" style="width: 100%;")
 									ui-select-match(placeholder="Categoría" allow-clear="true") {{$select.selected.nombre}}
 									ui-select-choices(repeat="categoria in categorias | filter: $select.search")
 										div(ng-bind-html="categoria.nombre | highlight: $select.search")
-						
+
 
 						.row
 							.col-lg-4.col-sm-6.col-xs-12
@@ -139,19 +139,19 @@
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Precio venta $
 									input(ng-model="prodActualizar.precio_venta" type="text" ui-money-mask="USER.deci_salida" maxlength="20")
-					
+
 
 							.col-lg-4.col-sm-12.col-xs-12
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Cantidad mínima
 									input(ng-model="prodActualizar.cantidad_minima" type="number" min="0")
-					
+
 						.row
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Nota
 									input(ng-model="prodActualizar.nota")
-							
+
 							.col-lg-4
 								md-input-container.md-block(flex-gt-sm style="margin: 0!important; padding-bottom: 0!important")
 									label Iva %
@@ -160,7 +160,7 @@
 							.col-lg-4
 								.checkbox
 									label
-										input(type="checkbox" ng-model="prodActualizar.activo" ng-true-value="1" ng-false-value="0") 
+										input(type="checkbox" ng-model="prodActualizar.activo" ng-true-value="1" ng-false-value="0")
 										| Activo
 
 						.row
@@ -176,12 +176,12 @@
 	.col-lg-12
 		.panel.panel-default.panel-hovered.mb20
 			.panel-heading Productos
-			
+
 			.panel-body(style="overflow: auto")
-				
+
 				md-button(ng-click="crearProducto()" class="md-raised md-primary" ng-if="hasRole([USER_ROLES.administrador, USER_ROLES.tecnico])") Nuevo Producto
 
 
-				div(ui-grid="opcionesGrid" ui-grid-edit ui-grid-resize-columns ui-grid-cellnav style="height: 600px")
+				div(ui-grid="opcionesGrid" ui-grid-edit ui-grid-resize-columns ui-grid-exporter ui-grid-cellnav style="height: 600px")
 
 
