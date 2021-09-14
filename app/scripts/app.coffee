@@ -32,7 +32,7 @@ angular.module('feryzApp', [
 #- Valores que usaremos para nuestro proyecto
 .constant('App', (()->
 
-  dominio = location.protocol + '//' + location.hostname + '/'
+  dominio = location.protocol + '//' + location.hostname + '/feryz_server/public/'
   #dominio = 'http://olimpiadaslibertad.com/'
   #dominio = 'http://192.168.1.100/'
   
@@ -40,9 +40,8 @@ angular.module('feryzApp', [
   
   if(location.hostname.match('localhost'))
     dominio = 'http://localhost/'
-    server = dominio + 'api/'
-  else
-    server = dominio + 'feryz_server/public/api/'
+
+  server = dominio + 'api/'
 
   frontapp = dominio + 'feryz/'
 
@@ -51,7 +50,7 @@ angular.module('feryzApp', [
     Server: server
     views: 'views/'
     #views: server + 'views/dist/views/' # Para el server Laravel
-    images: server + 'images/'
+    images: dominio + 'images/'
     perfilPath: server + 'images/perfil/'
     imgSystemPath: server + 'images/eventos/'
   }

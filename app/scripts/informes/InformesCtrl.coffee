@@ -2,7 +2,7 @@
 
 angular.module('feryzApp')
 
-.controller('InformesCtrl', ['$scope', '$http', '$state', '$cookieStore', '$rootScope', 'toastr', '$filter', 
+.controller('InformesCtrl', ['$scope', '$http', '$state', '$cookies', '$rootScope', 'toastr', '$filter', 
 	($scope, $http, $state, $cookieStore, $rootScope, toastr, $filter) ->
 		
 		$scope.config = {}
@@ -24,21 +24,23 @@ angular.module('feryzApp')
 
 
 		if $cookieStore.get 'config'
-			$scope.config = $cookieStore.get 'config'
+			texto = $cookieStore.get 'config'
+			$scope.config = JSON.parse texto
 			$scope.informe_tab_productos 	= if $scope.config.informe_tab_actual 	=='productos' then true else false
 			#console.log '$scope.config', $scope.config
 		else
 			$scope.config.orientacion = 'vertical'
 
 		$scope.$watch 'config', (newVal, oldVal)->
-			$cookieStore.put 'config', newVal
+			$cookieStore.put 'config', JSON.stringify newVal
 			$scope.$broadcast 'change_config'
 		, true
 
 
 		$scope.tabSeleccionado = (selectedIndex)->
+			console.log($scope.config)
 			$scope.config.informe_tab_actual = selectedIndex
-			$cookieStore.put 'config', $scope.config
+			$cookieStore.put 'config', JSON.stringify $scope.config
 
 
 
