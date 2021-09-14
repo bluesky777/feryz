@@ -38,12 +38,13 @@ angular.module('feryzApp', [
   
   #console.log 'Entra al dominio: ', location.hostname
   
-  if(location.hostname.match('lalvirtual'))
-    dominio = 'http://lalvirtual.com/'
-    
-  server = dominio + 'feryz_server/public/'
+  if(location.hostname.match('localhost'))
+    dominio = 'http://localhost/'
+    server = dominio + 'api/'
+  else
+    server = dominio + 'feryz_server/public/api/'
+
   frontapp = dominio + 'feryz/'
-  
 
 
   return {

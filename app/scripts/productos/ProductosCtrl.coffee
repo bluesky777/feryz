@@ -160,7 +160,7 @@ angular.module('feryzApp')
 			{field: 'id', width: 60, enableCellEdit: false}
 			{field: 'Edición', visible: $scope.isAdmin, cellTemplate: btn1 + btn2, width: 90, enableCellEdit: false, enableFiltering: false }
 			{field: 'nombre', minWidth: 270}
-			{field: 'categoria_id',	displayName: 'Categoría',		cellFilter: 'mapCategorias:grid.appScope.categorias',
+			{field: 'categoria_id',	displayName: 'Categoría', minWidth: 105,		cellFilter: 'mapCategorias:grid.appScope.categorias',
 			filter: {
 				condition: (searchTerm, cellValue)->
 					foundCategorias = $filter('filter')($scope.categorias, {nombre: searchTerm})
@@ -170,8 +170,8 @@ angular.module('feryzApp')
 			editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownIdLabel: 'id', editDropdownValueLabel: 'nombre', enableCellEditOnFocus: true }
 
 			{field: 'cantidad_minima', displayName: 'Min', cellFilter: 'number'}
-			{field: 'iva', cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.iva | number:0}}%</div>', editableCellTemplate: ivaEdit }
-			{field: 'activo', type: 'boolean', width: 60, cellTemplate: '<input type="checkbox" ng-model="row.entity.activo" ng-true-value="1" ng-false-value="0" ng-change="grid.appScope.guardarToggleActivo(row.entity)" ng-disabled="!grid.appScope.isAdmin">'}
+			{field: 'iva', minWidth: 50, cellTemplate: '<div class="ui-grid-cell-contents">{{row.entity.iva | number:0}}%</div>', editableCellTemplate: ivaEdit }
+			{field: 'activo', type: 'boolean', width: 60, cellTemplate: '<input type="checkbox" ng-model="row.entity.activo" ng-true-value="1" ng-false-value="0" ng-change="grid.appScope.guardarToggleActivo(row.entity)" ng-disabled="!grid.appScope.isAdmin" style="width: 50px;height: 18px;">'}
 			{field: 'precio_venta',	displayName: 'Prec venta', cellFilter: 'currency:undefined:grid.appScope.USER.deci_salida', minWidth: 90}
 		],
 		exporterFieldCallback: ( grid, row, col, input )->
@@ -196,7 +196,7 @@ angular.module('feryzApp')
 
 				if newValue != oldValue
 
-					$http.put('::productos/actualizar/' + rowEntity.id, rowEntity).then((r)->
+					$http.put('::productos/actualizar', rowEntity).then((r)->
 						toastr.success 'Producto actualizado con éxito', 'Actualizado'
 					, (r2)->
 						toastr.error 'Cambio no guardado', 'Error'
@@ -209,7 +209,7 @@ angular.module('feryzApp')
 
 	$scope.guardarToggleActivo = (rowEntity)->
 		if $scope.isAdmin
-			$http.put('::productos/actualizar/' + rowEntity.id, rowEntity).then((r)->
+			$http.put('::productos/actualizar', rowEntity).then((r)->
 				toastr.success 'Producto actualizado con éxito', 'Actualizado'
 			, (r2)->
 				toastr.error 'Cambio no guardado', 'Error'
